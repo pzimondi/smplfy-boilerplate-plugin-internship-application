@@ -1,9 +1,6 @@
 <?php
 /**
- * Task 1: Send Contact Form submission to Webhook.site
- *
- * This replaces the old my_custom_plugin_gravity_webhook() function
- * from your custom plugin, but now uses the Core Entity pattern.
+ * Task 1 + Task 3 Usecase Logic + Task 5 Logging
  */
 
 namespace SMPLFY\boilerplate;
@@ -14,11 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ExampleUsecase {
 
-    /**
-     * Optional repository, not currently used in this Task 1 usecase.
-     * Keeping the constructor signature means bootstrap code that
-     * instantiates ExampleUsecase( new ExampleRepository() ) still works.
-     */
     private ?ExampleRepository $exampleRepository;
 
     public function __construct( ExampleRepository $exampleRepository = null ) {
@@ -26,44 +18,30 @@ class ExampleUsecase {
     }
 
     /**
-     * This method is called by the GravityFormsAdapter when the form is submitted.
-     *
-     * @param array $entry The Gravity Forms entry array.
+     * Task 1 – Contact form submission
      */
     public function example_function( array $entry ): void {
 
-        // Wrap the raw GF entry in our Core Entity
+        /* 🔹 TASK 5 LOGGING */
+        error_log( 'Task 5: Contact form submitted' );
+        error_log( print_r( $entry, true ) );
+
         $entity = new ExampleEntity( $entry );
 
-        // Build the same payload you used in your original plugin
         $data = [
-
-            // Name
             'name_first' => $entity->nameFirst,
             'name_last'  => $entity->nameLast,
-            'full_name'  => trim($entity->nameFirst . ' ' . $entity->nameLast),
-
-            // Email
-            'email' => $entity->email,
-
-            // Message fields
-            'message' => $entity->message,
-
-            // Address
+            'full_name'  => trim( $entity->nameFirst . ' ' . $entity->nameLast ),
+            'email'      => $entity->email,
+            'message'    => $entity->message,
             'address_street'  => $entity->address_street,
             'address_city'    => $entity->address_city,
             'address_country' => $entity->address_country,
-
-            // Phone
             'phone' => $entity->phone,
-
-            // Dropdowns
             'preferred_contact_method' => $entity->preferred_contact_method,
             'best_time_to_call'        => $entity->best_time_to_call,
         ];
 
-
-        // Send the data to Webhook.site
         wp_remote_post(
             'https://webhook.site/5824f131-1149-49d0-99ab-ba154d3a27f6',
             [
@@ -72,4 +50,35 @@ class ExampleUsecase {
             ]
         );
     }
+
+    /**
+     * Task 3 – Event Registration Submission
+     */
+    public function handle_event_registration( array $entry ): void {
+
+        /* 🔹 TASK 5 LOGGING */
+        error_log( 'Task 5: Event registration submitted' );
+        error_log( print_r( $entry, true ) );
+
+        $entity = new EventRegistrationEntity( $entry );
+
+        $data = [
+            'full_name'  => trim( $entity->nameFirst . ' ' . $entity->nameLast ),
+            'email'      => $entity->email,
+            'phone'      => $entity->phone,
+            'event'      => $entity->eventSelected,
+            'attendees'  => $entry['21'] ?? '',
+            'addons'     => $entry['15'] ?? '',
+            'total_cost' => $entity->totalCost,
+        ];
+
+        wp_remote_post(
+            'https://webhook.site/YOUR-UNIQUE-URL',
+            [
+                'method' => 'POST',
+                'body'   => $data,
+            ]
+        );
+    }
+
 }

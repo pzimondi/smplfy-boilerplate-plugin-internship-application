@@ -23,10 +23,18 @@ class GravityFormsAdapter {
      */
     public function register_hooks() {
 
-        // Task 1 hook: replaces old gform_after_submission_9999
+        // Task 1: Contact form submission
         add_action(
             'gform_after_submission_' . FormIds::CONTACT_FORM_ID,
             [ $this->exampleUsecase, 'example_function' ],
+            10,
+            2
+        );
+
+        // Task 3: Event Registration form submission
+        add_action(
+            'gform_after_submission_' . FormIds::EVENT_FORM_ID,
+            [ $this->exampleUsecase, 'handle_event_registration' ],
             10,
             2
         );

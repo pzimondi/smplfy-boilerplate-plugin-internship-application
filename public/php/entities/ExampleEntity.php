@@ -37,7 +37,9 @@ class ExampleEntity extends SMPLFY_BaseEntity {
 
             // Best time to call (ID 12)
             'best_time_to_call' => '12',
-
         ];
     }
 }
+
+
+
