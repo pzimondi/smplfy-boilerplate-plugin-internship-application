@@ -1,4 +1,4 @@
-name: Deploy Boilerplate Plugin to Sandbox
+name: Deploy Boilerplate Plugin to intern.simplifybiz.com
 
 on:
   push:
