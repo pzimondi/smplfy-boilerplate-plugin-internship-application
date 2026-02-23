@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class InternshipApplicationUsecase {
 
-    private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAzOVb1uU/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=_WzCKTY4_MNgNZUBsoGR2zbJbgHPME_rUcxOCJ-zgPA';
+    private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
     public function handle_application_submission( array $entry ): void {
 
