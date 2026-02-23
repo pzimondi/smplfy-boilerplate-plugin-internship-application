@@ -1,0 +1,794 @@
+/* =====================================================
+   GENESIS SAMPLE HEADER + NAVIGATION
+   ===================================================== */
+
+/* Increase header height */
+.site-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Header inner wrap */
+.site-header .wrap {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Navigation base */
+.genesis-nav-menu a {
+    font-size: 1.05rem;
+    font-weight: 600;
+    position: relative;
+    padding: 10px 14px;
+    transition: transform 180ms ease;
+}
+
+/* Underline animation (default hidden) */
+.genesis-nav-menu a::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 6px;
+    height: 3px;
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms ease;
+}
+
+/* Hover — underline only, NO color change */
+.genesis-nav-menu a:hover,
+.genesis-nav-menu a:focus {
+    color: inherit;
+    transform: translateY(-1px);
+}
+
+.genesis-nav-menu a:hover::after,
+.genesis-nav-menu a:focus::after {
+    transform: scaleX(1);
+}
+
+/* Active menu item — underline stays visible */
+.genesis-nav-menu .current-menu-item > a,
+.genesis-nav-menu .current_page_item > a {
+    color: inherit;
+}
+
+.genesis-nav-menu .current-menu-item > a::after,
+.genesis-nav-menu .current_page_item > a::after {
+    transform: scaleX(1);
+}
+
+/* Mobile nav tweaks */
+@media (max-width: 782px) {
+    .site-header {
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+    .genesis-nav-menu a {
+        font-size: 1rem;
+        padding: 10px 10px;
+    }
+}
+
+/* =====================================================
+   NAV MENU STATIC COLORS (TEXT + UNDERLINE)
+   ===================================================== */
+
+/* About – Blue */
+#menu-item-608 > a {
+    color: #1D47A1;
+}
+#menu-item-608 > a::after {
+    background: #1D47A1;
+}
+
+/* Managers Dashboard – Green */
+#menu-item-606 > a {
+    color: #4CAF50;
+}
+#menu-item-606 > a::after {
+    background: #4CAF50;
+}
+
+#menu-item-860 > a {
+    color: #4CAF50;
+}
+#menu-item-860 > a::after {
+    background: #4CAF50;
+}
+
+#menu-item-859 > a {
+    color: #4CAF50;
+}
+#menu-item-859 > a::after {
+    background: #4CAF50;
+}
+
+#menu-item-1512 > a {
+    color: #4CAF50;
+}
+
+#menu-item-1512 > a::after {
+    background: #4CAF50;
+}
+
+#menu-item-1535 > a {
+    color: #4CAF50;
+}
+
+#menu-item-1535 > a::after {
+    background: #4CAF50;
+}
+
+#menu-item-1536 > a {
+    color: #4CAF50;
+}
+
+#menu-item-1536 > a::after {
+    background: #4CAF50;
+}
+
+#menu-item-1562 > a {
+    color: #4CAF50;
+}
+
+#menu-item-1562 > a::after {
+    background: #4CAF50;
+}
+
+/* Interns Dashboard – Yellow */
+
+#menu-item-607 > a {
+    color: #F9B500;
+}
+
+#menu-item-1550 > a {
+    color: #F9B500;
+}
+#menu-item-1550 > a::after {
+    background: #F9B500;
+}
+
+#menu-item-1551 > a {
+    color: #F9B500;
+}
+#menu-item-1551 > a::after {
+    background: #F9B500;
+}
+
+/* Login – Red */
+#menu-item-1021 > a {
+    color: #4CAF50;
+}
+#menu-item-1021 > a::after {
+    background: #4CAF50;
+}
+/*Logout – Red */
+#menu-item-741 > a {
+    color: red;
+}
+#menu-item-741 > a::after {
+    background: #E30B5C;
+}
+
+
+
+
+
+
+/* =====================================================
+   HOME HERO SECTION
+   ===================================================== */
+
+.home-hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* Title */
+.home-title {
+    font-size: clamp(1.9rem, 2.5vw, 2.4rem);
+    font-weight: 800;
+    color: #111;
+    margin: 0 0 12px;
+}
+
+/* Divider */
+.line1 {
+    border: none;
+    margin: 0;
+}
+
+.blue-line::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 7px;
+    background: #1D47A1;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+/* Subtitle */
+.home-subtitle {
+    margin-top: 22px;
+    font-style: italic;
+    color: #555;
+}
+
+/* =====================================================
+   ROLE CARDS
+   ===================================================== */
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin: 56px 0 36px;
+    grid-auto-rows: 1fr;
+}
+
+/* Card (NOT clickable) */
+.role-card {
+    display: flex;
+    flex-direction: column;   /* dot above text */
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+
+    height: 100%;
+    padding: 26px 22px;
+
+
+;   /* default (overridden below) */
+
+}
+
+
+
+
+/* Text */
+.role-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.35;
+    text-align: center;
+}
+
+/* Description */
+.home-description {
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #444;
+    line-height: 1.7;
+}
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 900px) {
+    .roles-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin: 40px 0 26px;
+    }
+
+    .home-hero {
+        padding: 60px 18px;
+    }
+}
+
+
+
+
+
+
+/* =====================================================
+   WHY INTERN – CENTERED, LIST STYLE
+   ===================================================== */
+
+.intern-benefits {
+    width: 100%;
+    padding: 70px 20px;
+}
+
+/* Match hero width + center title */
+.intern-benefits__inner {
+    max-width: 1100px;       /* same width as hero */
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Title */
+.intern-benefits__title {
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+}
+
+/* Divider */
+.intern-benefits__line {
+    border: none;
+    margin: 0;
+}
+
+.green-line::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 6px;
+    background: #4CAF50;
+    margin: 22px auto 0;
+    border-radius: 999px;
+}
+
+/* =====================================================
+   BENEFITS GRID — CENTERED AS A GROUP
+   ===================================================== */
+
+.intern-benefits__grid {
+    display: grid;
+
+    /* shrink to content, not full width */
+    grid-template-columns: repeat(3, max-content);
+
+    gap: 38px 60px;
+    margin: 60px auto 0;     /* centers grid */
+
+    justify-content: center;
+    text-align: left;
+}
+
+/* Individual item */
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Dot */
+.benefit-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+}
+
+/* Text */
+.benefit-heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222;
+    white-space: nowrap;    /* keeps labels neat */
+}
+
+/* Brand colors */
+.benefit-blue .benefit-dot { background: #1D47A1; }
+.benefit-green .benefit-dot { background: #4CAF50; }
+.benefit-yellow .benefit-dot { background: #F9B500; }
+.benefit-red .benefit-dot { background: #FF0000; }
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 900px) {
+    .intern-benefits {
+        padding: 55px 18px;
+    }
+
+    .intern-benefits__grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 42px;
+        justify-content: stretch;
+    }
+
+    .benefit-heading {
+        white-space: normal;
+    }
+}
+
+
+
+
+
+/* =====================================================
+   APPLY FOR OPEN ROLES SECTION
+   (Matches Hero Title + Divider Structure)
+   ===================================================== */
+
+.apply-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Title */
+.apply-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: #333333;
+}
+
+/* Divider */
+.apply-line {
+    border: none;
+    margin: 0;
+}
+
+.yellow-line::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 7px;
+    background: #F9B500;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+/* Subtitle */
+.apply-subtitle {
+    margin-top: 24px;      /* ✅ space AFTER divider */
+    margin-bottom: 40px;
+    font-style: italic;
+    color: #555;
+    text-align: center;
+}
+
+/* =====================================================
+   APPLY ROLE CARDS
+   ===================================================== */
+
+.apply-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* ✅ 2 columns */
+    gap: 22px;
+}
+
+/* Card */
+.apply-card {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 22px 26px;
+    border-radius: 14px;
+    background: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+}
+
+
+
+/* Hover */
+.apply-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* Arrow */
+.apply-arrow {
+    font-size: 22px;
+    transition: transform 0.25s ease;
+}
+
+.apply-card:hover .apply-arrow {
+    transform: translateX(6px);
+}
+
+/* Borders by role */
+.apply-dev {
+    border: 2px solid #1D47A1;
+}
+
+.apply-social {
+    border: 2px solid #4CAF50;
+}
+
+.apply-business {
+    border: 2px solid #F9B500;
+}
+
+.apply-dev2 {
+    border: 2px solid red;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1000px) {
+    .apply-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .apply-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-title {
+        font-size: 2rem;
+    }
+}
+
+
+
+
+
+/* =====================================================
+   SIMPLIFYBIZ FOOTER (GENESIS THEME SETTINGS)
+   ===================================================== */
+
+.site-footer {
+    border-top: 1px solid #eaeaea;
+    background: #ffffff;
+}
+
+.site-footer .simplify-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.site-footer a {
+    color: #1D47A1;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+/*MANAGERS DASHBOARD VIEW/EDIT APPLICATIONS
+ */
+.view-applications-heading {
+    border: none;
+    margin: 0;
+}
+
+.view-applications-heading::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 7px;
+    background: #4CAF50;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+
+
+/* =====================================================
+   NAV MENU UNDERLINE COLORS (PER MENU ITEM)
+   ===================================================== */
+
+/* About – Blue underline */
+#menu-item-608 > a::after {
+    background: #1D47A1;
+}
+
+/* Managers Dashboard – Green underline */
+#menu-item-606 > a::after {
+    background: #4CAF50;
+}
+
+/* Interns Dashboard – Yellow underline */
+#menu-item-607 > a::after {
+    background: #F9B500;
+}
+
+/* Login – Red underline */
+#menu-item-609 > a::after {
+    background: #E30B5C;
+}
+
+
+
+
+
+/* ABOUT PAGE */
+.about-line {
+    border: none;
+    margin: 0;
+}
+
+/* Career cards About me page */
+/* =====================================================
+   ABOUT PAGE – FIELD OF STUDY CARDS
+   (No dots, no halos, scoped styles)
+   ===================================================== */
+
+.about-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    margin: 56px 0 36px;
+}
+
+/* Clickable card */
+.about-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 120px;
+    padding: 26px 22px;
+
+    background: #ffffff;
+    border-radius: 16px;
+    border: 2px solid #ddd;
+
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    text-align: center;
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Hover / focus */
+.about-card:hover,
+.about-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    outline: none;
+}
+
+/* Border colors */
+.about-blue    { border-color:#1D47A1 ; } /* Software Development */
+.about-green  { border-color: #4CAF50; } /* Web Design */
+.about-yellow   { border-color: #F9B500; } /* Social Media Marketing */
+.about-red { border-color:red; } /* Business Management */
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .about-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .about-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*LOGIN*/
+.mepro-form h1 {
+    text-align: center;
+}
+
+.mepro-boxed {
+    border-color: #1D47A1;
+    border-radius: 20px;
+    border-width: 2px;
+}
+
+.mp-form-row mepr_username {
+    border-color: #4CAF50;
+}
+
+
+/*Internship Opportunities*/
+.internship-opportunities-line::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 7px;
+    background: #1D47A1;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+
+
+
+
+/*Red line*/
+.red-line::after {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 7px;
+    background: #E30B5C;
+    margin: 22px auto 0;
+    border-radius: 999px;
+    opacity: 0.95;
+}
+
+
+
+
+/* SUBMIT TASK*/
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0;
+}
+
+.task-bullet {
+    color: #F4B400; /* yellow */
+}
+
+.task-link {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+/* underline animation */
+.task-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #F4B400; /* yellow */
+    transition: width 0.25s ease;
+}
+
+.task-link:hover {
+    color: #F4B400;
+}
+
+.task-link:hover::after {
+    width: 100%;
+}
+
+
+.apply-button {
+    display: flex;
+    justify-content: center;
+}
+
+
+
