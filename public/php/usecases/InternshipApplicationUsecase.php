@@ -10,15 +10,14 @@ class InternshipApplicationUsecase {
 
     private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
-    /**
-     * Fired by GravityFormsAdapter on form submission.
-     * Finds the WordPress user created by Gravity Forms User Registration,
-     * assigns them the Applicants membership, and sends a Google Chat notification.
-     */
     public function handle_application_submission( array $entry ): void {
 
         $entity = new InternshipApplicationEntity( $entry );
 
+        // Always send Google Chat notification first
+        $this->send_google_chat_notification( $entity );
+
+        // Then attempt to assign the MemberPress membership
         $user = get_user_by( 'email', $entity->email );
 
         if ( ! $user ) {
@@ -30,8 +29,6 @@ class InternshipApplicationUsecase {
             $user->ID,
             FormIds::APPLICANTS_MEMBERSHIP_ID
         );
-
-        $this->send_google_chat_notification( $entity );
     }
 
     private function send_google_chat_notification( InternshipApplicationEntity $entity ): void {
