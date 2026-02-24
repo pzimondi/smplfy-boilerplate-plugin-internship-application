@@ -8,23 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class BackfillMembershipsUsecase {
 
-    /**
-     * Same role → membership map as UserCreatedUsecase.
-     * Kept in sync so existing users get the same treatment as new ones.
-     */
     private array $role_to_membership = [
         'applicant' => FormIds::APPLICANTS_MEMBERSHIP_ID,
         'intern'    => FormIds::INTERNS_MEMBERSHIP_ID,
         'manager'   => FormIds::MANAGERS_MEMBERSHIP_ID,
     ];
 
-    /**
-     * Fired once on plugin load via the init hook.
-     * Loops through all existing users with mapped roles and creates
-     * any missing MemberPress transactions so they get proper login redirects.
-     * Uses a wp_options flag so it only ever runs once.
-     * To re-run: delete 'smplfy_membership_backfill_done' from wp_options.
-     */
     public function run(): void {
 
         if ( get_option( 'smplfy_membership_backfill_done' ) ) {

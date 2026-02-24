@@ -17,7 +17,7 @@ class InternshipApplicationUsecase {
         // Always send Google Chat notification first
         $this->send_google_chat_notification( $entity );
 
-        // Then attempt to assign the MemberPress membership
+        // Find the WordPress user created by Gravity Forms User Registration
         $user = get_user_by( 'email', $entity->email );
 
         if ( ! $user ) {
@@ -25,6 +25,7 @@ class InternshipApplicationUsecase {
             return;
         }
 
+        // Assign the Applicants membership transaction
         MembershipTransactionUsecase::assign_membership_if_not_active(
             $user->ID,
             FormIds::APPLICANTS_MEMBERSHIP_ID
