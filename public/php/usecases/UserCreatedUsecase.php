@@ -10,7 +10,7 @@ class UserCreatedUsecase {
 
     /**
      * Maps WordPress roles to MemberPress membership IDs.
-     * When a user is created manually in WP Admin with one of these roles,
+     * When a user is created or updated in WP Admin with one of these roles,
      * they will automatically get the corresponding membership transaction,
      * which enables the MemberPress login redirect for their role.
      * Add new roles here as the system grows.
@@ -20,8 +20,9 @@ class UserCreatedUsecase {
     ];
 
     /**
-     * Fired by WordpressAdapter via the user_register hook.
-     * Checks the new user's role and assigns the matching membership.
+     * Fired by WordpressAdapter via user_register, profile_update
+     * and edit_user_profile_update hooks.
+     * Checks the user's role and assigns the matching membership.
      */
     public function handle_user_created( int $user_id ): void {
 
@@ -40,7 +41,6 @@ class UserCreatedUsecase {
 
                 MembershipTransactionUsecase::assign_membership_if_not_active( $user_id, $membership_id );
 
-                // Only assign the first matching role's membership
                 return;
             }
         }

@@ -23,7 +23,7 @@ class WordpressAdapter {
 
     private function register_hooks(): void {
 
-        // Fires when a user is created manually in WP Admin
+        // Fires when a new user is created in WP Admin
         add_action(
             'user_register',
             [ $this->userCreatedUsecase, 'handle_user_created' ],
@@ -31,7 +31,23 @@ class WordpressAdapter {
             1
         );
 
-        // Runs once to backfill existing users missing transactions
+        // Fires when an existing user is updated — catches role changes
+        add_action(
+            'profile_update',
+            [ $this->userCreatedUsecase, 'handle_user_created' ],
+            10,
+            1
+        );
+
+        // Fires when a user is saved via WP Admin user edit screen
+        add_action(
+            'edit_user_profile_update',
+            [ $this->userCreatedUsecase, 'handle_user_created' ],
+            10,
+            1
+        );
+
+        // Runs on every page load to catch any users missing transactions
         add_action(
             'init',
             [ $this->backfillMembershipsUsecase, 'run' ]
