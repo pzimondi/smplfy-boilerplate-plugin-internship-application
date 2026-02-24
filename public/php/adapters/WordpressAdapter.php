@@ -2,31 +2,39 @@
 
 namespace SMPLFY\boilerplate;
 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
 class WordpressAdapter {
-	private WPHeartbeatExample $wpHeartbeatExample;
 
-	public function __construct( WPHeartbeatExample $wpHeartbeatExample ) {
-		$this->wpHeartbeatExample = $wpHeartbeatExample;
+    private UserCreatedUsecase         $userCreatedUsecase;
+    private BackfillMembershipsUsecase $backfillMembershipsUsecase;
 
-		$this->register_hooks();
-		$this->register_filters();
-	}
+    public function __construct(
+        UserCreatedUsecase         $userCreatedUsecase,
+        BackfillMembershipsUsecase $backfillMembershipsUsecase
+    ) {
+        $this->userCreatedUsecase         = $userCreatedUsecase;
+        $this->backfillMembershipsUsecase = $backfillMembershipsUsecase;
 
-	/**
-	 * Register Wordpress hooks to handle custom logic
-	 *
-	 * @return void
-	 */
-	public function register_hooks() {
+        $this->register_hooks();
+    }
 
-	}
+    private function register_hooks(): void {
 
-	/**
-	 * Register Wordpress filters to handle custom logic
-	 *
-	 * @return void
-	 */
-	public function register_filters() {
-		add_filter( 'heartbeat_received', [ $this->wpHeartbeatExample, 'receive_heartbeat' ], 10, 2 );
-	}
+        // Fires when any new WordPress user is created (including manually via WP Admin)
+        add_action(
+            'user_register',
+            [ $this->userCreatedUsecase, 'handle_user_created' ],
+            10,
+            1
+        );
+
+        // Runs once on plugin load to backfill existing users who are missing transactions
+        add_action(
+            'init',
+            [ $this->backfillMembershipsUsecase, 'run' ]
+        );
+    }
 }

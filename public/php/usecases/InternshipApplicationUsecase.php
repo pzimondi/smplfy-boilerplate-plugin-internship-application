@@ -10,9 +10,31 @@ class InternshipApplicationUsecase {
 
     private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
+    /**
+     * Fired by GravityFormsAdapter on form submission.
+     * Finds the WordPress user created by Gravity Forms User Registration,
+     * assigns them the Applicants membership, and sends a Google Chat notification.
+     */
     public function handle_application_submission( array $entry ): void {
 
         $entity = new InternshipApplicationEntity( $entry );
+
+        $user = get_user_by( 'email', $entity->email );
+
+        if ( ! $user ) {
+            error_log( 'SMPLFY: No WordPress user found for email: ' . $entity->email );
+            return;
+        }
+
+        MembershipTransactionUsecase::assign_membership_if_not_active(
+            $user->ID,
+            FormIds::APPLICANTS_MEMBERSHIP_ID
+        );
+
+        $this->send_google_chat_notification( $entity );
+    }
+
+    private function send_google_chat_notification( InternshipApplicationEntity $entity ): void {
 
         $fullName = trim( $entity->nameFirst . ' ' . $entity->nameLast );
 
@@ -22,18 +44,14 @@ class InternshipApplicationUsecase {
         $text .= "Internship: {$entity->internship}\n";
         $text .= "Credits Completed: {$entity->creditsCompleted}\n";
 
-        $args = [
+        $response = wp_remote_post( $this->webhook_url, [
             'body'    => wp_json_encode( [ 'text' => $text ] ),
             'headers' => [ 'Content-Type' => 'application/json; charset=utf-8' ],
             'timeout' => 15,
-        ];
-
-        $response = wp_remote_post( $this->webhook_url, $args );
+        ]);
 
         if ( is_wp_error( $response ) ) {
-            error_log( 'Google Chat error (Internship Application): ' . $response->get_error_message() );
-        } else {
-            error_log( 'Google Chat notification sent successfully for internship application.' );
+            error_log( 'SMPLFY: Google Chat error: ' . $response->get_error_message() );
         }
     }
 }

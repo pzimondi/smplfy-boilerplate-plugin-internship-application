@@ -1,23 +1,16 @@
 <?php
-/**
- * A factory class responsible for creating and initializing all dependencies used in the plugin
- */
 
 namespace SMPLFY\boilerplate;
 
 class DependencyFactory {
 
-    /**
-     * Create and initialize all dependencies
-     *
-     * @return void
-     */
-    static function create_plugin_dependencies() {
+    static function create_plugin_dependencies(): void {
 
-        // Usecases
         $internshipApplicationUsecase = new InternshipApplicationUsecase();
+        $userCreatedUsecase           = new UserCreatedUsecase();
+        $backfillMembershipsUsecase   = new BackfillMembershipsUsecase();
 
-        // Adapters
         new GravityFormsAdapter( $internshipApplicationUsecase );
+        new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase );
     }
 }
