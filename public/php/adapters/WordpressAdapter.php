@@ -50,11 +50,12 @@ class WordpressAdapter {
             1
         );
 
-        // Fires before a user is deleted — removes their MemberPress transactions
+        // Priority 1 ensures our code runs BEFORE MemberPress nullifies the user_id
+        // on the transaction — allowing us to find and delete transactions first
         add_action(
             'delete_user',
             [ $this->deleteUserUsecase, 'handle_user_deleted' ],
-            10,
+            1,
             1
         );
 

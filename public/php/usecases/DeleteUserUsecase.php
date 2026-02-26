@@ -10,8 +10,10 @@ class DeleteUserUsecase {
 
     /**
      * Fired before a user is deleted from WordPress.
-     * Finds all MemberPress transactions for the user and deletes them
-     * so they don't remain in MemberPress showing as "Deleted" user.
+     * Runs at priority 1 to ensure it fires before MemberPress
+     * nullifies the user_id on the transaction record.
+     * Finds all transactions for the user and deletes them
+     * so they don't remain in MemberPress showing as "Deleted".
      */
     public function handle_user_deleted( int $user_id ): void {
 
@@ -28,7 +30,8 @@ class DeleteUserUsecase {
         }
 
         foreach ( $transactions as $transaction ) {
-            $transaction->destroy();
+            $txn = new \MeprTransaction( $transaction->id );
+            $txn->destroy();
             error_log( 'SMPLFY: Deleted transaction ID: ' . $transaction->id . ' for user_id: ' . $user_id );
         }
     }
