@@ -9,8 +9,9 @@ class DependencyFactory {
         $internshipApplicationUsecase = new InternshipApplicationUsecase();
         $userCreatedUsecase           = new UserCreatedUsecase();
         $backfillMembershipsUsecase   = new BackfillMembershipsUsecase();
+        $deleteUserUsecase            = new DeleteUserUsecase();
 
         new GravityFormsAdapter( $internshipApplicationUsecase );
-        new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase );
+        new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase, $deleteUserUsecase );
     }
 }
