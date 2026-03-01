@@ -154,6 +154,14 @@
     background: #4CAF50;
 }
 
+#menu-item-1929 > a::after {
+    background: #4CAF50;
+}
+
+
+#menu-item-1935 > a {
+    color: #4CAF50;
+}
 
 /* Interns Dashboard – Yellow */
 
