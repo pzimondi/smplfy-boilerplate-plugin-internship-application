@@ -16,6 +16,7 @@ class BackfillMembershipsUsecase {
      */
     private array $role_to_membership = [
         'Manager' => FormIds::MANAGERS_MEMBERSHIP_ID,
+        'Support' => FormIds::SUPPORT_MEMBERSHIP_ID,
     ];
 
     public function run(): void {

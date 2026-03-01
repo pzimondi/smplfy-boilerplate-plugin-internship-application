@@ -9,5 +9,6 @@ class FormIds {
     public const APPLICANTS_MEMBERSHIP_ID = 1890;
     public const INTERNS_MEMBERSHIP_ID    = 949;
     public const MANAGERS_MEMBERSHIP_ID   = 547;
+    public const SUPPORT_MEMBERSHIP_ID    = 1932;
 
 }
