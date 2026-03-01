@@ -140,12 +140,6 @@
 }
 
 /* Support Inbox – Green */
-#menu-item-1934 > a {
-    color: #4CAF50;
-}
-#menu-item-1934 > a::after {
-    background: #4CAF50;
-}
 
 #menu-item-1940 > a {
     color: #4CAF50;
