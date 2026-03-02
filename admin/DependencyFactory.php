@@ -6,18 +6,12 @@ class DependencyFactory {
 
     static function create_plugin_dependencies(): void {
 
-        $internshipApplicationUsecase  = new InternshipApplicationUsecase();
-        $userCreatedUsecase            = new UserCreatedUsecase();
-        $backfillMembershipsUsecase    = new BackfillMembershipsUsecase();
-        $deleteUserUsecase             = new DeleteUserUsecase();
-        $taskSubmissionAssigneeUsecase = new TaskSubmissionAssigneeUsecase();
+        $internshipApplicationUsecase = new InternshipApplicationUsecase();
+        $userCreatedUsecase           = new UserCreatedUsecase();
+        $backfillMembershipsUsecase   = new BackfillMembershipsUsecase();
+        $deleteUserUsecase            = new DeleteUserUsecase();
 
         new GravityFormsAdapter( $internshipApplicationUsecase );
-        new WordpressAdapter(
-            $userCreatedUsecase,
-            $backfillMembershipsUsecase,
-            $deleteUserUsecase,
-            $taskSubmissionAssigneeUsecase
-        );
+        new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase, $deleteUserUsecase );
     }
 }

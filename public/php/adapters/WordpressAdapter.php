@@ -8,21 +8,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class WordpressAdapter {
 
-    private UserCreatedUsecase            $userCreatedUsecase;
-    private BackfillMembershipsUsecase    $backfillMembershipsUsecase;
-    private DeleteUserUsecase             $deleteUserUsecase;
-    private TaskSubmissionAssigneeUsecase $taskSubmissionAssigneeUsecase;
+    private UserCreatedUsecase         $userCreatedUsecase;
+    private BackfillMembershipsUsecase $backfillMembershipsUsecase;
+    private DeleteUserUsecase          $deleteUserUsecase;
 
     public function __construct(
-        UserCreatedUsecase            $userCreatedUsecase,
-        BackfillMembershipsUsecase    $backfillMembershipsUsecase,
-        DeleteUserUsecase             $deleteUserUsecase,
-        TaskSubmissionAssigneeUsecase $taskSubmissionAssigneeUsecase
+        UserCreatedUsecase         $userCreatedUsecase,
+        BackfillMembershipsUsecase $backfillMembershipsUsecase,
+        DeleteUserUsecase          $deleteUserUsecase
     ) {
-        $this->userCreatedUsecase            = $userCreatedUsecase;
-        $this->backfillMembershipsUsecase    = $backfillMembershipsUsecase;
-        $this->deleteUserUsecase             = $deleteUserUsecase;
-        $this->taskSubmissionAssigneeUsecase = $taskSubmissionAssigneeUsecase;
+        $this->userCreatedUsecase         = $userCreatedUsecase;
+        $this->backfillMembershipsUsecase = $backfillMembershipsUsecase;
+        $this->deleteUserUsecase          = $deleteUserUsecase;
 
         $this->register_hooks();
     }
@@ -66,15 +63,6 @@ class WordpressAdapter {
         add_action(
             'init',
             [ $this->backfillMembershipsUsecase, 'run' ]
-        );
-
-        // Filter — dynamically assigns Submit Task Evidence step
-        // to the specific applicant who submitted the form
-        add_filter(
-            'gravityflow_assignees',
-            [ $this->taskSubmissionAssigneeUsecase, 'filter_assignees' ],
-            10,
-            2
         );
     }
 }
