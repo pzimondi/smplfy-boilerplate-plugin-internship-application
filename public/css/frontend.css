@@ -169,6 +169,13 @@
     background: #F9B500;
 }
 
+#menu-item-1956 > a {
+    color: #F9B500;
+}
+#menu-item-1956 > a::after {
+    background: #F9B500;
+}
+
 /* Login – Red */
 #menu-item-1021 > a {
     color: #4CAF50;
