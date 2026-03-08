@@ -51,7 +51,6 @@ class WordpressAdapter {
         );
 
         // Priority 1 ensures our code runs BEFORE MemberPress nullifies the user_id
-        // on the transaction — allowing us to find and delete transactions first
         add_action(
             'delete_user',
             [ $this->deleteUserUsecase, 'handle_user_deleted' ],
@@ -59,10 +58,17 @@ class WordpressAdapter {
             1
         );
 
-        // Runs on every page load to catch users missing transactions
+        // Runs on every page load EXCEPT during AJAX requests
+        // Prevents BackfillMembershipsUsecase from calling send_signup_notices()
+        // during form submission which was causing the duplicate confirmation
         add_action(
             'init',
-            [ $this->backfillMembershipsUsecase, 'run' ]
+            function() {
+                if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+                    return;
+                }
+                $this->backfillMembershipsUsecase->run();
+            }
         );
     }
 }
