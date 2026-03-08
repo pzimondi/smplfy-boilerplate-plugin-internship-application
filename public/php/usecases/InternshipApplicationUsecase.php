@@ -45,7 +45,8 @@ class InternshipApplicationUsecase {
         $response = wp_remote_post( $this->webhook_url, [
             'body'    => wp_json_encode( [ 'text' => $text ] ),
             'headers' => [ 'Content-Type' => 'application/json; charset=utf-8' ],
-            'timeout' => 15,
+            'timeout' => 0.01,
+            'blocking' => false,
         ]);
 
         if ( is_wp_error( $response ) ) {
