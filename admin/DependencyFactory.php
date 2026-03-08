@@ -8,7 +8,6 @@ class DependencyFactory {
 
     static function create_plugin_dependencies(): void {
 
-        // Prevent double instantiation
         if ( self::$initialized ) {
             return;
         }
