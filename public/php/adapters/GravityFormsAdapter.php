@@ -25,6 +25,9 @@ class GravityFormsAdapter {
     }
 
     public function register_filters() {
+
+        // Override the confirmation completely — return our HTML directly
+        // Priority 999 ensures this runs last and overrides everything else
         add_filter(
             'gform_confirmation_' . FormIds::INTERNSHIP_APPLICATION_FORM_ID,
             function( $confirmation, $form, $entry, $ajax ) {
@@ -51,7 +54,7 @@ class GravityFormsAdapter {
                     . '</script>'
                     . '</div>';
             },
-            10,
+            999,
             4
         );
     }
