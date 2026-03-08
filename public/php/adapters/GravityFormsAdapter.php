@@ -50,7 +50,7 @@ class GravityFormsAdapter {
                     . '<script>'
                     . 'setTimeout(function(){'
                     . 'window.location.href="https://intern.simplifybiz.com/applicant-dashboard/";'
-                    . '}, 4000);'
+                    . '}, 15000);'
                     . '</script>'
                     . '</div>';
             },
