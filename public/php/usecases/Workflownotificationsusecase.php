@@ -156,7 +156,7 @@ class WorkflowNotificationsUsecase {
                 $text .= "Email: {$email}\n";
                 $text .= "Internship: {$internship}\n\n";
                 $text .= "Please click the link below to come back and confirm once you have received the signed agreement notification:\n";
-                $text .= "{$entry_link}\n\n";
+                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox\n\n";
                 $text .= "Click *Approve* to confirm the agreement has been signed and advance to onboarding.\n";
                 $text .= "Click *Reject* only if the signed agreement is invalid or incomplete.\n\n";
                 $text .= "Regards,\nAndre\nSimplifyBiz LLC";
