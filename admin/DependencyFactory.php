@@ -20,6 +20,8 @@ class DependencyFactory {
 
         new GravityFormsAdapter( $internshipApplicationUsecase );
         new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase, $deleteUserUsecase );
-        new WorkflowNotificationsUsecase();
+
+        // WorkflowNotificationsUsecase disabled while debugging workflow issue
+        // new WorkflowNotificationsUsecase();
     }
 }
