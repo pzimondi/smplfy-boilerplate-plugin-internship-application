@@ -99,7 +99,7 @@ class WorkflowNotificationsUsecase {
             // --- STEP 2: Next Step - Submit Tasks ---
             // Form Submission step — fires on 'complete'
             // Applicant submitted tasks → notify Manager to review
-            if ( $step_name === 'Next Step - Submit Tasks' && (string) $status === 'complete' ) {
+            if ( $step_name === 'Next Step - Submit Tasks' && (string) $status === 'approved' ) {
                 $text  = "Hello,\n\n";
                 $text .= "An applicant has completed Tasks 1 to 5 and their submission is ready for your review and approval.\n\n";
                 $text .= "Applicant: {$full_name}\n";
