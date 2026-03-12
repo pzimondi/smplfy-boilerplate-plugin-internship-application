@@ -9,12 +9,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Sends Google Chat notifications when workflow steps complete.
  *
- * The entire handler is wrapped in a try/catch so that any error
- * inside this class cannot crash the page or affect the workflow.
+ * All steps are Approval type — status is always 'approved'.
  *
- * Status values by step type:
- *   Approval step   → 'approved' or 'rejected'
- *   Form Submission → 'complete'
+ * Active steps:
+ *   1. Approve Advance to Tasks          (approved) → Support Team
+ *   2. Next Step - Submit Tasks          (approved) → Manager
+ *   3. Schedule Interview                (approved) → Manager
+ *   4. Review and Accept Internship Offer(approved) → Manager
+ *   5. Agreement Signed                  (approved) → Support Team
+ *
+ * Pending steps (no message provided yet):
+ *   - Support Setup       → Support
+ *   - Approve Tasks       → Manager
+ *   - Interview Review    → Manager
+ *   - Onboard Applicant   → Support
  */
 class WorkflowNotificationsUsecase {
 
@@ -33,17 +41,19 @@ class WorkflowNotificationsUsecase {
 
         try {
 
-            // Only handle Form 2
             if ( (int) $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
                 return;
             }
 
-            // Bail if GravityFlow is not available
+            // All steps are Approval type — only fire on approved
+            if ( (string) $status !== 'approved' ) {
+                return;
+            }
+
             if ( ! function_exists( 'gravity_flow' ) ) {
                 return;
             }
 
-            // Bail if GFAPI is not available
             if ( ! class_exists( 'GFAPI' ) ) {
                 return;
             }
@@ -54,7 +64,7 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // Get the step name by looping through configured steps
+            // Get the step name
             $step_name = '';
             $steps     = gravity_flow()->get_steps( (int) $form_id, $entry );
 
@@ -71,20 +81,28 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            $first_name = (string) rgar( $entry, '6.3' );
-            $last_name  = (string) rgar( $entry, '6.6' );
-            $full_name  = trim( $first_name . ' ' . $last_name );
-            $email      = (string) rgar( $entry, '7' );
-            $country    = (string) rgar( $entry, '11.6' );
-            $internship = (string) rgar( $entry, '3' );
+            // Applicant details
+            $first_name     = (string) rgar( $entry, '6.3' );
+            $last_name      = (string) rgar( $entry, '6.6' );
+            $full_name      = trim( $first_name . ' ' . $last_name );
+            $email          = (string) rgar( $entry, '7' );
+            $country        = (string) rgar( $entry, '11.6' );
+            $internship     = (string) rgar( $entry, '3' );
+            $interview_date = (string) rgar( $entry, '99' );
+            $interview_time = (string) rgar( $entry, '100' );
+            $interview_link = (string) rgar( $entry, '101' );
+
+            // Entry link for manager inbox
+            $entry_link = get_site_url() . '/managers-dashboard/managers-inbox/?page=gravityflow-inbox&view=entry&id=' . $form_id . '&lid=' . $entry_id;
 
             $text = '';
 
-            // --- STEP 1: Approve Advance to Tasks ---
-            // Approval step — fires on 'approved'
-            // Manager approved → notify Support to set up sandbox
-            if ( $step_name === 'Approve Advance to Tasks' && (string) $status === 'approved' ) {
-                $text  = "Hello Support Team,\n\n";
+            // ---------------------------------------------------------------
+            // STEP 1: Approve Advance to Tasks → Support Team
+            // ---------------------------------------------------------------
+            if ( $step_name === 'Approve Advance to Tasks' ) {
+                $text  = "*Setup Required - {$full_name}*\n\n";
+                $text .= "Hello Support Team,\n\n";
                 $text .= "An applicant has been approved and requires setup before they can begin their internship tasks.\n\n";
                 $text .= "*Applicant Details:*\n";
                 $text .= "Name: {$full_name}\n";
@@ -96,11 +114,12 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nSimplifyBiz Team";
             }
 
-            // --- STEP 2: Next Step - Submit Tasks ---
-            // Form Submission step — fires on 'complete'
-            // Applicant submitted tasks → notify Manager to review
-            if ( $step_name === 'Next Step - Submit Tasks' && (string) $status === 'approved' ) {
-                $text  = "Hello,\n\n";
+            // ---------------------------------------------------------------
+            // STEP 2: Next Step - Submit Tasks → Manager
+            // ---------------------------------------------------------------
+            if ( $step_name === 'Next Step - Submit Tasks' ) {
+                $text  = "*Action Required - Review and Approve Task Submission*\n\n";
+                $text .= "Hello Manager,\n\n";
                 $text .= "An applicant has completed Tasks 1 to 5 and their submission is ready for your review and approval.\n\n";
                 $text .= "Applicant: {$full_name}\n";
                 $text .= "Email: {$email}\n";
@@ -110,29 +129,71 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nAndre\nSimplifyBiz LLC";
             }
 
-            // --- REMAINING STEPS (provide message text to activate) ---
+            // ---------------------------------------------------------------
+            // STEP 3: Schedule Interview → Manager
+            // ---------------------------------------------------------------
+            if ( $step_name === 'Schedule Interview' ) {
+                $text  = "*Interview Scheduled - {$full_name}*\n\n";
+                $text .= "Hello Manager,\n\n";
+                $text .= "{$full_name} has scheduled their interview for the {$internship} internship position.\n\n";
+                $text .= "*Interview Details:*\n";
+                $text .= "Date: {$interview_date}\n";
+                $text .= "Time: {$interview_time}\n";
+                $text .= "Link: {$interview_link}\n\n";
+                $text .= "Please log in to your inbox to complete the interview review step:\n";
+                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
+                $text .= "Regards,\nSimplifyBiz Team";
+            }
 
-            // if ( $step_name === 'Support Setup' && (string) $status === 'approved' ) {
+            // ---------------------------------------------------------------
+            // STEP 4: Review and Accept Internship Offer → Manager
+            // ---------------------------------------------------------------
+            if ( $step_name === 'Review and Accept Internship Offer' ) {
+                $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
+                $text .= "Hello Manager,\n\n";
+                $text .= "When you receive a notification from WP E-Signature that the following applicant has signed their internship agreement, please come back and confirm by clicking Approve to advance the applicant to the onboarding stage.\n\n";
+                $text .= "Applicant: {$full_name}\n";
+                $text .= "Email: {$email}\n";
+                $text .= "Internship: {$internship}\n\n";
+                $text .= "Please click the link below to come back and confirm once you have received the signed agreement notification:\n";
+                $text .= "{$entry_link}\n\n";
+                $text .= "Click *Approve* to confirm the agreement has been signed and advance to onboarding.\n";
+                $text .= "Click *Reject* only if the signed agreement is invalid or incomplete.\n\n";
+                $text .= "Regards,\nAndre\nSimplifyBiz LLC";
+            }
+
+            // ---------------------------------------------------------------
+            // STEP 5: Agreement Signed → Support Team
+            // ---------------------------------------------------------------
+            if ( $step_name === 'Agreement signed' ) {
+                $text  = "*Action Required - Onboard New Intern*\n\n";
+                $text .= "Hello Support Team,\n\n";
+                $text .= "A new intern has signed their internship agreement and is ready to be onboarded on ops.simplifybiz.com.\n\n";
+                $text .= "Applicant: {$full_name}\n";
+                $text .= "Email: {$email}\n";
+                $text .= "Internship: {$internship}\n\n";
+                $text .= "Please log in to your support inbox to complete the onboarding steps:\n";
+                $text .= "https://intern.simplifybiz.com/support-inbox/\n\n";
+                $text .= "Regards,\nSimplifyBiz Team";
+            }
+
+            // ---------------------------------------------------------------
+            // PENDING STEPS — no message provided yet
+            // ---------------------------------------------------------------
+
+            // if ( $step_name === 'Support Setup' ) {
             //     $text = '';
             // }
 
-            // if ( $step_name === 'Approve Tasks' && (string) $status === 'approved' ) {
+            // if ( $step_name === 'Approve Tasks' ) {
             //     $text = '';
             // }
 
-            // if ( $step_name === 'Schedule Interview' && (string) $status === 'complete' ) {
+            // if ( $step_name === 'Interview Review' ) {
             //     $text = '';
             // }
 
-            // if ( $step_name === 'Interview Review' && (string) $status === 'approved' ) {
-            //     $text = '';
-            // }
-
-            // if ( $step_name === 'Agreement Signed' && (string) $status === 'approved' ) {
-            //     $text = '';
-            // }
-
-            // if ( $step_name === 'Onboard Applicant' && (string) $status === 'approved' ) {
+            // if ( $step_name === 'Onboard Applicant' ) {
             //     $text = '';
             // }
 
