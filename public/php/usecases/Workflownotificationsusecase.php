@@ -10,10 +10,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Sends Google Chat notifications to the shared SimplifyBiz Google Space
  * when a workflow step becomes active that requires manager or support action.
  *
- * Replaces all assignee email notifications for manager and support steps.
- * After deploying this file, untick "Send an email to the assignee" on each
- * of the following steps in GravityFlow → Form 2 → Settings → Workflow:
+ * Uses the gravityflow_step_complete hook which fires when a step finishes,
+ * meaning the NEXT step is now active and ready for action.
  *
+ * The map below uses the name of the step that completes BEFORE the
+ * manager/support step that needs the notification. For example, when
+ * "New Internship Application" (the first webhook/notification step) completes,
+ * "Approve Advance to Tasks" becomes active, so we notify the manager then.
+ *
+ * After deploying, untick "Send an email to the assignee" on each of these
+ * steps in GravityFlow → Form 2 → Settings → Workflow:
  *   - Approve Advance to Tasks
  *   - Support Setup
  *   - Approve Tasks
@@ -22,20 +28,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  *   - Agreement Signed
  *   - Onboard Applicant
  *
- * IMPORTANT: Step names in $step_notifications must match GravityFlow
- * step names exactly, character for character including capitalisation.
+ * IMPORTANT: Step names must match GravityFlow exactly, character for character.
  */
 class WorkflowNotificationsUsecase {
 
     private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
     /**
-     * Each key is the exact GravityFlow step name.
+     * Key   = the exact GravityFlow step name that becomes active (the step needing action)
+     * Value = notification config to send when that step becomes active
      *
-     * 'role'   — WordPress role assigned to this step (informational only)
-     * 'title'  — bold heading displayed in Google Chat
-     * 'action' — instruction text sent with the notification
-     * 'inbox'  — direct URL to the relevant inbox
+     * gravityflow_step_complete fires AFTER a step completes and BEFORE the next
+     * step processes. We use it to detect which step just became active by checking
+     * the entry's current workflow_step meta immediately after completion.
      */
     private array $step_notifications = [
 
@@ -91,31 +96,38 @@ class WorkflowNotificationsUsecase {
     ];
 
     public function __construct() {
-        // gravityflow_step_active fires when a step becomes the current active step
+        /**
+         * gravityflow_step_complete fires after any step completes.
+         * Parameters: $step_id, $entry_id, $form_id, $status
+         * We read the entry's current workflow_step to find which step
+         * is now active and send the appropriate notification.
+         */
         add_action(
-            'gravityflow_step_active',
-            [ $this, 'handle_step_active' ],
+            'gravityflow_step_complete',
+            [ $this, 'handle_step_complete' ],
             10,
-            3
+            4
         );
     }
 
     /**
-     * Fires when any GravityFlow step becomes active.
-     * Checks if the step is on Form 2 and matches one we care about,
-     * then sends the appropriate Google Chat notification.
+     * Fires after a GravityFlow step completes.
+     * Reads the current active step on the entry and sends a Google Chat
+     * notification if the newly active step is one we care about.
      *
-     * @param int $step_id  The GravityFlow step ID.
-     * @param int $entry_id The Gravity Forms entry ID.
-     * @param int $form_id  The Gravity Forms form ID.
+     * @param int    $step_id  The step that just completed.
+     * @param int    $entry_id The Gravity Forms entry ID.
+     * @param int    $form_id  The Gravity Forms form ID.
+     * @param string $status   The completion status (approved, rejected, complete etc).
      */
-    public function handle_step_active( int $step_id, int $entry_id, int $form_id ): void {
+    public function handle_step_complete( int $step_id, int $entry_id, int $form_id, string $status ): void {
 
         // Only handle the main internship application form (Form 2)
         if ( $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
             return;
         }
 
+        // Get the updated entry after the step completed
         $entry = GFAPI::get_entry( $entry_id );
 
         if ( is_wp_error( $entry ) ) {
@@ -123,16 +135,17 @@ class WorkflowNotificationsUsecase {
             return;
         }
 
-        $step = gravity_flow()->get_step( $step_id, $entry );
+        // Get the current active step on this entry after completion
+        $current_step = gravity_flow()->get_current_step( $form_id, $entry );
 
-        if ( ! $step ) {
-            error_log( 'SMPLFY WorkflowNotifications: Could not retrieve step ' . $step_id );
+        if ( ! $current_step ) {
+            // Workflow may have completed — no next step
             return;
         }
 
-        $step_name = $step->get_name();
+        $step_name = $current_step->get_name();
 
-        // If this step is not in our map, do nothing
+        // Check if this newly active step needs a Google Chat notification
         if ( ! isset( $this->step_notifications[ $step_name ] ) ) {
             return;
         }
