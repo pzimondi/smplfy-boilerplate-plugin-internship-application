@@ -103,7 +103,7 @@ class WorkflowNotificationsUsecase {
             if ( $step_name === 'Approve Advance to Tasks' ) {
                 $text  = "*Setup Required - {$full_name}*\n\n";
                 $text .= "Hello Support Team,\n\n";
-                $text .= "An applicant has been approved and requires setup before they can begin their internship tasks.\n\n";
+                $text .= "An applicant has been approved to start their application tasks and requires setup before they can begin.\n\n";
                 $text .= "*Applicant Details:*\n";
                 $text .= "Name: {$full_name}\n";
                 $text .= "Email: {$email}\n";
