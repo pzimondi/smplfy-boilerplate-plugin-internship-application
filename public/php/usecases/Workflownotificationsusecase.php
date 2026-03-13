@@ -9,20 +9,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Sends Google Chat notifications when workflow steps complete.
  *
- * All steps are Approval type — status is always 'approved'.
+ * Form 2 — Internship Application (all Approval steps, status = 'approved')
+ * Form 4 — WP E-Signature Agreement (completes when signed, status = 'complete')
  *
  * Active steps:
- *   1. Approve Advance to Tasks          (approved) → Support Team
- *   2. Next Step - Submit Tasks          (approved) → Manager
- *   3. Schedule Interview                (approved) → Manager
- *   4. Review and Accept Internship Offer(approved) → Manager
- *   5. Agreement Signed                  (approved) → Support Team
+ *   Form 2:
+ *     1. Approve Advance to Tasks           (approved) → Support Team
+ *     2. Next Step - Submit Tasks           (approved) → Manager
+ *     3. Schedule Interview                 (approved) → Manager
+ *     4. Review and Accept Internship Offer (approved) → Manager
+ *     5. Agreement Signed                   (approved) → Support Team
+ *   Form 4:
+ *     6. Any step complete                  (complete) → Manager (document signed)
  *
  * Pending steps (no message provided yet):
- *   - Support Setup       → Support
- *   - Approve Tasks       → Manager
- *   - Interview Review    → Manager
- *   - Onboard Applicant   → Support
+ *   - Support Setup     → Support
+ *   - Approve Tasks     → Manager
+ *   - Interview Review  → Manager
+ *   - Onboard Applicant → Support
  */
 class WorkflowNotificationsUsecase {
 
@@ -41,20 +45,67 @@ class WorkflowNotificationsUsecase {
 
         try {
 
-            if ( (int) $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
-                return;
-            }
-
-            // All steps are Approval type — only fire on approved
-            if ( (string) $status !== 'approved' ) {
-                return;
-            }
-
             if ( ! function_exists( 'gravity_flow' ) ) {
                 return;
             }
 
             if ( ! class_exists( 'GFAPI' ) ) {
+                return;
+            }
+
+            // ---------------------------------------------------------------
+            // FORM 4 — WP E-Signature Agreement
+            // Fires when the document is signed (status = complete)
+            // ---------------------------------------------------------------
+            if ( (int) $form_id === 4 && (string) $status === 'complete' ) {
+
+                $entry = \GFAPI::get_entry( (int) $entry_id );
+
+                if ( is_wp_error( $entry ) || empty( $entry ) ) {
+                    return;
+                }
+
+                // Get signer name from entry field 4 (name field on Form 4)
+                $signer_name  = (string) rgar( $entry, '4' );
+                $signer_email = (string) rgar( $entry, '7' );
+
+                // Fall back to WordPress user who submitted if fields are empty
+                if ( empty( $signer_name ) ) {
+                    $user = get_userdata( (int) rgar( $entry, 'created_by' ) );
+                    if ( $user ) {
+                        $signer_name  = trim( $user->first_name . ' ' . $user->last_name );
+                        $signer_email = $user->user_email;
+                        if ( empty( trim( $signer_name ) ) ) {
+                            $signer_name = $user->display_name;
+                        }
+                    }
+                }
+
+                $signer_name  = ! empty( $signer_name )  ? $signer_name  : 'Unknown';
+                $signer_email = ! empty( $signer_email ) ? $signer_email : 'Unknown';
+
+                $text  = "*Internship Agreement Signed*\n\n";
+                $text .= "Hello Manager,\n\n";
+                $text .= "{$signer_name} has signed their internship agreement.\n\n";
+                $text .= "*Signed by:* {$signer_name}\n";
+                $text .= "*Email:* {$signer_email}\n\n";
+                $text .= "Please log in to your manager inbox to confirm the signed agreement and advance the applicant to onboarding:\n";
+                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
+                $text .= "Regards,\nSimplifyBiz Team";
+
+                $this->send_to_google_chat( $text );
+                return;
+            }
+
+            // ---------------------------------------------------------------
+            // FORM 2 — Internship Application
+            // All steps are Approval type — only fire on approved
+            // ---------------------------------------------------------------
+            if ( (int) $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
+                return;
+            }
+
+            if ( (string) $status !== 'approved' ) {
                 return;
             }
 
@@ -92,14 +143,11 @@ class WorkflowNotificationsUsecase {
             $interview_time = (string) rgar( $entry, '100' );
             $interview_link = (string) rgar( $entry, '101' );
 
-            // Entry link for manager inbox
-            $entry_link = get_site_url() . '/managers-dashboard/managers-inbox/?page=gravityflow-inbox&view=entry&id=' . $form_id . '&lid=' . $entry_id;
+            $entry_link = 'https://intern.simplifybiz.com/managers-dashboard/managers-inbox/';
 
             $text = '';
 
-            // ---------------------------------------------------------------
             // STEP 1: Approve Advance to Tasks → Support Team
-            // ---------------------------------------------------------------
             if ( $step_name === 'Approve Advance to Tasks' ) {
                 $text  = "*Setup Required - {$full_name}*\n\n";
                 $text .= "Hello Support Team,\n\n";
@@ -114,9 +162,7 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nSimplifyBiz Team";
             }
 
-            // ---------------------------------------------------------------
             // STEP 2: Next Step - Submit Tasks → Manager
-            // ---------------------------------------------------------------
             if ( $step_name === 'Next Step - Submit Tasks' ) {
                 $text  = "*Action Required - Review and Approve Task Submission*\n\n";
                 $text .= "Hello Manager,\n\n";
@@ -129,9 +175,7 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nAndre\nSimplifyBiz LLC";
             }
 
-            // ---------------------------------------------------------------
             // STEP 3: Schedule Interview → Manager
-            // ---------------------------------------------------------------
             if ( $step_name === 'Schedule Interview' ) {
                 $text  = "*Interview Scheduled - {$full_name}*\n\n";
                 $text .= "Hello Manager,\n\n";
@@ -145,9 +189,7 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nSimplifyBiz Team";
             }
 
-            // ---------------------------------------------------------------
             // STEP 4: Review and Accept Internship Offer → Manager
-            // ---------------------------------------------------------------
             if ( $step_name === 'Review and Accept Internship Offer' ) {
                 $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
                 $text .= "Hello Manager,\n\n";
@@ -156,15 +198,13 @@ class WorkflowNotificationsUsecase {
                 $text .= "Email: {$email}\n";
                 $text .= "Internship: {$internship}\n\n";
                 $text .= "Please click the link below to come back and confirm once you have received the signed agreement notification:\n";
-                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox\n\n";
+                $text .= "{$entry_link}\n\n";
                 $text .= "Click *Approve* to confirm the agreement has been signed and advance to onboarding.\n";
                 $text .= "Click *Reject* only if the signed agreement is invalid or incomplete.\n\n";
                 $text .= "Regards,\nAndre\nSimplifyBiz LLC";
             }
 
-            // ---------------------------------------------------------------
             // STEP 5: Agreement Signed → Support Team
-            // ---------------------------------------------------------------
             if ( $step_name === 'Agreement signed' ) {
                 $text  = "*Action Required - Onboard New Intern*\n\n";
                 $text .= "Hello Support Team,\n\n";
