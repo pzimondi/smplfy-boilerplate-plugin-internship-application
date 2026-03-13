@@ -30,7 +30,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WorkflowNotificationsUsecase {
 
-    private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
+    private string $webhook_managers = 'https://chat.googleapis.com/v1/spaces/AAAASovtrrQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=gBOpc8JEEP9ldGDLsDdt5tQwsLMBUs0RRkSjuaeaL-Y';
+
+    private string $webhook_support = 'https://chat.googleapis.com/v1/spaces/AAAASovtrrQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=TNYJnwryl0DifZqXxqNXUQEHPbwKROgakrI0t1BrUM8';
 
     public function __construct() {
         add_action(
@@ -93,7 +95,7 @@ class WorkflowNotificationsUsecase {
                 $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
                 $text .= "Regards,\nSimplifyBiz Team";
 
-                $this->send_to_google_chat( $text );
+                $this->send_to_google_chat( $text, $this->webhook_managers );
                 return;
             }
 
@@ -145,10 +147,12 @@ class WorkflowNotificationsUsecase {
 
             $entry_link = 'https://intern.simplifybiz.com/managers-dashboard/managers-inbox/';
 
-            $text = '';
+            $text    = '';
+            $webhook = '';
 
             // STEP 1: Approve Advance to Tasks → Support Team
             if ( $step_name === 'Approve Advance to Tasks' ) {
+                $webhook = $this->webhook_support;
                 $text  = "*Setup Required - {$full_name}*\n\n";
                 $text .= "Hello Support Team,\n\n";
                 $text .= "An applicant has been approved to start their application tasks and requires setup before they can begin.\n\n";
@@ -164,6 +168,7 @@ class WorkflowNotificationsUsecase {
 
             // STEP 2: Next Step - Submit Tasks → Manager
             if ( $step_name === 'Next Step - Submit Tasks' ) {
+                $webhook = $this->webhook_managers;
                 $text  = "*Action Required - Review and Approve Task Submission*\n\n";
                 $text .= "Hello Manager,\n\n";
                 $text .= "An applicant has completed Tasks 1 to 5 and their submission is ready for your review and approval.\n\n";
@@ -177,6 +182,7 @@ class WorkflowNotificationsUsecase {
 
             // STEP 3: Schedule Interview → Manager
             if ( $step_name === 'Schedule Interview' ) {
+                $webhook = $this->webhook_managers;
                 $text  = "*Interview Scheduled - {$full_name}*\n\n";
                 $text .= "Hello Manager,\n\n";
                 $text .= "{$full_name} has scheduled their interview for the {$internship} internship position.\n\n";
@@ -191,6 +197,7 @@ class WorkflowNotificationsUsecase {
 
             // STEP 4: Review and Accept Internship Offer → Manager
             if ( $step_name === 'Review and Accept Internship Offer' ) {
+                $webhook = $this->webhook_managers;
                 $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
                 $text .= "Hello Manager,\n\n";
                 $text .= "When you receive a notification from WP E-Signature that the following applicant has signed their internship agreement, please come back and confirm by clicking Approve to advance the applicant to the onboarding stage.\n\n";
@@ -206,6 +213,7 @@ class WorkflowNotificationsUsecase {
 
             // STEP 5: Agreement Signed → Support Team
             if ( $step_name === 'Agreement signed' ) {
+                $webhook = $this->webhook_support;
                 $text  = "*Action Required - Onboard New Intern*\n\n";
                 $text .= "Hello Support Team,\n\n";
                 $text .= "A new intern has signed their internship agreement and is ready to be onboarded on ops.simplifybiz.com.\n\n";
@@ -237,8 +245,8 @@ class WorkflowNotificationsUsecase {
             //     $text = '';
             // }
 
-            if ( ! empty( $text ) ) {
-                $this->send_to_google_chat( $text );
+            if ( ! empty( $text ) && ! empty( $webhook ) ) {
+                $this->send_to_google_chat( $text, $webhook );
             }
 
         } catch ( \Throwable $e ) {
@@ -246,10 +254,10 @@ class WorkflowNotificationsUsecase {
         }
     }
 
-    private function send_to_google_chat( string $text ): void {
+    private function send_to_google_chat( string $text, string $webhook ): void {
 
         try {
-            wp_remote_post( $this->webhook_url, [
+            wp_remote_post( $webhook, [
                 'body'     => wp_json_encode( [ 'text' => $text ] ),
                 'headers'  => [ 'Content-Type' => 'application/json; charset=utf-8' ],
                 'timeout'  => 0.01,

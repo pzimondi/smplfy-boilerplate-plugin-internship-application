@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class ESignatureNotificationsUsecase {
 
-    private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
+    private string $webhook_managers = 'https://chat.googleapis.com/v1/spaces/AAAASovtrrQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=gBOpc8JEEP9ldGDLsDdt5tQwsLMBUs0RRkSjuaeaL-Y';
 
     public function __construct() {
         // Confirmed hook from the plugin's own actions.php file.
@@ -98,7 +98,7 @@ class ESignatureNotificationsUsecase {
         $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
         $text .= "Regards,\nSimplifyBiz Team";
 
-        wp_remote_post( $this->webhook_url, [
+        wp_remote_post( $this->webhook_managers, [
             'body'     => wp_json_encode( [ 'text' => $text ] ),
             'headers'  => [ 'Content-Type' => 'application/json; charset=utf-8' ],
             'timeout'  => 0.01,
