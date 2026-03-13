@@ -21,6 +21,5 @@ class DependencyFactory {
         new GravityFormsAdapter( $internshipApplicationUsecase );
         new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase, $deleteUserUsecase );
         new WorkflowNotificationsUsecase();
-        new ESignatureNotificationsUsecase();
     }
 }
