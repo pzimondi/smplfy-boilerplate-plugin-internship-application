@@ -9,58 +9,70 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Sends a Google Chat notification when a WP E-Signature document is signed.
  *
- * Registers two hooks simultaneously — whichever one fires on this
- * version of WP E-Signature will trigger the notification.
- * A flag prevents duplicate notifications if both hooks fire.
+ * Uses the confirmed esig_signature_saved hook found in the plugin's actions.php.
+ * $args contains 'invitation' (object with document_id) and 'signature_id'.
  */
 class ESignatureNotificationsUsecase {
 
     private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
-    private bool $notification_sent = false;
-
     public function __construct() {
-        // Hook 1: esig_document_signed( $args, $document_id )
-        // $args contains signer_name and signer_email
+        // Confirmed hook from the plugin's own actions.php file.
+        // Fires after a signer's signature is saved.
+        // Priority 10 (after the plugin's own -100 priority handler).
         add_action(
-            'esig_document_signed',
-            [ $this, 'handle_esig_document_signed' ],
+            'esig_signature_saved',
+            [ $this, 'handle_signature_saved' ],
             10,
-            2
-        );
-
-        // Hook 2: wp_esignature_after_document_signed( $document_id, $invite_hash, $signature_id )
-        add_action(
-            'wp_esignature_after_document_signed',
-            [ $this, 'handle_wp_esignature_after_signed' ],
-            10,
-            3
+            1
         );
     }
 
     /**
-     * Handler for esig_document_signed hook.
-     * $args array contains signer_name and signer_email.
+     * Handler for esig_signature_saved hook.
+     *
+     * @param array $args {
+     *     @type object $invitation    Invitation object — contains document_id, invite_id, etc.
+     *     @type int    $signature_id  ID of the saved signature row.
+     *     @type int    $user_id       WordPress user ID of the signer (may be present).
+     * }
      */
-    public function handle_esig_document_signed( $args, $document_id ): void {
-
-        if ( $this->notification_sent ) {
-            return;
-        }
+    public function handle_signature_saved( $args ): void {
 
         try {
 
-            $signer_name  = ! empty( $args['signer_name'] )  ? (string) $args['signer_name']  : '';
-            $signer_email = ! empty( $args['signer_email'] ) ? (string) $args['signer_email'] : '';
+            // Resolve signer identity — try args first, fall back to current user.
+            $signer_name  = '';
+            $signer_email = '';
 
-            // Fall back to current user if args are empty
-            if ( empty( $signer_name ) ) {
-                $user = wp_get_current_user();
-                if ( $user && $user->ID ) {
+            // Some versions pass user_id directly in $args.
+            $user_id = isset( $args['user_id'] ) ? (int) $args['user_id'] : 0;
+
+            // The invitation object carries the signer's wp user id on some builds.
+            if ( ! $user_id && isset( $args['invitation'] ) && ! empty( $args['invitation']->invite_id ) ) {
+                // invitation->invite_id is the WP user id of the invited signer.
+                $user_id = (int) $args['invitation']->invite_id;
+            }
+
+            if ( $user_id ) {
+                $user = get_userdata( $user_id );
+                if ( $user ) {
                     $signer_name  = trim( $user->first_name . ' ' . $user->last_name );
                     $signer_email = $user->user_email;
                     if ( empty( $signer_name ) ) {
                         $signer_name = $user->display_name;
+                    }
+                }
+            }
+
+            // Last resort: whoever is currently logged in.
+            if ( empty( $signer_name ) ) {
+                $current = wp_get_current_user();
+                if ( $current && $current->ID ) {
+                    $signer_name  = trim( $current->first_name . ' ' . $current->last_name );
+                    $signer_email = $current->user_email;
+                    if ( empty( $signer_name ) ) {
+                        $signer_name = $current->display_name;
                     }
                 }
             }
@@ -75,43 +87,7 @@ class ESignatureNotificationsUsecase {
         }
     }
 
-    /**
-     * Handler for wp_esignature_after_document_signed hook.
-     * Gets signer details from current user.
-     */
-    public function handle_wp_esignature_after_signed( $document_id, $invite_hash, $signature_id ): void {
-
-        if ( $this->notification_sent ) {
-            return;
-        }
-
-        try {
-
-            $signer_name  = '';
-            $signer_email = '';
-
-            $user = wp_get_current_user();
-            if ( $user && $user->ID ) {
-                $signer_name  = trim( $user->first_name . ' ' . $user->last_name );
-                $signer_email = $user->user_email;
-                if ( empty( $signer_name ) ) {
-                    $signer_name = $user->display_name;
-                }
-            }
-
-            $signer_name  = ! empty( $signer_name )  ? $signer_name  : 'Unknown';
-            $signer_email = ! empty( $signer_email ) ? $signer_email : 'Unknown';
-
-            $this->send_notification( $signer_name, $signer_email );
-
-        } catch ( \Throwable $e ) {
-            error_log( 'SMPLFY ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
-        }
-    }
-
     private function send_notification( string $signer_name, string $signer_email ): void {
-
-        $this->notification_sent = true;
 
         $text  = "*Internship Agreement Signed*\n\n";
         $text .= "Hello Manager,\n\n";
