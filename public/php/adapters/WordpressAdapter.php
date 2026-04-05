@@ -8,18 +8,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class WordpressAdapter {
 
-    private UserCreated         $userCreated;
-    private BackfillMemberships $backfillMemberships;
-    private DeleteUser          $deleteUser;
+    private UserCreatedUsecase         $userCreatedUsecase;
+    private BackfillMembershipsUsecase $backfillMembershipsUsecase;
+    private DeleteUserUsecase          $deleteUserUsecase;
 
     public function __construct(
-        UserCreated         $userCreated,
-        BackfillMemberships $backfillMemberships,
-        DeleteUser          $deleteUser
+        UserCreatedUsecase         $userCreatedUsecase,
+        BackfillMembershipsUsecase $backfillMembershipsUsecase,
+        DeleteUserUsecase          $deleteUserUsecase
     ) {
-        $this->userCreated         = $userCreated;
-        $this->backfillMemberships = $backfillMemberships;
-        $this->deleteUser          = $deleteUser;
+        $this->userCreatedUsecase         = $userCreatedUsecase;
+        $this->backfillMembershipsUsecase = $backfillMembershipsUsecase;
+        $this->deleteUserUsecase          = $deleteUserUsecase;
 
         $this->register_hooks();
     }
@@ -28,39 +28,41 @@ class WordpressAdapter {
 
         add_action(
             'user_register',
-            [ $this->userCreated, 'handle_user_created' ],
+            [ $this->userCreatedUsecase, 'handle_user_created' ],
             10,
             1
         );
 
         add_action(
             'profile_update',
-            [ $this->userCreated, 'handle_user_created' ],
+            [ $this->userCreatedUsecase, 'handle_user_created' ],
             10,
             1
         );
 
         add_action(
             'edit_user_profile_update',
-            [ $this->userCreated, 'handle_user_created' ],
+            [ $this->userCreatedUsecase, 'handle_user_created' ],
             10,
             1
         );
 
         add_action(
             'delete_user',
-            [ $this->deleteUser, 'handle_user_deleted' ],
+            [ $this->deleteUserUsecase, 'handle_user_deleted' ],
             1,
             1
         );
 
+        // Skip backfill during AJAX to prevent send_signup_notices()
+        // from interfering with the form submission confirmation
         add_action(
             'init',
             function() {
                 if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
                     return;
                 }
-                $this->backfillMemberships->run();
+                $this->backfillMembershipsUsecase->run();
             }
         );
     }

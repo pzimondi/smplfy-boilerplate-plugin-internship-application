@@ -15,9 +15,6 @@
 
 namespace SMPLFY\boilerplate;
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 prevent_external_script_execution();
 
 define( 'SITE_URL', get_site_url() );
