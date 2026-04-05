@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class DeleteUserUsecase {
+class DeleteUser {
 
     /**
      * Fired before a user is deleted from WordPress.
@@ -18,21 +18,21 @@ class DeleteUserUsecase {
     public function handle_user_deleted( int $user_id ): void {
 
         if ( ! class_exists( 'MeprTransaction' ) ) {
-            error_log( 'SMPLFY: MemberPress not available.' );
+            SMPLFY_Log::error( 'MemberPress not available.' );
             return;
         }
 
         $transactions = \MeprTransaction::get_all_by_user_id( $user_id );
 
         if ( empty( $transactions ) ) {
-            error_log( 'SMPLFY: No transactions found for user_id: ' . $user_id );
+            SMPLFY_Log::error( 'No transactions found for user_id: ' . $user_id );
             return;
         }
 
         foreach ( $transactions as $transaction ) {
             $txn = new \MeprTransaction( $transaction->id );
             $txn->destroy();
-            error_log( 'SMPLFY: Deleted transaction ID: ' . $transaction->id . ' for user_id: ' . $user_id );
+            SMPLFY_Log::error( 'Deleted transaction ID: ' . $transaction->id . ' for user_id: ' . $user_id );
         }
     }
 }

@@ -9,24 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Sends a Google Chat notification when a WP E-Signature document is signed.
  *
- * Uses the confirmed esig_signature_saved hook found in the plugin's actions.php.
- * $args contains 'invitation' (object with document_id) and 'signature_id'.
+ * Hooked via ESignatureAdapter — do not register hooks here.
  */
-class ESignatureNotificationsUsecase {
+class ESignatureNotifications {
 
     private string $webhook_managers = 'https://chat.googleapis.com/v1/spaces/AAAASovtrrQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=gBOpc8JEEP9ldGDLsDdt5tQwsLMBUs0RRkSjuaeaL-Y';
-
-    public function __construct() {
-        // Confirmed hook from the plugin's own actions.php file.
-        // Fires after a signer's signature is saved.
-        // Priority 10 (after the plugin's own -100 priority handler).
-        add_action(
-            'esig_signature_saved',
-            [ $this, 'handle_signature_saved' ],
-            10,
-            1
-        );
-    }
 
     /**
      * Handler for esig_signature_saved hook.
@@ -41,16 +28,12 @@ class ESignatureNotificationsUsecase {
 
         try {
 
-            // Resolve signer identity — try args first, fall back to current user.
             $signer_name  = '';
             $signer_email = '';
 
-            // Some versions pass user_id directly in $args.
             $user_id = isset( $args['user_id'] ) ? (int) $args['user_id'] : 0;
 
-            // The invitation object carries the signer's wp user id on some builds.
             if ( ! $user_id && isset( $args['invitation'] ) && ! empty( $args['invitation']->invite_id ) ) {
-                // invitation->invite_id is the WP user id of the invited signer.
                 $user_id = (int) $args['invitation']->invite_id;
             }
 
@@ -65,7 +48,6 @@ class ESignatureNotificationsUsecase {
                 }
             }
 
-            // Last resort: whoever is currently logged in.
             if ( empty( $signer_name ) ) {
                 $current = wp_get_current_user();
                 if ( $current && $current->ID ) {
@@ -83,7 +65,7 @@ class ESignatureNotificationsUsecase {
             $this->send_notification( $signer_name, $signer_email );
 
         } catch ( \Throwable $e ) {
-            error_log( 'SMPLFY ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
+            SMPLFY_Log::error( 'ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
         }
     }
 

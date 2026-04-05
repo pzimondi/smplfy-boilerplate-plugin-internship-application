@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class UserCreatedUsecase {
+class UserCreated {
 
     /**
      * Maps WordPress roles to MemberPress membership IDs.
@@ -30,7 +30,7 @@ class UserCreatedUsecase {
         $user = get_userdata( $user_id );
 
         if ( ! $user ) {
-            error_log( 'SMPLFY: Could not load user data for user_id: ' . $user_id );
+            SMPLFY_Log::error( 'Could not load user data for user_id: ' . $user_id );
             return;
         }
 
@@ -40,12 +40,12 @@ class UserCreatedUsecase {
 
                 $membership_id = $this->role_to_membership[ $role ];
 
-                MembershipTransactionUsecase::assign_membership_if_not_active( $user_id, $membership_id );
+                MembershipTransaction::assign_membership_if_not_active( $user_id, $membership_id );
 
                 return;
             }
         }
 
-        error_log( 'SMPLFY: No membership mapping found for user_id: ' . $user_id . ' with roles: ' . implode( ', ', $user->roles ) );
+        SMPLFY_Log::error( 'No membership mapping found for user_id: ' . $user_id . ' with roles: ' . implode( ', ', $user->roles ) );
     }
 }

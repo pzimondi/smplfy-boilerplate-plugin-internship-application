@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Sends Google Chat notifications when workflow steps complete.
  *
+ * Hooked via GravityFlowAdapter — do not register hooks here.
+ *
  * Form 2 — Internship Application (all Approval steps, status = 'approved')
  * Form 4 — WP E-Signature Agreement (completes when signed, status = 'complete')
  *
@@ -21,21 +23,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  *     5. Agreement Signed                   (approved) → Support Team
  *   Form 4:
  *     6. Any step complete                  (complete) → Manager (document signed)
- *
  */
 class WorkflowNotificationsUsecase {
 
     private string $webhook_managers = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
+    private string $webhook_support  = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
-    private string $webhook_support = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
+    private InternshipApplicationRepository $internshipApplicationRepository;
 
-    public function __construct() {
-        add_action(
-            'gravityflow_step_complete',
-            [ $this, 'handle_step_complete' ],
-            10,
-            4
-        );
+    public function __construct( InternshipApplicationRepository $internshipApplicationRepository ) {
+        $this->internshipApplicationRepository = $internshipApplicationRepository;
     }
 
     public function handle_step_complete( $step_id, $entry_id, $form_id, $status ): void {
@@ -50,25 +47,21 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // ---------------------------------------------------------------
-            // FORM 4 — WP E-Signature Agreement
+            // Form 4 — WP E-Signature Agreement
             // Fires when the document is signed (status = complete)
-            // ---------------------------------------------------------------
-            if ( (int) $form_id === 4 && (string) $status === 'complete' ) {
+            if ( (int) $form_id === FormIds::ESIGNATURE_AGREEMENT_FORM_ID && (string) $status === 'complete' ) {
 
-                $entry = \GFAPI::get_entry( (int) $entry_id );
+                $raw_entry = \GFAPI::get_entry( (int) $entry_id );
 
-                if ( is_wp_error( $entry ) || empty( $entry ) ) {
+                if ( is_wp_error( $raw_entry ) || empty( $raw_entry ) ) {
                     return;
                 }
 
-                // Get signer name from entry field 4 (name field on Form 4)
-                $signer_name  = (string) rgar( $entry, '4' );
-                $signer_email = (string) rgar( $entry, '7' );
+                $signer_name  = (string) rgar( $raw_entry, '4' );
+                $signer_email = (string) rgar( $raw_entry, '7' );
 
-                // Fall back to WordPress user who submitted if fields are empty
                 if ( empty( $signer_name ) ) {
-                    $user = get_userdata( (int) rgar( $entry, 'created_by' ) );
+                    $user = get_userdata( (int) rgar( $raw_entry, 'created_by' ) );
                     if ( $user ) {
                         $signer_name  = trim( $user->first_name . ' ' . $user->last_name );
                         $signer_email = $user->user_email;
@@ -94,10 +87,8 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // ---------------------------------------------------------------
-            // FORM 2 — Internship Application
+            // Form 2 — Internship Application
             // All steps are Approval type — only fire on approved
-            // ---------------------------------------------------------------
             if ( (int) $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
                 return;
             }
@@ -106,15 +97,21 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            $entry = \GFAPI::get_entry( (int) $entry_id );
+            $raw_entry = \GFAPI::get_entry( (int) $entry_id );
 
-            if ( is_wp_error( $entry ) || empty( $entry ) ) {
+            if ( is_wp_error( $raw_entry ) || empty( $raw_entry ) ) {
                 return;
             }
 
+            // Use the repository to get the entry as a typed entity
+            $entity = $this->internshipApplicationRepository->get_one(
+                FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID,
+                rgar( $raw_entry, FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID )
+            );
+
             // Get the step name
             $step_name = '';
-            $steps     = gravity_flow()->get_steps( (int) $form_id, $entry );
+            $steps     = gravity_flow()->get_steps( (int) $form_id, $raw_entry );
 
             if ( ! empty( $steps ) ) {
                 foreach ( $steps as $step ) {
@@ -129,18 +126,23 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // Applicant details
-            $first_name     = (string) rgar( $entry, '6.3' );
-            $last_name      = (string) rgar( $entry, '6.6' );
-            $full_name      = trim( $first_name . ' ' . $last_name );
-            $email          = (string) rgar( $entry, '7' );
-            $country        = (string) rgar( $entry, '11.6' );
-            $internship     = (string) rgar( $entry, '3' );
-            $interview_date = (string) rgar( $entry, '99' );
-            $interview_time = (string) rgar( $entry, '100' );
-            $interview_link = (string) rgar( $entry, '101' );
+            // Applicant details from entity (falls back to raw entry if entity is null)
+            if ( $entity ) {
+                $full_name  = trim( $entity->nameFirst . ' ' . $entity->nameLast );
+                $email      = $entity->email;
+                $country    = $entity->country;
+                $internship = $entity->internship;
+            } else {
+                $full_name  = trim( rgar( $raw_entry, '6.3' ) . ' ' . rgar( $raw_entry, '6.6' ) );
+                $email      = (string) rgar( $raw_entry, '7' );
+                $country    = (string) rgar( $raw_entry, '11.6' );
+                $internship = (string) rgar( $raw_entry, '3' );
+            }
 
-            $entry_link = 'https://intern.simplifybiz.com/managers-dashboard/managers-inbox/';
+            $interview_date = (string) rgar( $raw_entry, '99' );
+            $interview_time = (string) rgar( $raw_entry, '100' );
+            $interview_link = (string) rgar( $raw_entry, '101' );
+            $entry_link     = 'https://intern.simplifybiz.com/managers-dashboard/managers-inbox/';
 
             $text    = '';
             $webhook = '';
@@ -245,7 +247,7 @@ class WorkflowNotificationsUsecase {
             }
 
         } catch ( \Throwable $e ) {
-            error_log( 'SMPLFY WorkflowNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
+            SMPLFY_Log::error( 'WorkflowNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
         }
     }
 
@@ -259,7 +261,7 @@ class WorkflowNotificationsUsecase {
                 'blocking' => false,
             ] );
         } catch ( \Throwable $e ) {
-            error_log( 'SMPLFY WorkflowNotifications send error: ' . $e->getMessage() );
+            SMPLFY_Log::error( 'WorkflowNotifications send error: ' . $e->getMessage() );
         }
     }
 }

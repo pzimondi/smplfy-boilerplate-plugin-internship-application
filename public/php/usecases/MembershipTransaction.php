@@ -6,19 +6,19 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class MembershipTransactionUsecase {
+class MembershipTransaction {
 
     public static function assign_membership_if_not_active( int $user_id, int $membership_id ): void {
 
         if ( ! class_exists( 'MeprTransaction' ) ) {
-            error_log( 'SMPLFY: MemberPress MeprTransaction class not found.' );
+            SMPLFY_Log::error( 'MemberPress MeprTransaction class not found.' );
             return;
         }
 
         $member = new \MeprUser( $user_id );
 
         if ( $member->is_active_on_membership( $membership_id ) ) {
-            error_log( 'SMPLFY: User ' . $user_id . ' already active on membership ' . $membership_id . '. Skipping.' );
+            SMPLFY_Log::error( 'User ' . $user_id . ' already active on membership ' . $membership_id . '. Skipping.' );
             return;
         }
 
@@ -38,6 +38,6 @@ class MembershipTransactionUsecase {
         $transaction->store();
         $transaction->send_signup_notices();
 
-        error_log( 'SMPLFY: Transaction created for user_id: ' . $user_id . ' on membership_id: ' . $membership_id );
+        SMPLFY_Log::error( 'Transaction created for user_id: ' . $user_id . ' on membership_id: ' . $membership_id );
     }
 }

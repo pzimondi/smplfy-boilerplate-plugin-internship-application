@@ -6,10 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class BackfillMembershipsUsecase {
+class BackfillMemberships {
 
     /**
-     * Same role → membership map as UserCreatedUsecase.
+     * Same role → membership map as UserCreated.
      * Runs on every page load but is safe because
      * assign_membership_if_not_active skips users
      * who already have an active transaction.
@@ -26,7 +26,7 @@ class BackfillMembershipsUsecase {
             $users = get_users( [ 'role' => $role ] );
 
             foreach ( $users as $user ) {
-                MembershipTransactionUsecase::assign_membership_if_not_active(
+                MembershipTransaction::assign_membership_if_not_active(
                     $user->ID,
                     $membership_id
                 );

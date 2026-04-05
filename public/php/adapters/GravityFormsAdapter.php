@@ -4,10 +4,10 @@ namespace SMPLFY\boilerplate;
 
 class GravityFormsAdapter {
 
-    private InternshipApplicationUsecase $internshipApplicationUsecase;
+    private InternshipApplication $internshipApplication;
 
-    public function __construct( InternshipApplicationUsecase $internshipApplicationUsecase ) {
-        $this->internshipApplicationUsecase = $internshipApplicationUsecase;
+    public function __construct( InternshipApplication $internshipApplication ) {
+        $this->internshipApplication = $internshipApplication;
 
         $this->register_hooks();
         $this->register_filters();
@@ -17,7 +17,7 @@ class GravityFormsAdapter {
         add_action(
             'gform_after_submission_' . FormIds::INTERNSHIP_APPLICATION_FORM_ID,
             function( $entry, $form ) {
-                $this->internshipApplicationUsecase->handle_application_submission( $entry );
+                $this->internshipApplication->handle_application_submission( $entry );
             },
             10,
             2
@@ -26,8 +26,6 @@ class GravityFormsAdapter {
 
     public function register_filters() {
 
-        // Override the confirmation completely — return our HTML directly
-        // Priority 999 ensures this runs last and overrides everything else
         add_filter(
             'gform_confirmation_' . FormIds::INTERNSHIP_APPLICATION_FORM_ID,
             function( $confirmation, $form, $entry, $ajax ) {
