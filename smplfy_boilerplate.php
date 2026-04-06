@@ -1,4 +1,8 @@
 <?php
+namespace SMPLFY\boilerplate;
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 /**
  * Plugin Name: SMPLFY Boiler Plate
  * Version: 1.0.0
@@ -13,7 +17,8 @@
  * @since 0.0.1
  */
 
-namespace SMPLFY\boilerplate;
+
+
 
 prevent_external_script_execution();
 
