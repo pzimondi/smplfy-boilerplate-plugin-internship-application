@@ -13,14 +13,23 @@ class DependencyFactory {
         }
         self::$initialized = true;
 
+        $gravityFormsApi = new \SmplfyCore\SMPLFY_GravityFormsApiWrapper();
+
+        // Repositories
+        $internshipApplicationRepository = new InternshipApplicationRepository( $gravityFormsApi );
+
+        // Usecases
         $internshipApplicationUsecase = new InternshipApplicationUsecase();
         $userCreatedUsecase           = new UserCreatedUsecase();
         $backfillMembershipsUsecase   = new BackfillMembershipsUsecase();
         $deleteUserUsecase            = new DeleteUserUsecase();
+        $workflowNotificationsUsecase = new WorkflowNotificationsUsecase( $internshipApplicationRepository );
+        $eSignatureNotificationsUsecase = new ESignatureNotificationsUsecase();
 
+        // Adapters
         new GravityFormsAdapter( $internshipApplicationUsecase );
         new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase, $deleteUserUsecase );
-        new WorkflowNotificationsUsecase();
-        new ESignatureNotificationsUsecase();
+        new GravityFlowAdapter( $workflowNotificationsUsecase );
+        new ESignatureAdapter( $eSignatureNotificationsUsecase );
     }
 }
