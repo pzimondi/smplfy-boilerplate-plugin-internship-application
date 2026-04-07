@@ -19,17 +19,17 @@ class DependencyFactory {
         $internshipApplicationRepository = new InternshipApplicationRepository( $gravityFormsApi );
 
         // Usecases
-        $internshipApplicationUsecase = new InternshipApplicationUsecase();
-        $userCreatedUsecase           = new UserCreatedUsecase();
-        $backfillMembershipsUsecase   = new BackfillMembershipsUsecase();
-        $deleteUserUsecase            = new DeleteUserUsecase();
-        $workflowNotificationsUsecase = new WorkflowNotificationsUsecase( $internshipApplicationRepository );
-        $eSignatureNotificationsUsecase = new ESignatureNotificationsUsecase();
+        $internshipApplication   = new InternshipApplication();
+        $userCreated             = new UserCreated();
+        $backfillMemberships     = new BackfillMemberships();
+        $deleteUser              = new DeleteUser();
+        $workflowNotifications   = new WorkflowNotifications( $internshipApplicationRepository );
+        $eSignatureNotifications = new ESignatureNotifications();
 
         // Adapters
-        new GravityFormsAdapter( $internshipApplicationUsecase );
-        new WordpressAdapter( $userCreatedUsecase, $backfillMembershipsUsecase, $deleteUserUsecase );
-        new GravityFlowAdapter( $workflowNotificationsUsecase );
-        new ESignatureAdapter( $eSignatureNotificationsUsecase );
+        new GravityFormsAdapter( $internshipApplication );
+        new WordpressAdapter( $userCreated, $backfillMemberships, $deleteUser );
+        new GravityFlowAdapter( $workflowNotifications );
+        new ESignatureAdapter( $eSignatureNotifications );
     }
 }
