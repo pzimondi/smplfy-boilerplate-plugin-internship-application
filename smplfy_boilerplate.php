@@ -4,16 +4,16 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 /**
- * Plugin Name: SMPLFY Boiler Plate
+ * Plugin Name: SMPLFY Boiler Plate Internship
  * Version: 1.0.0
- * Description: Starter plugin with custom plugin framework to get started
- * Author: Thomas Picolo-Donnelly
+ * Description: Plugin for Internship Application
+ * Author: Pastor Munashe Zimondi
  * Author URI: https://simplifybiz.com/
  * Requires PHP: 7.4
  * Requires Plugins:  smplfy-core
  *
  * @package Bliksem
- * @author Thomas Picolo-Donnelly
+ * @author Pastor Munashe Zimondi
  * @since 0.0.1
  */
 
