@@ -1,7 +1,15 @@
 <?php
 namespace SMPLFY\boilerplate;
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+
+register_shutdown_function( function() {
+    $error = error_get_last();
+    if ( $error && in_array( $error['type'], [ E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ] ) ) {
+        file_put_contents(
+            dirname( __FILE__ ) . '/debug-error.txt',
+            print_r( $error, true )
+        );
+    }
+} );
 
 /**
  * Plugin Name: SMPLFY Boiler Plate Internship
