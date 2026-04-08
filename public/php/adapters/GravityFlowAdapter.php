@@ -4,10 +4,10 @@ namespace SMPLFY\boilerplate;
 
 class GravityFlowAdapter {
 
-    private WorkflowNotifications $WorkflowNotifications;
+    private WorkflowNotificationsUsecase $workflowNotificationsUsecase;
 
-    public function __construct( WorkflowNotifications $WorkflowNotifications ) {
-        $this->WorkflowNotifications = $WorkflowNotifications;
+    public function __construct( WorkflowNotificationsUsecase $workflowNotificationsUsecase ) {
+        $this->workflowNotificationsUsecase = $workflowNotificationsUsecase;
 
         $this->register_hooks();
     }
@@ -15,7 +15,7 @@ class GravityFlowAdapter {
     private function register_hooks(): void {
         add_action(
             'gravityflow_step_complete',
-            [ $this->WorkflowNotifications, 'handle_step_complete' ],
+            [ $this->workflowNotificationsUsecase, 'handle_step_complete' ],
             10,
             4
         );
