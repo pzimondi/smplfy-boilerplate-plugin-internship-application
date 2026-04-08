@@ -7,6 +7,7 @@ class FormIds {
     public const INTERNSHIP_APPLICATION_FORM_ID        = 2;
     public const ESIGNATURE_AGREEMENT_FORM_ID          = 4;
     public const TASK_SUBMISSION_FORM_ID               = 6;
+    public const EVENT_REGISTRATION_FORM_ID            = 0; // TODO: replace with real form ID
 
     public const INTERNSHIP_APPLICATION_EMAIL_FIELD_ID = '7';
     public const TASK_SUBMISSION_EMAIL_FIELD_ID        = '4';
