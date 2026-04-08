@@ -1,7 +1,6 @@
 <?php
 namespace SMPLFY\boilerplate;
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+return;
 
 /**
  * Plugin Name: SMPLFY Boiler Plate Internship
