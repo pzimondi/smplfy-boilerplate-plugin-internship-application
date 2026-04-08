@@ -50,7 +50,9 @@ class WorkflowNotifications {
                     return;
                 }
 
-                $entity = $this->eSignatureAgreementRepository->get_one( '7', rgar( $raw_entry, '7' ) );
+                $entity = $this->eSignatureAgreementRepository->get_one(
+                    [ '7' => rgar( $raw_entry, '7' ) ]
+                );
 
                 $signer_name  = $entity ? $entity->signerName  : '';
                 $signer_email = $entity ? $entity->signerEmail : '';
@@ -97,8 +99,7 @@ class WorkflowNotifications {
             }
 
             $entity = $this->internshipApplicationRepository->get_one(
-                FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID,
-                rgar( $raw_entry, FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID )
+                [ FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID => rgar( $raw_entry, FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID ) ]
             );
 
             $step_name = '';
