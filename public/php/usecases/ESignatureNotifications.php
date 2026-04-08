@@ -11,19 +11,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Hooked via ESignatureAdapter — do not register hooks here.
  */
-class ESignatureNotificationsUsecase {
+class ESignatureNotifications {
 
     private string $webhook_managers = 'https://chat.googleapis.com/v1/spaces/AAAASovtrrQ/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=gBOpc8JEEP9ldGDLsDdt5tQwsLMBUs0RRkSjuaeaL-Y';
 
-    /**
-     * Handler for esig_signature_saved hook.
-     *
-     * @param array $args {
-     *     @type object $invitation    Invitation object — contains document_id, invite_id, etc.
-     *     @type int    $signature_id  ID of the saved signature row.
-     *     @type int    $user_id       WordPress user ID of the signer (may be present).
-     * }
-     */
     public function handle_signature_saved( $args ): void {
 
         try {
@@ -65,7 +56,7 @@ class ESignatureNotificationsUsecase {
             $this->send_notification( $signer_name, $signer_email );
 
         } catch ( \Throwable $e ) {
-            error_log( 'SMPLFY ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
+            SMPLFY_Log::error( 'ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
         }
     }
 

@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-class InternshipApplicationUsecase {
+class InternshipApplication {
 
     private string $webhook_url = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
@@ -36,11 +36,11 @@ class InternshipApplicationUsecase {
         $user = get_user_by( 'email', $email );
 
         if ( ! $user ) {
-            error_log( 'SMPLFY: No WordPress user found for email: ' . $email );
+            SMPLFY_Log::error( 'No WordPress user found for email: ' . $email );
             return;
         }
 
-        MembershipTransactionUsecase::assign_membership_if_not_active( $user->ID, $membership_id );
+        MembershipTransaction::assign_membership_if_not_active( $user->ID, $membership_id );
     }
 
     private function send_google_chat_notification( InternshipApplicationEntity $entity ): void {

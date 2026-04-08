@@ -13,26 +13,21 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Form 2 — Internship Application (all Approval steps, status = 'approved')
  * Form 4 — WP E-Signature Agreement (completes when signed, status = 'complete')
- *
- * Active steps:
- *   Form 2:
- *     1. Approve Advance to Tasks           (approved) → Support Team
- *     2. Next Step - Submit Tasks           (approved) → Manager
- *     3. Schedule Interview                 (approved) → Manager
- *     4. Review and Accept Internship Offer (approved) → Manager
- *     5. Agreement Signed                   (approved) → Support Team
- *   Form 4:
- *     6. Any step complete                  (complete) → Manager (document signed)
  */
-class WorkflowNotificationsUsecase {
+class WorkflowNotifications {
 
     private string $webhook_managers = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
     private string $webhook_support  = 'https://chat.googleapis.com/v1/spaces/AAQAoIBJG0w/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=Qui-5Y4sTCw9r6ZL5RKEh73nzVrapEiTBF9scx487bA';
 
     private InternshipApplicationRepository $internshipApplicationRepository;
+    private ESignatureAgreementRepository   $eSignatureAgreementRepository;
 
-    public function __construct( InternshipApplicationRepository $internshipApplicationRepository ) {
+    public function __construct(
+        InternshipApplicationRepository $internshipApplicationRepository,
+        ESignatureAgreementRepository   $eSignatureAgreementRepository
+    ) {
         $this->internshipApplicationRepository = $internshipApplicationRepository;
+        $this->eSignatureAgreementRepository   = $eSignatureAgreementRepository;
     }
 
     public function handle_step_complete( $step_id, $entry_id, $form_id, $status ): void {
@@ -47,8 +42,6 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // Form 4 — WP E-Signature Agreement
-            // Fires when the document is signed (status = complete)
             if ( (int) $form_id === FormIds::ESIGNATURE_AGREEMENT_FORM_ID && (string) $status === 'complete' ) {
 
                 $raw_entry = \GFAPI::get_entry( (int) $entry_id );
@@ -57,8 +50,10 @@ class WorkflowNotificationsUsecase {
                     return;
                 }
 
-                $signer_name  = (string) rgar( $raw_entry, '4' );
-                $signer_email = (string) rgar( $raw_entry, '7' );
+                $entity = $this->eSignatureAgreementRepository->get_one( '7', rgar( $raw_entry, '7' ) );
+
+                $signer_name  = $entity ? $entity->signerName  : '';
+                $signer_email = $entity ? $entity->signerEmail : '';
 
                 if ( empty( $signer_name ) ) {
                     $user = get_userdata( (int) rgar( $raw_entry, 'created_by' ) );
@@ -87,8 +82,6 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // Form 2 — Internship Application
-            // All steps are Approval type — only fire on approved
             if ( (int) $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
                 return;
             }
@@ -103,13 +96,11 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // Use the repository to get the entry as a typed entity
             $entity = $this->internshipApplicationRepository->get_one(
                 FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID,
                 rgar( $raw_entry, FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID )
             );
 
-            // Get the step name
             $step_name = '';
             $steps     = gravity_flow()->get_steps( (int) $form_id, $raw_entry );
 
@@ -126,7 +117,6 @@ class WorkflowNotificationsUsecase {
                 return;
             }
 
-            // Applicant details from entity (falls back to raw entry if entity is null)
             if ( $entity ) {
                 $full_name  = trim( $entity->nameFirst . ' ' . $entity->nameLast );
                 $email      = $entity->email;
@@ -147,7 +137,6 @@ class WorkflowNotificationsUsecase {
             $text    = '';
             $webhook = '';
 
-            // STEP 1: Approve Advance to Tasks → Support Team
             if ( $step_name === 'Approve Advance to Tasks' ) {
                 $webhook = $this->webhook_support;
                 $text  = "*Setup Required - {$full_name}*\n\n";
@@ -163,7 +152,6 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nSimplifyBiz Team";
             }
 
-            // STEP 2: Next Step - Submit Tasks → Manager
             if ( $step_name === 'Next Step - Submit Tasks' ) {
                 $webhook = $this->webhook_managers;
                 $text  = "*Action Required - Review and Approve Task Submission*\n\n";
@@ -177,7 +165,6 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nAndre\nSimplifyBiz LLC";
             }
 
-            // STEP 3: Schedule Interview → Manager
             if ( $step_name === 'Schedule Interview' ) {
                 $webhook = $this->webhook_managers;
                 $text  = "*Interview Scheduled - {$full_name}*\n\n";
@@ -192,7 +179,6 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nSimplifyBiz Team";
             }
 
-            // STEP 4: Review and Accept Internship Offer → Manager
             if ( $step_name === 'Review and Accept Internship Offer' ) {
                 $webhook = $this->webhook_managers;
                 $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
@@ -208,7 +194,6 @@ class WorkflowNotificationsUsecase {
                 $text .= "Regards,\nAndre\nSimplifyBiz LLC";
             }
 
-            // STEP 5: Agreement Signed → Support Team
             if ( $step_name === 'Agreement signed' ) {
                 $webhook = $this->webhook_support;
                 $text  = "*Action Required - Onboard New Intern*\n\n";
@@ -221,26 +206,6 @@ class WorkflowNotificationsUsecase {
                 $text .= "https://intern.simplifybiz.com/support-inbox/\n\n";
                 $text .= "Regards,\nSimplifyBiz Team";
             }
-
-            // ---------------------------------------------------------------
-            // PENDING STEPS — no message provided yet
-            // ---------------------------------------------------------------
-
-            // if ( $step_name === 'Support Setup' ) {
-            //     $text = '';
-            // }
-
-            // if ( $step_name === 'Approve Tasks' ) {
-            //     $text = '';
-            // }
-
-            // if ( $step_name === 'Interview Review' ) {
-            //     $text = '';
-            // }
-
-            // if ( $step_name === 'Onboard Applicant' ) {
-            //     $text = '';
-            // }
 
             if ( ! empty( $text ) && ! empty( $webhook ) ) {
                 $this->send_to_google_chat( $text, $webhook );
