@@ -1,7 +1,6 @@
 <?php
 namespace SMPLFY\boilerplate;
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+return;
 
 /**
  * Plugin Name: SMPLFY Boiler Plate Internship
@@ -17,9 +16,6 @@ error_reporting(E_ALL);
  * @since 0.0.1
  */
 
-
-
-
 prevent_external_script_execution();
 
 define( 'SITE_URL', get_site_url() );
@@ -32,11 +28,9 @@ require_once SMPLFY_NAME_PLUGIN_DIR . 'includes/smplfy_bootstrap.php';
 
 bootstrap_boilerplate_plugin();
 
-//require_once SMPLFY_NAME_PLUGIN_DIR . 'includes/smplfy_bootstrap.php';
-
 function prevent_external_script_execution(): void {
-	if ( ! function_exists( 'get_option' ) ) {
-		header( 'HTTP/1.0 403 Forbidden' );
-		die;
-	}
+    if ( ! function_exists( 'get_option' ) ) {
+        header( 'HTTP/1.0 403 Forbidden' );
+        die;
+    }
 }
