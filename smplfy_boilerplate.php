@@ -1,52 +1,37 @@
 <?php
+
 namespace SMPLFY\boilerplate;
 
-// Override core's exception handler so we can see the error
-set_exception_handler( function( $e ) {
-    file_put_contents(
-        __DIR__ . '/debug-error.txt',
-        $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() . "\n\n" . $e->getTraceAsString()
-    );
-} );
+function bootstrap_boilerplate_plugin() {
+    require_boilerplate_dependencies();
+    DependencyFactory::create_plugin_dependencies();
+}
 
-register_shutdown_function( function() {
-    $error = error_get_last();
-    if ( $error && in_array( $error['type'], [ E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ] ) ) {
-        file_put_contents(
-            __DIR__ . '/debug-error.txt',
-            print_r( $error, true )
-        );
-    }
-} );
+function require_boilerplate_dependencies() {
 
-/**
- * Plugin Name: SMPLFY Boiler Plate Internship
- * Version: 1.0.0
- * Description: Plugin for Internship Application
- * Author: Pastor Munashe Zimondi
- * Author URI: https://simplifybiz.com/
- * Requires PHP: 7.4
- * Requires Plugins:  smplfy-core
- *
- * @package Bliksem
- * @author Pastor Munashe Zimondi
- * @since 0.0.1
- */
+    $log = SMPLFY_NAME_PLUGIN_DIR . 'debug-error.txt';
+    file_put_contents( $log, "Starting load\n" );
 
-prevent_external_script_execution();
+    require_file( 'includes/enqueue_scripts.php' );
+    file_put_contents( $log, "enqueue ok\n", FILE_APPEND );
 
-define( 'SITE_URL', get_site_url() );
-define( 'SMPLFY_NAME_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'SMPLFY_NAME_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+    require_file( 'admin/DependencyFactory.php' );
+    file_put_contents( $log, "DependencyFactory ok\n", FILE_APPEND );
 
-require_once SMPLFY_NAME_PLUGIN_DIR . 'admin/utilities/smplfy_require_utilities.php';
-require_once SMPLFY_NAME_PLUGIN_DIR . 'includes/smplfy_bootstrap.php';
+    require_directory( 'public/php/types' );
+    file_put_contents( $log, "types ok\n", FILE_APPEND );
 
-add_action( 'plugins_loaded', 'SMPLFY\boilerplate\bootstrap_boilerplate_plugin' );
+    require_directory( 'public/php/entities' );
+    file_put_contents( $log, "entities ok\n", FILE_APPEND );
 
-function prevent_external_script_execution(): void {
-    if ( ! function_exists( 'get_option' ) ) {
-        header( 'HTTP/1.0 403 Forbidden' );
-        die;
-    }
+    require_directory( 'public/php/repositories' );
+    file_put_contents( $log, "repositories ok\n", FILE_APPEND );
+
+    require_directory( 'public/php/usecases' );
+    file_put_contents( $log, "usecases ok\n", FILE_APPEND );
+
+    require_directory( 'public/php/adapters' );
+    file_put_contents( $log, "adapters ok\n", FILE_APPEND );
+
+    file_put_contents( $log, "All loaded ok\n", FILE_APPEND );
 }
