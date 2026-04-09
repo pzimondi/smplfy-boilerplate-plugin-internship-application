@@ -18,7 +18,7 @@ class UserCreated {
         $user = get_userdata( $user_id );
 
         if ( ! $user ) {
-            SMPLFY_Log::error( 'Could not load user data for user_id: ' . $user_id );
+            \SmplfyCore\SMPLFY_Log::error( 'Could not load user data for user_id: ' . $user_id );
             return;
         }
 
@@ -34,6 +34,6 @@ class UserCreated {
             }
         }
 
-        SMPLFY_Log::error( 'No membership mapping found for user_id: ' . $user_id . ' with roles: ' . implode( ', ', $user->roles ) );
+        \SmplfyCore\SMPLFY_Log::error( 'No membership mapping found for user_id: ' . $user_id . ' with roles: ' . implode( ', ', $user->roles ) );
     }
 }

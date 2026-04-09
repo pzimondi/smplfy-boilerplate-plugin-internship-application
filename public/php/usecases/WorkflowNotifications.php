@@ -213,7 +213,7 @@ class WorkflowNotifications {
             }
 
         } catch ( \Throwable $e ) {
-            SMPLFY_Log::error( 'WorkflowNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
+            \SmplfyCore\SMPLFY_Log::error( 'WorkflowNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
         }
     }
 
@@ -227,7 +227,7 @@ class WorkflowNotifications {
                 'blocking' => false,
             ] );
         } catch ( \Throwable $e ) {
-            SMPLFY_Log::error( 'WorkflowNotifications send error: ' . $e->getMessage() );
+            \SmplfyCore\SMPLFY_Log::error( 'WorkflowNotifications send error: ' . $e->getMessage() );
         }
     }
 }

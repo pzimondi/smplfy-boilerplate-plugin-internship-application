@@ -36,7 +36,7 @@ class InternshipApplication {
         $user = get_user_by( 'email', $email );
 
         if ( ! $user ) {
-            SMPLFY_Log::error( 'No WordPress user found for email: ' . $email );
+            \SmplfyCore\SMPLFY_Log::error( 'No WordPress user found for email: ' . $email );
             return;
         }
 

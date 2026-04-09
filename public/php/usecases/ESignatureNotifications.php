@@ -56,7 +56,7 @@ class ESignatureNotifications {
             $this->send_notification( $signer_name, $signer_email );
 
         } catch ( \Throwable $e ) {
-            SMPLFY_Log::error( 'ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
+            \SmplfyCore\SMPLFY_Log::error( 'ESignatureNotifications error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
         }
     }
 
