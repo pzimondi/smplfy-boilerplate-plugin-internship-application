@@ -1,9 +1,6 @@
 <?php
 namespace SMPLFY\boilerplate;
 
-ini_set( 'error_log', __DIR__ . '/debug-error.txt' );
-error_reporting( E_ALL );
-
 /**
  * Plugin Name: SMPLFY Boiler Plate Internship
  * Version: 1.0.0
