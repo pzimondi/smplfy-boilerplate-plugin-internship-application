@@ -19,15 +19,20 @@ class GravityFlowAdapter {
             4
         );
 
-        // This is the CRITICAL hook that fills the field before Step #91 is reached
+        /**
+         * Fired after the User Registration step.
+         * Links the Applicant ID to Field 110 so their inbox works later.
+         */
         add_action(
             'gravityflow_post_user_registration',
             function( $user_id, $entry ) {
-                if ( $user_id ) {
-                    // Update field 110 so the workflow has an assignee to land on
+                // Only run for Form 2 to avoid conflicts elsewhere
+                if ( $user_id && $entry['form_id'] == 2 ) {
+
+                    // 1. Set the Assignee Field (ID 110) for the Applicant's Inbox
                     \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
 
-                    // Update entry owner for the inbox security filter
+                    // 2. Claim entry ownership
                     \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
                 }
             },
