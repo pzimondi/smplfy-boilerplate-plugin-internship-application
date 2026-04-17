@@ -12,37 +12,29 @@ class GravityFlowAdapter {
     }
 
     private function register_hooks(): void {
-
-        // Your existing notification hook
-        add_action(
-            'gravityflow_step_complete',
-            [ $this->workflowNotifications, 'handle_step_complete' ],
-            10,
-            4
-        );
+        add_action( 'gravityflow_step_complete', [ $this->workflowNotifications, 'handle_step_complete' ], 10, 4 );
 
         /**
-         * RECOMMENDED FIX: Link applicant only when the Registration step finishes.
-         * This prevents infinite loading for other roles (Support/Manager).
+         * Use gform_after_submission to bridge the gap between MemberPress/Registration
+         * and the Workflow. This ensures Field 110 is filled before Support or Applicant see it.
          */
-        add_action( 'gravityflow_step_complete', function( $step_id, $entry_id, $form_id, $status ) {
-            $step = \Gravity_Flow_API::get_step( $step_id );
+        add_action( 'gform_after_submission_2', function( $entry, $form ) {
+            // 1. Get the newly created User ID from the User Registration feed
+            $user_id = gform_get_meta( $entry['id'], 'workflow_user_registration_user_id' );
 
-            // Only run if the completed step was a 'user_registration' type
-            if ( $step && $step->get_type() == 'user_registration' && $status == 'complete' ) {
-
-                $entry = \GFAPI::get_entry( $entry_id );
-                // The registration step stores the new User ID in the entry meta
-                $new_user_id = gform_get_meta( $entry_id, 'workflow_user_registration_user_id' );
-
-                if ( $new_user_id ) {
-                    // 1. Link entry ownership property
-                    \GFAPI::update_entry_property( $entry_id, 'created_by', $new_user_id );
-
-                    // 2. Populate Field 110 for the Applicant Inbox
-                    \GFAPI::update_entry_field( $entry_id, '110', "user_id|{$new_user_id}" );
-                }
+            // If meta isn't ready, try to find the user by the email field (Field ID 3 - adjust if different)
+            if ( ! $user_id ) {
+                $user = get_user_by( 'email', $entry['3'] );
+                $user_id = $user ? $user->ID : false;
             }
-        }, 10, 4 );
+
+            if ( $user_id ) {
+                // 2. Populate Field 110 (Assignee) immediately
+                \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
+
+                // 3. Link entry ownership so the inbox filter recognizes the user
+                \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
+            }
+        }, 20, 2 ); // Priority 20 to ensure it runs AFTER User Registration/MemberPress feeds
     }
 }
