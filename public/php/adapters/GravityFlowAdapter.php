@@ -8,7 +8,6 @@ class GravityFlowAdapter {
 
     public function __construct( WorkflowNotifications $workflowNotifications ) {
         $this->workflowNotifications = $workflowNotifications;
-
         $this->register_hooks();
     }
 
@@ -21,26 +20,19 @@ class GravityFlowAdapter {
         );
 
         /**
-         * Safely links the newly registered user to the entry.
-         * This handles both the 'created_by' property and updates
-         * a specific Assignee field if needed.
+         * Use 'post_user_registration' to ensure the ID is saved
+         * BEFORE the workflow evaluates the next step (#91).
          */
         add_action(
-            'gravityflow_user_registration_complete',
+            'gravityflow_post_user_registration',
             function( $user_id, $entry ) {
-                if ( ! $user_id ) {
-                    return;
+                if ( $user_id ) {
+                    // 1. Set the Assignee Field (ID 110) in the required format
+                    \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
+
+                    // 2. Link entry ownership for inbox filtering
+                    \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
                 }
-
-                // 1. Link entry 'owner' to the new user ID
-                \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
-
-                /**
-                 * 2. OPTIONAL: Update a dedicated Assignee Field
-                 * If you add an 'Assignee' field to your form, replace 'XX' with its ID.
-                 * Gravity Flow uses the 'user_id|ID' format for these fields.
-                 */
-                // \GFAPI::update_entry_field( $entry['id'], 'XX', "user_id|{$user_id}" );
             },
             10,
             2
