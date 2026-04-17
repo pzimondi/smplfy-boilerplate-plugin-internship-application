@@ -20,24 +20,19 @@ class GravityFlowAdapter {
         );
 
         /**
-         * Fired after the User Registration step.
-         * Links the Applicant ID to Field 110 so their inbox works later.
+         * Use gform_user_registered instead.
+         * This fires as soon as the account is created, ensuring the ID
+         * exists before any other workflow steps (like Support) load.
          */
-        add_action(
-            'gravityflow_post_user_registration',
-            function( $user_id, $entry ) {
-                // Only run for Form 2 to avoid conflicts elsewhere
-                if ( $user_id && $entry['form_id'] == 2 ) {
+        add_action( 'gform_user_registered', function( $user_id, $feed, $entry ) {
+            // Only target Form 2
+            if ( $entry['form_id'] == 2 ) {
+                // 1. Link the entry 'owner'
+                \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
 
-                    // 1. Set the Assignee Field (ID 110) for the Applicant's Inbox
-                    \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
-
-                    // 2. Claim entry ownership
-                    \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
-                }
-            },
-            10,
-            2
-        );
+                // 2. Explicitly fill Field 110 with the correct format
+                \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
+            }
+        }, 10, 3 );
     }
 }
