@@ -15,26 +15,18 @@ class GravityFlowAdapter {
         add_action( 'gravityflow_step_complete', [ $this->workflowNotifications, 'handle_step_complete' ], 10, 4 );
 
         /**
-         * Use gform_after_submission to bridge the gap between MemberPress/Registration
-         * and the Workflow. This ensures Field 110 is filled before Support or Applicant see it.
+         * Fired exactly when the user account is created.
+         * This links the ID before the Support or Manager ever see the entry.
          */
-        add_action( 'gform_after_submission_2', function( $entry, $form ) {
-            // 1. Get the newly created User ID from the User Registration feed
-            $user_id = gform_get_meta( $entry['id'], 'workflow_user_registration_user_id' );
-
-            // If meta isn't ready, try to find the user by the email field (Field ID 3 - adjust if different)
-            if ( ! $user_id ) {
-                $user = get_user_by( 'email', $entry['3'] );
-                $user_id = $user ? $user->ID : false;
-            }
-
-            if ( $user_id ) {
-                // 2. Populate Field 110 (Assignee) immediately
+        add_action( 'gform_user_registered', function( $user_id, $feed, $entry ) {
+            // Target Form 2 only
+            if ( $entry['form_id'] == 2 ) {
+                // 1. Force the Assignee Field (110)
                 \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
 
-                // 3. Link entry ownership so the inbox filter recognizes the user
+                // 2. Link the entry 'owner' property
                 \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
             }
-        }, 20, 2 ); // Priority 20 to ensure it runs AFTER User Registration/MemberPress feeds
+        }, 10, 3 );
     }
 }
