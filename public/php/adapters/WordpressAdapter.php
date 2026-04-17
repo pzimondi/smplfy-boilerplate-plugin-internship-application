@@ -63,5 +63,14 @@ class WordpressAdapter {
                 $this->backfillMemberships->run();
             }
         );
+
+        add_action(
+            'gform_user_registered',
+            function( $user_id, $feed, $entry, $user_pass ) {
+                GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
+            },
+            10,
+            4
+        );
     }
 }
