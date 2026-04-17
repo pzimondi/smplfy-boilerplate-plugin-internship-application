@@ -26,16 +26,11 @@ class DependencyFactory {
         $deleteUser              = new DeleteUser();
         $workflowNotifications   = new WorkflowNotifications( $internshipApplicationRepository, $eSignatureAgreementRepository );
         $eSignatureNotifications = new ESignatureNotifications();
-        $workflowInbox           = new WorkflowInbox();
 
         // Adapters
         new GravityFormsAdapter( $internshipApplication );
         new WordpressAdapter( $userCreated, $backfillMemberships, $deleteUser );
         new GravityFlowAdapter( $workflowNotifications );
         new ESignatureAdapter( $eSignatureNotifications );
-
-        // Filters
-        add_filter( 'gravityflow_inbox_args', [ $workflowInbox, 'filter_inbox_entries' ] );
-        add_filter( 'gravityflow_is_assignee', [ $workflowInbox, 'filter_assignee_notification' ], 10, 3 );
     }
 }
