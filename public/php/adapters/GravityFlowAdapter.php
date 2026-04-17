@@ -19,5 +19,18 @@ class GravityFlowAdapter {
             10,
             4
         );
+
+        // Link the entry to the new user after Gravity Flow finishes registration.
+        // This makes the "User (Created by)" assignee option appear.
+        add_action(
+            'gravityflow_user_registration_complete',
+            function( $user_id, $entry ) {
+                if ( $user_id ) {
+                    \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
+                }
+            },
+            10,
+            2
+        );
     }
 }
