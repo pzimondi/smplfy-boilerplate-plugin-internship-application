@@ -19,18 +19,15 @@ class GravityFlowAdapter {
             4
         );
 
-        /**
-         * Use 'post_user_registration' to ensure the ID is saved
-         * BEFORE the workflow evaluates the next step (#91).
-         */
+        // This is the CRITICAL hook that fills the field before Step #91 is reached
         add_action(
             'gravityflow_post_user_registration',
             function( $user_id, $entry ) {
                 if ( $user_id ) {
-                    // 1. Set the Assignee Field (ID 110) in the required format
+                    // Update field 110 so the workflow has an assignee to land on
                     \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
 
-                    // 2. Link entry ownership for inbox filtering
+                    // Update entry owner for the inbox security filter
                     \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
                 }
             },
