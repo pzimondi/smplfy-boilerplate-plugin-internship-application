@@ -12,6 +12,8 @@ class GravityFlowAdapter {
     }
 
     private function register_hooks(): void {
+
+        // Your existing notification hook
         add_action(
             'gravityflow_step_complete',
             [ $this->workflowNotifications, 'handle_step_complete' ],
@@ -20,19 +22,27 @@ class GravityFlowAdapter {
         );
 
         /**
-         * Use gform_user_registered instead.
-         * This fires as soon as the account is created, ensuring the ID
-         * exists before any other workflow steps (like Support) load.
+         * RECOMMENDED FIX: Link applicant only when the Registration step finishes.
+         * This prevents infinite loading for other roles (Support/Manager).
          */
-        add_action( 'gform_user_registered', function( $user_id, $feed, $entry ) {
-            // Only target Form 2
-            if ( $entry['form_id'] == 2 ) {
-                // 1. Link the entry 'owner'
-                \GFAPI::update_entry_property( $entry['id'], 'created_by', $user_id );
+        add_action( 'gravityflow_step_complete', function( $step_id, $entry_id, $form_id, $status ) {
+            $step = \Gravity_Flow_API::get_step( $step_id );
 
-                // 2. Explicitly fill Field 110 with the correct format
-                \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
+            // Only run if the completed step was a 'user_registration' type
+            if ( $step && $step->get_type() == 'user_registration' && $status == 'complete' ) {
+
+                $entry = \GFAPI::get_entry( $entry_id );
+                // The registration step stores the new User ID in the entry meta
+                $new_user_id = gform_get_meta( $entry_id, 'workflow_user_registration_user_id' );
+
+                if ( $new_user_id ) {
+                    // 1. Link entry ownership property
+                    \GFAPI::update_entry_property( $entry_id, 'created_by', $new_user_id );
+
+                    // 2. Populate Field 110 for the Applicant Inbox
+                    \GFAPI::update_entry_field( $entry_id, '110', "user_id|{$new_user_id}" );
+                }
             }
-        }, 10, 3 );
+        }, 10, 4 );
     }
 }
