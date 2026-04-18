@@ -811,7 +811,8 @@
 
 /* Small uppercase label above section headings */
 .section-label {
-    display: inline-block;
+    display: block;
+    text-align: center;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -819,5 +820,4 @@
     color: #22c55e;
     margin-bottom: 14px;
 }
-
 
