@@ -2661,7 +2661,7 @@ body.page-id-582 .gflow-grid__search-icon {
    vertically centered with the search input */
 body.page-id-582 .gflow-grid__button {
     position: absolute !important;
-    top: calc(20px + 22px) !important;
+    top: 50% !important;
     /* card padding (20px) + half button height (44/2) */
     transform: translateY(-50%) !important;
     background: #ffffff !important;
