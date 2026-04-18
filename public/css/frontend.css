@@ -3590,11 +3590,49 @@ body.page-id-582 .gravityflow-note-body .gravityflow-note-body {
    Green theme — mirrors Manager's Inbox styling
    ===================================================== */
 
-/* Full-width GravityView block — edge to edge */
-body.page-id-1556 .entry-content>.wp-block-columns.alignfull {
-    max-width: 100% !important;
-    width: 100% !important;
+/* ===== Fix 1: "INTERNS DASHBOARD" label above H1 (pure CSS, no markup change) ===== */
+body.page-id-1556 .entry-content>h1.wp-block-heading::before {
+    content: "Interns Dashboard";
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4CAF50;
+    margin: 0 0 14px;
+}
+
+/* ===== Fix 2: Heading underline — match site's 50x3 style ===== */
+/* Reset the hr itself (hides default wp-block-separator border) */
+body.page-id-1556 .entry-content>hr.wp-block-separator.green-line {
+    border: none !important;
+    background: transparent !important;
+    height: auto !important;
     margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+}
+
+/* Override the .green-line ::after pill with the standard 50x3 bar */
+body.page-id-1556 .entry-content>hr.wp-block-separator.green-line::after {
+    content: "" !important;
+    display: block !important;
+    width: 50px !important;
+    height: 3px !important;
+    background: #4CAF50 !important;
+    margin: 0 auto !important;
+    border-radius: 2px !important;
+    opacity: 1 !important;
+}
+
+/* ===== Fix 3: Full-bleed table — break out of Genesis .site-inner constraint ===== */
+body.page-id-1556 .entry-content>.wp-block-columns.alignfull {
+    position: relative !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
     padding: 0 24px !important;
     box-sizing: border-box !important;
 }
@@ -3605,6 +3643,7 @@ body.page-id-1556 .entry-content>.wp-block-columns.alignfull>.wp-block-column {
     flex-basis: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    min-width: 0 !important;
 }
 
 body.page-id-1556 .gv-template-table {
