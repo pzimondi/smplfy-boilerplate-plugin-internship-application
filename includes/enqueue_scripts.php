@@ -23,22 +23,12 @@ function enqueue_boilerplate_frontend_scripts() {
         true
     );
 
-    // CORRECTED PATHS BELOW ⬇⬇⬇
-    wp_register_script(
-        'smplfy-demo-frontend-script',
-        SMPLFY_NAME_PLUGIN_URL . 'public/js/frontend.js',
-        ['jquery'],
-        null,
-        true
-    );
-
     wp_register_style(
         'smplfy-demo-frontend-styles',
         SMPLFY_NAME_PLUGIN_URL . 'public/css/frontend.css'
     );
 
-    // Enqueue your public JS + CSS
-    wp_enqueue_script('smplfy-demo-frontend-script');
+    // Enqueue your public CSS
     wp_enqueue_style('smplfy-demo-frontend-styles');
 
     // Only load heartbeat script on page ID 999 (demo logic)
