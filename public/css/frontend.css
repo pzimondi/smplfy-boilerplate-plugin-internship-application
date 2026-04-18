@@ -6138,3 +6138,28 @@ hr.au-underline.blue-line::after {
 
 
 
+/* Force-remove default bullets on About page section cards
+   (Genesis Sample's ul li styling overrides the scoped reset) */
+.au-section-card ul,
+.au-section-card ul li {
+    list-style: none !important;
+    list-style-type: none !important;
+}
+
+.au-section-card ul {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.au-section-card ul li {
+    padding-left: 22px !important;
+    margin-left: 0 !important;
+}
+
+.au-section-card ul li::marker {
+    content: '' !important;
+    display: none !important;
+}
+
+
+
