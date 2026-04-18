@@ -4145,3 +4145,615 @@ body.page-id-1556 article>.post-edit-link {
 
 
 
+/* =====================================================
+   WORKFLOW ENTRY DETAIL — PENDING APPROVAL VIEW
+   Rendered when a manager clicks an inbox row for a
+   pending entry (vs the approved/read-only view above).
+   Markup: form#gform_2 inside table.gravityflow-step-approval
+   Scoped to body.page-id-582
+   ===================================================== */
+
+/* Outer entry container */
+body.page-id-582 .wrap.gravityflow_workflow_detail {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+}
+
+/* ===== Instructions callout (left sidebar equivalent at top) ===== */
+body.page-id-582 .postbox.gravityflow-instructions {
+    background: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    border-left: 4px solid #F9B500 !important;
+    border-radius: 10px !important;
+    padding: 0 !important;
+    margin: 0 0 20px !important;
+    box-shadow: none !important;
+}
+
+body.page-id-582 .postbox.gravityflow-instructions .inside {
+    padding: 16px 20px !important;
+    margin: 0 !important;
+    font-size: 0.94rem !important;
+    line-height: 1.65 !important;
+    color: #78400a !important;
+    font-weight: 500 !important;
+}
+
+body.page-id-582 .postbox.gravityflow-instructions .inside br+br {
+    display: block !important;
+    content: "" !important;
+    margin-top: 6px !important;
+}
+
+/* ===== Outer approval table card ===== */
+body.page-id-582 table.gravityflow-step-approval {
+    background: #ffffff !important;
+    border: 1px solid #e8ecf1 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+body.page-id-582 table.gravityflow-step-approval thead th {
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
+    padding: 18px 28px !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    vertical-align: middle !important;
+}
+
+body.page-id-582 table.gravityflow-step-approval thead th#details {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-align: left !important;
+}
+
+body.page-id-582 table.gravityflow-step-approval thead th[style*="text-align: right"] {
+    font-weight: 500 !important;
+    color: #64748b !important;
+    font-size: 0.82rem !important;
+}
+
+body.page-id-582 table.gravityflow-step-approval tbody>tr>td {
+    padding: 28px !important;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+/* ===== Gravity Form wrapper inside the card ===== */
+body.page-id-582 #gform_wrapper_2 {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.page-id-582 #gform_fields_2 {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+}
+
+body.page-id-582 #gform_fields_2>.gfield {
+    margin: 0 0 22px !important;
+    padding: 0 !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+}
+
+/* Kill Gravity's spacer pseudo-fields that eat grid tracks */
+body.page-id-582 #gform_fields_2>.spacer.gfield {
+    display: none !important;
+}
+
+/* ===== Section headings inside the form ===== */
+body.page-id-582 #gform_fields_2 .gfield--type-section,
+body.page-id-582 #gform_fields_2 .gsection {
+    border: none !important;
+    padding: 8px 0 4px !important;
+    margin: 28px 0 12px !important;
+    background: transparent !important;
+}
+
+body.page-id-582 #gform_fields_2 .gfield--type-section:first-child,
+body.page-id-582 #gform_fields_2 .gsection:first-child {
+    margin-top: 0 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gsection_title {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid #e8ecf1 !important;
+    position: relative !important;
+}
+
+body.page-id-582 #gform_fields_2 .gsection_title::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important;
+    left: 0 !important;
+    width: 40px !important;
+    height: 2px !important;
+    background: #4CAF50 !important;
+    border-radius: 2px !important;
+}
+
+body.page-id-582 #gform_fields_2 .gsection_description {
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+    margin-top: 6px !important;
+    font-style: italic !important;
+}
+
+/* ===== Read-only display fields (gravityflow-display-field) ===== */
+body.page-id-582 #gform_fields_2 .gravityflow-display-field {
+    background: #f8fafc !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-display-field.gfield--type-section {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 0 4px !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    display: block !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label .gfield_required {
+    display: none !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value {
+    font-size: 0.98rem !important;
+    color: #1e293b !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    word-break: break-word !important;
+}
+
+/* Links inside display values (email, URL) */
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
+    color: #4CAF50 !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a:hover {
+    color: #3d8b41 !important;
+    text-decoration: underline !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Hide legend-within-fieldset (complex fields like Name) since value is already flat */
+body.page-id-582 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex {
+    margin-bottom: 6px !important;
+}
+
+/* ===== Editable fields (gravityflow-editable-field) ===== */
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_label,
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field legend.gfield_label {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin: 0 0 10px !important;
+    display: block !important;
+    line-height: 1.4 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gfield_required {
+    color: #E30B5C !important;
+    margin-left: 4px !important;
+}
+
+body.page-id-582 #gform_fields_2 .gfield_required_text {
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+}
+
+/* ===== Editable CHECKBOX fields (Core Skills Mastery, Task 1-5) — pill style ===== */
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
+    list-style: none !important;
+    margin: 4px 0 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 16px !important;
+    background: #fafbfc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 100px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:hover {
+    border-color: #cbd5e1 !important;
+    background: #ffffff !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    accent-color: #4CAF50 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox label {
+    font-size: 0.92rem !important;
+    color: #334155 !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:has(input:checked) {
+    border-color: #4CAF50 !important;
+    background: #f0fdf4 !important;
+}
+
+/* Select All toggle button */
+body.page-id-582 #gform_fields_2 .gfield-choice-toggle-all {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-top: 14px !important;
+}
+
+body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle {
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 6px 16px !important;
+    border-radius: 100px !important;
+    margin: 0 !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    border: none !important;
+    background: #f0fdf4 !important;
+    color: #2f8132 !important;
+    min-width: 100px !important;
+}
+
+body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle:hover {
+    background: #4CAF50 !important;
+    color: #ffffff !important;
+}
+
+/* ===== Editable RADIO fields (Advance to interview?) — card style ===== */
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio {
+    list-style: none !important;
+    margin: 4px 0 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px 16px !important;
+    background: #fafbfc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:hover {
+    border-color: #cbd5e1 !important;
+    background: #ffffff !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio input[type="radio"] {
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    accent-color: #4CAF50 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio label {
+    font-size: 0.98rem !important;
+    color: #334155 !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    flex: 1 !important;
+}
+
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:has(input:checked) {
+    border-color: #4CAF50 !important;
+    background: #f0fdf4 !important;
+}
+
+/* ===== Application Status (display radio) — render as pill ===== */
+body.page-id-582 #gform_fields_2 #field_2_56 .gravityflow-field-value {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 4px 12px !important;
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 100px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    margin-top: 4px !important;
+}
+
+/* Hide the GF form footer (it's not used on this approval page) */
+body.page-id-582 .gform-footer.gform_footer {
+    display: none !important;
+}
+
+/* ===== Workflow sidebar — Approve Tasks step status ===== */
+body.page-id-582 .gravityflow-status-box hr {
+    border: none !important;
+    border-top: 1px solid #e8ecf1 !important;
+    margin: 4px 0 8px !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-step-status {
+    grid-column: 1 / -1 !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-step-status h4 {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-label {
+    display: inline !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    margin: 0 !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-value {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 3px 10px !important;
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 100px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+/* Assignees list */
+body.page-id-582 .gravityflow-status-box-field-assignees {
+    grid-column: 1 / -1 !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-assignees ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-assignees ul li {
+    display: inline-flex !important;
+    padding: 4px 10px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 100px !important;
+    font-size: 0.78rem !important;
+    color: #475569 !important;
+    font-weight: 500 !important;
+    list-style: none !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-assignees span.gravityflow-status-box-field-value {
+    display: contents !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+}
+
+/* ===== Note textarea ===== */
+body.page-id-582 .gravityflow-status-box-field-note {
+    grid-column: 1 / -1 !important;
+    margin-top: 8px !important;
+}
+
+body.page-id-582 .gravityflow-status-box-field-note label[for="gravityflow-note"] {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+    cursor: pointer !important;
+}
+
+body.page-id-582 #submitcomment>span.gravityflow-status-box-field-value {
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    margin-top: 4px !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+}
+
+body.page-id-582 textarea#gravityflow-note {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    color: #1e293b !important;
+    background: #ffffff !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    resize: vertical !important;
+    min-height: 90px !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.page-id-582 textarea#gravityflow-note:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
+}
+
+/* ===== Approve / Reject action buttons ===== */
+body.page-id-582 .gravityflow-action-buttons {
+    display: flex !important;
+    gap: 12px !important;
+    margin-top: 16px !important;
+    flex-wrap: wrap !important;
+    grid-column: 1 / -1 !important;
+}
+
+body.page-id-582 .gravityflow-action-buttons button[value="approved"],
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 12px 28px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    line-height: 1 !important;
+    min-width: 140px !important;
+}
+
+/* Approve — green */
+body.page-id-582 .gravityflow-action-buttons button[value="approved"] {
+    background: #4CAF50 !important;
+    color: #ffffff !important;
+}
+
+body.page-id-582 .gravityflow-action-buttons button[value="approved"]:hover {
+    background: #3d8b41 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
+}
+
+body.page-id-582 .gravityflow-action-buttons button[value="approved"] i.fa {
+    color: #ffffff !important;
+    font-size: 0.9rem !important;
+}
+
+/* Reject — red */
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
+    background: #ffffff !important;
+    color: #b5094a !important;
+    border: 1.5px solid #fbcfe0 !important;
+}
+
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover {
+    background: #E30B5C !important;
+    border-color: #E30B5C !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30) !important;
+}
+
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"] i.fa {
+    font-size: 0.9rem !important;
+}
+
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover i.fa {
+    color: #ffffff !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    body.page-id-582 .wrap.gravityflow_workflow_detail {
+        padding: 0 16px !important;
+    }
+
+    body.page-id-582 table.gravityflow-step-approval tbody>tr>td {
+        padding: 20px !important;
+    }
+
+    body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
+        gap: 8px !important;
+    }
+
+    body.page-id-582 .gravityflow-action-buttons {
+        flex-direction: column !important;
+    }
+
+    body.page-id-582 .gravityflow-action-buttons button[value="approved"],
+    body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
+        width: 100% !important;
+    }
+}
+
+
+
