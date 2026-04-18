@@ -1194,7 +1194,8 @@
 .io-page .gform_previous_button,
 .io-page input.gform_button,
 .io-page input.gform_next_button,
-.io-page input.gform_previous_button {
+.io-page input.gform_previous_button,
+.io-page .gform-button--width-full {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
@@ -1209,10 +1210,12 @@
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
     line-height: 1 !important;
-    min-width: 180px;
-    margin: 0 6px !important;
+    min-width: 180px !important;
+    max-width: 280px !important;
     width: auto !important;
-    box-sizing: border-box;
+    flex: 0 0 auto !important;
+    margin: 0 6px !important;
+    box-sizing: border-box !important;
 }
 
 .io-page .gform_button:hover,
@@ -1271,17 +1274,19 @@
     color: #ffffff !important;
 }
 
-/* Previous button — muted secondary style */
+/* Previous button — darker secondary style (distinct from Submit/Next) */
 .io-page .gform_previous_button {
-    background-color: #e2e8f0 !important;
-    color: #334155 !important;
+    background-color: #64748b !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
 }
 
 .io-page .gform_previous_button:hover {
-    background-color: #cbd5e1 !important;
-    color: #1e293b !important;
-    box-shadow: 0 6px 20px rgba(100, 116, 139, 0.20);
+    background-color: #475569 !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 20px rgba(100, 116, 139, 0.30);
 }
+
 
 /* ---------- Validation & confirmation ---------- */
 .io-page .validation_error {
