@@ -829,3 +829,15 @@
 .section-label-red {
     color: #E30B5C;
 }
+
+
+.red-underline::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #E30B5C;
+    margin: 16px auto 0;
+    border-radius: 2px;
+    opacity: 1;
+}
