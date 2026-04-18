@@ -890,17 +890,20 @@
    ===================================================== */
 
 #scroll-to-top {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: #1D47A1;
-    color: #ffffff;
+    position: fixed !important;
+    right: 24px !important;
+    bottom: 24px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    border: none !important;
+    background: #1D47A1 !important;
+    color: #ffffff !important;
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -909,6 +912,8 @@
     transform: translateY(10px);
     transition: opacity 250ms ease, transform 250ms ease, background 200ms ease, visibility 0s linear 250ms;
     z-index: 999;
+    box-sizing: border-box;
+    line-height: 1;
 }
 
 #scroll-to-top.visible {
@@ -920,34 +925,33 @@
 
 #scroll-to-top:hover,
 #scroll-to-top:focus {
-    background: #143373;
+    background: #143373 !important;
     transform: translateY(-2px);
     outline: none;
 }
 
-#scroll-to-top:focus-visible {
-    box-shadow: 0 0 0 3px rgba(29, 71, 161, 0.35);
-}
-
-
-#scroll-to-top::after {
+#scroll-to-top::before {
     content: "";
     display: block;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-top: 3px solid #ffffff;
-    border-right: 3px solid #ffffff;
-    transform: rotate(-45deg);
-    margin-top: 3px;
+    border-left: 3px solid #ffffff;
+    transform: rotate(45deg);
+    margin-top: 4px;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
     #scroll-to-top {
-        right: 16px;
-        bottom: 16px;
-        width: 40px;
-        height: 40px;
+        right: 16px !important;
+        bottom: 16px !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        max-width: 40px !important;
     }
 }
+
 
 
