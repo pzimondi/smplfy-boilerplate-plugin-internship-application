@@ -2911,7 +2911,9 @@
 }
 
 /* ---------- AG Grid table — light theme refresh ---------- */
-.gflow-inbox-page .ag-theme-alpine {
+/* Scoped to page ID 582 (Manager's Inbox) to ensure selectors win
+   against AG Grid's own stylesheet specificity */
+body.page-id-582 .ag-theme-alpine {
     --ag-background-color: #ffffff;
     --ag-odd-row-background-color: #fafbfc;
     --ag-header-background-color: #f8fafc;
@@ -2927,6 +2929,191 @@
     --ag-cell-horizontal-padding: 16px;
     --ag-borders: solid 1px;
     --ag-border-radius: 10px;
+}
+
+body.page-id-582 .ag-root-wrapper {
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+
+body.page-id-582 .ag-header {
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e8ecf1 !important;
+}
+
+body.page-id-582 .ag-header-cell {
+    padding: 0 16px !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: #64748b !important;
+}
+
+body.page-id-582 .ag-header-cell-text {
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #64748b !important;
+}
+
+body.page-id-582 .ag-row {
+    border-bottom: 1px solid #f1f5f9 !important;
+    transition: background 0.15s ease;
+}
+
+body.page-id-582 .ag-row:last-child {
+    border-bottom: none !important;
+}
+
+body.page-id-582 .ag-row-hover {
+    background-color: #f0fdf4 !important;
+    cursor: pointer;
+}
+
+body.page-id-582 .ag-cell {
+    padding: 0 16px !important;
+    font-size: 0.93rem !important;
+    color: #1e293b !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+body.page-id-582 .ag-cell span {
+    color: inherit !important;
+}
+
+body.page-id-582 .ag-cell[col-id="id"] span {
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace !important;
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+    font-weight: 500 !important;
+}
+
+body.page-id-582 .ag-cell[col-id="form_title"] span {
+    font-weight: 600 !important;
+    color: #1e293b !important;
+}
+
+body.page-id-582 .ag-cell[col-id="created_by"] span {
+    color: #475569 !important;
+}
+
+body.page-id-582 .ag-cell[col-id="workflow_step"] span {
+    display: inline-flex !important;
+    align-items: center;
+    padding: 4px 12px !important;
+    background: #f0fdf4 !important;
+    color: #2f8132 !important;
+    border: 1px solid #c6f0d4 !important;
+    border-radius: 100px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+}
+
+body.page-id-582 .ag-cell[col-id="date_created"] span,
+body.page-id-582 .ag-cell[col-id="last_updated"] span {
+    color: #64748b !important;
+    font-size: 0.88rem !important;
+}
+
+body.page-id-582 .gflow-grid__actions-trigger {
+    background: transparent !important;
+    border: none !important;
+    color: #94a3b8 !important;
+    padding: 6px !important;
+    border-radius: 6px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.page-id-582 .gflow-grid__actions-trigger:hover {
+    background: #f0fdf4 !important;
+    color: #4CAF50 !important;
+}
+
+body.page-id-582 .ag-header-cell-sortable:hover {
+    background: #eef2f6 !important;
+}
+
+/* Search box at top of the table */
+body.page-id-582 .gflow-inbox__search {
+    width: 100% !important;
+    padding: 11px 14px 11px 42px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    color: #1e293b !important;
+    background: #ffffff !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+body.page-id-582 .gflow-inbox__search:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
+}
+
+body.page-id-582 .gflow-grid__button {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    color: #64748b !important;
+    padding: 6px 10px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 6px !important;
+}
+
+body.page-id-582 .gflow-grid__button:hover {
+    background: #f0fdf4 !important;
+    border-color: #c6f0d4 !important;
+    color: #4CAF50 !important;
+}
+
+/* Pagination */
+body.page-id-582 .ag-paging-panel {
+    background: #f8fafc !important;
+    border-top: 1px solid #e8ecf1 !important;
+    padding: 10px 16px !important;
+    font-size: 0.86rem !important;
+    color: #64748b !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+body.page-id-582 .ag-paging-button {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 6px !important;
+    padding: 4px 8px !important;
+    margin: 0 2px !important;
+    color: #64748b !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.page-id-582 .ag-paging-button:hover:not(.ag-disabled) {
+    background: #f0fdf4 !important;
+    border-color: #c6f0d4 !important;
+    color: #4CAF50 !important;
+}
+
+body.page-id-582 .ag-paging-button.ag-disabled {
+    opacity: 0.4 !important;
+    cursor: default;
+}
+
+body.page-id-582 .ag-paging-number {
+    font-weight: 700 !important;
+    color: #1e293b !important;
 }
 
 /* Table root — clean rounded container */
