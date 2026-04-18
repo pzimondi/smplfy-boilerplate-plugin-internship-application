@@ -24,12 +24,13 @@ class DependencyFactory {
         $userCreated             = new UserCreated();
         $backfillMemberships     = new BackfillMemberships();
         $deleteUser              = new DeleteUser();
+        $loginRedirect           = new LoginRedirect();
         $workflowNotifications   = new WorkflowNotifications( $internshipApplicationRepository, $eSignatureAgreementRepository );
         $eSignatureNotifications = new ESignatureNotifications();
 
         // Adapters
         new GravityFormsAdapter( $internshipApplication );
-        new WordpressAdapter( $userCreated, $backfillMemberships, $deleteUser );
+        new WordpressAdapter( $userCreated, $backfillMemberships, $deleteUser, $loginRedirect );
         new GravityFlowAdapter( $workflowNotifications );
         new ESignatureAdapter( $eSignatureNotifications );
     }

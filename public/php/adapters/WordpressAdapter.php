@@ -11,17 +11,21 @@ class WordpressAdapter {
     private UserCreated         $userCreated;
     private BackfillMemberships $backfillMemberships;
     private DeleteUser          $deleteUser;
+    private LoginRedirect       $loginRedirect;
 
     public function __construct(
         UserCreated         $userCreated,
         BackfillMemberships $backfillMemberships,
-        DeleteUser          $deleteUser
+        DeleteUser          $deleteUser,
+        LoginRedirect       $loginRedirect
     ) {
         $this->userCreated         = $userCreated;
         $this->backfillMemberships = $backfillMemberships;
         $this->deleteUser          = $deleteUser;
+        $this->loginRedirect       = $loginRedirect;
 
         $this->register_hooks();
+        $this->register_filters();
     }
 
     private function register_hooks(): void {
@@ -62,6 +66,16 @@ class WordpressAdapter {
                 }
                 $this->backfillMemberships->run();
             }
+        );
+    }
+
+    private function register_filters(): void {
+
+        add_filter(
+            'login_redirect',
+            [ $this->loginRedirect, 'handle_login_redirect' ],
+            99,
+            3
         );
     }
 }
