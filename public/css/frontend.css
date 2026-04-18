@@ -6163,3 +6163,309 @@ hr.au-underline.blue-line::after {
 
 
 
+/* =====================================================
+   LOGIN PAGE (Blue theme — page 1018)
+   Scoped to body.page-id-1018 for the page header,
+   and .mepro-form for the MemberPress-rendered form.
+   ===================================================== */
+
+/* ===== Page wrapper + header ===== */
+body.page-id-1018 .login-page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+    text-align: center;
+}
+
+body.page-id-1018 .login-label {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #1D47A1;
+    margin: 0 0 14px;
+}
+
+body.page-id-1018 .login-heading {
+    font-size: clamp(2rem, 3vw, 2.4rem);
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 16px;
+    line-height: 1.2;
+}
+
+body.page-id-1018 hr.login-underline,
+body.page-id-1018 .login-underline {
+    border: none !important;
+    display: block !important;
+    width: 50px !important;
+    height: 3px !important;
+    background: #1D47A1 !important;
+    border-radius: 2px !important;
+    margin: 0 auto 24px !important;
+    opacity: 1 !important;
+    max-width: none !important;
+}
+
+body.page-id-1018 .login-subheading {
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.6;
+    max-width: 420px;
+    margin: 0 auto 40px;
+}
+
+/* ===== Override the MemberPress "Pro" layout wrapper ===== */
+/* The shortcode renders #mepro-login-hero > .mepro-boxed > .mepro-login-contents.
+   We neutralize the default Pro layout and apply our own card styling. */
+
+body.page-id-1018 #mepro-login-hero {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    min-height: 0 !important;
+}
+
+body.page-id-1018 .mepro-boxed {
+    background: #ffffff !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 16px !important;
+    padding: 40px 36px !important;
+    margin: 0 auto !important;
+    max-width: 460px !important;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05) !important;
+    text-align: left !important;
+}
+
+body.page-id-1018 .mepro-login-contents {
+    padding: 0 !important;
+}
+
+body.page-id-1018 #mepr-template-login {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+}
+
+/* ===== Form h1 (MemberPress outputs its own "Login" heading — hide it,
+           we have our own themed heading above) ===== */
+body.page-id-1018 .mepro-form h1 {
+    display: none !important;
+}
+
+/* ===== Form rows ===== */
+body.page-id-1018 .mepro-form .mp-form-row {
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+body.page-id-1018 .mepro-form .mp-form-label {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    position: relative !important;
+}
+
+body.page-id-1018 .mepro-form .mp-form-label label {
+    display: block !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin: 0 0 6px !important;
+    line-height: 1.4 !important;
+}
+
+/* ===== Inputs ===== */
+body.page-id-1018 .mepro-form input[type="text"],
+body.page-id-1018 .mepro-form input[type="password"],
+body.page-id-1018 .mepro-form input[type="email"] {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    color: #1e293b !important;
+    background: #ffffff !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    height: auto !important;
+    max-width: 100% !important;
+}
+
+body.page-id-1018 .mepro-form input[type="text"]:hover,
+body.page-id-1018 .mepro-form input[type="password"]:hover,
+body.page-id-1018 .mepro-form input[type="email"]:hover {
+    border-color: #cbd5e1 !important;
+}
+
+body.page-id-1018 .mepro-form input[type="text"]:focus,
+body.page-id-1018 .mepro-form input[type="password"]:focus,
+body.page-id-1018 .mepro-form input[type="email"]:focus {
+    outline: none !important;
+    border-color: #1D47A1 !important;
+    box-shadow: 0 0 0 3px rgba(29, 71, 161, 0.15) !important;
+}
+
+/* ===== Password field — show/hide toggle ===== */
+body.page-id-1018 .mepro-form .mp-hide-pw {
+    position: relative !important;
+}
+
+body.page-id-1018 .mepro-form .mp-hide-pw input[type="password"],
+body.page-id-1018 .mepro-form .mp-hide-pw input[type="text"] {
+    padding-right: 44px !important;
+}
+
+body.page-id-1018 .mepro-form button.mp-hide-pw {
+    position: absolute !important;
+    right: 8px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 6px 8px !important;
+    cursor: pointer !important;
+    color: #64748b !important;
+    line-height: 1 !important;
+    border-radius: 6px !important;
+    transition: color 0.2s ease, background 0.2s ease !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+}
+
+body.page-id-1018 .mepro-form button.mp-hide-pw:hover {
+    color: #1D47A1 !important;
+    background: #eff4fb !important;
+}
+
+body.page-id-1018 .mepro-form button.mp-hide-pw .dashicons {
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+    line-height: 18px !important;
+}
+
+/* ===== Remember me checkbox ===== */
+body.page-id-1018 .mepro-form .mp-form-row.mepr_remember_me {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 6px 0 20px !important;
+}
+
+body.page-id-1018 .mepro-form .mp-form-row.mepr_remember_me input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    accent-color: #1D47A1 !important;
+}
+
+body.page-id-1018 .mepro-form .mp-form-row.mepr_remember_me label {
+    font-size: 0.9rem !important;
+    color: #475569 !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    line-height: 1.4 !important;
+}
+
+/* ===== Spacer ===== */
+body.page-id-1018 .mepro-form .mp-spacer {
+    display: none !important;
+}
+
+/* ===== Submit button ===== */
+body.page-id-1018 .mepro-form .submit {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
+body.page-id-1018 .mepro-form input[type="submit"].button-primary,
+body.page-id-1018 .mepro-form input#wp-submit,
+body.page-id-1018 .mepro-form .mepr-share-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 14px 24px !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    background-color: #1D47A1 !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    font-family: inherit !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    height: auto !important;
+    max-width: 100% !important;
+}
+
+body.page-id-1018 .mepro-form input[type="submit"].button-primary:hover,
+body.page-id-1018 .mepro-form input#wp-submit:hover,
+body.page-id-1018 .mepro-form .mepr-share-button:hover {
+    background-color: #143373 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(29, 71, 161, 0.30) !important;
+    color: #ffffff !important;
+}
+
+/* ===== Forgot password link ===== */
+body.page-id-1018 .mepr-login-actions {
+    text-align: center !important;
+    margin-top: 20px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid #f1f5f9 !important;
+}
+
+body.page-id-1018 .mepr-login-actions a {
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    color: #1D47A1 !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+
+body.page-id-1018 .mepr-login-actions a:hover {
+    color: #143373 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+}
+
+/* ===== Hide the (Edit) admin link ===== */
+body.page-id-1018 .entry-content>.post-edit-link,
+body.page-id-1018 article>.post-edit-link {
+    display: none !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+    body.page-id-1018 .login-page {
+        padding: 60px 16px 70px;
+    }
+
+    body.page-id-1018 .mepro-boxed {
+        padding: 28px 22px !important;
+    }
+}
+
+
+
