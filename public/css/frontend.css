@@ -3590,12 +3590,21 @@ body.page-id-582 .gravityflow-note-body .gravityflow-note-body {
    Green theme — mirrors Manager's Inbox styling
    ===================================================== */
 
-/* Constrain the GravityView block + parent column to page width */
+/* Full-width GravityView block — edge to edge */
 body.page-id-1556 .entry-content>.wp-block-columns.alignfull {
-    max-width: 1200px !important;
-    margin: 0 auto !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
     padding: 0 24px !important;
     box-sizing: border-box !important;
+}
+
+body.page-id-1556 .entry-content>.wp-block-columns.alignfull>.wp-block-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-basis: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 body.page-id-1556 .gv-template-table {
