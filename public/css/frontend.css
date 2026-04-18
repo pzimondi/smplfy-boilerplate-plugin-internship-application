@@ -594,11 +594,36 @@
     color: #1D47A1;
     font-weight: 600;
     text-decoration: none;
+    position: relative;
+    padding: 2px 0;
+    transition: transform 180ms ease, color 180ms ease;
+    display: inline-block;
 }
 
-.site-footer a:hover {
+.site-footer a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: #1D47A1;
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus {
     color: #143373;
-    text-decoration: underline;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.site-footer a:hover::after,
+.site-footer a:focus::after {
+    transform: scaleX(1);
 }
 
 
