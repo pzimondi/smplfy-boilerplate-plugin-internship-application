@@ -2610,7 +2610,7 @@ body.page-id-582 .gflow-inbox {
     border-radius: 14px !important;
     padding: 20px !important;
     box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
-    margin: 0 !important;
+    margin: 60px 0 0 0 !important;
     max-width: 100% !important;
 }
 
@@ -2624,7 +2624,7 @@ body.page-id-582 .gflow-grid__header {
 
 body.page-id-582 .gflow-inbox__search {
     width: 100% !important;
-    padding: 12px 160px 12px 44px !important;
+    padding: 12px 16px 12px 44px !important;
     border: 1.5px solid #e2e8f0 !important;
     border-radius: 10px !important;
     font-size: 0.95rem !important;
@@ -2662,7 +2662,7 @@ body.page-id-582 .gflow-grid__search-icon {
    aligned with search input (card padding 20px = top offset) */
 body.page-id-582 .gflow-grid__button {
     position: absolute !important;
-    top: 20px !important;
+    top: -52px !important;
     bottom: auto !important;
     transform: none !important;
     background: #ffffff !important;
