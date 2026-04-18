@@ -1004,11 +1004,15 @@
     text-align: center !important;
 }
 
-/* Wrap the apply-button's parent <body> in centered display — it's embedded
-   inside a full HTML doc inside field_1_11. The <a> needs to be centered. */
-.io-page .gfield_html body {
-    display: block;
-    text-align: center;
+/* Center the apply button inside its HTML field wrapper */
+.io-page .gfield_html {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.io-page .gfield_html a.apply-button {
+    align-self: center;
 }
 
 /* Role-colored apply button */
