@@ -771,16 +771,569 @@
 }
 
 
-/*Internship Opportunities*/
-.internship-opportunities-line::after {
-    content: "";
+/* =====================================================
+   INTERNSHIP OPPORTUNITIES PAGES (4 role-gating pages)
+   Controlled by adding ONE wrapper class per page:
+     .io-blue   → Junior Web Designer      (Form 1)
+     .io-green  → Junior Social Media      (Form 10)
+     .io-yellow → Junior Business Analyst  (Form 11)
+     .io-red    → Junior Web Developer     (Form 12)
+   ===================================================== */
+
+/* ---------- Page wrapper & header ---------- */
+.io-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+    text-align: center;
+}
+
+.io-label {
     display: block;
-    width: 110px;
-    height: 7px;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+
+.io-heading {
+    font-size: clamp(2rem, 3vw, 2.4rem);
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 16px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.io-underline {
+    display: block;
+    width: 50px;
+    height: 3px;
+    border-radius: 2px;
+    margin: 0 auto 40px;
+}
+
+/* Per-role primary accents */
+.io-blue .io-label {
+    color: #1D47A1;
+}
+
+.io-green .io-label {
+    color: #4CAF50;
+}
+
+.io-yellow .io-label {
+    color: #F9B500;
+}
+
+.io-red .io-label {
+    color: #E30B5C;
+}
+
+.io-blue .io-underline {
     background: #1D47A1;
-    margin: 22px auto 0;
-    border-radius: 999px;
-    opacity: 0.95;
+}
+
+.io-green .io-underline {
+    background: #4CAF50;
+}
+
+.io-yellow .io-underline {
+    background: #F9B500;
+}
+
+.io-red .io-underline {
+    background: #E30B5C;
+}
+
+/* ---------- Content card ---------- */
+.io-content {
+    text-align: left;
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 16px;
+    padding: 40px 44px;
+    margin: 0 auto 28px;
+    max-width: 680px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.io-content:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.io-content h3,
+.io-content h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 16px;
+    line-height: 1.3;
+}
+
+.io-content p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #334155;
+    margin: 0 0 16px;
+}
+
+.io-content p:last-of-type {
+    margin-bottom: 0;
+}
+
+.io-content ul {
+    margin: 8px 0 0;
+    padding-left: 24px;
+    list-style-type: disc;
+}
+
+.io-content li {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #334155;
+}
+
+/* ---------- Gravity Form container ---------- */
+.io-page .gform_wrapper {
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 16px;
+    padding: 36px 44px;
+    margin: 0 auto 28px;
+    max-width: 680px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease;
+}
+
+.io-page .gform_wrapper:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Hide ALL status-display clutter — admin controls via backend */
+.io-page .gf_progressbar_wrapper,
+.io-page .gf_progressbar_title,
+.io-page .gf_progressbar,
+.io-page .gf_step {
+    display: none !important;
+}
+
+/* Hide the Open/Closed radio field across all 4 forms (field_X_1) */
+.io-page #field_1_1,
+.io-page #field_10_1,
+.io-page #field_11_1,
+.io-page #field_12_1 {
+    display: none !important;
+}
+
+/* Hide the "Internship Window Status" H5 that sits just above the form */
+.io-page>h5:first-of-type,
+.entry-content>h5:only-of-type {
+    display: none;
+}
+
+/* Form internal spacing */
+.io-page .gform_fields>.gfield {
+    margin-bottom: 20px;
+}
+
+.io-page .gfield:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- HTML-type fields (Closed message, apply block) ---------- */
+.io-page .gfield_html h3,
+.io-page .gfield_html h4,
+.io-page .gfield_html h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 12px;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.io-page .gfield_html p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #334155;
+    margin: 0 0 14px;
+    text-align: left;
+}
+
+.io-page .gfield_html ul {
+    margin: 8px 0 14px;
+    padding-left: 24px;
+    list-style-type: disc;
+    text-align: left;
+}
+
+.io-page .gfield_html li {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #334155;
+}
+
+.io-page .gfield_html li p {
+    margin: 0;
+}
+
+/* The embedded "Click Here to Apply" button inside field_1_11 HTML block
+   has inline styles — override with high specificity and !important. */
+.io-page .gfield_html a.apply-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    padding: 14px 40px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
+    line-height: 1 !important;
+    margin: 24px auto 0 !important;
+    text-align: center !important;
+}
+
+/* Wrap the apply-button's parent <body> in centered display — it's embedded
+   inside a full HTML doc inside field_1_11. The <a> needs to be centered. */
+.io-page .gfield_html body {
+    display: block;
+    text-align: center;
+}
+
+/* Role-colored apply button */
+.io-blue .gfield_html a.apply-button {
+    background-color: #1D47A1 !important;
+}
+
+.io-blue .gfield_html a.apply-button:hover {
+    background-color: #143373 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(29, 71, 161, 0.30) !important;
+    color: #ffffff !important;
+}
+
+.io-green .gfield_html a.apply-button {
+    background-color: #4CAF50 !important;
+}
+
+.io-green .gfield_html a.apply-button:hover {
+    background-color: #3d8b41 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
+    color: #ffffff !important;
+}
+
+.io-yellow .gfield_html a.apply-button {
+    background-color: #F9B500 !important;
+}
+
+.io-yellow .gfield_html a.apply-button:hover {
+    background-color: #d99a00 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30) !important;
+    color: #ffffff !important;
+}
+
+.io-red .gfield_html a.apply-button {
+    background-color: #E30B5C !important;
+}
+
+.io-red .gfield_html a.apply-button:hover {
+    background-color: #b5094a !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30) !important;
+    color: #ffffff !important;
+}
+
+/* ---------- Form field labels ---------- */
+.io-page .gfield_label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
+}
+
+/* ---------- Radio buttons (Yes/No notification) ---------- */
+.io-page .gfield_radio {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 28px;
+    text-align: left;
+}
+
+.io-page .gfield_radio .gchoice {
+    position: relative;
+    margin: 0;
+}
+
+.io-page .gfield_radio label.gform-field-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: #334155;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0 0 0 8px;
+}
+
+.io-page .gfield_radio input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.io-blue .gfield_radio input[type="radio"] {
+    accent-color: #1D47A1;
+}
+
+.io-green .gfield_radio input[type="radio"] {
+    accent-color: #4CAF50;
+}
+
+.io-yellow .gfield_radio input[type="radio"] {
+    accent-color: #F9B500;
+}
+
+.io-red .gfield_radio input[type="radio"] {
+    accent-color: #E30B5C;
+}
+
+/* ---------- Text / email inputs (page 2: name + email) ---------- */
+.io-page .ginput_container input[type="text"],
+.io-page .ginput_container input[type="email"],
+.io-page .ginput_container input[type="tel"],
+.io-page .ginput_container input[type="number"],
+.io-page .ginput_container textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1e293b;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.io-page .ginput_container input:focus,
+.io-page .ginput_container textarea:focus {
+    outline: none;
+}
+
+.io-blue .ginput_container input:focus,
+.io-blue .ginput_container textarea:focus {
+    border-color: #1D47A1;
+    box-shadow: 0 0 0 3px rgba(29, 71, 161, 0.15);
+}
+
+.io-green .ginput_container input:focus,
+.io-green .ginput_container textarea:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+.io-yellow .ginput_container input:focus,
+.io-yellow .ginput_container textarea:focus {
+    border-color: #F9B500;
+    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.15);
+}
+
+.io-red .ginput_container input:focus,
+.io-red .ginput_container textarea:focus {
+    border-color: #E30B5C;
+    box-shadow: 0 0 0 3px rgba(227, 11, 92, 0.15);
+}
+
+/* Sub-labels under name first/last */
+.io-page .gfield_label.gform-field-label--type-sub {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #64748b;
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+/* ---------- Submit / Next / Previous buttons ---------- */
+.io-page .gform_page_footer,
+.io-page .gform_footer,
+.io-page .gform-page-footer {
+    text-align: center;
+    padding-top: 16px;
+    margin: 0;
+    border-top: none;
+}
+
+.io-page .gform_button,
+.io-page .gform_next_button,
+.io-page .gform_previous_button,
+.io-page input.gform_button,
+.io-page input.gform_next_button,
+.io-page input.gform_previous_button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    padding: 14px 40px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
+    line-height: 1 !important;
+    min-width: 180px;
+    margin: 0 6px !important;
+    width: auto !important;
+    box-sizing: border-box;
+}
+
+.io-page .gform_button:hover,
+.io-page .gform_next_button:hover,
+.io-page .gform_previous_button:hover {
+    transform: translateY(-2px);
+    text-decoration: none !important;
+}
+
+/* Per-role submit/next button colors */
+.io-blue .gform_button,
+.io-blue .gform_next_button {
+    background-color: #1D47A1 !important;
+}
+
+.io-blue .gform_button:hover,
+.io-blue .gform_next_button:hover {
+    background-color: #143373 !important;
+    box-shadow: 0 6px 20px rgba(29, 71, 161, 0.30);
+    color: #ffffff !important;
+}
+
+.io-green .gform_button,
+.io-green .gform_next_button {
+    background-color: #4CAF50 !important;
+}
+
+.io-green .gform_button:hover,
+.io-green .gform_next_button:hover {
+    background-color: #3d8b41 !important;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30);
+    color: #ffffff !important;
+}
+
+.io-yellow .gform_button,
+.io-yellow .gform_next_button {
+    background-color: #F9B500 !important;
+}
+
+.io-yellow .gform_button:hover,
+.io-yellow .gform_next_button:hover {
+    background-color: #d99a00 !important;
+    box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30);
+    color: #ffffff !important;
+}
+
+.io-red .gform_button,
+.io-red .gform_next_button {
+    background-color: #E30B5C !important;
+}
+
+.io-red .gform_button:hover,
+.io-red .gform_next_button:hover {
+    background-color: #b5094a !important;
+    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30);
+    color: #ffffff !important;
+}
+
+/* Previous button — muted secondary style */
+.io-page .gform_previous_button {
+    background-color: #e2e8f0 !important;
+    color: #334155 !important;
+}
+
+.io-page .gform_previous_button:hover {
+    background-color: #cbd5e1 !important;
+    color: #1e293b !important;
+    box-shadow: 0 6px 20px rgba(100, 116, 139, 0.20);
+}
+
+/* ---------- Validation & confirmation ---------- */
+.io-page .validation_error {
+    color: #E30B5C;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px;
+    background: #fef2f4;
+    border: 1px solid #fbcfe0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.io-page .gfield_error .gfield_label {
+    color: #E30B5C;
+}
+
+.io-page .gform_confirmation_message {
+    text-align: center;
+    padding: 32px 24px;
+    background: #f8fafc;
+    border-radius: 12px;
+    color: #1e293b;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* ---------- Hide "(Edit)" admin-only link on these pages ---------- */
+.entry-content>.post-edit-link {
+    display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .io-page {
+        padding: 60px 16px 70px;
+    }
+
+    .io-content,
+    .io-page .gform_wrapper {
+        padding: 28px 22px;
+    }
+
+    .io-page .gfield_radio {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .io-page .gform_button,
+    .io-page .gform_next_button,
+    .io-page .gform_previous_button {
+        min-width: 140px;
+        padding: 12px 28px !important;
+        font-size: 1rem !important;
+    }
+
+    .io-page .gfield_html a.apply-button {
+        padding: 12px 28px !important;
+        font-size: 1rem !important;
+    }
 }
 
 
