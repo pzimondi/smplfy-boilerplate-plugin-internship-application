@@ -21,14 +21,14 @@ class GravityFlowAdapter {
         );
 
         add_action(
-            'gravityflow_post_user_registration',
-            function( $user_id, $entry ) {
-                if ( $user_id ) {
+            'gform_user_registered',
+            function( $user_id, $feed, $entry, $user_pass ) {
+                if ( $user_id && (int) $entry['form_id'] === FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
                     \GFAPI::update_entry_field( $entry['id'], '110', "user_id|{$user_id}" );
                 }
             },
             10,
-            2
+            4
         );
     }
 }
