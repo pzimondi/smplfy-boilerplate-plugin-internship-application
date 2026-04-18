@@ -3069,16 +3069,36 @@ body.page-id-582 .gform-field__toggle-input:checked+.gform-field__toggle-contain
 
 /* =====================================================
    WORKFLOW ENTRY DETAIL PAGE (Gravity Flow)
-   Shown when clicking an inbox row
+   Shown when clicking an inbox row (read-only after approval)
    URL: ?page=gravityflow-inbox&view=entry&id=X&lid=Y
    Scoped to body.page-id-582
    ===================================================== */
 
-/* Container: full width, no sidebar crowding */
+/* Success notice at top ("Entry Approved") */
+body.page-id-582 .gravityflow_workflow_notice {
+    background: #f0fdf4 !important;
+    border: 1px solid #c6f0d4 !important;
+    border-left: 4px solid #4CAF50 !important;
+    border-radius: 10px !important;
+    padding: 14px 18px !important;
+    margin: 20px auto !important;
+    max-width: 1152px !important;
+    box-shadow: none !important;
+}
+
+body.page-id-582 .gravityflow_workflow_notice p {
+    margin: 0 !important;
+    color: #2f8132 !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+}
+
+/* Container: full width, centered, no WP admin sidebar constraints */
 body.page-id-582 #poststuff {
     padding-top: 0 !important;
     min-width: 0 !important;
-    margin: 20px auto 40px !important;
+    margin: 0 auto 60px !important;
     max-width: 1200px !important;
     padding: 0 24px !important;
 }
@@ -3116,43 +3136,31 @@ body.page-id-582 #postbox-container-2 {
     min-width: 0 !important;
 }
 
-/* Instructions box */
-body.page-id-582 .postbox.gravityflow-instructions {
-    background: #f0fdf4 !important;
-    border: 1px solid #c6f0d4 !important;
-    border-left: 4px solid #4CAF50 !important;
-    border-radius: 10px !important;
-    padding: 0 !important;
-    margin: 0 0 20px !important;
-    box-shadow: none !important;
-}
-
-body.page-id-582 .postbox.gravityflow-instructions .inside {
-    padding: 18px 22px !important;
-    margin: 0 !important;
-    font-size: 0.94rem !important;
-    line-height: 1.65 !important;
-    color: #1e293b !important;
-}
-
-/* Entry detail table (read-only applicant data) */
+/* ===== Entry detail table card ===== */
 body.page-id-582 table.entry-detail-view {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
     border-radius: 12px !important;
     overflow: hidden !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     width: 100% !important;
-    margin-bottom: 0 !important;
+    margin: 0 !important;
 }
 
+/* Table header — entry title + "show empty fields" toggle */
 body.page-id-582 table.entry-detail-view thead th {
-    background: #f8fafc !important;
-    padding: 14px 22px !important;
-    font-size: 1rem !important;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
+    padding: 18px 28px !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    vertical-align: middle !important;
+}
+
+body.page-id-582 table.entry-detail-view thead th#details {
+    font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
-    border-bottom: 1px solid #e8ecf1 !important;
     text-align: left !important;
 }
 
@@ -3167,102 +3175,104 @@ body.page-id-582 table.entry-detail-view thead th[style*="text-align: right"] la
     user-select: none !important;
 }
 
+body.page-id-582 #gentry_display_empty_fields {
+    accent-color: #4CAF50 !important;
+    cursor: pointer !important;
+    margin-right: 4px !important;
+    vertical-align: middle !important;
+}
+
+/* Neutralize all TDs so the specific ones can repaint cleanly */
 body.page-id-582 table.entry-detail-view tbody td {
-    padding: 24px 28px !important;
-    background: #ffffff !important;
     border: none !important;
+    background: #ffffff !important;
 }
 
-/* Read-only display fields */
-body.page-id-582 .gravityflow-display-field {
-    margin-bottom: 18px !important;
-    padding-bottom: 16px !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-}
-
-body.page-id-582 .gravityflow-display-field:last-child {
-    border-bottom: none !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-}
-
-/* Section dividers */
-body.page-id-582 .gfield--type-section {
-    margin: 28px 0 16px !important;
-    padding: 0 !important;
-    border-bottom: none !important;
-}
-
-body.page-id-582 .gfield--type-section:first-child {
-    margin-top: 0 !important;
-}
-
-body.page-id-582 .gfield--type-section .gsection_title {
-    font-size: 1.1rem !important;
+/* Section break rows — green accent divider */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break {
+    padding: 26px 28px 12px !important;
+    font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
-    margin: 0 0 12px !important;
-    padding-bottom: 10px !important;
+    background: #ffffff !important;
     border-bottom: 2px solid #e8ecf1 !important;
     position: relative !important;
 }
 
-body.page-id-582 .gfield--type-section .gsection_title::after {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::after {
     content: '' !important;
     position: absolute !important;
     bottom: -2px !important;
-    left: 0 !important;
+    left: 28px !important;
     width: 40px !important;
     height: 2px !important;
     background: #4CAF50 !important;
     border-radius: 2px !important;
 }
 
-/* Field labels */
-body.page-id-582 .gravityflow-display-field .gfield_label {
-    font-size: 0.8rem !important;
+/* Field label row (uppercase, small, muted) */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name {
+    padding: 16px 28px 4px !important;
+    font-size: 0.72rem !important;
     font-weight: 700 !important;
     color: #64748b !important;
-    margin: 0 0 6px !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
+    letter-spacing: 0.08em !important;
+    background: #ffffff !important;
 }
 
-body.page-id-582 .gravityflow-display-field .gfield_required {
-    color: #E30B5C !important;
-    margin-left: 4px !important;
-    font-weight: 600 !important;
-}
-
-body.page-id-582 .gravityflow-display-field .gfield_required_text {
-    font-size: 0.7rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
-}
-
-/* Field values */
-body.page-id-582 .gravityflow-field-value {
-    font-size: 1rem !important;
+/* Field value row (dark, readable, separator) */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value {
+    padding: 0 28px 18px !important;
+    font-size: 0.98rem !important;
     color: #1e293b !important;
-    line-height: 1.55 !important;
     font-weight: 500 !important;
+    line-height: 1.6 !important;
     word-break: break-word !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #f1f5f9 !important;
 }
 
-body.page-id-582 .gravityflow-field-value a {
+body.page-id-582 table.entry-detail-view tbody tr:last-child td.entry-view-field-value {
+    border-bottom: none !important;
+    padding-bottom: 24px !important;
+}
+
+/* Links inside values (email, URLs) */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a {
     color: #4CAF50 !important;
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: color 0.2s ease !important;
 }
 
-body.page-id-582 .gravityflow-field-value a:hover {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a:hover {
     color: #3d8b41 !important;
     text-decoration: underline !important;
 }
 
-/* Bulleted lists (days of week) */
-body.page-id-582 .gravityflow-field-value ul.bulleted {
+/* Map It link — small pill */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link {
+    display: inline-block !important;
+    margin-top: 6px !important;
+    padding: 3px 12px !important;
+    background: #f0fdf4 !important;
+    border: 1px solid #c6f0d4 !important;
+    border-radius: 100px !important;
+    font-size: 0.78rem !important;
+    color: #2f8132 !important;
+    font-weight: 600 !important;
+}
+
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link:hover {
+    background: #4CAF50 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-color: #4CAF50 !important;
+}
+
+/* Bulleted list (e.g. days of week) as pills */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -3271,7 +3281,7 @@ body.page-id-582 .gravityflow-field-value ul.bulleted {
     gap: 8px !important;
 }
 
-body.page-id-582 .gravityflow-field-value ul.bulleted li {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted li {
     display: inline-flex !important;
     padding: 5px 12px !important;
     background: #f0fdf4 !important;
@@ -3282,45 +3292,31 @@ body.page-id-582 .gravityflow-field-value ul.bulleted li {
     font-weight: 600 !important;
 }
 
-/* Editable radio field (Advance to Tasks) */
-body.page-id-582 .gravityflow-editable-field {
-    padding: 16px 18px !important;
-    background: #f0fdf4 !important;
-    border: 1px solid #c6f0d4 !important;
-    border-radius: 10px !important;
-    margin-top: 20px !important;
-    margin-bottom: 20px !important;
+/* Instructional blocks (e.g. "Create a 1 Minute introduction using Loom") */
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value strong {
+    display: block !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 6px !important;
 }
 
-body.page-id-582 .gravityflow-editable-field .gfield_radio {
-    display: flex !important;
-    gap: 20px !important;
-    margin-top: 10px !important;
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) {
+    margin: 4px 0 0 !important;
+    padding-left: 22px !important;
 }
 
-body.page-id-582 .gravityflow-editable-field .gchoice {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) li {
+    line-height: 1.7 !important;
+    color: #334155 !important;
+    font-weight: 500 !important;
 }
 
-body.page-id-582 .gravityflow-editable-field input[type="radio"] {
-    accent-color: #4CAF50 !important;
-    cursor: pointer !important;
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value p {
+    margin: 6px 0 !important;
 }
 
-body.page-id-582 #gentry_display_empty_fields {
-    accent-color: #4CAF50 !important;
-    cursor: pointer !important;
-    margin-right: 4px !important;
-}
-
-/* Hide workflow-hidden fields (not meant for manager at this stage) */
-body.page-id-582 .gravityflow-hidden-field {
-    display: none !important;
-}
-
-/* Workflow status box (contains Approve/Reject buttons) */
+/* ===== Workflow status box (sidebar) ===== */
 body.page-id-582 #gravityflow-status-box-container.postbox {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
@@ -3332,15 +3328,16 @@ body.page-id-582 #gravityflow-status-box-container.postbox {
 }
 
 body.page-id-582 #gravityflow-status-box-container .hndle {
-    background: #f8fafc !important;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 14px 22px !important;
     margin: 0 !important;
-    border-bottom: 1px solid #e8ecf1 !important;
-    font-size: 0.9rem !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-size: 0.85rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.1em !important;
+    cursor: default !important;
 }
 
 body.page-id-582 #gravityflow-status-box-container .hndle span {
@@ -3354,8 +3351,8 @@ body.page-id-582 #submitcomment {
 
 body.page-id-582 .gravityflow-status-box {
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-    gap: 16px !important;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+    gap: 20px 24px !important;
     background: none !important;
     padding: 0 !important;
     border: none !important;
@@ -3374,7 +3371,7 @@ body.page-id-582 .gravityflow-status-box-field-label {
     color: #64748b !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
-    margin-bottom: 4px !important;
+    margin-bottom: 6px !important;
 }
 
 body.page-id-582 .gravityflow-status-box-field-value {
@@ -3383,29 +3380,10 @@ body.page-id-582 .gravityflow-status-box-field-value {
     font-weight: 600 !important;
 }
 
-body.page-id-582 .gravityflow-status-box hr {
-    grid-column: 1 / -1 !important;
-    border: none !important;
-    border-top: 1px solid #f1f5f9 !important;
-    margin: 8px 0 !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-step-status {
-    grid-column: 1 / -1 !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-step-status h4 {
-    font-size: 1.05rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-step-status .gravityflow-status-box-field-value {
+/* Pending status — yellow pill */
+body.page-id-582 .gravityflow-status-box-field-status .gravityflow-status-box-field-value {
     display: inline-flex !important;
+    align-items: center !important;
     padding: 4px 12px !important;
     background: #fffbeb !important;
     color: #b17a00 !important;
@@ -3413,119 +3391,10 @@ body.page-id-582 .gravityflow-status-box-field-step-status .gravityflow-status-b
     border-radius: 100px !important;
     font-size: 0.78rem !important;
     font-weight: 600 !important;
-    font-style: normal !important;
-    text-transform: none !important;
     letter-spacing: 0 !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-assignees {
-    grid-column: 1 / -1 !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-assignees ul {
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-assignees li {
-    font-size: 0.88rem !important;
-    color: #475569 !important;
-    padding: 6px 0 !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-note {
-    grid-column: 1 / -1 !important;
-    margin-top: 8px !important;
-}
-
-body.page-id-582 .gravityflow-status-box-field-note .gravityflow-status-box-field-label {
-    margin-bottom: 8px !important;
-}
-
-body.page-id-582 #gravityflow-note {
-    width: 100% !important;
-    padding: 11px 14px !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    font-size: 0.95rem !important;
-    color: #1e293b !important;
-    background: #ffffff !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-    box-sizing: border-box !important;
-    font-family: inherit !important;
-    line-height: 1.5 !important;
-    resize: vertical !important;
-    min-height: 88px !important;
-}
-
-body.page-id-582 #gravityflow-note:focus {
-    outline: none !important;
-    border-color: #4CAF50 !important;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
-}
-
-/* Approve / Reject buttons */
-body.page-id-582 .gravityflow-action-buttons {
-    grid-column: 1 / -1 !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    margin-top: 20px !important;
-    padding-top: 20px !important;
-    border-top: 1px solid #f1f5f9 !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    font-size: 1rem !important;
-    font-weight: 600 !important;
-    padding: 12px 36px !important;
-    border: none !important;
-    border-radius: 10px !important;
-    cursor: pointer !important;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
-    line-height: 1 !important;
-    width: auto !important;
-    min-width: 180px !important;
-    color: #ffffff !important;
-    text-transform: none !important;
-    box-shadow: none !important;
-    text-decoration: none !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button[value="approved"] {
-    background: #4CAF50 !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button[value="approved"]:hover {
-    background: #3d8b41 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button[value="approved"] i {
-    color: #ffffff !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button[value="rejected"] {
-    background: #E30B5C !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button[value="rejected"]:hover {
-    background: #b5094a !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30) !important;
-}
-
-body.page-id-582 .gravityflow-action-buttons .button[value="rejected"] i {
-    color: #ffffff !important;
-}
-
-/* Print button */
+/* ===== Print button row ===== */
 body.page-id-582 .detail-view-print {
     text-align: center !important;
     margin: 20px 0 0 !important;
@@ -3533,7 +3402,7 @@ body.page-id-582 .detail-view-print {
     background: #f8fafc !important;
     border: 1px solid #e8ecf1 !important;
     border-radius: 10px !important;
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
     color: #64748b !important;
     display: flex !important;
     justify-content: center !important;
@@ -3545,13 +3414,14 @@ body.page-id-582 .detail-view-print {
 body.page-id-582 .detail-view-print .button {
     background: #64748b !important;
     color: #ffffff !important;
-    padding: 8px 20px !important;
+    padding: 8px 22px !important;
     border-radius: 8px !important;
     border: none !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: all 0.2s ease !important;
+    cursor: pointer !important;
 }
 
 body.page-id-582 .detail-view-print .button:hover {
@@ -3563,9 +3433,10 @@ body.page-id-582 .detail-view-print .button:hover {
 body.page-id-582 #gform_print_notes {
     accent-color: #4CAF50 !important;
     margin-right: 4px !important;
+    vertical-align: middle !important;
 }
 
-/* Timeline */
+/* ===== Timeline ===== */
 body.page-id-582 .postbox.gravityflow-timeline {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
@@ -3577,15 +3448,15 @@ body.page-id-582 .postbox.gravityflow-timeline {
 }
 
 body.page-id-582 .postbox.gravityflow-timeline>h3 {
-    background: #f8fafc !important;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 14px 22px !important;
     margin: 0 !important;
-    border-bottom: 1px solid #e8ecf1 !important;
-    font-size: 0.9rem !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-size: 0.85rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
+    letter-spacing: 0.1em !important;
     cursor: default !important;
 }
 
@@ -3595,6 +3466,7 @@ body.page-id-582 .postbox.gravityflow-timeline>h3 label {
     font-weight: inherit !important;
     text-transform: inherit !important;
     letter-spacing: inherit !important;
+    cursor: default !important;
 }
 
 body.page-id-582 .postbox.gravityflow-timeline .inside {
@@ -3605,8 +3477,9 @@ body.page-id-582 .gravityflow-note {
     display: flex !important;
     align-items: flex-start !important;
     gap: 14px !important;
-    padding: 14px 0 !important;
+    padding: 16px 0 !important;
     border-bottom: 1px solid #f1f5f9 !important;
+    margin: 0 !important;
 }
 
 body.page-id-582 .gravityflow-note:last-child {
@@ -3635,6 +3508,7 @@ body.page-id-582 .gravityflow-note-avatar .avatar {
     width: 40px !important;
     height: 40px !important;
     border-radius: 50% !important;
+    display: block !important;
 }
 
 body.page-id-582 .gravityflow-note-avatar i.fa {
@@ -3644,6 +3518,7 @@ body.page-id-582 .gravityflow-note-avatar i.fa {
 
 body.page-id-582 .gravityflow-note-body-wrap {
     flex: 1 !important;
+    min-width: 0 !important;
 }
 
 body.page-id-582 .gravityflow-note-header {
@@ -3669,27 +3544,40 @@ body.page-id-582 .gravityflow-note-meta {
 body.page-id-582 .gravityflow-note-body {
     font-size: 0.88rem !important;
     color: #475569 !important;
-    line-height: 1.55 !important;
+    line-height: 1.6 !important;
 }
 
+/* GF nests .gravityflow-note-body inside itself — neutralize inner */
+body.page-id-582 .gravityflow-note-body .gravityflow-note-body {
+    padding: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
+    body.page-id-582 #poststuff {
+        padding: 0 16px !important;
+    }
+
+    body.page-id-582 table.entry-detail-view thead th,
+    body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break,
+    body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name,
+    body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value {
+        padding-left: 18px !important;
+        padding-right: 18px !important;
+    }
+
+    body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::after {
+        left: 18px !important;
+    }
+
     body.page-id-582 #submitcomment {
         padding: 18px !important;
     }
 
     body.page-id-582 .gravityflow-status-box {
         grid-template-columns: 1fr !important;
-    }
-
-    body.page-id-582 .gravityflow-action-buttons {
-        flex-direction: column !important;
-    }
-
-    body.page-id-582 .gravityflow-action-buttons .button {
-        width: 100% !important;
-    }
-
-    body.page-id-582 table.entry-detail-view tbody td {
-        padding: 18px 20px !important;
     }
 }
