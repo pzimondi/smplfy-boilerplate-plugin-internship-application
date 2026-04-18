@@ -1869,6 +1869,20 @@
     cursor: pointer;
 }
 
+/* Explicitly no chevron on text-type inputs and textareas */
+.io-application-page .ginput_container input[type="text"],
+.io-application-page .ginput_container input[type="email"],
+.io-application-page .ginput_container input[type="tel"],
+.io-application-page .ginput_container input[type="number"],
+.io-application-page .ginput_container input[type="url"],
+.io-application-page .ginput_container input[type="password"],
+.io-application-page .ginput_container textarea {
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 /* Proper dropdown styling for <select> (Country, State, Time AM/PM, etc.) */
 .io-application-page .ginput_container select {
     -webkit-appearance: none;
