@@ -2753,3 +2753,421 @@
         padding: 26px 22px 22px;
     }
 }
+
+
+
+
+/* =====================================================
+   MANAGER'S INBOX PAGE
+   Green theme (extending Managers Dashboard look)
+   Styles the Gravity Flow AG Grid inbox table
+   Scoped to .gflow-inbox-page — does NOT leak to
+   Applicant Inbox, Task Submissions, or any other
+   Gravity Flow context.
+   ===================================================== */
+
+/* ---------- Page wrapper & header ---------- */
+.gflow-inbox-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 24px 100px;
+    text-align: center;
+}
+
+.gflow-inbox-page .gflow-label {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4CAF50;
+    margin: 0 0 14px;
+}
+
+.gflow-inbox-page .gflow-heading {
+    font-size: clamp(1.8rem, 2.8vw, 2.2rem);
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 16px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.gflow-inbox-page .gflow-underline {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #4CAF50;
+    border-radius: 2px;
+    margin: 0 auto 20px;
+}
+
+.gflow-inbox-page .gflow-subheading {
+    font-size: 0.98rem;
+    color: #475569;
+    margin: 0 auto 28px;
+    max-width: 560px;
+    line-height: 1.6;
+}
+
+.gflow-inbox-page .gflow-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #4CAF50;
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s ease;
+}
+
+.gflow-inbox-page .gflow-back-link::before {
+    content: '←';
+    font-size: 1.1rem;
+}
+
+.gflow-inbox-page .gflow-back-link:hover {
+    color: #3d8b41;
+    text-decoration: none;
+}
+
+/* ---------- Inbox container (the actual workflow UI) ---------- */
+.gflow-inbox-page .gravityflow_wrap {
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    text-align: left;
+}
+
+/* ---------- Header bar (search + control buttons) ---------- */
+.gflow-inbox-page .gflow-grid__header {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.gflow-inbox-page .gflow-inbox__search {
+    width: 100%;
+    padding: 11px 14px 11px 42px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.gflow-inbox-page .gflow-inbox__search:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+.gflow-inbox-page .gflow-grid__search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Top-right control buttons (Clear filters, Fullscreen, Settings) */
+.gflow-inbox-page .gflow-grid__button {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #64748b;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 6px;
+}
+
+.gflow-inbox-page .gflow-grid__button:hover {
+    background: #f0fdf4;
+    border-color: #c6f0d4;
+    color: #4CAF50;
+}
+
+/* ---------- AG Grid table — light theme refresh ---------- */
+.gflow-inbox-page .ag-theme-alpine {
+    --ag-background-color: #ffffff;
+    --ag-odd-row-background-color: #fafbfc;
+    --ag-header-background-color: #f8fafc;
+    --ag-header-foreground-color: #1e293b;
+    --ag-foreground-color: #334155;
+    --ag-border-color: #f1f5f9;
+    --ag-row-hover-color: #f0fdf4;
+    --ag-selected-row-background-color: #dcfce7;
+    --ag-font-family: inherit;
+    --ag-font-size: 0.92rem;
+    --ag-header-height: 44px;
+    --ag-row-height: 46px;
+    --ag-cell-horizontal-padding: 16px;
+    --ag-borders: solid 1px;
+    --ag-border-radius: 10px;
+}
+
+/* Table root — clean rounded container */
+.gflow-inbox-page .ag-root-wrapper {
+    border: 1px solid #e8ecf1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Header row */
+.gflow-inbox-page .ag-header {
+    background: #f8fafc;
+    border-bottom: 1px solid #e8ecf1;
+}
+
+.gflow-inbox-page .ag-header-cell {
+    padding: 0 16px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+}
+
+.gflow-inbox-page .ag-header-cell-text {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+/* Row styling */
+.gflow-inbox-page .ag-row {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s ease;
+}
+
+.gflow-inbox-page .ag-row:last-child {
+    border-bottom: none;
+}
+
+.gflow-inbox-page .ag-row-hover {
+    background-color: #f0fdf4 !important;
+    cursor: pointer;
+}
+
+/* Cell content */
+.gflow-inbox-page .ag-cell {
+    padding: 0 16px;
+    font-size: 0.93rem;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+}
+
+.gflow-inbox-page .ag-cell span {
+    color: inherit;
+}
+
+/* ID column — monospace, muted */
+.gflow-inbox-page .ag-cell[col-id="id"] span {
+    font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Form title — slightly bold */
+.gflow-inbox-page .ag-cell[col-id="form_title"] span {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Submitter */
+.gflow-inbox-page .ag-cell[col-id="created_by"] span {
+    color: #475569;
+}
+
+/* Step — green pill */
+.gflow-inbox-page .ag-cell[col-id="workflow_step"] span {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: #f0fdf4;
+    color: #2f8132;
+    border: 1px solid #c6f0d4;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Date columns */
+.gflow-inbox-page .ag-cell[col-id="date_created"] span,
+.gflow-inbox-page .ag-cell[col-id="last_updated"] span {
+    color: #64748b;
+    font-size: 0.88rem;
+}
+
+/* Actions button (three dots) */
+.gflow-inbox-page .gflow-grid__actions-trigger {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gflow-inbox-page .gflow-grid__actions-trigger:hover {
+    background: #f0fdf4;
+    color: #4CAF50;
+}
+
+/* Sort indicator icons */
+.gflow-inbox-page .ag-header-cell-sortable:hover {
+    background: #eef2f6;
+}
+
+/* ---------- Pagination bar ---------- */
+.gflow-inbox-page .ag-paging-panel {
+    background: #f8fafc;
+    border-top: 1px solid #e8ecf1;
+    padding: 10px 16px;
+    font-size: 0.86rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.gflow-inbox-page .ag-paging-row-summary-panel,
+.gflow-inbox-page .ag-paging-page-summary-panel {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.gflow-inbox-page .ag-paging-button {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin: 0 2px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gflow-inbox-page .ag-paging-button:hover:not(.ag-disabled) {
+    background: #f0fdf4;
+    border-color: #c6f0d4;
+    color: #4CAF50;
+}
+
+.gflow-inbox-page .ag-paging-button.ag-disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.gflow-inbox-page .ag-paging-number {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* ---------- Settings flyout ---------- */
+.gflow-inbox-page .gform-flyout {
+    background: #ffffff;
+    border-left: 1px solid #e8ecf1;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.06);
+}
+
+.gflow-inbox-page .gform-flyout__head {
+    padding: 18px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    background: #f8fafc;
+}
+
+.gflow-inbox-page .gform-flyout__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.gflow-inbox-page .gform-flyout__close {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.gflow-inbox-page .gform-flyout__close:hover {
+    background: #fef2f4;
+    border-color: #fbcfe0;
+    color: #E30B5C;
+}
+
+.gflow-inbox-page .gform-flyout__body {
+    padding: 20px 24px;
+}
+
+.gflow-inbox-page .gform-flyout__setting-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1e293b;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.gflow-inbox-page .gform-flyout__setting-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    display: block;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+/* Toggle switch — green */
+.gflow-inbox-page .gform-field__toggle-input:checked+.gform-field__toggle-container .gform-field__toggle-switch {
+    background: #4CAF50;
+}
+
+/* ---------- Empty state (no entries) ---------- */
+.gflow-inbox-page .ag-overlay-no-rows-wrapper {
+    font-size: 0.95rem;
+    color: #64748b;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Hide "(Edit)" admin-only link */
+.gflow-inbox-page~.post-edit-link,
+.gflow-inbox-page+.post-edit-link {
+    display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .gflow-inbox-page {
+        padding: 50px 14px 70px;
+    }
+
+    .gflow-inbox-page .gravityflow_wrap {
+        padding: 14px;
+    }
+
+    /* AG Grid naturally horizontal-scrolls on small screens — keep it */
+    .gflow-inbox-page .ag-paging-panel {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+}
