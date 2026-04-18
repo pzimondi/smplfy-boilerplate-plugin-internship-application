@@ -1210,8 +1210,6 @@
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
     line-height: 1 !important;
-    min-width: 180px !important;
-    max-width: 280px !important;
     width: 200px !important;
     flex: 0 0 auto !important;
     margin: 0 6px !important;
