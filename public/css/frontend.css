@@ -2498,8 +2498,9 @@
 }
 
 /* =====================================================
-   MANAGER'S INBOX PAGE — HEADER BLOCK
+   GFLOW INBOX PAGE — HEADER BLOCK
    (Green theme — the label/heading/underline/subheading/back-link)
+   Applies to both Manager's Inbox (582) and Support Inbox (1929)
    ===================================================== */
 
 .gflow-inbox-page {
@@ -2579,14 +2580,17 @@
 }
 
 /* =====================================================
-   MANAGER'S INBOX PAGE — AG GRID TABLE STYLING
-   Scoped to body.page-id-582 so rules win against AG Grid's
-   stylesheet specificity.
+   GFLOW INBOX PAGES — AG GRID TABLE STYLING
+   Scoped to body.page-id-582 (Manager's Inbox) and
+   body.page-id-1929 (Support Inbox) — identical markup,
+   identical styling.
    ===================================================== */
 
 /* Constrain the inbox block and its children to 1200px max */
 body.page-id-582 .entry-content>.workflow-inbox,
-body.page-id-582 .entry-content>.wp-block-gravityflow-inbox {
+body.page-id-582 .entry-content>.wp-block-gravityflow-inbox,
+body.page-id-1929 .entry-content>.workflow-inbox,
+body.page-id-1929 .entry-content>.wp-block-gravityflow-inbox {
     max-width: 1200px !important;
     margin: 20px auto 60px !important;
     padding: 0 24px !important;
@@ -2597,13 +2601,18 @@ body.page-id-582 .entry-content>.wp-block-gravityflow-inbox {
 body.page-id-582 .wp-block-gravityflow-inbox,
 body.page-id-582 .gflow-inbox,
 body.page-id-582 .gflow-inbox__container,
-body.page-id-582 .ag-theme-alpine[data-js="gflow-inbox"] {
+body.page-id-582 .ag-theme-alpine[data-js="gflow-inbox"],
+body.page-id-1929 .wp-block-gravityflow-inbox,
+body.page-id-1929 .gflow-inbox,
+body.page-id-1929 .gflow-inbox__container,
+body.page-id-1929 .ag-theme-alpine[data-js="gflow-inbox"] {
     width: 100% !important;
     max-width: 100% !important;
 }
 
 /* Outer card wrapping the entire inbox (search + table + pagination) */
-body.page-id-582 .gflow-inbox {
+body.page-id-582 .gflow-inbox,
+body.page-id-1929 .gflow-inbox {
     position: relative !important;
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
@@ -2614,15 +2623,16 @@ body.page-id-582 .gflow-inbox {
     max-width: 100% !important;
 }
 
-/* Search row — reserve space on the right for the 3 icons */
 /* Search row — buttons pinned to top-right of the inbox card */
-body.page-id-582 .gflow-grid__header {
+body.page-id-582 .gflow-grid__header,
+body.page-id-1929 .gflow-grid__header {
     position: relative !important;
     margin-right: 0 !important;
     margin-bottom: 18px !important;
 }
 
-body.page-id-582 .gflow-inbox__search {
+body.page-id-582 .gflow-inbox__search,
+body.page-id-1929 .gflow-inbox__search {
     width: 100% !important;
     padding: 12px 16px 12px 44px !important;
     border: 1.5px solid #e2e8f0 !important;
@@ -2635,19 +2645,22 @@ body.page-id-582 .gflow-inbox__search {
     font-family: inherit !important;
 }
 
-body.page-id-582 .gflow-inbox__search:hover {
+body.page-id-582 .gflow-inbox__search:hover,
+body.page-id-1929 .gflow-inbox__search:hover {
     background: #ffffff !important;
     border-color: #cbd5e1 !important;
 }
 
-body.page-id-582 .gflow-inbox__search:focus {
+body.page-id-582 .gflow-inbox__search:focus,
+body.page-id-1929 .gflow-inbox__search:focus {
     outline: none !important;
     background: #ffffff !important;
     border-color: #4CAF50 !important;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
 }
 
-body.page-id-582 .gflow-grid__search-icon {
+body.page-id-582 .gflow-grid__search-icon,
+body.page-id-1929 .gflow-grid__search-icon {
     position: absolute !important;
     left: 40px !important;
     top: 70% !important;
@@ -2660,7 +2673,8 @@ body.page-id-582 .gflow-grid__search-icon {
 
 /* Icon buttons (Clear filters / Fullscreen / Settings) — pinned to top of card,
    aligned with search input (card padding 20px = top offset) */
-body.page-id-582 .gflow-grid__button {
+body.page-id-582 .gflow-grid__button,
+body.page-id-1929 .gflow-grid__button {
     position: absolute !important;
     top: 10px !important;
     bottom: auto !important;
@@ -2681,31 +2695,37 @@ body.page-id-582 .gflow-grid__button {
     margin: 0 !important;
 }
 
-body.page-id-582 .gflow-grid__button--settings {
+body.page-id-582 .gflow-grid__button--settings,
+body.page-id-1929 .gflow-grid__button--settings {
     right: 30px !important;
 }
 
-body.page-id-582 .gflow-grid__button--fullscreen {
+body.page-id-582 .gflow-grid__button--fullscreen,
+body.page-id-1929 .gflow-grid__button--fullscreen {
     right: 76px !important;
 }
 
-body.page-id-582 .gflow-grid__button--clear-filters {
+body.page-id-582 .gflow-grid__button--clear-filters,
+body.page-id-1929 .gflow-grid__button--clear-filters {
     right: 122px !important;
 }
 
-body.page-id-582 .gflow-grid__button:hover {
+body.page-id-582 .gflow-grid__button:hover,
+body.page-id-1929 .gflow-grid__button:hover {
     background: #f0fdf4 !important;
     border-color: #4CAF50 !important;
     color: #4CAF50 !important;
 }
 
-body.page-id-582 .gflow-grid__button.gflow-icon::before {
+body.page-id-582 .gflow-grid__button.gflow-icon::before,
+body.page-id-1929 .gflow-grid__button.gflow-icon::before {
     font-size: 16px !important;
     line-height: 1 !important;
 }
 
 /* AG Grid theme variables + root */
-body.page-id-582 .ag-theme-alpine {
+body.page-id-582 .ag-theme-alpine,
+body.page-id-1929 .ag-theme-alpine {
     --ag-background-color: #ffffff;
     --ag-odd-row-background-color: #fcfdfe;
     --ag-header-background-color: #f8fafc;
@@ -2724,7 +2744,8 @@ body.page-id-582 .ag-theme-alpine {
     --ag-border-radius: 10px;
 }
 
-body.page-id-582 .ag-root-wrapper {
+body.page-id-582 .ag-root-wrapper,
+body.page-id-1929 .ag-root-wrapper {
     border: 1px solid #e2e8f0 !important;
     border-radius: 10px !important;
     overflow: hidden !important;
@@ -2732,16 +2753,19 @@ body.page-id-582 .ag-root-wrapper {
 }
 
 /* Header */
-body.page-id-582 .ag-header {
+body.page-id-582 .ag-header,
+body.page-id-1929 .ag-header {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     border-bottom: 2px solid #e2e8f0 !important;
 }
 
-body.page-id-582 .ag-header-row {
+body.page-id-582 .ag-header-row,
+body.page-id-1929 .ag-header-row {
     background: transparent !important;
 }
 
-body.page-id-582 .ag-header-cell {
+body.page-id-582 .ag-header-cell,
+body.page-id-1929 .ag-header-cell {
     padding: 0 18px !important;
     font-size: 0.72rem !important;
     font-weight: 700 !important;
@@ -2752,11 +2776,13 @@ body.page-id-582 .ag-header-cell {
     border-bottom: none !important;
 }
 
-body.page-id-582 .ag-header-cell:last-child {
+body.page-id-582 .ag-header-cell:last-child,
+body.page-id-1929 .ag-header-cell:last-child {
     border-right: none !important;
 }
 
-body.page-id-582 .ag-header-cell-text {
+body.page-id-582 .ag-header-cell-text,
+body.page-id-1929 .ag-header-cell-text {
     font-size: 0.72rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.1em !important;
@@ -2764,42 +2790,51 @@ body.page-id-582 .ag-header-cell-text {
     color: #475569 !important;
 }
 
-body.page-id-582 .ag-header-cell-sortable {
+body.page-id-582 .ag-header-cell-sortable,
+body.page-id-1929 .ag-header-cell-sortable {
     cursor: pointer !important;
     transition: background 0.15s ease !important;
 }
 
-body.page-id-582 .ag-header-cell-sortable:hover {
+body.page-id-582 .ag-header-cell-sortable:hover,
+body.page-id-1929 .ag-header-cell-sortable:hover {
     background: rgba(76, 175, 80, 0.04) !important;
 }
 
 body.page-id-582 .ag-sort-ascending-icon,
-body.page-id-582 .ag-sort-descending-icon {
+body.page-id-582 .ag-sort-descending-icon,
+body.page-id-1929 .ag-sort-ascending-icon,
+body.page-id-1929 .ag-sort-descending-icon {
     color: #4CAF50 !important;
 }
 
 /* Rows */
-body.page-id-582 .ag-row {
+body.page-id-582 .ag-row,
+body.page-id-1929 .ag-row {
     background: #ffffff !important;
     border-bottom: 1px solid #e8ecf1 !important;
     transition: background 0.15s ease !important;
 }
 
-body.page-id-582 .ag-row-odd {
+body.page-id-582 .ag-row-odd,
+body.page-id-1929 .ag-row-odd {
     background: #fcfdfe !important;
 }
 
-body.page-id-582 .ag-row:last-child {
+body.page-id-582 .ag-row:last-child,
+body.page-id-1929 .ag-row:last-child {
     border-bottom: none !important;
 }
 
-body.page-id-582 .ag-row-hover {
+body.page-id-582 .ag-row-hover,
+body.page-id-1929 .ag-row-hover {
     background-color: #f0fdf4 !important;
     cursor: pointer !important;
 }
 
 /* Cells */
-body.page-id-582 .ag-cell {
+body.page-id-582 .ag-cell,
+body.page-id-1929 .ag-cell {
     padding: 0 18px !important;
     font-size: 0.93rem !important;
     color: #1e293b !important;
@@ -2809,16 +2844,19 @@ body.page-id-582 .ag-cell {
     border-bottom: none !important;
 }
 
-body.page-id-582 .ag-cell:last-child {
+body.page-id-582 .ag-cell:last-child,
+body.page-id-1929 .ag-cell:last-child {
     border-right: none !important;
 }
 
-body.page-id-582 .ag-cell span {
+body.page-id-582 .ag-cell span,
+body.page-id-1929 .ag-cell span {
     color: inherit !important;
 }
 
 /* ID column — monospace badge */
-body.page-id-582 .ag-cell[col-id="id"] span {
+body.page-id-582 .ag-cell[col-id="id"] span,
+body.page-id-1929 .ag-cell[col-id="id"] span {
     font-family: 'SF Mono', 'Monaco', 'Consolas', monospace !important;
     font-size: 0.82rem !important;
     color: #94a3b8 !important;
@@ -2831,11 +2869,13 @@ body.page-id-582 .ag-cell[col-id="id"] span {
 }
 
 /* Actions column */
-body.page-id-582 .ag-cell[col-id="actions"] {
+body.page-id-582 .ag-cell[col-id="actions"],
+body.page-id-1929 .ag-cell[col-id="actions"] {
     justify-content: center !important;
 }
 
-body.page-id-582 .gflow-grid__actions-trigger {
+body.page-id-582 .gflow-grid__actions-trigger,
+body.page-id-1929 .gflow-grid__actions-trigger {
     background: transparent !important;
     border: none !important;
     color: #94a3b8 !important;
@@ -2846,13 +2886,15 @@ body.page-id-582 .gflow-grid__actions-trigger {
     font-size: 1.1rem !important;
 }
 
-body.page-id-582 .gflow-grid__actions-trigger:hover {
+body.page-id-582 .gflow-grid__actions-trigger:hover,
+body.page-id-1929 .gflow-grid__actions-trigger:hover {
     background: #f0fdf4 !important;
     color: #4CAF50 !important;
 }
 
 /* Form title */
-body.page-id-582 .ag-cell[col-id="form_title"] span {
+body.page-id-582 .ag-cell[col-id="form_title"] span,
+body.page-id-1929 .ag-cell[col-id="form_title"] span {
     font-weight: 600 !important;
     color: #0f172a !important;
     white-space: nowrap !important;
@@ -2861,18 +2903,21 @@ body.page-id-582 .ag-cell[col-id="form_title"] span {
 }
 
 /* Submitter — avatar circle prefix */
-body.page-id-582 .ag-cell[col-id="created_by"] span {
+body.page-id-582 .ag-cell[col-id="created_by"] span,
+body.page-id-1929 .ag-cell[col-id="created_by"] span {
     color: #334155 !important;
     font-weight: 500 !important;
 }
 
-body.page-id-582 .ag-cell[col-id="created_by"]>div {
+body.page-id-582 .ag-cell[col-id="created_by"]>div,
+body.page-id-1929 .ag-cell[col-id="created_by"]>div {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
 }
 
-body.page-id-582 .ag-cell[col-id="created_by"]>div::before {
+body.page-id-582 .ag-cell[col-id="created_by"]>div::before,
+body.page-id-1929 .ag-cell[col-id="created_by"]>div::before {
     content: '' !important;
     width: 28px !important;
     height: 28px !important;
@@ -2888,7 +2933,8 @@ body.page-id-582 .ag-cell[col-id="created_by"]>div::before {
 }
 
 /* Step pill */
-body.page-id-582 .ag-cell[col-id="workflow_step"] span {
+body.page-id-582 .ag-cell[col-id="workflow_step"] span,
+body.page-id-1929 .ag-cell[col-id="workflow_step"] span {
     display: inline-flex !important;
     align-items: center !important;
     padding: 5px 14px !important;
@@ -2903,21 +2949,25 @@ body.page-id-582 .ag-cell[col-id="workflow_step"] span {
     white-space: nowrap !important;
 }
 
-body.page-id-582 .ag-row-hover .ag-cell[col-id="workflow_step"] span {
+body.page-id-582 .ag-row-hover .ag-cell[col-id="workflow_step"] span,
+body.page-id-1929 .ag-row-hover .ag-cell[col-id="workflow_step"] span {
     background: linear-gradient(135deg, #dcfce7, #bbf7d0) !important;
     border-color: #86efac !important;
 }
 
 /* Date columns */
 body.page-id-582 .ag-cell[col-id="date_created"] span,
-body.page-id-582 .ag-cell[col-id="last_updated"] span {
+body.page-id-582 .ag-cell[col-id="last_updated"] span,
+body.page-id-1929 .ag-cell[col-id="date_created"] span,
+body.page-id-1929 .ag-cell[col-id="last_updated"] span {
     color: #64748b !important;
     font-size: 0.87rem !important;
     font-weight: 500 !important;
 }
 
 /* Pagination */
-body.page-id-582 .ag-paging-panel {
+body.page-id-582 .ag-paging-panel,
+body.page-id-1929 .ag-paging-panel {
     background: #fafbfc !important;
     border-top: 2px solid #e2e8f0 !important;
     padding: 14px 20px !important;
@@ -2930,18 +2980,21 @@ body.page-id-582 .ag-paging-panel {
     flex-wrap: wrap !important;
 }
 
-body.page-id-582 .ag-paging-row-summary-panel {
+body.page-id-582 .ag-paging-row-summary-panel,
+body.page-id-1929 .ag-paging-row-summary-panel {
     color: #475569 !important;
     font-weight: 500 !important;
 }
 
-body.page-id-582 .ag-paging-page-summary-panel {
+body.page-id-582 .ag-paging-page-summary-panel,
+body.page-id-1929 .ag-paging-page-summary-panel {
     display: flex !important;
     align-items: center !important;
     gap: 4px !important;
 }
 
-body.page-id-582 .ag-paging-button {
+body.page-id-582 .ag-paging-button,
+body.page-id-1929 .ag-paging-button {
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 6px !important;
@@ -2957,28 +3010,32 @@ body.page-id-582 .ag-paging-button {
     justify-content: center !important;
 }
 
-body.page-id-582 .ag-paging-button:hover:not(.ag-disabled) {
+body.page-id-582 .ag-paging-button:hover:not(.ag-disabled),
+body.page-id-1929 .ag-paging-button:hover:not(.ag-disabled) {
     background: #f0fdf4 !important;
     border-color: #4CAF50 !important;
     color: #4CAF50 !important;
     transform: translateY(-1px) !important;
 }
 
-body.page-id-582 .ag-paging-button.ag-disabled {
+body.page-id-582 .ag-paging-button.ag-disabled,
+body.page-id-1929 .ag-paging-button.ag-disabled {
     opacity: 0.35 !important;
     cursor: default !important;
     background: transparent !important;
     border-color: transparent !important;
 }
 
-body.page-id-582 .ag-paging-number {
+body.page-id-582 .ag-paging-number,
+body.page-id-1929 .ag-paging-number {
     font-weight: 700 !important;
     color: #0f172a !important;
     padding: 0 4px !important;
 }
 
 /* Empty state */
-body.page-id-582 .ag-overlay-no-rows-wrapper {
+body.page-id-582 .ag-overlay-no-rows-wrapper,
+body.page-id-1929 .ag-overlay-no-rows-wrapper {
     font-size: 0.95rem !important;
     color: #64748b !important;
     padding: 40px 20px !important;
@@ -2986,26 +3043,30 @@ body.page-id-582 .ag-overlay-no-rows-wrapper {
 }
 
 /* Settings flyout */
-body.page-id-582 .gform-flyout {
+body.page-id-582 .gform-flyout,
+body.page-id-1929 .gform-flyout {
     background: #ffffff !important;
     border-left: 1px solid #e8ecf1 !important;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.06) !important;
 }
 
-body.page-id-582 .gform-flyout__head {
+body.page-id-582 .gform-flyout__head,
+body.page-id-1929 .gform-flyout__head {
     padding: 18px 24px !important;
     border-bottom: 1px solid #f1f5f9 !important;
     background: #f8fafc !important;
 }
 
-body.page-id-582 .gform-flyout__title {
+body.page-id-582 .gform-flyout__title,
+body.page-id-1929 .gform-flyout__title {
     font-size: 1rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
     margin: 0 !important;
 }
 
-body.page-id-582 .gform-flyout__close {
+body.page-id-582 .gform-flyout__close,
+body.page-id-1929 .gform-flyout__close {
     background: transparent !important;
     border: 1px solid #e2e8f0 !important;
     color: #64748b !important;
@@ -3015,17 +3076,20 @@ body.page-id-582 .gform-flyout__close {
     transition: all 0.2s ease !important;
 }
 
-body.page-id-582 .gform-flyout__close:hover {
+body.page-id-582 .gform-flyout__close:hover,
+body.page-id-1929 .gform-flyout__close:hover {
     background: #fef2f4 !important;
     border-color: #fbcfe0 !important;
     color: #E30B5C !important;
 }
 
-body.page-id-582 .gform-flyout__body {
+body.page-id-582 .gform-flyout__body,
+body.page-id-1929 .gform-flyout__body {
     padding: 20px 24px !important;
 }
 
-body.page-id-582 .gform-flyout__setting-label {
+body.page-id-582 .gform-flyout__setting-label,
+body.page-id-1929 .gform-flyout__setting-label {
     font-size: 0.92rem !important;
     font-weight: 600 !important;
     color: #1e293b !important;
@@ -3033,7 +3097,8 @@ body.page-id-582 .gform-flyout__setting-label {
     margin-bottom: 6px !important;
 }
 
-body.page-id-582 .gform-flyout__setting-desc {
+body.page-id-582 .gform-flyout__setting-desc,
+body.page-id-1929 .gform-flyout__setting-desc {
     font-size: 0.85rem !important;
     color: #64748b !important;
     display: block !important;
@@ -3041,27 +3106,33 @@ body.page-id-582 .gform-flyout__setting-desc {
     line-height: 1.5 !important;
 }
 
-body.page-id-582 .gform-field__toggle-input:checked+.gform-field__toggle-container .gform-field__toggle-switch {
+body.page-id-582 .gform-field__toggle-input:checked+.gform-field__toggle-container .gform-field__toggle-switch,
+body.page-id-1929 .gform-field__toggle-input:checked+.gform-field__toggle-container .gform-field__toggle-switch {
     background: #4CAF50 !important;
 }
 
 @media (max-width: 768px) {
-    body.page-id-582 .gflow-inbox {
+
+    body.page-id-582 .gflow-inbox,
+    body.page-id-1929 .gflow-inbox {
         padding: 14px !important;
         border-radius: 10px !important;
     }
 
-    body.page-id-582 .gflow-grid__header {
+    body.page-id-582 .gflow-grid__header,
+    body.page-id-1929 .gflow-grid__header {
         margin-right: 0 !important;
     }
 
-    body.page-id-582 .gflow-grid__button {
+    body.page-id-582 .gflow-grid__button,
+    body.page-id-1929 .gflow-grid__button {
         top: auto !important;
         bottom: 14px !important;
         transform: none !important;
     }
 
-    body.page-id-582 .ag-cell[col-id="created_by"]>div::before {
+    body.page-id-582 .ag-cell[col-id="created_by"]>div::before,
+    body.page-id-1929 .ag-cell[col-id="created_by"]>div::before {
         width: 22px !important;
         height: 22px !important;
     }
@@ -3071,11 +3142,12 @@ body.page-id-582 .gform-field__toggle-input:checked+.gform-field__toggle-contain
    WORKFLOW ENTRY DETAIL PAGE (Gravity Flow)
    Shown when clicking an inbox row (read-only after approval)
    URL: ?page=gravityflow-inbox&view=entry&id=X&lid=Y
-   Scoped to body.page-id-582
+   Scoped to body.page-id-582 AND body.page-id-1929
    ===================================================== */
 
 /* Success notice at top ("Entry Approved") */
-body.page-id-582 .gravityflow_workflow_notice {
+body.page-id-582 .gravityflow_workflow_notice,
+body.page-id-1929 .gravityflow_workflow_notice {
     background: #f0fdf4 !important;
     border: 1px solid #c6f0d4 !important;
     border-left: 4px solid #4CAF50 !important;
@@ -3086,7 +3158,8 @@ body.page-id-582 .gravityflow_workflow_notice {
     box-shadow: none !important;
 }
 
-body.page-id-582 .gravityflow_workflow_notice p {
+body.page-id-582 .gravityflow_workflow_notice p,
+body.page-id-1929 .gravityflow_workflow_notice p {
     margin: 0 !important;
     color: #2f8132 !important;
     font-size: 0.95rem !important;
@@ -3095,7 +3168,8 @@ body.page-id-582 .gravityflow_workflow_notice p {
 }
 
 /* Container: full width, centered, no WP admin sidebar constraints */
-body.page-id-582 #poststuff {
+body.page-id-582 #poststuff,
+body.page-id-1929 #poststuff {
     padding-top: 0 !important;
     min-width: 0 !important;
     margin: 0 auto 60px !important;
@@ -3103,7 +3177,8 @@ body.page-id-582 #poststuff {
     padding: 0 24px !important;
 }
 
-body.page-id-582 #post-body.metabox-holder.columns-2 {
+body.page-id-582 #post-body.metabox-holder.columns-2,
+body.page-id-1929 #post-body.metabox-holder.columns-2 {
     display: flex !important;
     flex-direction: column !important;
     gap: 20px !important;
@@ -3111,14 +3186,16 @@ body.page-id-582 #post-body.metabox-holder.columns-2 {
     padding: 0 !important;
 }
 
-body.page-id-582 #post-body-content {
+body.page-id-582 #post-body-content,
+body.page-id-1929 #post-body-content {
     float: none !important;
     width: 100% !important;
     margin: 0 !important;
     order: 1 !important;
 }
 
-body.page-id-582 #postbox-container-1 {
+body.page-id-582 #postbox-container-1,
+body.page-id-1929 #postbox-container-1 {
     float: none !important;
     width: 100% !important;
     margin: 0 !important;
@@ -3127,7 +3204,8 @@ body.page-id-582 #postbox-container-1 {
     min-width: 0 !important;
 }
 
-body.page-id-582 #postbox-container-2 {
+body.page-id-582 #postbox-container-2,
+body.page-id-1929 #postbox-container-2 {
     float: none !important;
     width: 100% !important;
     margin: 0 !important;
@@ -3137,7 +3215,8 @@ body.page-id-582 #postbox-container-2 {
 }
 
 /* ===== Entry detail table card ===== */
-body.page-id-582 table.entry-detail-view {
+body.page-id-582 table.entry-detail-view,
+body.page-id-1929 table.entry-detail-view {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
     border-collapse: separate !important;
@@ -3150,32 +3229,37 @@ body.page-id-582 table.entry-detail-view {
 }
 
 /* Table header — entry title + "show empty fields" toggle */
-body.page-id-582 table.entry-detail-view thead th {
+body.page-id-582 table.entry-detail-view thead th,
+body.page-id-1929 table.entry-detail-view thead th {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 18px 28px !important;
     border-bottom: 2px solid #e2e8f0 !important;
     vertical-align: middle !important;
 }
 
-body.page-id-582 table.entry-detail-view thead th#details {
+body.page-id-582 table.entry-detail-view thead th#details,
+body.page-id-1929 table.entry-detail-view thead th#details {
     font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
     text-align: left !important;
 }
 
-body.page-id-582 table.entry-detail-view thead th[style*="text-align: right"] {
+body.page-id-582 table.entry-detail-view thead th[style*="text-align: right"],
+body.page-id-1929 table.entry-detail-view thead th[style*="text-align: right"] {
     font-weight: 500 !important;
     color: #64748b !important;
     font-size: 0.82rem !important;
 }
 
-body.page-id-582 table.entry-detail-view thead th[style*="text-align: right"] label {
+body.page-id-582 table.entry-detail-view thead th[style*="text-align: right"] label,
+body.page-id-1929 table.entry-detail-view thead th[style*="text-align: right"] label {
     cursor: pointer !important;
     user-select: none !important;
 }
 
-body.page-id-582 #gentry_display_empty_fields {
+body.page-id-582 #gentry_display_empty_fields,
+body.page-id-1929 #gentry_display_empty_fields {
     accent-color: #4CAF50 !important;
     cursor: pointer !important;
     margin-right: 4px !important;
@@ -3183,13 +3267,15 @@ body.page-id-582 #gentry_display_empty_fields {
 }
 
 /* Neutralize all TDs so the specific ones can repaint cleanly */
-body.page-id-582 table.entry-detail-view tbody td {
+body.page-id-582 table.entry-detail-view tbody td,
+body.page-id-1929 table.entry-detail-view tbody td {
     border: none !important;
     background: #ffffff !important;
 }
 
 /* Section break rows — green accent divider */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-section-break {
     padding: 26px 28px 12px !important;
     font-size: 1.05rem !important;
     font-weight: 700 !important;
@@ -3199,7 +3285,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break {
     position: relative !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::after {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::after,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-section-break::after {
     content: '' !important;
     position: absolute !important;
     bottom: -2px !important;
@@ -3211,7 +3298,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::afte
 }
 
 /* Field label row (uppercase, small, muted) */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-name {
     padding: 16px 28px 4px !important;
     font-size: 0.72rem !important;
     font-weight: 700 !important;
@@ -3222,7 +3310,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name {
 }
 
 /* Field value row (dark, readable, separator) */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value {
     padding: 0 28px 18px !important;
     font-size: 0.98rem !important;
     color: #1e293b !important;
@@ -3233,26 +3322,30 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value {
     border-bottom: 1px solid #f1f5f9 !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody tr:last-child td.entry-view-field-value {
+body.page-id-582 table.entry-detail-view tbody tr:last-child td.entry-view-field-value,
+body.page-id-1929 table.entry-detail-view tbody tr:last-child td.entry-view-field-value {
     border-bottom: none !important;
     padding-bottom: 24px !important;
 }
 
 /* Links inside values (email, URLs) */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a {
     color: #4CAF50 !important;
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: color 0.2s ease !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a:hover {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a:hover,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a:hover {
     color: #3d8b41 !important;
     text-decoration: underline !important;
 }
 
 /* Map It link — small pill */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link {
     display: inline-block !important;
     margin-top: 6px !important;
     padding: 3px 12px !important;
@@ -3264,7 +3357,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-i
     font-weight: 600 !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link:hover {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link:hover,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link:hover {
     background: #4CAF50 !important;
     color: #ffffff !important;
     text-decoration: none !important;
@@ -3272,7 +3366,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-i
 }
 
 /* Bulleted list (e.g. days of week) as pills */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -3281,7 +3376,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bull
     gap: 8px !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted li {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted li,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted li {
     display: inline-flex !important;
     padding: 5px 12px !important;
     background: #f0fdf4 !important;
@@ -3293,7 +3389,8 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bull
 }
 
 /* Instructional blocks (e.g. "Create a 1 Minute introduction using Loom") */
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value strong {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value strong,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value strong {
     display: block !important;
     font-size: 1rem !important;
     font-weight: 700 !important;
@@ -3301,23 +3398,27 @@ body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value strong 
     margin-bottom: 6px !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted),
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) {
     margin: 4px 0 0 !important;
     padding-left: 22px !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) li {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) li,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value ul:not(.bulleted) li {
     line-height: 1.7 !important;
     color: #334155 !important;
     font-weight: 500 !important;
 }
 
-body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value p {
+body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value p,
+body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value p {
     margin: 6px 0 !important;
 }
 
 /* ===== Workflow status box (sidebar) ===== */
-body.page-id-582 #gravityflow-status-box-container.postbox {
+body.page-id-582 #gravityflow-status-box-container.postbox,
+body.page-id-1929 #gravityflow-status-box-container.postbox {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
     border-radius: 12px !important;
@@ -3327,7 +3428,8 @@ body.page-id-582 #gravityflow-status-box-container.postbox {
     overflow: hidden !important;
 }
 
-body.page-id-582 #gravityflow-status-box-container .hndle {
+body.page-id-582 #gravityflow-status-box-container .hndle,
+body.page-id-1929 #gravityflow-status-box-container .hndle {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 14px 22px !important;
     margin: 0 !important;
@@ -3340,16 +3442,19 @@ body.page-id-582 #gravityflow-status-box-container .hndle {
     cursor: default !important;
 }
 
-body.page-id-582 #gravityflow-status-box-container .hndle span {
+body.page-id-582 #gravityflow-status-box-container .hndle span,
+body.page-id-1929 #gravityflow-status-box-container .hndle span {
     font-size: inherit !important;
     color: inherit !important;
 }
 
-body.page-id-582 #submitcomment {
+body.page-id-582 #submitcomment,
+body.page-id-1929 #submitcomment {
     padding: 24px 28px !important;
 }
 
-body.page-id-582 .gravityflow-status-box {
+body.page-id-582 .gravityflow-status-box,
+body.page-id-1929 .gravityflow-status-box {
     display: grid !important;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
     gap: 20px 24px !important;
@@ -3359,12 +3464,14 @@ body.page-id-582 .gravityflow-status-box {
     box-shadow: none !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field {
+body.page-id-582 .gravityflow-status-box-field,
+body.page-id-1929 .gravityflow-status-box-field {
     padding: 0 !important;
     margin: 0 !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-label {
+body.page-id-582 .gravityflow-status-box-field-label,
+body.page-id-1929 .gravityflow-status-box-field-label {
     display: block !important;
     font-size: 0.72rem !important;
     font-weight: 700 !important;
@@ -3374,14 +3481,16 @@ body.page-id-582 .gravityflow-status-box-field-label {
     margin-bottom: 6px !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-value {
+body.page-id-582 .gravityflow-status-box-field-value,
+body.page-id-1929 .gravityflow-status-box-field-value {
     font-size: 0.94rem !important;
     color: #1e293b !important;
     font-weight: 600 !important;
 }
 
 /* Pending status — yellow pill */
-body.page-id-582 .gravityflow-status-box-field-status .gravityflow-status-box-field-value {
+body.page-id-582 .gravityflow-status-box-field-status .gravityflow-status-box-field-value,
+body.page-id-1929 .gravityflow-status-box-field-status .gravityflow-status-box-field-value {
     display: inline-flex !important;
     align-items: center !important;
     padding: 4px 12px !important;
@@ -3395,7 +3504,25 @@ body.page-id-582 .gravityflow-status-box-field-status .gravityflow-status-box-fi
 }
 
 /* ===== Print button row ===== */
-body.page-id-582 .detail-view-print .button {
+body.page-id-582 .detail-view-print,
+body.page-id-1929 .detail-view-print {
+    text-align: center !important;
+    margin: 20px 0 0 !important;
+    padding: 18px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 10px !important;
+    font-size: 0.88rem !important;
+    color: #64748b !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+}
+
+body.page-id-582 .detail-view-print .button,
+body.page-id-1929 .detail-view-print .button {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -3413,33 +3540,23 @@ body.page-id-582 .detail-view-print .button {
     min-height: 38px !important;
 }
 
-body.page-id-582 .detail-view-print .button {
-    background: #64748b !important;
-    color: #ffffff !important;
-    padding: 8px 22px !important;
-    border-radius: 8px !important;
-    border: none !important;
-    font-size: 0.88rem !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-}
-
-body.page-id-582 .detail-view-print .button:hover {
+body.page-id-582 .detail-view-print .button:hover,
+body.page-id-1929 .detail-view-print .button:hover {
     background: #475569 !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(100, 116, 139, 0.25) !important;
 }
 
-body.page-id-582 #gform_print_notes {
+body.page-id-582 #gform_print_notes,
+body.page-id-1929 #gform_print_notes {
     accent-color: #4CAF50 !important;
     margin-right: 4px !important;
     vertical-align: middle !important;
 }
 
 /* ===== Timeline ===== */
-body.page-id-582 .postbox.gravityflow-timeline {
+body.page-id-582 .postbox.gravityflow-timeline,
+body.page-id-1929 .postbox.gravityflow-timeline {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
     border-radius: 12px !important;
@@ -3449,7 +3566,8 @@ body.page-id-582 .postbox.gravityflow-timeline {
     overflow: hidden !important;
 }
 
-body.page-id-582 .postbox.gravityflow-timeline>h3 {
+body.page-id-582 .postbox.gravityflow-timeline>h3,
+body.page-id-1929 .postbox.gravityflow-timeline>h3 {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 14px 22px !important;
     margin: 0 !important;
@@ -3462,7 +3580,8 @@ body.page-id-582 .postbox.gravityflow-timeline>h3 {
     cursor: default !important;
 }
 
-body.page-id-582 .postbox.gravityflow-timeline>h3 label {
+body.page-id-582 .postbox.gravityflow-timeline>h3 label,
+body.page-id-1929 .postbox.gravityflow-timeline>h3 label {
     font-size: inherit !important;
     color: inherit !important;
     font-weight: inherit !important;
@@ -3471,11 +3590,13 @@ body.page-id-582 .postbox.gravityflow-timeline>h3 label {
     cursor: default !important;
 }
 
-body.page-id-582 .postbox.gravityflow-timeline .inside {
+body.page-id-582 .postbox.gravityflow-timeline .inside,
+body.page-id-1929 .postbox.gravityflow-timeline .inside {
     padding: 18px 22px !important;
 }
 
-body.page-id-582 .gravityflow-note {
+body.page-id-582 .gravityflow-note,
+body.page-id-1929 .gravityflow-note {
     display: flex !important;
     align-items: flex-start !important;
     gap: 14px !important;
@@ -3484,16 +3605,19 @@ body.page-id-582 .gravityflow-note {
     margin: 0 !important;
 }
 
-body.page-id-582 .gravityflow-note:last-child {
+body.page-id-582 .gravityflow-note:last-child,
+body.page-id-1929 .gravityflow-note:last-child {
     border-bottom: none !important;
     padding-bottom: 0 !important;
 }
 
-body.page-id-582 .gravityflow-note:first-child {
+body.page-id-582 .gravityflow-note:first-child,
+body.page-id-1929 .gravityflow-note:first-child {
     padding-top: 0 !important;
 }
 
-body.page-id-582 .gravityflow-note-avatar {
+body.page-id-582 .gravityflow-note-avatar,
+body.page-id-1929 .gravityflow-note-avatar {
     flex-shrink: 0 !important;
     width: 40px !important;
     height: 40px !important;
@@ -3506,24 +3630,29 @@ body.page-id-582 .gravityflow-note-avatar {
 }
 
 body.page-id-582 .gravityflow-note-avatar img,
-body.page-id-582 .gravityflow-note-avatar .avatar {
+body.page-id-582 .gravityflow-note-avatar .avatar,
+body.page-id-1929 .gravityflow-note-avatar img,
+body.page-id-1929 .gravityflow-note-avatar .avatar {
     width: 40px !important;
     height: 40px !important;
     border-radius: 50% !important;
     display: block !important;
 }
 
-body.page-id-582 .gravityflow-note-avatar i.fa {
+body.page-id-582 .gravityflow-note-avatar i.fa,
+body.page-id-1929 .gravityflow-note-avatar i.fa {
     font-size: 18px !important;
     color: #4CAF50 !important;
 }
 
-body.page-id-582 .gravityflow-note-body-wrap {
+body.page-id-582 .gravityflow-note-body-wrap,
+body.page-id-1929 .gravityflow-note-body-wrap {
     flex: 1 !important;
     min-width: 0 !important;
 }
 
-body.page-id-582 .gravityflow-note-header {
+body.page-id-582 .gravityflow-note-header,
+body.page-id-1929 .gravityflow-note-header {
     display: flex !important;
     justify-content: space-between !important;
     align-items: baseline !important;
@@ -3532,25 +3661,29 @@ body.page-id-582 .gravityflow-note-header {
     gap: 6px !important;
 }
 
-body.page-id-582 .gravityflow-note-title {
+body.page-id-582 .gravityflow-note-title,
+body.page-id-1929 .gravityflow-note-title {
     font-size: 0.92rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
 }
 
-body.page-id-582 .gravityflow-note-meta {
+body.page-id-582 .gravityflow-note-meta,
+body.page-id-1929 .gravityflow-note-meta {
     font-size: 0.8rem !important;
     color: #94a3b8 !important;
 }
 
-body.page-id-582 .gravityflow-note-body {
+body.page-id-582 .gravityflow-note-body,
+body.page-id-1929 .gravityflow-note-body {
     font-size: 0.88rem !important;
     color: #475569 !important;
     line-height: 1.6 !important;
 }
 
 /* GF nests .gravityflow-note-body inside itself — neutralize inner */
-body.page-id-582 .gravityflow-note-body .gravityflow-note-body {
+body.page-id-582 .gravityflow-note-body .gravityflow-note-body,
+body.page-id-1929 .gravityflow-note-body .gravityflow-note-body {
     padding: 0 !important;
     font-size: inherit !important;
     color: inherit !important;
@@ -3559,27 +3692,36 @@ body.page-id-582 .gravityflow-note-body .gravityflow-note-body {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-    body.page-id-582 #poststuff {
+
+    body.page-id-582 #poststuff,
+    body.page-id-1929 #poststuff {
         padding: 0 16px !important;
     }
 
     body.page-id-582 table.entry-detail-view thead th,
     body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break,
     body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name,
-    body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value {
+    body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value,
+    body.page-id-1929 table.entry-detail-view thead th,
+    body.page-id-1929 table.entry-detail-view tbody td.entry-view-section-break,
+    body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-name,
+    body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value {
         padding-left: 18px !important;
         padding-right: 18px !important;
     }
 
-    body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::after {
+    body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break::after,
+    body.page-id-1929 table.entry-detail-view tbody td.entry-view-section-break::after {
         left: 18px !important;
     }
 
-    body.page-id-582 #submitcomment {
+    body.page-id-582 #submitcomment,
+    body.page-id-1929 #submitcomment {
         padding: 18px !important;
     }
 
-    body.page-id-582 .gravityflow-status-box {
+    body.page-id-582 .gravityflow-status-box,
+    body.page-id-1929 .gravityflow-status-box {
         grid-template-columns: 1fr !important;
     }
 }
@@ -3893,45 +4035,14 @@ body.page-id-1556 table.gv-table-view tbody td[data-label="Name"] {
     white-space: nowrap !important;
 }
 
-/* Application Status — pill (single style; see note about per-state colors) */
+/* Application Status — pill */
 body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] {
     white-space: nowrap !important;
-}
-
-body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"]:not(:empty) {
-    font-size: 0 !important;
-    /* collapse whitespace nodes */
-}
-
-body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"]::before {
-    content: attr(data-status) !important;
-}
-
-/* Simpler fallback: wrap the text content visually without removing it */
-body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] {
-    font-size: 0.93rem !important;
-    padding: 14px 18px !important;
-}
-
-/* Actual pill styling — apply via a wrapping technique using the cell itself */
-body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] {
-    position: relative !important;
-}
-
-/* Use inner-box styling via inline-flex on the cell's text */
-body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] {
-    display: table-cell !important;
-}
-
-/* Simpler and reliable: style text as a pill via padding/bg on the cell's text
-   using a display:inline-block trick applied with a custom wrap.
-   Since we can't wrap without HTML changes, we apply pill styling to the cell
-   content directly by making the cell content flex-align and using a gradient. */
-body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] {
     font-weight: 600 !important;
     color: #2f8132 !important;
     font-size: 0.82rem !important;
     text-transform: none !important;
+    padding: 14px 18px !important;
 }
 
 /* Tasks (Completed/Submitted) — pills like days of week */
@@ -4149,21 +4260,23 @@ body.page-id-1556 article>.post-edit-link {
 
 /* =====================================================
    WORKFLOW ENTRY DETAIL — PENDING APPROVAL VIEW
-   Rendered when a manager clicks an inbox row for a
+   Rendered when a manager/support clicks an inbox row for a
    pending entry (vs the approved/read-only view above).
    Markup: form#gform_2 inside table.gravityflow-step-approval
-   Scoped to body.page-id-582
+   Scoped to body.page-id-582 AND body.page-id-1929
    ===================================================== */
 
 /* Outer entry container */
-body.page-id-582 .wrap.gravityflow_workflow_detail {
+body.page-id-582 .wrap.gravityflow_workflow_detail,
+body.page-id-1929 .wrap.gravityflow_workflow_detail {
     max-width: 1200px !important;
     margin: 0 auto !important;
     padding: 0 24px !important;
 }
 
 /* ===== Instructions callout (left sidebar equivalent at top) ===== */
-body.page-id-582 .postbox.gravityflow-instructions {
+body.page-id-582 .postbox.gravityflow-instructions,
+body.page-id-1929 .postbox.gravityflow-instructions {
     background: #fffbeb !important;
     border: 1px solid #fde68a !important;
     border-left: 4px solid #F9B500 !important;
@@ -4173,7 +4286,8 @@ body.page-id-582 .postbox.gravityflow-instructions {
     box-shadow: none !important;
 }
 
-body.page-id-582 .postbox.gravityflow-instructions .inside {
+body.page-id-582 .postbox.gravityflow-instructions .inside,
+body.page-id-1929 .postbox.gravityflow-instructions .inside {
     padding: 16px 20px !important;
     margin: 0 !important;
     font-size: 0.94rem !important;
@@ -4182,14 +4296,16 @@ body.page-id-582 .postbox.gravityflow-instructions .inside {
     font-weight: 500 !important;
 }
 
-body.page-id-582 .postbox.gravityflow-instructions .inside br+br {
+body.page-id-582 .postbox.gravityflow-instructions .inside br+br,
+body.page-id-1929 .postbox.gravityflow-instructions .inside br+br {
     display: block !important;
     content: "" !important;
     margin-top: 6px !important;
 }
 
 /* ===== Outer approval table card ===== */
-body.page-id-582 table.gravityflow-step-approval {
+body.page-id-582 table.gravityflow-step-approval,
+body.page-id-1929 table.gravityflow-step-approval {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
     border-collapse: separate !important;
@@ -4201,34 +4317,39 @@ body.page-id-582 table.gravityflow-step-approval {
     margin: 0 !important;
 }
 
-body.page-id-582 table.gravityflow-step-approval thead th {
+body.page-id-582 table.gravityflow-step-approval thead th,
+body.page-id-1929 table.gravityflow-step-approval thead th {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 18px 28px !important;
     border-bottom: 2px solid #e2e8f0 !important;
     vertical-align: middle !important;
 }
 
-body.page-id-582 table.gravityflow-step-approval thead th#details {
+body.page-id-582 table.gravityflow-step-approval thead th#details,
+body.page-id-1929 table.gravityflow-step-approval thead th#details {
     font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
     text-align: left !important;
 }
 
-body.page-id-582 table.gravityflow-step-approval thead th[style*="text-align: right"] {
+body.page-id-582 table.gravityflow-step-approval thead th[style*="text-align: right"],
+body.page-id-1929 table.gravityflow-step-approval thead th[style*="text-align: right"] {
     font-weight: 500 !important;
     color: #64748b !important;
     font-size: 0.82rem !important;
 }
 
-body.page-id-582 table.gravityflow-step-approval tbody>tr>td {
+body.page-id-582 table.gravityflow-step-approval tbody>tr>td,
+body.page-id-1929 table.gravityflow-step-approval tbody>tr>td {
     padding: 28px !important;
     background: #ffffff !important;
     border: none !important;
 }
 
 /* ===== Gravity Form wrapper inside the card ===== */
-body.page-id-582 #gform_wrapper_2 {
+body.page-id-582 #gform_wrapper_2,
+body.page-id-1929 #gform_wrapper_2 {
     margin: 0 !important;
     padding: 0 !important;
     background: transparent !important;
@@ -4236,13 +4357,15 @@ body.page-id-582 #gform_wrapper_2 {
     box-shadow: none !important;
 }
 
-body.page-id-582 #gform_fields_2 {
+body.page-id-582 #gform_fields_2,
+body.page-id-1929 #gform_fields_2 {
     display: block !important;
     grid-template-columns: none !important;
     gap: 0 !important;
 }
 
-body.page-id-582 #gform_fields_2>.gfield {
+body.page-id-582 #gform_fields_2>.gfield,
+body.page-id-1929 #gform_fields_2>.gfield {
     margin: 0 0 22px !important;
     padding: 0 !important;
     grid-column: 1 / -1 !important;
@@ -4252,13 +4375,16 @@ body.page-id-582 #gform_fields_2>.gfield {
 }
 
 /* Kill Gravity's spacer pseudo-fields that eat grid tracks */
-body.page-id-582 #gform_fields_2>.spacer.gfield {
+body.page-id-582 #gform_fields_2>.spacer.gfield,
+body.page-id-1929 #gform_fields_2>.spacer.gfield {
     display: none !important;
 }
 
 /* ===== Section headings inside the form ===== */
 body.page-id-582 #gform_fields_2 .gfield--type-section,
-body.page-id-582 #gform_fields_2 .gsection {
+body.page-id-582 #gform_fields_2 .gsection,
+body.page-id-1929 #gform_fields_2 .gfield--type-section,
+body.page-id-1929 #gform_fields_2 .gsection {
     border: none !important;
     padding: 8px 0 4px !important;
     margin: 28px 0 12px !important;
@@ -4266,11 +4392,14 @@ body.page-id-582 #gform_fields_2 .gsection {
 }
 
 body.page-id-582 #gform_fields_2 .gfield--type-section:first-child,
-body.page-id-582 #gform_fields_2 .gsection:first-child {
+body.page-id-582 #gform_fields_2 .gsection:first-child,
+body.page-id-1929 #gform_fields_2 .gfield--type-section:first-child,
+body.page-id-1929 #gform_fields_2 .gsection:first-child {
     margin-top: 0 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gsection_title {
+body.page-id-582 #gform_fields_2 .gsection_title,
+body.page-id-1929 #gform_fields_2 .gsection_title {
     font-size: 1.05rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
@@ -4280,7 +4409,8 @@ body.page-id-582 #gform_fields_2 .gsection_title {
     position: relative !important;
 }
 
-body.page-id-582 #gform_fields_2 .gsection_title::after {
+body.page-id-582 #gform_fields_2 .gsection_title::after,
+body.page-id-1929 #gform_fields_2 .gsection_title::after {
     content: '' !important;
     position: absolute !important;
     bottom: -2px !important;
@@ -4291,7 +4421,8 @@ body.page-id-582 #gform_fields_2 .gsection_title::after {
     border-radius: 2px !important;
 }
 
-body.page-id-582 #gform_fields_2 .gsection_description {
+body.page-id-582 #gform_fields_2 .gsection_description,
+body.page-id-1929 #gform_fields_2 .gsection_description {
     font-size: 0.85rem !important;
     color: #64748b !important;
     margin-top: 6px !important;
@@ -4299,20 +4430,23 @@ body.page-id-582 #gform_fields_2 .gsection_description {
 }
 
 /* ===== Read-only display fields (gravityflow-display-field) ===== */
-body.page-id-582 #gform_fields_2 .gravityflow-display-field {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field {
     background: #f8fafc !important;
     border: 1px solid #e8ecf1 !important;
     border-radius: 8px !important;
     padding: 12px 16px !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-display-field.gfield--type-section {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field.gfield--type-section,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field.gfield--type-section {
     background: transparent !important;
     border: none !important;
     padding: 8px 0 4px !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gfield_label {
     font-size: 0.72rem !important;
     font-weight: 700 !important;
     color: #64748b !important;
@@ -4323,11 +4457,13 @@ body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label {
     display: block !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label .gfield_required {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gfield_label .gfield_required,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gfield_label .gfield_required {
     display: none !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value {
     font-size: 0.98rem !important;
     color: #1e293b !important;
     font-weight: 500 !important;
@@ -4336,31 +4472,37 @@ body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-v
 }
 
 /* Links inside display values (email, URL) */
-body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
     color: #4CAF50 !important;
     font-weight: 600 !important;
     text-decoration: none !important;
     transition: color 0.2s ease !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a:hover {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a:hover,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a:hover {
     color: #3d8b41 !important;
     text-decoration: underline !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a::after {
+body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a::after,
+body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a::after {
     display: none !important;
     content: none !important;
 }
 
 /* Hide legend-within-fieldset (complex fields like Name) since value is already flat */
-body.page-id-582 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex {
+body.page-id-582 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex,
+body.page-id-1929 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex {
     margin-bottom: 6px !important;
 }
 
 /* ===== Editable fields (gravityflow-editable-field) ===== */
 body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_label,
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field legend.gfield_label {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field legend.gfield_label,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_label,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field legend.gfield_label {
     font-size: 0.95rem !important;
     font-weight: 600 !important;
     color: #1e293b !important;
@@ -4369,18 +4511,21 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field legend.gfield_label
     line-height: 1.4 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gfield_required {
+body.page-id-582 #gform_fields_2 .gfield_required,
+body.page-id-1929 #gform_fields_2 .gfield_required {
     color: #E30B5C !important;
     margin-left: 4px !important;
 }
 
-body.page-id-582 #gform_fields_2 .gfield_required_text {
+body.page-id-582 #gform_fields_2 .gfield_required_text,
+body.page-id-1929 #gform_fields_2 .gfield_required_text {
     font-size: 0.78rem !important;
     font-weight: 500 !important;
 }
 
 /* ===== Editable CHECKBOX fields (Core Skills Mastery, Task 1-5) — pill style ===== */
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
     list-style: none !important;
     margin: 4px 0 0 !important;
     padding: 0 !important;
@@ -4389,7 +4534,8 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
     gap: 10px !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice {
     display: flex !important;
     align-items: center !important;
     gap: 8px !important;
@@ -4402,12 +4548,14 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .g
     margin: 0 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:hover {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:hover,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:hover {
     border-color: #cbd5e1 !important;
     background: #ffffff !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"] {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"],
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"] {
     width: 16px !important;
     height: 16px !important;
     cursor: pointer !important;
@@ -4416,7 +4564,8 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox in
     accent-color: #4CAF50 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox label {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox label,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox label {
     font-size: 0.92rem !important;
     color: #334155 !important;
     cursor: pointer !important;
@@ -4425,20 +4574,23 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox la
     white-space: nowrap !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:has(input:checked) {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:has(input:checked),
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:has(input:checked) {
     border-color: #4CAF50 !important;
     background: #f0fdf4 !important;
 }
 
 /* Select All toggle button */
-body.page-id-582 #gform_fields_2 .gfield-choice-toggle-all {
+body.page-id-582 #gform_fields_2 .gfield-choice-toggle-all,
+body.page-id-1929 #gform_fields_2 .gfield-choice-toggle-all {
     display: flex !important;
     justify-content: center !important;
     width: 100% !important;
     margin-top: 14px !important;
 }
 
-body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle {
+body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle,
+body.page-id-1929 #gform_fields_2 button.gfield_choice_all_toggle {
     font-size: 0.78rem !important;
     font-weight: 600 !important;
     text-decoration: none !important;
@@ -4456,13 +4608,15 @@ body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle {
     min-width: 100px !important;
 }
 
-body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle:hover {
+body.page-id-582 #gform_fields_2 button.gfield_choice_all_toggle:hover,
+body.page-id-1929 #gform_fields_2 button.gfield_choice_all_toggle:hover {
     background: #4CAF50 !important;
     color: #ffffff !important;
 }
 
 /* ===== Editable RADIO fields (Advance to interview?) — card style ===== */
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio {
     list-style: none !important;
     margin: 4px 0 0 !important;
     padding: 0 !important;
@@ -4471,7 +4625,8 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio {
     gap: 10px !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice {
     display: flex !important;
     align-items: center !important;
     gap: 10px !important;
@@ -4484,12 +4639,14 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gcho
     margin: 0 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:hover {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:hover,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:hover {
     border-color: #cbd5e1 !important;
     background: #ffffff !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio input[type="radio"] {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio input[type="radio"],
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio input[type="radio"] {
     width: 18px !important;
     height: 18px !important;
     cursor: pointer !important;
@@ -4498,7 +4655,8 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio input
     accent-color: #4CAF50 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio label {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio label,
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio label {
     font-size: 0.98rem !important;
     color: #334155 !important;
     cursor: pointer !important;
@@ -4507,13 +4665,15 @@ body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio label
     flex: 1 !important;
 }
 
-body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:has(input:checked) {
+body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:has(input:checked),
+body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:has(input:checked) {
     border-color: #4CAF50 !important;
     background: #f0fdf4 !important;
 }
 
 /* ===== Application Status (display radio) — render as pill ===== */
-body.page-id-582 #gform_fields_2 #field_2_56 .gravityflow-field-value {
+body.page-id-582 #gform_fields_2 #field_2_56 .gravityflow-field-value,
+body.page-id-1929 #gform_fields_2 #field_2_56 .gravityflow-field-value {
     display: inline-flex !important;
     align-items: center !important;
     padding: 4px 12px !important;
@@ -4528,12 +4688,14 @@ body.page-id-582 #gform_fields_2 #field_2_56 .gravityflow-field-value {
 }
 
 /* Hide the GF form footer (it's not used on this approval page) */
-body.page-id-582 .gform-footer.gform_footer {
+body.page-id-582 .gform-footer.gform_footer,
+body.page-id-1929 .gform-footer.gform_footer {
     display: none !important;
 }
 
 /* ===== Workflow sidebar — Approve Tasks step status ===== */
-body.page-id-582 .gravityflow-status-box hr {
+body.page-id-582 .gravityflow-status-box hr,
+body.page-id-1929 .gravityflow-status-box hr {
     border: none !important;
     border-top: 1px solid #e8ecf1 !important;
     margin: 4px 0 8px !important;
@@ -4541,11 +4703,13 @@ body.page-id-582 .gravityflow-status-box hr {
     width: 100% !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-step-status {
+body.page-id-582 .gravityflow-status-box-field-step-status,
+body.page-id-1929 .gravityflow-status-box-field-step-status {
     grid-column: 1 / -1 !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-step-status h4 {
+body.page-id-582 .gravityflow-status-box-field-step-status h4,
+body.page-id-1929 .gravityflow-status-box-field-step-status h4 {
     font-size: 0.95rem !important;
     font-weight: 700 !important;
     color: #1e293b !important;
@@ -4556,7 +4720,8 @@ body.page-id-582 .gravityflow-status-box-field-step-status h4 {
     flex-wrap: wrap !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-label {
+body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-label,
+body.page-id-1929 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-label {
     display: inline !important;
     font-size: 0.95rem !important;
     font-weight: 700 !important;
@@ -4566,7 +4731,8 @@ body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-statu
     margin: 0 !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-value {
+body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-value,
+body.page-id-1929 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-value {
     display: inline-flex !important;
     align-items: center !important;
     padding: 3px 10px !important;
@@ -4581,11 +4747,13 @@ body.page-id-582 .gravityflow-status-box-field-step-status h4 .gravityflow-statu
 }
 
 /* Assignees list */
-body.page-id-582 .gravityflow-status-box-field-assignees {
+body.page-id-582 .gravityflow-status-box-field-assignees,
+body.page-id-1929 .gravityflow-status-box-field-assignees {
     grid-column: 1 / -1 !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-assignees ul {
+body.page-id-582 .gravityflow-status-box-field-assignees ul,
+body.page-id-1929 .gravityflow-status-box-field-assignees ul {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -4594,7 +4762,8 @@ body.page-id-582 .gravityflow-status-box-field-assignees ul {
     gap: 6px !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-assignees ul li {
+body.page-id-582 .gravityflow-status-box-field-assignees ul li,
+body.page-id-1929 .gravityflow-status-box-field-assignees ul li {
     display: inline-flex !important;
     padding: 4px 10px !important;
     background: #f8fafc !important;
@@ -4606,7 +4775,8 @@ body.page-id-582 .gravityflow-status-box-field-assignees ul li {
     list-style: none !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-assignees span.gravityflow-status-box-field-value {
+body.page-id-582 .gravityflow-status-box-field-assignees span.gravityflow-status-box-field-value,
+body.page-id-1929 .gravityflow-status-box-field-assignees span.gravityflow-status-box-field-value {
     display: contents !important;
     background: none !important;
     border: none !important;
@@ -4617,12 +4787,14 @@ body.page-id-582 .gravityflow-status-box-field-assignees span.gravityflow-status
 }
 
 /* ===== Note textarea ===== */
-body.page-id-582 .gravityflow-status-box-field-note {
+body.page-id-582 .gravityflow-status-box-field-note,
+body.page-id-1929 .gravityflow-status-box-field-note {
     grid-column: 1 / -1 !important;
     margin-top: 8px !important;
 }
 
-body.page-id-582 .gravityflow-status-box-field-note label[for="gravityflow-note"] {
+body.page-id-582 .gravityflow-status-box-field-note label[for="gravityflow-note"],
+body.page-id-1929 .gravityflow-status-box-field-note label[for="gravityflow-note"] {
     font-size: 0.85rem !important;
     font-weight: 600 !important;
     color: #1e293b !important;
@@ -4633,7 +4805,8 @@ body.page-id-582 .gravityflow-status-box-field-note label[for="gravityflow-note"
     cursor: pointer !important;
 }
 
-body.page-id-582 #submitcomment>span.gravityflow-status-box-field-value {
+body.page-id-582 #submitcomment>span.gravityflow-status-box-field-value,
+body.page-id-1929 #submitcomment>span.gravityflow-status-box-field-value {
     display: block !important;
     grid-column: 1 / -1 !important;
     margin-top: 4px !important;
@@ -4645,7 +4818,8 @@ body.page-id-582 #submitcomment>span.gravityflow-status-box-field-value {
     font-weight: inherit !important;
 }
 
-body.page-id-582 textarea#gravityflow-note {
+body.page-id-582 textarea#gravityflow-note,
+body.page-id-1929 textarea#gravityflow-note {
     width: 100% !important;
     padding: 12px 14px !important;
     border: 1.5px solid #e2e8f0 !important;
@@ -4661,14 +4835,16 @@ body.page-id-582 textarea#gravityflow-note {
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-body.page-id-582 textarea#gravityflow-note:focus {
+body.page-id-582 textarea#gravityflow-note:focus,
+body.page-id-1929 textarea#gravityflow-note:focus {
     outline: none !important;
     border-color: #4CAF50 !important;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
 }
 
 /* ===== Approve / Reject action buttons ===== */
-body.page-id-582 .gravityflow-action-buttons {
+body.page-id-582 .gravityflow-action-buttons,
+body.page-id-1929 .gravityflow-action-buttons {
     display: flex !important;
     gap: 12px !important;
     margin-top: 16px !important;
@@ -4677,7 +4853,9 @@ body.page-id-582 .gravityflow-action-buttons {
 }
 
 body.page-id-582 .gravityflow-action-buttons button[value="approved"],
-body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"],
+body.page-id-1929 .gravityflow-action-buttons button[value="approved"],
+body.page-id-1929 .gravityflow-action-buttons button[value="rejected"] {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -4694,30 +4872,35 @@ body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
 }
 
 /* Approve — green */
-body.page-id-582 .gravityflow-action-buttons button[value="approved"] {
+body.page-id-582 .gravityflow-action-buttons button[value="approved"],
+body.page-id-1929 .gravityflow-action-buttons button[value="approved"] {
     background: #4CAF50 !important;
     color: #ffffff !important;
 }
 
-body.page-id-582 .gravityflow-action-buttons button[value="approved"]:hover {
+body.page-id-582 .gravityflow-action-buttons button[value="approved"]:hover,
+body.page-id-1929 .gravityflow-action-buttons button[value="approved"]:hover {
     background: #3d8b41 !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
 }
 
-body.page-id-582 .gravityflow-action-buttons button[value="approved"] i.fa {
+body.page-id-582 .gravityflow-action-buttons button[value="approved"] i.fa,
+body.page-id-1929 .gravityflow-action-buttons button[value="approved"] i.fa {
     color: #ffffff !important;
     font-size: 0.9rem !important;
 }
 
 /* Reject — red */
-body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"],
+body.page-id-1929 .gravityflow-action-buttons button[value="rejected"] {
     background: #ffffff !important;
     color: #b5094a !important;
     border: 1.5px solid #fbcfe0 !important;
 }
 
-body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover {
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover,
+body.page-id-1929 .gravityflow-action-buttons button[value="rejected"]:hover {
     background: #E30B5C !important;
     border-color: #E30B5C !important;
     color: #ffffff !important;
@@ -4725,37 +4908,43 @@ body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover {
     box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30) !important;
 }
 
-body.page-id-582 .gravityflow-action-buttons button[value="rejected"] i.fa {
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"] i.fa,
+body.page-id-1929 .gravityflow-action-buttons button[value="rejected"] i.fa {
     font-size: 0.9rem !important;
 }
 
-body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover i.fa {
+body.page-id-582 .gravityflow-action-buttons button[value="rejected"]:hover i.fa,
+body.page-id-1929 .gravityflow-action-buttons button[value="rejected"]:hover i.fa {
     color: #ffffff !important;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-    body.page-id-582 .wrap.gravityflow_workflow_detail {
+
+    body.page-id-582 .wrap.gravityflow_workflow_detail,
+    body.page-id-1929 .wrap.gravityflow_workflow_detail {
         padding: 0 16px !important;
     }
 
-    body.page-id-582 table.gravityflow-step-approval tbody>tr>td {
+    body.page-id-582 table.gravityflow-step-approval tbody>tr>td,
+    body.page-id-1929 table.gravityflow-step-approval tbody>tr>td {
         padding: 20px !important;
     }
 
-    body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
+    body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox,
+    body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
         gap: 8px !important;
     }
 
-    body.page-id-582 .gravityflow-action-buttons {
+    body.page-id-582 .gravityflow-action-buttons,
+    body.page-id-1929 .gravityflow-action-buttons {
         flex-direction: column !important;
     }
 
     body.page-id-582 .gravityflow-action-buttons button[value="approved"],
-    body.page-id-582 .gravityflow-action-buttons button[value="rejected"] {
+    body.page-id-582 .gravityflow-action-buttons button[value="rejected"],
+    body.page-id-1929 .gravityflow-action-buttons button[value="approved"],
+    body.page-id-1929 .gravityflow-action-buttons button[value="rejected"] {
         width: 100% !important;
     }
 }
-
-
-
