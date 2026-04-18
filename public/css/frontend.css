@@ -3171,3 +3171,647 @@
         gap: 10px;
     }
 }
+
+
+
+/* =====================================================
+   WORKFLOW ENTRY DETAIL PAGE (Gravity Flow)
+   Shown when a manager clicks a row in the inbox
+   URL pattern: ?page=gravityflow-inbox&view=entry&id=X&lid=Y
+
+   Scoped to .gflow-inbox-page since the entry detail
+   renders inside the same page wrapper. Does NOT leak
+   to applicant views.
+   ===================================================== */
+
+/* ---------- Container: full width, no sidebar crowding ---------- */
+.gflow-inbox-page #poststuff {
+    padding-top: 0;
+    min-width: 0;
+}
+
+/* Override WP admin postbox-holder 2-column default to use CSS grid.
+   This lets us rearrange: entry details full-width on top,
+   actions bar below, sidebar panels at the bottom. */
+.gflow-inbox-page #post-body.metabox-holder.columns-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.gflow-inbox-page #post-body-content {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    order: 1;
+}
+
+/* Action bar (Approve / Reject buttons) — hoisted to order 2 */
+.gflow-inbox-page #postbox-container-1 {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    order: 2;
+    min-width: 0;
+}
+
+/* Timeline — order 3, appears last */
+.gflow-inbox-page #postbox-container-2 {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    order: 3;
+    min-width: 0;
+}
+
+/* ---------- Instructions box (top of form) ---------- */
+.gflow-inbox-page .postbox.gravityflow-instructions {
+    background: #f0fdf4;
+    border: 1px solid #c6f0d4;
+    border-left: 4px solid #4CAF50;
+    border-radius: 10px;
+    padding: 0;
+    margin: 0 0 20px;
+    box-shadow: none;
+}
+
+.gflow-inbox-page .postbox.gravityflow-instructions .inside {
+    padding: 18px 22px;
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.65;
+    color: #1e293b;
+}
+
+/* ---------- Entry detail table (read-only display of applicant's data) ---------- */
+.gflow-inbox-page table.entry-detail-view {
+    background: #ffffff;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.gflow-inbox-page table.entry-detail-view thead th {
+    background: #f8fafc;
+    padding: 14px 22px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: 1px solid #e8ecf1;
+    text-align: left;
+}
+
+.gflow-inbox-page table.entry-detail-view thead th[style*="text-align: right"] {
+    font-weight: 500;
+    color: #64748b;
+    font-size: 0.82rem !important;
+}
+
+.gflow-inbox-page table.entry-detail-view tbody td {
+    padding: 24px 28px;
+    background: #ffffff;
+    border: none;
+}
+
+/* Read-only display fields inside the entry detail */
+.gflow-inbox-page .gravityflow-display-field {
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.gflow-inbox-page .gravityflow-display-field:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Section dividers inside the entry detail */
+.gflow-inbox-page .gfield--type-section {
+    margin: 28px 0 16px !important;
+    padding: 0 !important;
+    border-bottom: none !important;
+}
+
+.gflow-inbox-page .gfield--type-section:first-child {
+    margin-top: 0 !important;
+}
+
+.gflow-inbox-page .gfield--type-section .gsection_title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8ecf1;
+    position: relative;
+}
+
+.gflow-inbox-page .gfield--type-section .gsection_title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #4CAF50;
+    border-radius: 2px;
+}
+
+/* Field labels in entry detail */
+.gflow-inbox-page .gravityflow-display-field .gfield_label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #64748b;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.gflow-inbox-page .gravityflow-display-field .gfield_required {
+    color: #E30B5C;
+    margin-left: 4px;
+    font-weight: 600;
+}
+
+.gflow-inbox-page .gravityflow-display-field .gfield_required_text {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Field values (the actual data) */
+.gflow-inbox-page .gravityflow-field-value {
+    font-size: 1rem;
+    color: #1e293b;
+    line-height: 1.55;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.gflow-inbox-page .gravityflow-field-value a {
+    color: #4CAF50;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gflow-inbox-page .gravityflow-field-value a:hover {
+    color: #3d8b41;
+    text-decoration: underline;
+}
+
+/* Bulleted lists inside field values (e.g., days of week) */
+.gflow-inbox-page .gravityflow-field-value ul.bulleted {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gflow-inbox-page .gravityflow-field-value ul.bulleted li {
+    display: inline-flex;
+    padding: 5px 12px;
+    background: #f0fdf4;
+    border: 1px solid #c6f0d4;
+    color: #2f8132;
+    border-radius: 100px;
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+/* Editable-field radio in manager workflow step (Advance to Tasks Yes/No) */
+.gflow-inbox-page .gravityflow-editable-field {
+    padding: 16px 18px;
+    background: #f0fdf4;
+    border: 1px solid #c6f0d4;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px !important;
+}
+
+.gflow-inbox-page .gravityflow-editable-field .gfield_radio {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.gflow-inbox-page .gravityflow-editable-field .gchoice {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.gflow-inbox-page .gravityflow-editable-field input[type="radio"] {
+    accent-color: #4CAF50;
+    cursor: pointer;
+}
+
+/* Hide empty fields checkbox (top right of entry detail) */
+.gflow-inbox-page table.entry-detail-view thead th[style*="text-align: right"] label {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ---------- "show empty fields" toggle at top of entry detail ---------- */
+.gflow-inbox-page #gentry_display_empty_fields {
+    accent-color: #4CAF50;
+    cursor: pointer;
+    margin-right: 4px;
+}
+
+/* Hide fields marked gravityflow-hidden-field — not meant for manager at this stage */
+.gflow-inbox-page .gravityflow-hidden-field {
+    display: none !important;
+}
+
+/* ---------- Workflow status box (Approve / Reject action bar) ---------- */
+.gflow-inbox-page #gravityflow-status-box-container.postbox {
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 12px;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.gflow-inbox-page #gravityflow-status-box-container .hndle {
+    background: #f8fafc;
+    padding: 14px 22px;
+    margin: 0;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.gflow-inbox-page #gravityflow-status-box-container .hndle span {
+    font-size: inherit;
+    color: inherit;
+}
+
+.gflow-inbox-page #submitcomment {
+    padding: 24px 28px;
+}
+
+.gflow-inbox-page .gravityflow-status-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* Status meta fields (Entry ID, Submitted, Status) */
+.gflow-inbox-page .gravityflow-status-box-field {
+    padding: 0;
+    margin: 0;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-value {
+    font-size: 0.94rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Divider line between meta fields and step */
+.gflow-inbox-page .gravityflow-status-box hr {
+    grid-column: 1 / -1;
+    border: none;
+    border-top: 1px solid #f1f5f9;
+    margin: 8px 0;
+}
+
+/* The step heading ("Approve Advance to Tasks (Pending Approval)") */
+.gflow-inbox-page .gravityflow-status-box-field-step-status {
+    grid-column: 1 / -1;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-step-status h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-step-status .gravityflow-status-box-field-value {
+    display: inline-flex;
+    padding: 4px 12px;
+    background: #fffbeb;
+    color: #b17a00;
+    border: 1px solid #fde68a;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* Assignees list (Role: manager (Pending)) */
+.gflow-inbox-page .gravityflow-status-box-field-assignees {
+    grid-column: 1 / -1;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-assignees ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-assignees li {
+    font-size: 0.88rem;
+    color: #475569;
+    padding: 6px 0;
+}
+
+/* Note textarea (manager's reasoning) */
+.gflow-inbox-page .gravityflow-status-box-field-note {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+}
+
+.gflow-inbox-page .gravityflow-status-box-field-note .gravityflow-status-box-field-label {
+    margin-bottom: 8px;
+}
+
+.gflow-inbox-page #gravityflow-note {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 88px;
+}
+
+.gflow-inbox-page #gravityflow-note:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+/* ---------- Approve / Reject action buttons ---------- */
+.gflow-inbox-page .gravityflow-action-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.gflow-inbox-page .gravityflow-action-buttons .button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    padding: 12px 36px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
+    line-height: 1 !important;
+    width: auto !important;
+    min-width: 180px;
+    color: #ffffff !important;
+    text-transform: none;
+    box-shadow: none;
+    text-decoration: none !important;
+}
+
+/* Approve — green */
+.gflow-inbox-page .gravityflow-action-buttons .button[value="approved"] {
+    background: #4CAF50 !important;
+}
+
+.gflow-inbox-page .gravityflow-action-buttons .button[value="approved"]:hover {
+    background: #3d8b41 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30);
+}
+
+.gflow-inbox-page .gravityflow-action-buttons .button[value="approved"] i {
+    color: #ffffff !important;
+}
+
+/* Reject — red */
+.gflow-inbox-page .gravityflow-action-buttons .button[value="rejected"] {
+    background: #E30B5C !important;
+}
+
+.gflow-inbox-page .gravityflow-action-buttons .button[value="rejected"]:hover {
+    background: #b5094a !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30);
+}
+
+.gflow-inbox-page .gravityflow-action-buttons .button[value="rejected"] i {
+    color: #ffffff !important;
+}
+
+/* ---------- Print button below the action bar ---------- */
+.gflow-inbox-page .detail-view-print {
+    text-align: center;
+    margin: 20px 0 0;
+    padding: 18px;
+    background: #f8fafc;
+    border: 1px solid #e8ecf1;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.gflow-inbox-page .detail-view-print .button {
+    background: #64748b !important;
+    color: #ffffff !important;
+    padding: 8px 20px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.gflow-inbox-page .detail-view-print .button:hover {
+    background: #475569 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.25);
+}
+
+.gflow-inbox-page #gform_print_notes {
+    accent-color: #4CAF50;
+    margin-right: 4px;
+}
+
+/* ---------- Timeline (submission history) ---------- */
+.gflow-inbox-page .postbox.gravityflow-timeline {
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 12px;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.gflow-inbox-page .postbox.gravityflow-timeline>h3 {
+    background: #f8fafc;
+    padding: 14px 22px;
+    margin: 0;
+    border-bottom: 1px solid #e8ecf1;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: default;
+}
+
+.gflow-inbox-page .postbox.gravityflow-timeline>h3 label {
+    font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
+    text-transform: inherit;
+    letter-spacing: inherit;
+}
+
+.gflow-inbox-page .postbox.gravityflow-timeline .inside {
+    padding: 18px 22px;
+}
+
+.gflow-inbox-page .gravityflow-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.gflow-inbox-page .gravityflow-note:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.gflow-inbox-page .gravityflow-note:first-child {
+    padding-top: 0;
+}
+
+.gflow-inbox-page .gravityflow-note-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f0fdf4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gflow-inbox-page .gravityflow-note-avatar img,
+.gflow-inbox-page .gravityflow-note-avatar .avatar {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+}
+
+.gflow-inbox-page .gravityflow-note-avatar i.fa {
+    font-size: 18px;
+    color: #4CAF50 !important;
+}
+
+.gflow-inbox-page .gravityflow-note-body-wrap {
+    flex: 1;
+}
+
+.gflow-inbox-page .gravityflow-note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.gflow-inbox-page .gravityflow-note-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.gflow-inbox-page .gravityflow-note-meta {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.gflow-inbox-page .gravityflow-note-body {
+    font-size: 0.88rem;
+    color: #475569;
+    line-height: 1.55;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .gflow-inbox-page #submitcomment {
+        padding: 18px 18px;
+    }
+
+    .gflow-inbox-page .gravityflow-status-box {
+        grid-template-columns: 1fr;
+    }
+
+    .gflow-inbox-page .gravityflow-action-buttons {
+        flex-direction: column;
+    }
+
+    .gflow-inbox-page .gravityflow-action-buttons .button {
+        width: 100% !important;
+    }
+
+    .gflow-inbox-page table.entry-detail-view tbody td {
+        padding: 18px 20px;
+    }
+}
