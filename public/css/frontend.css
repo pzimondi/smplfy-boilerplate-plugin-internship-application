@@ -2158,30 +2158,76 @@
     background: #fef2f4;
 }
 
-/* Select All button */
-/* Select All toggle — centered below checkbox list */
-.io-application-page .gfield--type-checkbox .ginput_container_checkbox {
+
+/* Select All toggle wrapper — center horizontally below checkboxes */
+.io-application-page .gfield-choice-toggle-all {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    margin-top: 14px;
 }
 
+/* Select All button styling */
+.io-application-page button.gfield_choice_all_toggle,
 .io-application-page .gfield_choice_all_toggle {
-    font-size: 0.78rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin: 14px auto 0;
-    align-self: center;
-    transition: all 0.2s ease;
-    display: inline-flex;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 6px 16px !important;
+    border-radius: 100px !important;
+    margin: 0 !important;
+    transition: all 0.2s ease !important;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border: none;
-    width: auto;
+    border: none !important;
+    width: auto !important;
     min-width: 100px;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+/* Per-role Select All colors */
+.io-app-blue .gfield_choice_all_toggle {
+    background: #eff4fb !important;
+    color: #1D47A1 !important;
+}
+
+.io-app-blue .gfield_choice_all_toggle:hover {
+    background: #1D47A1 !important;
+    color: #fff !important;
+}
+
+.io-app-green .gfield_choice_all_toggle {
+    background: #f0fdf4 !important;
+    color: #2f8132 !important;
+}
+
+.io-app-green .gfield_choice_all_toggle:hover {
+    background: #4CAF50 !important;
+    color: #fff !important;
+}
+
+.io-app-yellow .gfield_choice_all_toggle {
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+}
+
+.io-app-yellow .gfield_choice_all_toggle:hover {
+    background: #F9B500 !important;
+    color: #fff !important;
+}
+
+.io-app-red .gfield_choice_all_toggle {
+    background: #fef2f4 !important;
+    color: #b5094a !important;
+}
+
+.io-app-red .gfield_choice_all_toggle:hover {
+    background: #E30B5C !important;
+    color: #fff !important;
 }
 
 .io-app-blue .gfield_choice_all_toggle {
