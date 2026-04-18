@@ -1538,3 +1538,911 @@
 .io-page .gfield_required_legend {
     display: none !important;
 }
+
+
+
+
+/* =====================================================
+   INTERNSHIP APPLICATION PAGE (Form 2)
+   Scoped to .io-application-page — does NOT affect any
+   other page, the manager inbox, task submission, etc.
+
+   Role color is determined at runtime by a small JS
+   snippet that reads ?internship=X from URL and adds:
+     .io-app-blue   → Junior Web Designer
+     .io-app-green  → Junior Social Media Specialist
+     .io-app-yellow → Junior Business Analyst
+     .io-app-red    → Junior Web Developer
+     .io-app-blue   → (default if no param)
+   ===================================================== */
+
+/* ---------- Page wrapper & header ---------- */
+.io-application-page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 70px 24px 100px;
+    text-align: center;
+}
+
+.io-app-label {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+
+.io-app-heading {
+    font-size: clamp(2rem, 3vw, 2.4rem);
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.io-app-subheading {
+    font-size: 1rem;
+    color: #64748b;
+    margin: 0 0 18px;
+    line-height: 1.5;
+}
+
+.io-app-underline {
+    display: block;
+    width: 50px;
+    height: 3px;
+    border-radius: 2px;
+    margin: 0 auto 36px;
+}
+
+/* Role-colored accents */
+.io-app-blue .io-app-label {
+    color: #1D47A1;
+}
+
+.io-app-green .io-app-label {
+    color: #4CAF50;
+}
+
+.io-app-yellow .io-app-label {
+    color: #F9B500;
+}
+
+.io-app-red .io-app-label {
+    color: #E30B5C;
+}
+
+.io-app-blue .io-app-underline {
+    background: #1D47A1;
+}
+
+.io-app-green .io-app-underline {
+    background: #4CAF50;
+}
+
+.io-app-yellow .io-app-underline {
+    background: #F9B500;
+}
+
+.io-app-red .io-app-underline {
+    background: #E30B5C;
+}
+
+/* ---------- Role badge (shows which role they're applying for) ---------- */
+.io-app-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 0 auto 36px;
+}
+
+.io-app-role-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.io-app-blue .io-app-role-badge {
+    background: #eff4fb;
+    color: #1D47A1;
+    border: 1px solid #c7d8ef;
+}
+
+.io-app-blue .io-app-role-badge::before {
+    background: #1D47A1;
+}
+
+.io-app-green .io-app-role-badge {
+    background: #f0fdf4;
+    color: #2f8132;
+    border: 1px solid #c6f0d4;
+}
+
+.io-app-green .io-app-role-badge::before {
+    background: #4CAF50;
+}
+
+.io-app-yellow .io-app-role-badge {
+    background: #fffbeb;
+    color: #b17a00;
+    border: 1px solid #fde68a;
+}
+
+.io-app-yellow .io-app-role-badge::before {
+    background: #F9B500;
+}
+
+.io-app-red .io-app-role-badge {
+    background: #fef2f4;
+    color: #b5094a;
+    border: 1px solid #fbcfe0;
+}
+
+.io-app-red .io-app-role-badge::before {
+    background: #E30B5C;
+}
+
+/* ---------- Gravity Form container ---------- */
+.io-application-page .gform_wrapper {
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 16px;
+    padding: 40px 44px;
+    margin: 0 auto;
+    max-width: 760px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Hide the "* indicates required fields" legend */
+.io-application-page .gform_required_legend,
+.io-application-page .gfield_required_legend {
+    display: none !important;
+}
+
+/* ---------- Progress bar (Step X of Y) ---------- */
+.io-application-page .gf_progressbar_wrapper {
+    margin-bottom: 32px;
+    padding: 0;
+}
+
+.io-application-page .gf_progressbar_title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.io-application-page .gf_progressbar {
+    background: #f1f5f9;
+    border-radius: 100px;
+    overflow: hidden;
+    height: 8px;
+    box-shadow: none;
+    border: none;
+}
+
+.io-application-page .gf_progressbar_percentage {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+}
+
+.io-application-page .gf_progressbar_percentage span {
+    display: none;
+}
+
+.io-app-blue .gf_progressbar_percentage {
+    background: #1D47A1 !important;
+}
+
+.io-app-green .gf_progressbar_percentage {
+    background: #4CAF50 !important;
+}
+
+.io-app-yellow .gf_progressbar_percentage {
+    background: #F9B500 !important;
+}
+
+.io-app-red .gf_progressbar_percentage {
+    background: #E30B5C !important;
+}
+
+/* ---------- Section labels (dividers in the form: "Personal Details", etc.) ---------- */
+.io-application-page .gsection,
+.io-application-page .gfield--type-section {
+    border: none;
+    padding: 12px 0 4px;
+    margin: 28px 0 8px;
+}
+
+.io-application-page .gsection_title,
+.io-application-page .gfield--type-section .gsection_title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8ecf1;
+    position: relative;
+}
+
+.io-application-page .gsection_title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    border-radius: 2px;
+}
+
+.io-app-blue .gsection_title::after {
+    background: #1D47A1;
+}
+
+.io-app-green .gsection_title::after {
+    background: #4CAF50;
+}
+
+.io-app-yellow .gsection_title::after {
+    background: #F9B500;
+}
+
+.io-app-red .gsection_title::after {
+    background: #E30B5C;
+}
+
+/* ---------- Field labels ---------- */
+.io-application-page .gfield_label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+    display: block;
+    line-height: 1.4;
+}
+
+.io-application-page .gfield_required {
+    color: #E30B5C;
+    margin-left: 4px;
+}
+
+.io-application-page .gfield {
+    margin-bottom: 22px;
+}
+
+/* ---------- Descriptions / helper text ---------- */
+.io-application-page .gfield_description {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.5;
+}
+
+/* Sub-labels (e.g., First, Last, Street, City) */
+.io-application-page .gfield_label.gform-field-label--type-sub,
+.io-application-page .gform-field-label--type-sub {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #64748b;
+    margin-top: 6px;
+    margin-bottom: 0;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* ---------- Text / email / tel / number / url / textarea inputs ---------- */
+.io-application-page .ginput_container input[type="text"],
+.io-application-page .ginput_container input[type="email"],
+.io-application-page .ginput_container input[type="tel"],
+.io-application-page .ginput_container input[type="number"],
+.io-application-page .ginput_container input[type="url"],
+.io-application-page .ginput_container input[type="password"],
+.io-application-page .ginput_container textarea,
+.io-application-page .ginput_container select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.98rem;
+    color: #1e293b;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.io-application-page .ginput_container textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.io-application-page .ginput_container input:focus,
+.io-application-page .ginput_container textarea:focus,
+.io-application-page .ginput_container select:focus {
+    outline: none;
+}
+
+.io-app-blue .ginput_container input:focus,
+.io-app-blue .ginput_container textarea:focus,
+.io-app-blue .ginput_container select:focus {
+    border-color: #1D47A1;
+    box-shadow: 0 0 0 3px rgba(29, 71, 161, 0.15);
+}
+
+.io-app-green .ginput_container input:focus,
+.io-app-green .ginput_container textarea:focus,
+.io-app-green .ginput_container select:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+.io-app-yellow .ginput_container input:focus,
+.io-app-yellow .ginput_container textarea:focus,
+.io-app-yellow .ginput_container select:focus {
+    border-color: #F9B500;
+    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.15);
+}
+
+.io-app-red .ginput_container input:focus,
+.io-app-red .ginput_container textarea:focus,
+.io-app-red .ginput_container select:focus {
+    border-color: #E30B5C;
+    box-shadow: 0 0 0 3px rgba(227, 11, 92, 0.15);
+}
+
+/* ---------- Complex fields (Name, Address, Time) — grid layout ---------- */
+.io-application-page .ginput_complex {
+    display: grid;
+    gap: 14px;
+    margin-top: 4px;
+}
+
+.io-application-page .ginput_complex.ginput_container_name {
+    grid-template-columns: 1fr 1fr;
+}
+
+.io-application-page .ginput_complex.ginput_container_address {
+    grid-template-columns: 1fr 1fr;
+}
+
+.io-application-page .ginput_complex.ginput_container_address .address_line_1,
+.io-application-page .ginput_complex.ginput_container_address .address_line_2 {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+
+    .io-application-page .ginput_complex.ginput_container_name,
+    .io-application-page .ginput_complex.ginput_container_address {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Time field (HH/MM/AM-PM) */
+.io-application-page .ginput_container_time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 320px;
+}
+
+.io-application-page .ginput_container_time .gfield_time_hour,
+.io-application-page .ginput_container_time .gfield_time_minute,
+.io-application-page .ginput_container_time .gfield_time_ampm {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.io-application-page .ginput_container_time input,
+.io-application-page .ginput_container_time select {
+    width: 100%;
+    text-align: center;
+}
+
+.io-application-page .ginput_container_time .gform-field-label--type-sub {
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* ---------- Radio buttons ---------- */
+.io-application-page .gfield_radio {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.io-application-page .gfield_radio .gchoice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #fafbfc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+
+.io-application-page .gfield_radio .gchoice:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+.io-application-page .gfield_radio input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.io-application-page .gfield_radio label.gform-field-label {
+    font-size: 0.98rem;
+    color: #334155;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0;
+    flex: 1;
+}
+
+/* Role-colored radio accents + selected state */
+.io-app-blue .gfield_radio input[type="radio"] {
+    accent-color: #1D47A1;
+}
+
+.io-app-green .gfield_radio input[type="radio"] {
+    accent-color: #4CAF50;
+}
+
+.io-app-yellow .gfield_radio input[type="radio"] {
+    accent-color: #F9B500;
+}
+
+.io-app-red .gfield_radio input[type="radio"] {
+    accent-color: #E30B5C;
+}
+
+.io-app-blue .gfield_radio .gchoice:has(input:checked) {
+    border-color: #1D47A1;
+    background: #eff4fb;
+}
+
+.io-app-green .gfield_radio .gchoice:has(input:checked) {
+    border-color: #4CAF50;
+    background: #f0fdf4;
+}
+
+.io-app-yellow .gfield_radio .gchoice:has(input:checked) {
+    border-color: #F9B500;
+    background: #fffbeb;
+}
+
+.io-app-red .gfield_radio .gchoice:has(input:checked) {
+    border-color: #E30B5C;
+    background: #fef2f4;
+}
+
+/* ---------- Checkboxes (days of week, multi-select) ---------- */
+.io-application-page .gfield_checkbox {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.io-application-page .gfield_checkbox .gchoice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #fafbfc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+
+.io-application-page .gfield_checkbox .gchoice:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+.io-application-page .gfield_checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.io-application-page .gfield_checkbox label.gform-field-label {
+    font-size: 0.92rem;
+    color: #334155;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.io-app-blue .gfield_checkbox input[type="checkbox"] {
+    accent-color: #1D47A1;
+}
+
+.io-app-green .gfield_checkbox input[type="checkbox"] {
+    accent-color: #4CAF50;
+}
+
+.io-app-yellow .gfield_checkbox input[type="checkbox"] {
+    accent-color: #F9B500;
+}
+
+.io-app-red .gfield_checkbox input[type="checkbox"] {
+    accent-color: #E30B5C;
+}
+
+.io-app-blue .gfield_checkbox .gchoice:has(input:checked) {
+    border-color: #1D47A1;
+    background: #eff4fb;
+}
+
+.io-app-green .gfield_checkbox .gchoice:has(input:checked) {
+    border-color: #4CAF50;
+    background: #f0fdf4;
+}
+
+.io-app-yellow .gfield_checkbox .gchoice:has(input:checked) {
+    border-color: #F9B500;
+    background: #fffbeb;
+}
+
+.io-app-red .gfield_checkbox .gchoice:has(input:checked) {
+    border-color: #E30B5C;
+    background: #fef2f4;
+}
+
+/* Select All button */
+.io-application-page .gfield_choice_all_toggle {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-left: 10px;
+    margin-top: 4px;
+    transition: all 0.2s ease;
+}
+
+.io-app-blue .gfield_choice_all_toggle {
+    background: #eff4fb;
+    color: #1D47A1;
+}
+
+.io-app-blue .gfield_choice_all_toggle:hover {
+    background: #1D47A1;
+    color: #fff;
+}
+
+.io-app-green .gfield_choice_all_toggle {
+    background: #f0fdf4;
+    color: #2f8132;
+}
+
+.io-app-green .gfield_choice_all_toggle:hover {
+    background: #4CAF50;
+    color: #fff;
+}
+
+.io-app-yellow .gfield_choice_all_toggle {
+    background: #fffbeb;
+    color: #b17a00;
+}
+
+.io-app-yellow .gfield_choice_all_toggle:hover {
+    background: #F9B500;
+    color: #fff;
+}
+
+.io-app-red .gfield_choice_all_toggle {
+    background: #fef2f4;
+    color: #b5094a;
+}
+
+.io-app-red .gfield_choice_all_toggle:hover {
+    background: #E30B5C;
+    color: #fff;
+}
+
+/* ---------- HTML content fields (instructions, warnings) ---------- */
+.io-application-page .gfield_html {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #334155;
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-left: 3px solid #cbd5e1;
+    border-radius: 0 8px 8px 0;
+    margin: 8px 0;
+}
+
+.io-application-page .gfield_html h3,
+.io-application-page .gfield_html h4,
+.io-application-page .gfield_html h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px;
+}
+
+.io-application-page .gfield_html p {
+    margin: 0 0 10px;
+}
+
+.io-application-page .gfield_html p:last-child {
+    margin-bottom: 0;
+}
+
+.io-application-page .gfield_html ul,
+.io-application-page .gfield_html ol {
+    margin: 8px 0;
+    padding-left: 22px;
+}
+
+.io-application-page .gfield_html a {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.io-app-blue .gfield_html a {
+    color: #1D47A1;
+}
+
+.io-app-green .gfield_html a {
+    color: #2f8132;
+}
+
+.io-app-yellow .gfield_html a {
+    color: #b17a00;
+}
+
+.io-app-red .gfield_html a {
+    color: #b5094a;
+}
+
+/* ---------- Validation ---------- */
+.io-application-page .validation_error,
+.io-application-page .gform_validation_errors {
+    color: #b5094a;
+    font-weight: 600;
+    padding: 14px 18px;
+    background: #fef2f4;
+    border: 1px solid #fbcfe0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.io-application-page .validation_error h2,
+.io-application-page .gform_validation_errors h2 {
+    font-size: 0.95rem;
+    margin: 0;
+    color: #b5094a;
+}
+
+.io-application-page .gfield_error .gfield_label {
+    color: #b5094a;
+}
+
+.io-application-page .gfield_error .ginput_container input,
+.io-application-page .gfield_error .ginput_container textarea,
+.io-application-page .gfield_error .ginput_container select {
+    border-color: #E30B5C;
+    background: #fef2f4;
+}
+
+.io-application-page .validation_message,
+.io-application-page .gfield_validation_message {
+    color: #b5094a;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: #fef2f4;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* ---------- Confirmation (after submit) ---------- */
+.io-application-page .gform_confirmation_message {
+    text-align: center;
+    padding: 48px 32px;
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 16px;
+    color: #1e293b;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0 auto;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* ---------- Next / Previous / Submit buttons ---------- */
+.io-application-page .gform_page_footer,
+.io-application-page .gform_footer,
+.io-application-page .gform-page-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    margin: 16px 0 0;
+    border-top: 1px solid #f1f5f9;
+}
+
+.io-application-page .gform_button,
+.io-application-page .gform_next_button,
+.io-application-page .gform_previous_button,
+.io-application-page input.gform_button,
+.io-application-page input.gform_next_button,
+.io-application-page input.gform_previous_button,
+.io-application-page .gform-button--width-full {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    padding: 14px 40px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
+    line-height: 1 !important;
+    width: 200px !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.io-application-page .gform_button:hover,
+.io-application-page .gform_next_button:hover,
+.io-application-page .gform_previous_button:hover {
+    transform: translateY(-2px);
+    text-decoration: none !important;
+    color: #ffffff !important;
+}
+
+/* Per-role primary buttons (Next, Submit) */
+.io-app-blue .gform_button,
+.io-app-blue .gform_next_button {
+    background-color: #1D47A1 !important;
+}
+
+.io-app-blue .gform_button:hover,
+.io-app-blue .gform_next_button:hover {
+    background-color: #143373 !important;
+    box-shadow: 0 6px 20px rgba(29, 71, 161, 0.30);
+    color: #ffffff !important;
+}
+
+.io-app-green .gform_button,
+.io-app-green .gform_next_button {
+    background-color: #4CAF50 !important;
+}
+
+.io-app-green .gform_button:hover,
+.io-app-green .gform_next_button:hover {
+    background-color: #3d8b41 !important;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30);
+    color: #ffffff !important;
+}
+
+.io-app-yellow .gform_button,
+.io-app-yellow .gform_next_button {
+    background-color: #F9B500 !important;
+}
+
+.io-app-yellow .gform_button:hover,
+.io-app-yellow .gform_next_button:hover {
+    background-color: #d99a00 !important;
+    box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30);
+    color: #ffffff !important;
+}
+
+.io-app-red .gform_button,
+.io-app-red .gform_next_button {
+    background-color: #E30B5C !important;
+}
+
+.io-app-red .gform_button:hover,
+.io-app-red .gform_next_button:hover {
+    background-color: #b5094a !important;
+    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30);
+    color: #ffffff !important;
+}
+
+/* Previous button — slate gray secondary */
+.io-application-page .gform_previous_button {
+    background-color: #64748b !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.io-application-page .gform_previous_button:hover {
+    background-color: #475569 !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 20px rgba(100, 116, 139, 0.30);
+}
+
+/* Hide disabled/stray buttons (same trick as gating pages) */
+.io-application-page input.gform_button[disabled],
+.io-application-page input.gform_button[disabled="disabled"],
+.io-application-page input[disabled][type="submit"],
+.io-application-page input.gform_next_button[disabled],
+.io-application-page input.gform_button.gform-disabled,
+.io-application-page input[type="submit"].gform-disabled {
+    display: none !important;
+}
+
+/* ---------- Admin-only edit link ---------- */
+.entry-content>.post-edit-link {
+    display: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .io-application-page {
+        padding: 50px 14px 70px;
+    }
+
+    .io-application-page .gform_wrapper {
+        padding: 28px 22px;
+    }
+
+    .io-application-page .gfield_radio {
+        gap: 8px;
+    }
+
+    .io-application-page .gfield_checkbox {
+        gap: 8px;
+    }
+
+    .io-application-page .gform_button,
+    .io-application-page .gform_next_button,
+    .io-application-page .gform_previous_button {
+        width: 100% !important;
+        max-width: 280px !important;
+    }
+
+    .io-application-page .ginput_container_time {
+        max-width: 100%;
+    }
+}
