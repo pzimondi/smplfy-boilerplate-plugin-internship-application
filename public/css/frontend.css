@@ -929,6 +929,18 @@
     box-shadow: 0 0 0 3px rgba(29, 71, 161, 0.35);
 }
 
+
+#scroll-to-top::after {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 3px solid #ffffff;
+    border-right: 3px solid #ffffff;
+    transform: rotate(-45deg);
+    margin-top: 3px;
+}
+
 @media (max-width: 768px) {
     #scroll-to-top {
         right: 16px;
@@ -937,3 +949,5 @@
         height: 40px;
     }
 }
+
+
