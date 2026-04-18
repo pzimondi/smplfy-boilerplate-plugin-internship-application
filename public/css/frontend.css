@@ -3999,3 +3999,44 @@ body.page-id-1556 article>.post-edit-link {
         padding-right: 14px !important;
     }
 }
+
+
+
+/* =====================================================
+   SHARED GFLOW HEADING PATTERN (reusable across pages)
+   Label + heading + underline — consistent site-wide
+   ===================================================== */
+
+.gflow-label {
+    display: block !important;
+    text-align: center !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: #4CAF50 !important;
+    margin: 0 0 14px !important;
+}
+
+.gflow-heading {
+    font-size: clamp(1.8rem, 2.8vw, 2.2rem) !important;
+    font-weight: 800 !important;
+    color: #1e293b !important;
+    margin: 0 0 16px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+}
+
+.gflow-underline {
+    border: none !important;
+    display: block !important;
+    width: 50px !important;
+    height: 3px !important;
+    background: #4CAF50 !important;
+    border-radius: 2px !important;
+    margin: 0 auto 20px !important;
+    opacity: 1 !important;
+}
+
+
+
