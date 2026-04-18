@@ -4429,7 +4429,9 @@ body.page-id-582 .gflow-grid__header {
 /* Icon buttons — absolutely position them inside the card, to the right of the search */
 body.page-id-582 .gflow-grid__button {
     position: absolute !important;
-    top: 20px !important;
+    top: calc(20px + 22px) !important;
+    /* card padding (20px) + half of button height (44px/2) */
+    transform: translateY(-50%) !important;
     background: #ffffff !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 8px !important;
@@ -4443,6 +4445,7 @@ body.page-id-582 .gflow-grid__button {
     cursor: pointer !important;
     transition: all 0.2s ease !important;
     z-index: 2 !important;
+    margin: 0 !important;
 }
 
 /* Position each icon button individually — right-aligned */
