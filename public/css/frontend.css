@@ -3592,7 +3592,7 @@ body.page-id-582 .gravityflow-note-body .gravityflow-note-body {
 
 /* ===== Fix 1: "INTERNS DASHBOARD" label above H1 (pure CSS, no markup change) ===== */
 body.page-id-1556 .entry-content>h1.wp-block-heading::before {
-    content: "Interns Dashboard";
+    content: "Managers Dashboard";
     display: block;
     text-align: center;
     font-size: 0.75rem;
