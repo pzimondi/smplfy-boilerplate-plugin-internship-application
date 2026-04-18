@@ -7,24 +7,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Redirects administrators to /wp-admin/ on login.
+ * Forces administrators to /wp-admin/ on login.
  *
- * Non-admin roles (Manager, Support, Applicant, Intern, Subscriber)
- * pass through untouched so MemberPress's per-membership Login Redirect URL
- * setting remains in control of those flows.
+ * MemberPress hooks into the `wp_login` action and does
+ * wp_redirect() + exit to its account page, which runs BEFORE
+ * the `login_redirect` filter chain. To win, we hook `wp_login`
+ * ourselves at an earlier priority and short-circuit for admins.
+ *
+ * Non-admin roles are untouched — MemberPress's per-membership
+ * Login Redirect URL behavior remains fully in control of those flows.
  *
  * Hooked via WordpressAdapter — do not register hooks here.
  */
 class LoginRedirect {
 
     /**
-     * Filter callback for the `login_redirect` hook.
-     *
-     * @param string           $redirect_to           The redirect destination URL.
-     * @param string           $requested_redirect_to The requested redirect destination URL.
-     * @param \WP_User|\WP_Error $user                Logged in user object, or WP_Error on failure.
-     *
-     * @return string
+     * wp_login action — fires right after authentication succeeds
+     * and auth cookies are set. Redirecting here is safe.
+     */
+    public function handle_wp_login( string $user_login, \WP_User $user ): void {
+
+        if ( in_array( 'administrator', (array) $user->roles, true ) ) {
+            wp_safe_redirect( admin_url() );
+            exit;
+        }
+    }
+
+    /**
+     * login_redirect filter — secondary safety net in case the wp_login
+     * action path is bypassed (e.g. programmatic login, some SSO flows).
      */
     public function handle_login_redirect( $redirect_to, $requested_redirect_to, $user ) {
 

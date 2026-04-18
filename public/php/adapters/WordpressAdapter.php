@@ -59,6 +59,13 @@ class WordpressAdapter {
         );
 
         add_action(
+            'wp_login',
+            [ $this->loginRedirect, 'handle_wp_login' ],
+            1,
+            2
+        );
+
+        add_action(
             'init',
             function() {
                 if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
