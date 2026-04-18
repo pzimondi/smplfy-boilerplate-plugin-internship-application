@@ -556,8 +556,8 @@
    ===================================================== */
 
 .site-footer {
-    border-top: 1px solid #2a3548;
-    background: #1e293b;
+    border-top: 1px solid #cbd5e1;
+    background: #e2e8f0;
 }
 
 .site-footer .simplify-footer-inner {
@@ -570,18 +570,18 @@
 .site-footer p {
     margin: 0;
     font-size: 0.9rem;
-    color: #cbd5e1;
+    color: #1e293b;
     line-height: 1.6;
 }
 
 .site-footer a {
-    color: #93c5fd;
+    color: #1D47A1;
     font-weight: 600;
     text-decoration: none;
 }
 
 .site-footer a:hover {
-    color: #ffffff;
+    color: #143373;
     text-decoration: underline;
 }
 
