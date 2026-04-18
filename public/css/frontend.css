@@ -2650,7 +2650,7 @@ body.page-id-582 .gflow-inbox__search:focus {
 body.page-id-582 .gflow-grid__search-icon {
     position: absolute !important;
     left: 16px !important;
-    top: 50% !important;
+    top: 30% !important;
     transform: translateY(-50%) !important;
     color: #94a3b8 !important;
     pointer-events: none !important;
