@@ -1856,17 +1856,17 @@
 .io-application-page .ginput_container input[type="password"],
 .io-application-page .ginput_container textarea,
 .io-application-page .ginput_container select {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 0.98rem;
-    color: #1e293b;
-    background: #ffffff;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    box-sizing: border-box;
-    font-family: inherit;
-    line-height: 1.5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 11px 40px 11px 14px;
+    line-height: 1.4;
+    height: 44px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 12px 8px;
+    cursor: pointer;
 }
 
 /* Proper dropdown styling for <select> (Country, State, Time AM/PM, etc.) */
