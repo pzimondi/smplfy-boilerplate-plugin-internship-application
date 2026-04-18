@@ -1533,3 +1533,8 @@
 
 
 
+/* Hide the "* indicates required fields" legend */
+.io-page .gform_required_legend,
+.io-page .gfield_required_legend {
+    display: none !important;
+}
