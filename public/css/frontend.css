@@ -5158,60 +5158,224 @@ hr.ad-underline.yellow-line::after {
 
 
 /* =====================================================
-   MANAGERS DASHBOARD — YELLOW VARIANT
-   Add class `md-yellow` alongside `md-page` to switch
-   the green accents to yellow. Used on the Applicant
-   Dashboard (page 393).
+   APPLICANT INBOX PAGE (Yellow variant)
+   Page 1950 — same Gravity Flow inbox markup as pages
+   582/1929, but yellow-themed instead of green.
+   Only color-bearing rules are overridden here.
    ===================================================== */
 
-.md-yellow .md-label {
-    color: #F9B500;
+/* ===== Inbox header block (label + heading + underline) ===== */
+body.page-id-1950 .gflow-inbox-page .gflow-label {
+    color: #F9B500 !important;
 }
 
-.md-yellow .md-underline {
-    background: #F9B500;
+body.page-id-1950 .gflow-inbox-page .gflow-underline,
+body.page-id-1950 hr.gflow-underline {
+    background: #F9B500 !important;
 }
 
-/* In case the hr carries WP's default styling, keep it clean */
-.md-yellow hr.md-underline {
-    border: none;
-    height: 3px;
-    width: 50px;
-    border-radius: 2px;
-    margin: 0 auto 20px;
-    opacity: 1;
+body.page-id-1950 .gflow-inbox-page .gflow-back-link {
+    color: #F9B500 !important;
 }
 
-.md-yellow .md-card::before {
-    background: #F9B500;
+body.page-id-1950 .gflow-inbox-page .gflow-back-link:hover {
+    color: #d99a00 !important;
 }
 
-.md-yellow .md-card:hover {
-    border-color: #fde68a;
-    box-shadow: 0 8px 30px rgba(249, 181, 0, 0.10);
+/* Global .gflow-label / .gflow-underline fallback (when used inline on page) */
+body.page-id-1950 .gflow-label {
+    color: #F9B500 !important;
 }
 
-.md-yellow .md-card-icon {
-    background: #fffbeb;
-    color: #F9B500;
+body.page-id-1950 .gflow-underline {
+    background: #F9B500 !important;
 }
 
-.md-yellow .md-card:hover .md-card-icon {
-    background: #F9B500;
-    color: #ffffff;
+/* ===== Inbox card — search focus ring + icon buttons ===== */
+body.page-id-1950 .gflow-inbox__search:focus {
+    border-color: #F9B500 !important;
+    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
 }
 
-.md-yellow .md-card-cta {
-    color: #F9B500;
+body.page-id-1950 .gflow-grid__button:hover {
+    background: #fffbeb !important;
+    border-color: #F9B500 !important;
+    color: #F9B500 !important;
 }
 
-.md-yellow .md-card:hover .md-card-cta {
-    color: #d99a00;
+/* ===== AG Grid — header sort + row hover + sort icons ===== */
+body.page-id-1950 .ag-theme-alpine {
+    --ag-row-hover-color: #fffbeb;
+    --ag-selected-row-background-color: #fde68a;
 }
 
-.md-yellow .md-switch-back-wrap a:hover {
-    color: #F9B500;
+body.page-id-1950 .ag-header-cell-sortable:hover {
+    background: rgba(249, 181, 0, 0.06) !important;
 }
 
+body.page-id-1950 .ag-sort-ascending-icon,
+body.page-id-1950 .ag-sort-descending-icon {
+    color: #F9B500 !important;
+}
+
+body.page-id-1950 .ag-row-hover {
+    background-color: #fffbeb !important;
+}
+
+/* ===== Submitter avatar — yellow gradient ===== */
+body.page-id-1950 .ag-cell[col-id="created_by"]>div::before {
+    background: linear-gradient(135deg, #F9B500, #fbbf24) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: #F9B500 !important;
+}
+
+/* ===== Step pill — yellow ===== */
+body.page-id-1950 .ag-cell[col-id="workflow_step"] span {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7) !important;
+    color: #b17a00 !important;
+    border-color: #fde68a !important;
+}
+
+body.page-id-1950 .ag-row-hover .ag-cell[col-id="workflow_step"] span {
+    background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
+    border-color: #facc15 !important;
+}
+
+/* ===== Actions trigger hover ===== */
+body.page-id-1950 .gflow-grid__actions-trigger:hover {
+    background: #fffbeb !important;
+    color: #F9B500 !important;
+}
+
+/* ===== Pagination ===== */
+body.page-id-1950 .ag-paging-button:hover:not(.ag-disabled) {
+    background: #fffbeb !important;
+    border-color: #F9B500 !important;
+    color: #F9B500 !important;
+}
+
+/* ===== Settings flyout toggle ===== */
+body.page-id-1950 .gform-field__toggle-input:checked+.gform-field__toggle-container .gform-field__toggle-switch {
+    background: #F9B500 !important;
+}
+
+/* =====================================================
+   APPLICANT INBOX — ENTRY DETAIL + PENDING APPROVAL
+   Yellow overrides for the entry detail page rendered
+   when clicking a row in page 1950's inbox.
+   ===================================================== */
+
+/* Success notice */
+body.page-id-1950 .gravityflow_workflow_notice {
+    background: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    border-left: 4px solid #F9B500 !important;
+}
+
+body.page-id-1950 .gravityflow_workflow_notice p {
+    color: #b17a00 !important;
+}
+
+/* Entry detail — section break accent bar */
+body.page-id-1950 table.entry-detail-view tbody td.entry-view-section-break::after {
+    background: #F9B500 !important;
+}
+
+/* Entry detail — links, Map It, bulleted pills */
+body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value a {
+    color: #F9B500 !important;
+}
+
+body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value a:hover {
+    color: #d99a00 !important;
+}
+
+body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link {
+    background: #fffbeb !important;
+    border-color: #fde68a !important;
+    color: #b17a00 !important;
+}
+
+body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link:hover {
+    background: #F9B500 !important;
+    border-color: #F9B500 !important;
+    color: #ffffff !important;
+}
+
+body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted li {
+    background: #fffbeb !important;
+    border-color: #fde68a !important;
+    color: #b17a00 !important;
+}
+
+/* "Show empty fields" checkbox + print notes checkbox */
+body.page-id-1950 #gentry_display_empty_fields,
+body.page-id-1950 #gform_print_notes {
+    accent-color: #F9B500 !important;
+}
+
+/* Timeline avatar icon */
+body.page-id-1950 .gravityflow-note-avatar {
+    background: #fffbeb !important;
+}
+
+body.page-id-1950 .gravityflow-note-avatar i.fa {
+    color: #F9B500 !important;
+}
+
+/* ===== Pending approval form — section title accent ===== */
+body.page-id-1950 #gform_fields_2 .gsection_title::after {
+    background: #F9B500 !important;
+}
+
+/* Display field links */
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
+    color: #F9B500 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a:hover {
+    color: #d99a00 !important;
+}
+
+/* Editable checkbox / radio — accent + checked state */
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"],
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_radio input[type="radio"] {
+    accent-color: #F9B500 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:has(input:checked),
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gchoice:has(input:checked) {
+    border-color: #F9B500 !important;
+    background: #fffbeb !important;
+}
+
+/* Select-all toggle */
+body.page-id-1950 #gform_fields_2 button.gfield_choice_all_toggle {
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+}
+
+body.page-id-1950 #gform_fields_2 button.gfield_choice_all_toggle:hover {
+    background: #F9B500 !important;
+    color: #ffffff !important;
+}
+
+/* Note textarea focus */
+body.page-id-1950 textarea#gravityflow-note:focus {
+    border-color: #F9B500 !important;
+    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
+}
+
+/* Approve / Reject buttons — keep approve yellow, reject stays pink */
+body.page-id-1950 .gravityflow-action-buttons button[value="approved"] {
+    background: #F9B500 !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="approved"]:hover {
+    background: #d99a00 !important;
+    box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30) !important;
+}
 
 
