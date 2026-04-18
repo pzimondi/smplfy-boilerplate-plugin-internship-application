@@ -1179,7 +1179,11 @@
 .io-page .gform_page_footer,
 .io-page .gform_footer,
 .io-page .gform-page-footer {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
     padding-top: 16px;
     margin: 0;
     border-top: none;
