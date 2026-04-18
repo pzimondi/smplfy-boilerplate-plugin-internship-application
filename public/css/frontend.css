@@ -1216,6 +1216,20 @@
     box-sizing: border-box !important;
 }
 
+/* Force override Orbital theme's button sizing */
+.io-page .gform_wrapper.gform-theme--orbital input.gform_button,
+.io-page .gform_wrapper.gform-theme--orbital input.gform_next_button,
+.io-page .gform_wrapper.gform-theme--orbital input.gform_previous_button,
+.io-page .gform_wrapper .gform_footer input[type="submit"],
+.io-page .gform_wrapper .gform-page-footer input[type="submit"],
+.io-page .gform_wrapper .gform-page-footer input[type="button"] {
+    width: 200px !important;
+    max-width: 200px !important;
+    min-width: 200px !important;
+    flex: 0 0 200px !important;
+    display: inline-flex !important;
+}
+
 .io-page .gform_button:hover,
 .io-page .gform_next_button:hover,
 .io-page .gform_previous_button:hover {
