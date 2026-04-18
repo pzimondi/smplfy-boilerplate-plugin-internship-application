@@ -4389,3 +4389,132 @@ body.page-id-582 .entry-content>.workflow-inbox {
         height: 22px !important;
     }
 }
+
+
+
+/* =====================================================
+   MANAGER'S INBOX — CONTAINMENT & TABLE GRID LINES FIX
+   ===================================================== */
+
+/* Constrain the entire inbox widget to the page width */
+body.page-id-582 .entry-content>.workflow-inbox,
+body.page-id-582 .entry-content>.wp-block-gravityflow-inbox {
+    max-width: 1200px !important;
+    margin: 20px auto 60px !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+}
+
+/* Reset any absolute positioning on the icon buttons and put them
+   inline with the search box in a proper flex row */
+body.page-id-582 .gflow-inbox {
+    position: relative !important;
+    max-width: 100% !important;
+    padding: 20px !important;
+}
+
+/* Put search + icons in the same row */
+body.page-id-582 .gflow-inbox>.gflow-inbox__container::before {
+    content: none !important;
+}
+
+body.page-id-582 .gflow-grid__header {
+    position: relative !important;
+    flex: 1 !important;
+    margin-right: 140px !important;
+    /* reserve space for the 3 icons */
+    margin-bottom: 18px !important;
+}
+
+/* Icon buttons — absolutely position them inside the card, to the right of the search */
+body.page-id-582 .gflow-grid__button {
+    position: absolute !important;
+    top: 20px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    color: #64748b !important;
+    width: 38px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    z-index: 2 !important;
+}
+
+/* Position each icon button individually — right-aligned */
+body.page-id-582 .gflow-grid__button--settings {
+    right: 20px !important;
+}
+
+body.page-id-582 .gflow-grid__button--fullscreen {
+    right: 66px !important;
+}
+
+body.page-id-582 .gflow-grid__button--clear-filters {
+    right: 112px !important;
+}
+
+body.page-id-582 .gflow-grid__button:hover {
+    background: #f0fdf4 !important;
+    border-color: #4CAF50 !important;
+    color: #4CAF50 !important;
+}
+
+/* Ensure the icon inside each button is sized correctly */
+body.page-id-582 .gflow-grid__button.gflow-icon::before {
+    font-size: 16px !important;
+    line-height: 1 !important;
+}
+
+/* =====================================================
+   VISIBLE GRID LINES ON TABLE
+   ===================================================== */
+
+/* Stronger vertical borders between columns */
+body.page-id-582 .ag-header-cell {
+    border-right: 1px solid #e2e8f0 !important;
+    border-bottom: none !important;
+}
+
+body.page-id-582 .ag-header-cell:last-child {
+    border-right: none !important;
+}
+
+/* Stronger horizontal row lines */
+body.page-id-582 .ag-row {
+    border-bottom: 1px solid #e8ecf1 !important;
+}
+
+/* Vertical cell dividers — more visible */
+body.page-id-582 .ag-cell {
+    border-right: 1px solid #eef2f6 !important;
+    border-bottom: none !important;
+}
+
+body.page-id-582 .ag-cell:last-child {
+    border-right: none !important;
+}
+
+/* Make the table body background slightly grey so white cells pop */
+body.page-id-582 .ag-theme-alpine {
+    --ag-row-border-color: #e8ecf1 !important;
+    --ag-border-color: #e2e8f0 !important;
+}
+
+body.page-id-582 .ag-root-wrapper {
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Header — stronger bottom border */
+body.page-id-582 .ag-header {
+    border-bottom: 2px solid #e2e8f0 !important;
+}
+
+/* Pagination border top */
+body.page-id-582 .ag-paging-panel {
+    border-top: 2px solid #e2e8f0 !important;
+}
