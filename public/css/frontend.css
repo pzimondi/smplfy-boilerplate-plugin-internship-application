@@ -5154,3 +5154,64 @@ hr.ad-underline.yellow-line::after {
         padding: 26px 22px 22px;
     }
 }
+
+
+
+/* =====================================================
+   MANAGERS DASHBOARD — YELLOW VARIANT
+   Add class `md-yellow` alongside `md-page` to switch
+   the green accents to yellow. Used on the Applicant
+   Dashboard (page 393).
+   ===================================================== */
+
+.md-yellow .md-label {
+    color: #F9B500;
+}
+
+.md-yellow .md-underline {
+    background: #F9B500;
+}
+
+/* In case the hr carries WP's default styling, keep it clean */
+.md-yellow hr.md-underline {
+    border: none;
+    height: 3px;
+    width: 50px;
+    border-radius: 2px;
+    margin: 0 auto 20px;
+    opacity: 1;
+}
+
+.md-yellow .md-card::before {
+    background: #F9B500;
+}
+
+.md-yellow .md-card:hover {
+    border-color: #fde68a;
+    box-shadow: 0 8px 30px rgba(249, 181, 0, 0.10);
+}
+
+.md-yellow .md-card-icon {
+    background: #fffbeb;
+    color: #F9B500;
+}
+
+.md-yellow .md-card:hover .md-card-icon {
+    background: #F9B500;
+    color: #ffffff;
+}
+
+.md-yellow .md-card-cta {
+    color: #F9B500;
+}
+
+.md-yellow .md-card:hover .md-card-cta {
+    color: #d99a00;
+}
+
+.md-yellow .md-switch-back-wrap a:hover {
+    color: #F9B500;
+}
+
+
+
