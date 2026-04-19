@@ -31,6 +31,16 @@ function enqueue_boilerplate_frontend_scripts() {
     // Enqueue your public CSS
     wp_enqueue_style('smplfy-demo-frontend-styles');
 
+    // Header scroll behavior — hide on scroll down, show on scroll up.
+    // Also handles back-to-top button visibility.
+    wp_enqueue_script(
+        'smplfy-header-scroll',
+        SMPLFY_NAME_PLUGIN_URL . 'public/js/header-scroll.js',
+        [],
+        '1.0.0',
+        true
+    );
+
     // Only load heartbeat script on page ID 999 (demo logic)
     if ( isset($post->ID) && $post->ID == 999 ) {
         wp_enqueue_script('smplfy-demo-heartbeat-script');

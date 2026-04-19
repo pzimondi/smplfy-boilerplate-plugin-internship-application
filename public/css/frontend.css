@@ -7602,3 +7602,39 @@ body:has(.io-app-red) .site-footer-accent-bar__track {
 .site-header {
     margin-top: 0 !important;
 }
+
+
+
+/* =====================================================
+   STICKY HEADER — HIDE ON SCROLL DOWN, SHOW ON SCROLL UP
+   Body class 'header-hidden' toggled by header-scroll.js.
+   Header accent bar moves with the header (it's a child).
+   ===================================================== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    transition: transform 280ms ease, box-shadow 280ms ease;
+    will-change: transform;
+}
+
+body.header-hidden .site-header {
+    transform: translateY(-100%);
+}
+
+/* Subtle shadow once scrolled (depth cue that header is floating) */
+body:not(.header-hidden) .site-header {
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+/* Disable the slide animation for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+    .site-header {
+        transition: none;
+    }
+}
+
+
+
