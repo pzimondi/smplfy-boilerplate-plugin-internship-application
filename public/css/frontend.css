@@ -2270,13 +2270,28 @@
     box-shadow: 0 6px 20px rgba(100, 116, 139, 0.30);
 }
 
-/* Hide disabled submit buttons */
+/* Hide disabled submit buttons, including buttons hidden by Gravity Forms
+   conditional logic (which sets style="display: none" + disabled="disabled"
+   + data-conditional-logic="hidden" on the element).
+   Our .gform_button { display: inline-flex !important; } rule above would
+   otherwise override GF's inline display:none, so we need to explicitly
+   re-hide them here. */
+.io-page input.gform_button[disabled],
+.io-page input.gform_button[disabled="disabled"],
+.io-page input[disabled][type="submit"],
+.io-page input.gform_next_button[disabled],
+.io-page input.gform_button.gform-disabled,
+.io-page input[type="submit"].gform-disabled,
+.io-page input[data-conditional-logic="hidden"],
+.io-page button[data-conditional-logic="hidden"],
 .io-application-page input.gform_button[disabled],
 .io-application-page input.gform_button[disabled="disabled"],
 .io-application-page input[disabled][type="submit"],
 .io-application-page input.gform_next_button[disabled],
 .io-application-page input.gform_button.gform-disabled,
-.io-application-page input[type="submit"].gform-disabled {
+.io-application-page input[type="submit"].gform-disabled,
+.io-application-page input[data-conditional-logic="hidden"],
+.io-application-page button[data-conditional-logic="hidden"] {
     display: none !important;
 }
 
