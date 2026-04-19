@@ -4277,9 +4277,9 @@ body.page-id-1929 .wrap.gravityflow_workflow_detail {
 /* ===== Instructions callout (left sidebar equivalent at top) ===== */
 body.page-id-582 .postbox.gravityflow-instructions,
 body.page-id-1929 .postbox.gravityflow-instructions {
-    background: #fffbeb !important;
-    border: 1px solid #fde68a !important;
-    border-left: 4px solid #F9B500 !important;
+    background: #f0fdf4 !important;
+    border: 1px solid #c6f0d4 !important;
+    border-left: 4px solid #4CAF50 !important;
     border-radius: 10px !important;
     padding: 0 !important;
     margin: 0 0 20px !important;
@@ -4292,7 +4292,7 @@ body.page-id-1929 .postbox.gravityflow-instructions .inside {
     margin: 0 !important;
     font-size: 0.94rem !important;
     line-height: 1.65 !important;
-    color: #78400a !important;
+    color: #2f5a33 !important;
     font-weight: 500 !important;
 }
 
