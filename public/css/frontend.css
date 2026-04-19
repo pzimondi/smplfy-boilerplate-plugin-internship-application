@@ -7628,3 +7628,319 @@ body:not(.header-hidden) .site-header {
 
 
 
+/* =====================================================
+   ACCOUNT PAGE (Green theme — page 1020)
+   MemberPress [mepr-account-form] shortcode output.
+   Green — part of the logged-in dashboard experience.
+   ===================================================== */
+
+/* ===== Hide the account nav (Home / Subscriptions / Payments / Courses / Logout)
+   Using :has() to hide the entire wrapper so no empty card remains. */
+body.page-id-1020 .mp_wrapper:has(#mepr-account-nav) {
+    display: none !important;
+}
+
+/* Page wrapper — center */
+body.page-id-1020 .entry-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 30px 24px 80px;
+}
+
+/* "Account" H1 — themed to match site pattern */
+body.page-id-1020 .entry-title {
+    font-size: clamp(2rem, 3vw, 2.4rem);
+    font-weight: 800;
+    color: #1e293b;
+    text-align: center;
+    margin: 0 0 8px;
+    line-height: 1.2;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+body.page-id-1020 .entry-title::before {
+    content: 'ACCOUNT SETTINGS';
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #4CAF50;
+    margin: 0 0 14px;
+}
+
+body.page-id-1020 .entry-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #4CAF50;
+    border-radius: 2px;
+    margin: 16px auto 0;
+}
+
+/* Welcome message */
+body.page-id-1020 #mepr-account-welcome-message {
+    text-align: center;
+    margin: 20px 0 28px;
+}
+
+body.page-id-1020 #mepr-account-welcome-message p {
+    font-size: 1rem;
+    color: #475569;
+    margin: 0;
+}
+
+/* ===== Form card wrapper (the remaining .mp_wrapper, form-only) ===== */
+body.page-id-1020 .mp_wrapper:has(#mepr_account_form) {
+    background: #ffffff;
+    border: 1px solid #c6f0d4;
+    border-radius: 16px;
+    padding: 40px 36px;
+    margin: 20px auto 0;
+    max-width: 620px;
+    box-shadow: 0 8px 30px rgba(76, 175, 80, 0.12);
+    text-align: left;
+}
+
+/* ===== Form ===== */
+body.page-id-1020 form.mepr-form {
+    margin: 0;
+    padding: 0;
+}
+
+body.page-id-1020 .mepr-form .mp-form-row {
+    margin: 0 0 18px;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+body.page-id-1020 .mepr-form .mp-form-label {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+body.page-id-1020 .mepr-form .mp-form-label label,
+body.page-id-1020 .mepr-form .mp-form-label label.placeholder-text,
+body.page-id-1020 .mepr-form .mp-form-label label.placeholder-text.active {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 6px;
+    line-height: 1.4;
+}
+
+/* Error spans — hidden by default, visible only when MP forces them via inline style */
+body.page-id-1020 .mepr-form .cc-error {
+    display: none;
+    color: #E30B5C;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+body.page-id-1020 .mepr-form .cc-error[style*="display: inline"] {
+    display: inline !important;
+}
+
+/* ===== Inputs ===== */
+body.page-id-1020 .mepr-form input[type="text"],
+body.page-id-1020 .mepr-form input[type="email"],
+body.page-id-1020 .mepr-form input[type="password"],
+body.page-id-1020 .mepr-form input[type="tel"] {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    color: #1e293b !important;
+    background: #ffffff !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    height: auto !important;
+    max-width: 100% !important;
+}
+
+body.page-id-1020 .mepr-form input:hover {
+    border-color: #cbd5e1 !important;
+}
+
+body.page-id-1020 .mepr-form input:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
+}
+
+/* ===== Select dropdowns (Country, State) — custom chevron ===== */
+body.page-id-1020 .mepr-form select {
+    width: 100% !important;
+    padding: 11px 40px 11px 14px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    color: #1e293b !important;
+    background-color: #ffffff !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 14px center !important;
+    background-size: 12px 8px !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    cursor: pointer !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    box-sizing: border-box !important;
+    font-family: inherit !important;
+    height: 44px !important;
+    line-height: 1.4 !important;
+}
+
+body.page-id-1020 .mepr-form select:hover {
+    border-color: #cbd5e1 !important;
+}
+
+body.page-id-1020 .mepr-form select:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
+}
+
+/* ===== Spacers — hide ===== */
+body.page-id-1020 .mepr_spacer {
+    display: none !important;
+}
+
+/* ===== Save Profile submit button — green, full width ===== */
+body.page-id-1020 .mepr-form input[type="submit"].mepr-submit,
+body.page-id-1020 .mepr-form input.mepr-share-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 14px 24px !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    background-color: #4CAF50 !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    font-family: inherit !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    height: auto !important;
+    max-width: 100% !important;
+    margin-top: 12px !important;
+}
+
+body.page-id-1020 .mepr-form input[type="submit"].mepr-submit:hover,
+body.page-id-1020 .mepr-form input.mepr-share-button:hover {
+    background-color: #3d8b41 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
+    color: #ffffff !important;
+}
+
+/* Loading gif */
+body.page-id-1020 .mepr-form .mepr-loading-gif {
+    display: inline-block !important;
+    margin: 12px auto 0 !important;
+    max-width: 32px !important;
+}
+
+/* ===== Form-level error banner (only when shown by MP) ===== */
+body.page-id-1020 .mepr-form .mepr-form-has-errors {
+    display: none;
+    color: #b5094a;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: #fef2f4;
+    border: 1px solid #fbcfe0;
+    border-radius: 8px;
+}
+
+body.page-id-1020 .mepr-form .mepr-form-has-errors[style*="display: block"] {
+    display: block !important;
+}
+
+/* ===== Change Password link ===== */
+body.page-id-1020 .mepr-account-change-password {
+    display: block;
+    text-align: center;
+    margin: 24px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+body.page-id-1020 .mepr-account-change-password a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4CAF50;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0;
+}
+
+body.page-id-1020 .mepr-account-change-password a::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.page-id-1020 .mepr-account-change-password a:hover {
+    color: #3d8b41;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ===== Hide (Edit) admin link ===== */
+body.page-id-1020 .entry-content>.post-edit-link,
+body.page-id-1020 article>.post-edit-link {
+    display: none !important;
+}
+
+/* ===== 2-column layout for First/Last Name on desktop ===== */
+@media (min-width: 640px) {
+
+    body.page-id-1020 .mepr-form .mepr_first_name,
+    body.page-id-1020 .mepr-form .mepr_last_name {
+        display: inline-block;
+        width: calc(50% - 6px);
+        vertical-align: top;
+    }
+
+    body.page-id-1020 .mepr-form .mepr_first_name {
+        margin-right: 8px;
+    }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+    body.page-id-1020 .entry-content {
+        padding: 20px 16px 60px;
+    }
+
+    body.page-id-1020 .mp_wrapper:has(#mepr_account_form) {
+        padding: 28px 22px;
+    }
+}
+
+
+
