@@ -7490,7 +7490,7 @@ body:has(.io-app-red) .site-header-accent-bar__track {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
+    height: 1px;
     overflow: hidden;
     background: #ffffff;
     margin: 0;
