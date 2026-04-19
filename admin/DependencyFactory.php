@@ -33,5 +33,8 @@ class DependencyFactory {
         new WordpressAdapter( $userCreated, $backfillMemberships, $deleteUser, $loginRedirect );
         new GravityFlowAdapter( $workflowNotifications );
         new ESignatureAdapter( $eSignatureNotifications );
+
+        // Presentation
+        new FooterAccentBar();
     }
 }
