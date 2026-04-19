@@ -457,6 +457,23 @@
    SITE FOOTER
    ===================================================== */
 
+.site-footer {
+    background: #ffffff;
+    border-top: none !important;
+    /* kill inherited Genesis border; accent bar replaces it */
+    padding-top: 0 !important;
+    /* accent bar sits flush at the top edge */
+    margin-top: 0;
+    position: relative;
+    /* positioning context for absolute accent bar */
+}
+
+/* Breathing room below the accent bar so copyright text doesn't crash into it */
+.site-footer .wrap,
+.site-footer .simplify-footer-inner {
+    padding-top: 24px;
+}
+
 .site-footer .simplify-footer-inner {
     max-width: 1100px;
     margin: 0 auto;
@@ -7356,26 +7373,24 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
 
 
 /* =====================================================
-   FOOTER ACCENT BAR SYSTEM
-   
-   Home page  → animated 4-color gradient chain (default)
-   All other  → solid single-color bar in that page's
-                role color (blue/green/yellow/red)
-   
-   Shared: footer background stays white, accent bar
-   is the separator between content and footer.
+   FOOTER ACCENT BAR (animated 4-color brand chain)
+   Home page: scrolling Blue → Green → Yellow → Red chain.
+   Inner pages: solid single color per page-id (see overrides below).
+   Anchored absolutely to the top edge of .site-footer.
    ===================================================== */
 
-/* ----- Shared shell (all pages) ----- */
 .site-footer-accent-bar {
-    position: relative;
-    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 4px;
     overflow: hidden;
     background: #ffffff;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    margin: 0;
     padding: 0;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .site-footer-accent-bar__track {
@@ -7412,73 +7427,53 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
     }
 }
 
-/* ----- INNER PAGES — solid single-color bars -----
-   Override the animated track with a solid single color,
-   scoped per page via body class or wrapper class. */
+/* -----------------------------------------------------
+   PER-PAGE SOLID COLOR OVERRIDES
+   Inner pages replace the animated chain with a single
+   flat brand color matching their page accent. We target
+   __track and swap the gradient for a solid background
+   plus kill the animation.
+   ----------------------------------------------------- */
 
-/* GREEN — Managers areas */
+/* GREEN — Managers / Interns-related dashboards */
 body.page-id-582 .site-footer-accent-bar__track,
-/* Manager's Inbox */
 body.page-id-1929 .site-footer-accent-bar__track,
-/* Support Inbox */
 body.page-id-1556 .site-footer-accent-bar__track,
-/* View Submitted Tasks */
 body:has(.md-page) .site-footer-accent-bar__track,
-body:has(.gflow-inbox-page) .site-footer-accent-bar__track {
-    width: 100%;
-    background: #4CAF50;
-    animation: none;
-}
-
-/* YELLOW — Applicant / intern areas */
-body.page-id-1950 .site-footer-accent-bar__track,
-/* Applicant Inbox */
-body.page-id-1542 .site-footer-accent-bar__track,
-/* View Task Completed */
-body:has(.ad-page) .site-footer-accent-bar__track {
-    width: 100%;
-    background: #F9B500;
-    animation: none;
-}
-
-/* BLUE — About, Login */
-body.page-id-1018 .site-footer-accent-bar__track,
-/* Login */
-body:has(.au-page) .site-footer-accent-bar__track,
-body:has(.login-page) .site-footer-accent-bar__track {
-    width: 100%;
-    background: #1D47A1;
-    animation: none;
-}
-
-/* Role-wrapper pages — pick up color via existing wrapper classes */
-body:has(.io-blue) .site-footer-accent-bar__track,
-body:has(.io-app-blue) .site-footer-accent-bar__track {
-    width: 100%;
-    background: #1D47A1;
-    animation: none;
-}
-
+body:has(.gflow-inbox-page) .site-footer-accent-bar__track,
 body:has(.io-green) .site-footer-accent-bar__track,
 body:has(.io-app-green) .site-footer-accent-bar__track {
-    width: 100%;
     background: #4CAF50;
     animation: none;
+    width: 100%;
 }
 
+/* YELLOW — Applicants / Interns public-facing */
+body.page-id-1950 .site-footer-accent-bar__track,
+body.page-id-1542 .site-footer-accent-bar__track,
+body:has(.ad-page) .site-footer-accent-bar__track,
 body:has(.io-yellow) .site-footer-accent-bar__track,
 body:has(.io-app-yellow) .site-footer-accent-bar__track {
-    width: 100%;
     background: #F9B500;
     animation: none;
+    width: 100%;
 }
 
+/* BLUE — About / Login */
+body.page-id-1018 .site-footer-accent-bar__track,
+body:has(.au-page) .site-footer-accent-bar__track,
+body:has(.login-page) .site-footer-accent-bar__track,
+body:has(.io-blue) .site-footer-accent-bar__track,
+body:has(.io-app-blue) .site-footer-accent-bar__track {
+    background: #1D47A1;
+    animation: none;
+    width: 100%;
+}
+
+/* RED — Logout / Alert contexts (reserved) */
 body:has(.io-red) .site-footer-accent-bar__track,
 body:has(.io-app-red) .site-footer-accent-bar__track {
-    width: 100%;
     background: #E30B5C;
     animation: none;
+    width: 100%;
 }
-
-
-
