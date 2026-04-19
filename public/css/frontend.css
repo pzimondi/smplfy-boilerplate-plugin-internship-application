@@ -91,12 +91,14 @@
    NAV MENU STATIC COLORS (TEXT + UNDERLINE)
    ===================================================== */
 
-/* About – Blue */
-#menu-item-608>a {
+/* About + Account – Blue (universal / logged-in pages, not role-specific) */
+#menu-item-608>a,
+#menu-item-1021>a {
     color: #1D47A1;
 }
 
-#menu-item-608>a::after {
+#menu-item-608>a::after,
+#menu-item-1021>a::after {
     background: #1D47A1;
 }
 
@@ -108,8 +110,7 @@
 #menu-item-1535>a,
 #menu-item-1536>a,
 #menu-item-1562>a,
-#menu-item-1940>a,
-#menu-item-1021>a {
+#menu-item-1940>a {
     color: #4CAF50;
 }
 
@@ -120,8 +121,7 @@
 #menu-item-1535>a::after,
 #menu-item-1536>a::after,
 #menu-item-1562>a::after,
-#menu-item-1940>a::after,
-#menu-item-1021>a::after {
+#menu-item-1940>a::after {
     background: #4CAF50;
 }
 
@@ -613,7 +613,7 @@
 }
 
 /* =====================================================
-   LOGIN (MemberPress)
+   LOGIN (MemberPress) — legacy
    ===================================================== */
 
 .mepro-form h1 {
@@ -1590,7 +1590,7 @@
     background: #E30B5C !important;
 }
 
-/* Section dividers (Personal Details, etc.) */
+/* Section dividers */
 .io-application-page .gsection,
 .io-application-page .gfield--type-section {
     border: none;
@@ -1661,7 +1661,7 @@
     line-height: 1.5;
 }
 
-/* Sub-labels (First, Last, Street, City) */
+/* Sub-labels */
 .io-application-page .gfield_label.gform-field-label--type-sub,
 .io-application-page .gform-field-label--type-sub {
     font-size: 0.78rem;
@@ -1673,7 +1673,7 @@
     letter-spacing: 0;
 }
 
-/* Text / email / url / etc. inputs: NO chevron, clean look */
+/* Text inputs */
 .io-application-page .ginput_container input[type="text"],
 .io-application-page .ginput_container input[type="email"],
 .io-application-page .ginput_container input[type="tel"],
@@ -1704,7 +1704,7 @@
     line-height: 1.6;
 }
 
-/* Select dropdowns: custom chevron, proper vertical centering */
+/* Select dropdowns */
 .io-application-page .ginput_container select {
     width: 100%;
     -webkit-appearance: none;
@@ -1766,7 +1766,7 @@
     box-shadow: 0 0 0 3px rgba(227, 11, 92, 0.15);
 }
 
-/* Complex fields (Name, Address, Time) — grid layout */
+/* Complex fields (Name, Address, Time) */
 .io-application-page .ginput_complex {
     display: grid;
     gap: 14px;
@@ -1791,7 +1791,7 @@
     }
 }
 
-/* Time field (HH/MM/AM-PM) */
+/* Time field */
 .io-application-page .ginput_container_time {
     display: flex;
     align-items: center;
@@ -1818,7 +1818,7 @@
     margin-top: 4px;
 }
 
-/* Radio buttons — card style */
+/* Radio buttons */
 .io-application-page .gfield_radio {
     list-style: none;
     margin: 4px 0 0;
@@ -1899,7 +1899,7 @@
     background: #fef2f4;
 }
 
-/* Checkboxes — pill style */
+/* Checkboxes */
 .io-application-page .gfield_checkbox {
     list-style: none;
     margin: 4px 0 0;
@@ -1980,7 +1980,7 @@
     background: #fef2f4;
 }
 
-/* Select All toggle wrapper — centered below checkboxes */
+/* Select All toggle */
 .io-application-page .gfield-choice-toggle-all {
     display: flex;
     justify-content: center;
@@ -2049,7 +2049,7 @@
     color: #fff !important;
 }
 
-/* HTML content fields (instructions, warnings) */
+/* HTML content fields */
 .io-application-page .gfield_html {
     font-size: 0.95rem;
     line-height: 1.7;
@@ -2270,7 +2270,7 @@
     box-shadow: 0 6px 20px rgba(100, 116, 139, 0.30);
 }
 
-/* Hide disabled/stray submit buttons */
+/* Hide disabled submit buttons */
 .io-application-page input.gform_button[disabled],
 .io-application-page input.gform_button[disabled="disabled"],
 .io-application-page input[disabled][type="submit"],
@@ -2510,9 +2510,8 @@
 }
 
 /* =====================================================
-   GFLOW INBOX PAGE — HEADER BLOCK
-   (Green theme — the label/heading/underline/subheading/back-link)
-   Applies to both Manager's Inbox (582) and Support Inbox (1929)
+   GFLOW INBOX PAGE — HEADER BLOCK (Green)
+   Manager's Inbox (582) and Support Inbox (1929)
    ===================================================== */
 
 .gflow-inbox-page {
@@ -2593,12 +2592,9 @@
 
 /* =====================================================
    GFLOW INBOX PAGES — AG GRID TABLE STYLING
-   Scoped to body.page-id-582 (Manager's Inbox) and
-   body.page-id-1929 (Support Inbox) — identical markup,
-   identical styling.
+   Scoped to body.page-id-582 AND body.page-id-1929
    ===================================================== */
 
-/* Constrain the inbox block and its children to 1200px max */
 body.page-id-582 .entry-content>.workflow-inbox,
 body.page-id-582 .entry-content>.wp-block-gravityflow-inbox,
 body.page-id-1929 .entry-content>.workflow-inbox,
@@ -2622,7 +2618,6 @@ body.page-id-1929 .ag-theme-alpine[data-js="gflow-inbox"] {
     max-width: 100% !important;
 }
 
-/* Outer card wrapping the entire inbox (search + table + pagination) */
 body.page-id-582 .gflow-inbox,
 body.page-id-1929 .gflow-inbox {
     position: relative !important;
@@ -2635,7 +2630,6 @@ body.page-id-1929 .gflow-inbox {
     max-width: 100% !important;
 }
 
-/* Search row — buttons pinned to top-right of the inbox card */
 body.page-id-582 .gflow-grid__header,
 body.page-id-1929 .gflow-grid__header {
     position: relative !important;
@@ -2683,8 +2677,6 @@ body.page-id-1929 .gflow-grid__search-icon {
     font-size: 1.05rem !important;
 }
 
-/* Icon buttons (Clear filters / Fullscreen / Settings) — pinned to top of card,
-   aligned with search input (card padding 20px = top offset) */
 body.page-id-582 .gflow-grid__button,
 body.page-id-1929 .gflow-grid__button {
     position: absolute !important;
@@ -2735,7 +2727,6 @@ body.page-id-1929 .gflow-grid__button.gflow-icon::before {
     line-height: 1 !important;
 }
 
-/* AG Grid theme variables + root */
 body.page-id-582 .ag-theme-alpine,
 body.page-id-1929 .ag-theme-alpine {
     --ag-background-color: #ffffff;
@@ -2764,7 +2755,6 @@ body.page-id-1929 .ag-root-wrapper {
     width: 100% !important;
 }
 
-/* Header */
 body.page-id-582 .ag-header,
 body.page-id-1929 .ag-header {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
@@ -2820,7 +2810,6 @@ body.page-id-1929 .ag-sort-descending-icon {
     color: #4CAF50 !important;
 }
 
-/* Rows */
 body.page-id-582 .ag-row,
 body.page-id-1929 .ag-row {
     background: #ffffff !important;
@@ -2844,7 +2833,6 @@ body.page-id-1929 .ag-row-hover {
     cursor: pointer !important;
 }
 
-/* Cells */
 body.page-id-582 .ag-cell,
 body.page-id-1929 .ag-cell {
     padding: 0 18px !important;
@@ -2866,7 +2854,6 @@ body.page-id-1929 .ag-cell span {
     color: inherit !important;
 }
 
-/* ID column — monospace badge */
 body.page-id-582 .ag-cell[col-id="id"] span,
 body.page-id-1929 .ag-cell[col-id="id"] span {
     font-family: 'SF Mono', 'Monaco', 'Consolas', monospace !important;
@@ -2880,7 +2867,6 @@ body.page-id-1929 .ag-cell[col-id="id"] span {
     display: inline-flex !important;
 }
 
-/* Actions column */
 body.page-id-582 .ag-cell[col-id="actions"],
 body.page-id-1929 .ag-cell[col-id="actions"] {
     justify-content: center !important;
@@ -2904,7 +2890,6 @@ body.page-id-1929 .gflow-grid__actions-trigger:hover {
     color: #4CAF50 !important;
 }
 
-/* Form title */
 body.page-id-582 .ag-cell[col-id="form_title"] span,
 body.page-id-1929 .ag-cell[col-id="form_title"] span {
     font-weight: 600 !important;
@@ -2914,7 +2899,6 @@ body.page-id-1929 .ag-cell[col-id="form_title"] span {
     text-overflow: ellipsis !important;
 }
 
-/* Submitter — avatar circle prefix */
 body.page-id-582 .ag-cell[col-id="created_by"] span,
 body.page-id-1929 .ag-cell[col-id="created_by"] span {
     color: #334155 !important;
@@ -2944,7 +2928,6 @@ body.page-id-1929 .ag-cell[col-id="created_by"]>div::before {
     background-position: center !important;
 }
 
-/* Step pill */
 body.page-id-582 .ag-cell[col-id="workflow_step"] span,
 body.page-id-1929 .ag-cell[col-id="workflow_step"] span {
     display: inline-flex !important;
@@ -2967,7 +2950,6 @@ body.page-id-1929 .ag-row-hover .ag-cell[col-id="workflow_step"] span {
     border-color: #86efac !important;
 }
 
-/* Date columns */
 body.page-id-582 .ag-cell[col-id="date_created"] span,
 body.page-id-582 .ag-cell[col-id="last_updated"] span,
 body.page-id-1929 .ag-cell[col-id="date_created"] span,
@@ -2977,7 +2959,6 @@ body.page-id-1929 .ag-cell[col-id="last_updated"] span {
     font-weight: 500 !important;
 }
 
-/* Pagination */
 body.page-id-582 .ag-paging-panel,
 body.page-id-1929 .ag-paging-panel {
     background: #fafbfc !important;
@@ -3045,7 +3026,6 @@ body.page-id-1929 .ag-paging-number {
     padding: 0 4px !important;
 }
 
-/* Empty state */
 body.page-id-582 .ag-overlay-no-rows-wrapper,
 body.page-id-1929 .ag-overlay-no-rows-wrapper {
     font-size: 0.95rem !important;
@@ -3054,7 +3034,6 @@ body.page-id-1929 .ag-overlay-no-rows-wrapper {
     text-align: center !important;
 }
 
-/* Settings flyout */
 body.page-id-582 .gform-flyout,
 body.page-id-1929 .gform-flyout {
     background: #ffffff !important;
@@ -3152,12 +3131,9 @@ body.page-id-1929 .gform-field__toggle-input:checked+.gform-field__toggle-contai
 
 /* =====================================================
    WORKFLOW ENTRY DETAIL PAGE (Gravity Flow)
-   Shown when clicking an inbox row (read-only after approval)
-   URL: ?page=gravityflow-inbox&view=entry&id=X&lid=Y
-   Scoped to body.page-id-582 AND body.page-id-1929
+   Read-only after approval, pages 582/1929
    ===================================================== */
 
-/* Success notice at top ("Entry Approved") */
 body.page-id-582 .gravityflow_workflow_notice,
 body.page-id-1929 .gravityflow_workflow_notice {
     background: #f0fdf4 !important;
@@ -3179,7 +3155,6 @@ body.page-id-1929 .gravityflow_workflow_notice p {
     line-height: 1.5 !important;
 }
 
-/* Container: full width, centered, no WP admin sidebar constraints */
 body.page-id-582 #poststuff,
 body.page-id-1929 #poststuff {
     padding-top: 0 !important;
@@ -3226,7 +3201,6 @@ body.page-id-1929 #postbox-container-2 {
     min-width: 0 !important;
 }
 
-/* ===== Entry detail table card ===== */
 body.page-id-582 table.entry-detail-view,
 body.page-id-1929 table.entry-detail-view {
     background: #ffffff !important;
@@ -3240,7 +3214,6 @@ body.page-id-1929 table.entry-detail-view {
     margin: 0 !important;
 }
 
-/* Table header — entry title + "show empty fields" toggle */
 body.page-id-582 table.entry-detail-view thead th,
 body.page-id-1929 table.entry-detail-view thead th {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
@@ -3278,14 +3251,12 @@ body.page-id-1929 #gentry_display_empty_fields {
     vertical-align: middle !important;
 }
 
-/* Neutralize all TDs so the specific ones can repaint cleanly */
 body.page-id-582 table.entry-detail-view tbody td,
 body.page-id-1929 table.entry-detail-view tbody td {
     border: none !important;
     background: #ffffff !important;
 }
 
-/* Section break rows — green accent divider */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-section-break,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-section-break {
     padding: 26px 28px 12px !important;
@@ -3309,7 +3280,6 @@ body.page-id-1929 table.entry-detail-view tbody td.entry-view-section-break::aft
     border-radius: 2px !important;
 }
 
-/* Field label row (uppercase, small, muted) */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-field-name,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-name {
     padding: 16px 28px 4px !important;
@@ -3321,7 +3291,6 @@ body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-name {
     background: #ffffff !important;
 }
 
-/* Field value row (dark, readable, separator) */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value {
     padding: 0 28px 18px !important;
@@ -3340,7 +3309,6 @@ body.page-id-1929 table.entry-detail-view tbody tr:last-child td.entry-view-fiel
     padding-bottom: 24px !important;
 }
 
-/* Links inside values (email, URLs) */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a {
     color: #4CAF50 !important;
@@ -3355,7 +3323,6 @@ body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a:hove
     text-decoration: underline !important;
 }
 
-/* Map It link — small pill */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a.map-it-link {
     display: inline-block !important;
@@ -3377,7 +3344,6 @@ body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value a.map-
     border-color: #4CAF50 !important;
 }
 
-/* Bulleted list (e.g. days of week) as pills */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value ul.bulleted {
     list-style: none !important;
@@ -3400,7 +3366,6 @@ body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value ul.bul
     font-weight: 600 !important;
 }
 
-/* Instructional blocks (e.g. "Create a 1 Minute introduction using Loom") */
 body.page-id-582 table.entry-detail-view tbody td.entry-view-field-value strong,
 body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value strong {
     display: block !important;
@@ -3428,7 +3393,6 @@ body.page-id-1929 table.entry-detail-view tbody td.entry-view-field-value p {
     margin: 6px 0 !important;
 }
 
-/* ===== Workflow status box (sidebar) ===== */
 body.page-id-582 #gravityflow-status-box-container.postbox,
 body.page-id-1929 #gravityflow-status-box-container.postbox {
     background: #ffffff !important;
@@ -3500,7 +3464,6 @@ body.page-id-1929 .gravityflow-status-box-field-value {
     font-weight: 600 !important;
 }
 
-/* Pending status — yellow pill */
 body.page-id-582 .gravityflow-status-box-field-status .gravityflow-status-box-field-value,
 body.page-id-1929 .gravityflow-status-box-field-status .gravityflow-status-box-field-value {
     display: inline-flex !important;
@@ -3515,7 +3478,6 @@ body.page-id-1929 .gravityflow-status-box-field-status .gravityflow-status-box-f
     letter-spacing: 0 !important;
 }
 
-/* ===== Print button row ===== */
 body.page-id-582 .detail-view-print,
 body.page-id-1929 .detail-view-print {
     text-align: center !important;
@@ -3566,7 +3528,6 @@ body.page-id-1929 #gform_print_notes {
     vertical-align: middle !important;
 }
 
-/* ===== Timeline ===== */
 body.page-id-582 .postbox.gravityflow-timeline,
 body.page-id-1929 .postbox.gravityflow-timeline {
     background: #ffffff !important;
@@ -3693,7 +3654,6 @@ body.page-id-1929 .gravityflow-note-body {
     line-height: 1.6 !important;
 }
 
-/* GF nests .gravityflow-note-body inside itself — neutralize inner */
 body.page-id-582 .gravityflow-note-body .gravityflow-note-body,
 body.page-id-1929 .gravityflow-note-body .gravityflow-note-body {
     padding: 0 !important;
@@ -3702,7 +3662,6 @@ body.page-id-1929 .gravityflow-note-body .gravityflow-note-body {
     line-height: inherit !important;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
 
     body.page-id-582 #poststuff,
@@ -3738,15 +3697,11 @@ body.page-id-1929 .gravityflow-note-body .gravityflow-note-body {
     }
 }
 
-
-
 /* =====================================================
-   VIEW SUBMITTED TASKS PAGE (GravityView)
-   Scoped to body.page-id-1556
-   Green theme — mirrors Manager's Inbox styling
+   VIEW SUBMITTED TASKS PAGE (GravityView) — page 1556
+   Green theme
    ===================================================== */
 
-/* ===== Fix 1: "INTERNS DASHBOARD" label above H1 (pure CSS, no markup change) ===== */
 body.page-id-1556 .entry-content>h1.wp-block-heading::before {
     content: "Managers Dashboard";
     display: block;
@@ -3759,8 +3714,6 @@ body.page-id-1556 .entry-content>h1.wp-block-heading::before {
     margin: 0 0 14px;
 }
 
-/* ===== Fix 2: Heading underline — match site's 50x3 style ===== */
-/* Reset the hr itself (hides default wp-block-separator border) */
 body.page-id-1556 .entry-content>hr.wp-block-separator.green-line {
     border: none !important;
     background: transparent !important;
@@ -3770,7 +3723,6 @@ body.page-id-1556 .entry-content>hr.wp-block-separator.green-line {
     max-width: none !important;
 }
 
-/* Override the .green-line ::after pill with the standard 50x3 bar */
 body.page-id-1556 .entry-content>hr.wp-block-separator.green-line::after {
     content: "" !important;
     display: block !important;
@@ -3782,7 +3734,6 @@ body.page-id-1556 .entry-content>hr.wp-block-separator.green-line::after {
     opacity: 1 !important;
 }
 
-/* ===== Fix 3: Full-bleed table — break out of Genesis .site-inner constraint ===== */
 body.page-id-1556 .entry-content>.wp-block-columns.alignfull {
     position: relative !important;
     width: 100vw !important;
@@ -3814,7 +3765,6 @@ body.page-id-1556 .gv-template-table {
     box-sizing: border-box !important;
 }
 
-/* ===== Search + pagination header row ===== */
 body.page-id-1556 .gv-widgets-header {
     margin-bottom: 18px !important;
 }
@@ -3840,7 +3790,6 @@ body.page-id-1556 .gv-widget-search .gv-grid-row {
 
 body.page-id-1556 .gv-widget-search .gv-grid-row+.gv-grid-row {
     display: none !important;
-    /* second row is empty filler */
 }
 
 body.page-id-1556 .gv-widget-search .gv-grid-col-1-2 {
@@ -3893,7 +3842,6 @@ body.page-id-1556 input[type="search"][name="gv_search"]:focus {
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
 }
 
-/* Search submit button */
 body.page-id-1556 input.gv-search-button[type="submit"] {
     background: #4CAF50 !important;
     color: #ffffff !important;
@@ -3914,7 +3862,6 @@ body.page-id-1556 input.gv-search-button[type="submit"]:hover {
     box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
 }
 
-/* Pagination "Displaying 1 – 3 of 3" */
 body.page-id-1556 .gv-widget-pagination {
     margin: 14px 0 0 !important;
     text-align: right !important;
@@ -3927,7 +3874,6 @@ body.page-id-1556 .gv-widget-pagination p {
     font-weight: 500 !important;
 }
 
-/* ===== The table itself ===== */
 body.page-id-1556 .gv-table-container {
     border: 1px solid #e2e8f0 !important;
     border-radius: 10px !important;
@@ -3944,7 +3890,6 @@ body.page-id-1556 table.gv-table-view {
     font-family: inherit !important;
 }
 
-/* Table header */
 body.page-id-1556 table.gv-table-view thead th {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 0 18px !important;
@@ -3975,7 +3920,6 @@ body.page-id-1556 table.gv-table-view .gv-field-label {
     gap: 6px !important;
 }
 
-/* Sort icons */
 body.page-id-1556 table.gv-table-view .gv-sort {
     color: #94a3b8 !important;
     transition: color 0.15s ease !important;
@@ -3988,7 +3932,6 @@ body.page-id-1556 table.gv-table-view .gv-sort:hover {
     color: #4CAF50 !important;
 }
 
-/* Rows */
 body.page-id-1556 table.gv-table-view tbody tr {
     background: #ffffff !important;
     transition: background 0.15s ease !important;
@@ -4002,7 +3945,6 @@ body.page-id-1556 table.gv-table-view tbody tr:hover {
     background-color: #f0fdf4 !important;
 }
 
-/* Cells */
 body.page-id-1556 table.gv-table-view tbody td {
     padding: 14px 18px !important;
     font-size: 0.93rem !important;
@@ -4021,14 +3963,10 @@ body.page-id-1556 table.gv-table-view tbody tr:last-child td {
     border-bottom: none !important;
 }
 
-/* Hide the footer (it duplicates the header) */
 body.page-id-1556 table.gv-table-view tfoot {
     display: none !important;
 }
 
-/* ===== Column-specific styling ===== */
-
-/* Entry ID — monospace badge (will be empty if no data) */
 body.page-id-1556 table.gv-table-view tbody td[data-label="Entry ID"] {
     font-family: 'SF Mono', 'Monaco', 'Consolas', monospace !important;
     font-size: 0.82rem !important;
@@ -4040,14 +3978,12 @@ body.page-id-1556 table.gv-table-view tbody td[data-label="Entry ID"]:not(:empty
     color: #94a3b8 !important;
 }
 
-/* Name column — bold dark */
 body.page-id-1556 table.gv-table-view tbody td[data-label="Name"] {
     font-weight: 600 !important;
     color: #0f172a !important;
     white-space: nowrap !important;
 }
 
-/* Application Status — pill */
 body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] {
     white-space: nowrap !important;
     font-weight: 600 !important;
@@ -4057,7 +3993,6 @@ body.page-id-1556 table.gv-table-view tbody td[data-label="Application Status"] 
     padding: 14px 18px !important;
 }
 
-/* Tasks (Completed/Submitted) — pills like days of week */
 body.page-id-1556 table.gv-table-view tbody td[data-label="Completed/Submitted Tasks"] ul.bulleted,
 body.page-id-1556 table.gv-table-view tbody td[data-label="Core Skills Mastery:"] ul.bulleted {
     list-style: none !important;
@@ -4081,16 +4016,11 @@ body.page-id-1556 table.gv-table-view tbody td[data-label="Core Skills Mastery:"
     line-height: 1.3 !important;
 }
 
-/* Edit / Delete action links — pill buttons */
 body.page-id-1556 table.gv-table-view tbody td[data-label="Link to Edit Entry"],
 body.page-id-1556 table.gv-table-view tbody td[data-label="Delete Entry"] {
     white-space: nowrap !important;
     text-align: center !important;
 }
-
-/* ===== Edit / Delete action links — pill buttons =====
-   Using td ID selector (.gv-field-2-edit_link / .gv-field-2-delete_link)
-   combined with a[href] for specificity — beats Genesis's .entry-content a rules. */
 
 body.page-id-1556 table.gv-table-view tbody td.gv-field-2-edit_link,
 body.page-id-1556 table.gv-table-view tbody td.gv-field-2-delete_link {
@@ -4099,7 +4029,6 @@ body.page-id-1556 table.gv-table-view tbody td.gv-field-2-delete_link {
     vertical-align: middle !important;
 }
 
-/* EDIT button — green pill */
 body.page-id-1556 table.gv-table-view tbody td.gv-field-2-edit_link a[href],
 body.page-id-1556 .entry-content table.gv-table-view tbody td.gv-field-2-edit_link a[href] {
     display: inline-flex !important;
@@ -4130,7 +4059,6 @@ body.page-id-1556 .entry-content table.gv-table-view tbody td.gv-field-2-edit_li
     text-decoration: none !important;
 }
 
-/* DELETE button — red/pink pill */
 body.page-id-1556 table.gv-table-view tbody td.gv-field-2-delete_link a[href],
 body.page-id-1556 .entry-content table.gv-table-view tbody td.gv-field-2-delete_link a[href] {
     display: inline-flex !important;
@@ -4161,7 +4089,6 @@ body.page-id-1556 .entry-content table.gv-table-view tbody td.gv-field-2-delete_
     text-decoration: none !important;
 }
 
-/* Kill any ::after underline-on-hover that Genesis adds to entry-content links */
 body.page-id-1556 table.gv-table-view tbody td.gv-field-2-edit_link a[href]::after,
 body.page-id-1556 table.gv-table-view tbody td.gv-field-2-delete_link a[href]::after {
     display: none !important;
@@ -4191,13 +4118,11 @@ body.page-id-1556 table.gv-table-view tbody td[data-label="Delete Entry"] a:hove
     box-shadow: 0 4px 10px rgba(227, 11, 92, 0.25) !important;
 }
 
-/* Hide the "(Edit)" admin link WP sometimes appends */
 body.page-id-1556 .entry-content>.post-edit-link,
 body.page-id-1556 article>.post-edit-link {
     display: none !important;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 900px) {
     body.page-id-1556 .gv-widget-search .gv-grid-row {
         grid-template-columns: 1fr !important;
@@ -4230,11 +4155,8 @@ body.page-id-1556 article>.post-edit-link {
     }
 }
 
-
-
 /* =====================================================
-   SHARED GFLOW HEADING PATTERN (reusable across pages)
-   Label + heading + underline — consistent site-wide
+   SHARED GFLOW HEADING PATTERN
    ===================================================== */
 
 .gflow-label {
@@ -4268,17 +4190,11 @@ body.page-id-1556 article>.post-edit-link {
     opacity: 1 !important;
 }
 
-
-
 /* =====================================================
    WORKFLOW ENTRY DETAIL — PENDING APPROVAL VIEW
-   Rendered when a manager/support clicks an inbox row for a
-   pending entry (vs the approved/read-only view above).
-   Markup: form#gform_2 inside table.gravityflow-step-approval
-   Scoped to body.page-id-582 AND body.page-id-1929
+   Pages 582 and 1929 (manager / support pending approval)
    ===================================================== */
 
-/* Outer entry container */
 body.page-id-582 .wrap.gravityflow_workflow_detail,
 body.page-id-1929 .wrap.gravityflow_workflow_detail {
     max-width: 1200px !important;
@@ -4286,7 +4202,6 @@ body.page-id-1929 .wrap.gravityflow_workflow_detail {
     padding: 0 24px !important;
 }
 
-/* ===== Instructions callout (left sidebar equivalent at top) ===== */
 body.page-id-582 .postbox.gravityflow-instructions,
 body.page-id-1929 .postbox.gravityflow-instructions {
     background: #f0fdf4 !important;
@@ -4315,7 +4230,6 @@ body.page-id-1929 .postbox.gravityflow-instructions .inside br+br {
     margin-top: 6px !important;
 }
 
-/* ===== Outer approval table card ===== */
 body.page-id-582 table.gravityflow-step-approval,
 body.page-id-1929 table.gravityflow-step-approval {
     background: #ffffff !important;
@@ -4359,7 +4273,6 @@ body.page-id-1929 table.gravityflow-step-approval tbody>tr>td {
     border: none !important;
 }
 
-/* ===== Gravity Form wrapper inside the card ===== */
 body.page-id-582 #gform_wrapper_2,
 body.page-id-1929 #gform_wrapper_2 {
     margin: 0 !important;
@@ -4386,13 +4299,11 @@ body.page-id-1929 #gform_fields_2>.gfield {
     flex: 0 0 100% !important;
 }
 
-/* Kill Gravity's spacer pseudo-fields that eat grid tracks */
 body.page-id-582 #gform_fields_2>.spacer.gfield,
 body.page-id-1929 #gform_fields_2>.spacer.gfield {
     display: none !important;
 }
 
-/* ===== Section headings inside the form ===== */
 body.page-id-582 #gform_fields_2 .gfield--type-section,
 body.page-id-582 #gform_fields_2 .gsection,
 body.page-id-1929 #gform_fields_2 .gfield--type-section,
@@ -4441,7 +4352,6 @@ body.page-id-1929 #gform_fields_2 .gsection_description {
     font-style: italic !important;
 }
 
-/* ===== Read-only display fields (gravityflow-display-field) ===== */
 body.page-id-582 #gform_fields_2 .gravityflow-display-field,
 body.page-id-1929 #gform_fields_2 .gravityflow-display-field {
     background: #f8fafc !important;
@@ -4483,7 +4393,6 @@ body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-
     word-break: break-word !important;
 }
 
-/* Links inside display values (email, URL) */
 body.page-id-582 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a,
 body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
     color: #4CAF50 !important;
@@ -4504,13 +4413,11 @@ body.page-id-1929 #gform_fields_2 .gravityflow-display-field .gravityflow-field-
     content: none !important;
 }
 
-/* Hide legend-within-fieldset (complex fields like Name) since value is already flat */
 body.page-id-582 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex,
 body.page-id-1929 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex {
     margin-bottom: 6px !important;
 }
 
-/* ===== Editable fields (gravityflow-editable-field) ===== */
 body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_label,
 body.page-id-582 #gform_fields_2 .gravityflow-editable-field legend.gfield_label,
 body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_label,
@@ -4535,7 +4442,6 @@ body.page-id-1929 #gform_fields_2 .gfield_required_text {
     font-weight: 500 !important;
 }
 
-/* ===== Editable CHECKBOX fields (Core Skills Mastery, Task 1-5) — pill style ===== */
 body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox,
 body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
     list-style: none !important;
@@ -4592,7 +4498,6 @@ body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .
     background: #f0fdf4 !important;
 }
 
-/* Select All toggle button */
 body.page-id-582 #gform_fields_2 .gfield-choice-toggle-all,
 body.page-id-1929 #gform_fields_2 .gfield-choice-toggle-all {
     display: flex !important;
@@ -4626,7 +4531,6 @@ body.page-id-1929 #gform_fields_2 button.gfield_choice_all_toggle:hover {
     color: #ffffff !important;
 }
 
-/* ===== Editable RADIO fields (Advance to interview?) — card style ===== */
 body.page-id-582 #gform_fields_2 .gravityflow-editable-field .gfield_radio,
 body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio {
     list-style: none !important;
@@ -4683,7 +4587,6 @@ body.page-id-1929 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gch
     background: #f0fdf4 !important;
 }
 
-/* ===== Application Status (display radio) — render as pill ===== */
 body.page-id-582 #gform_fields_2 #field_2_56 .gravityflow-field-value,
 body.page-id-1929 #gform_fields_2 #field_2_56 .gravityflow-field-value {
     display: inline-flex !important;
@@ -4699,13 +4602,11 @@ body.page-id-1929 #gform_fields_2 #field_2_56 .gravityflow-field-value {
     margin-top: 4px !important;
 }
 
-/* Hide the GF form footer (it's not used on this approval page) */
 body.page-id-582 .gform-footer.gform_footer,
 body.page-id-1929 .gform-footer.gform_footer {
     display: none !important;
 }
 
-/* ===== Workflow sidebar — Approve Tasks step status ===== */
 body.page-id-582 .gravityflow-status-box hr,
 body.page-id-1929 .gravityflow-status-box hr {
     border: none !important;
@@ -4758,7 +4659,6 @@ body.page-id-1929 .gravityflow-status-box-field-step-status h4 .gravityflow-stat
     letter-spacing: 0 !important;
 }
 
-/* Assignees list */
 body.page-id-582 .gravityflow-status-box-field-assignees,
 body.page-id-1929 .gravityflow-status-box-field-assignees {
     grid-column: 1 / -1 !important;
@@ -4798,7 +4698,6 @@ body.page-id-1929 .gravityflow-status-box-field-assignees span.gravityflow-statu
     font-weight: inherit !important;
 }
 
-/* ===== Note textarea ===== */
 body.page-id-582 .gravityflow-status-box-field-note,
 body.page-id-1929 .gravityflow-status-box-field-note {
     grid-column: 1 / -1 !important;
@@ -4854,7 +4753,6 @@ body.page-id-1929 textarea#gravityflow-note:focus {
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
 }
 
-/* ===== Approve / Reject action buttons ===== */
 body.page-id-582 .gravityflow-action-buttons,
 body.page-id-1929 .gravityflow-action-buttons {
     display: flex !important;
@@ -4883,7 +4781,6 @@ body.page-id-1929 .gravityflow-action-buttons button[value="rejected"] {
     min-width: 140px !important;
 }
 
-/* Approve — green */
 body.page-id-582 .gravityflow-action-buttons button[value="approved"],
 body.page-id-1929 .gravityflow-action-buttons button[value="approved"] {
     background: #4CAF50 !important;
@@ -4903,7 +4800,6 @@ body.page-id-1929 .gravityflow-action-buttons button[value="approved"] i.fa {
     font-size: 0.9rem !important;
 }
 
-/* Reject — red */
 body.page-id-582 .gravityflow-action-buttons button[value="rejected"],
 body.page-id-1929 .gravityflow-action-buttons button[value="rejected"] {
     background: #ffffff !important;
@@ -4930,7 +4826,6 @@ body.page-id-1929 .gravityflow-action-buttons button[value="rejected"]:hover i.f
     color: #ffffff !important;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
 
     body.page-id-582 .wrap.gravityflow_workflow_detail,
@@ -4961,11 +4856,8 @@ body.page-id-1929 .gravityflow-action-buttons button[value="rejected"]:hover i.f
     }
 }
 
-
-
 /* =====================================================
    APPLICANT DASHBOARD PAGE (Yellow theme)
-   Mirrors the Managers Dashboard layout — yellow accent.
    ===================================================== */
 
 .ad-page {
@@ -5006,7 +4898,6 @@ body.page-id-1929 .gravityflow-action-buttons button[value="rejected"]:hover i.f
     max-width: none !important;
 }
 
-/* Override the global .yellow-line::after (prevents the default pill from showing alongside) */
 .ad-page hr.ad-underline::after,
 hr.ad-underline.yellow-line::after {
     display: none !important;
@@ -5167,16 +5058,11 @@ hr.ad-underline.yellow-line::after {
     }
 }
 
-
-
 /* =====================================================
-   APPLICANT INBOX PAGE (Yellow variant)
-   Page 1950 — same Gravity Flow inbox markup as pages
-   582/1929, but yellow-themed instead of green.
-   Only color-bearing rules are overridden here.
+   APPLICANT INBOX PAGE (Yellow variant) — page 1950
+   Only color overrides on top of 582/1929 structural rules.
    ===================================================== */
 
-/* ===== Inbox header block (label + heading + underline) ===== */
 body.page-id-1950 .gflow-inbox-page .gflow-label {
     color: #F9B500 !important;
 }
@@ -5194,7 +5080,6 @@ body.page-id-1950 .gflow-inbox-page .gflow-back-link:hover {
     color: #d99a00 !important;
 }
 
-/* Global .gflow-label / .gflow-underline fallback (when used inline on page) */
 body.page-id-1950 .gflow-label {
     color: #F9B500 !important;
 }
@@ -5203,7 +5088,6 @@ body.page-id-1950 .gflow-underline {
     background: #F9B500 !important;
 }
 
-/* ===== Inbox card — search focus ring + icon buttons ===== */
 body.page-id-1950 .gflow-inbox__search:focus {
     border-color: #F9B500 !important;
     box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
@@ -5215,7 +5099,6 @@ body.page-id-1950 .gflow-grid__button:hover {
     color: #F9B500 !important;
 }
 
-/* ===== AG Grid — header sort + row hover + sort icons ===== */
 body.page-id-1950 .ag-theme-alpine {
     --ag-row-hover-color: #fffbeb;
     --ag-selected-row-background-color: #fde68a;
@@ -5234,7 +5117,6 @@ body.page-id-1950 .ag-row-hover {
     background-color: #fffbeb !important;
 }
 
-/* ===== Submitter avatar — yellow gradient ===== */
 body.page-id-1950 .ag-cell[col-id="created_by"]>div::before {
     background: linear-gradient(135deg, #F9B500, #fbbf24) !important;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E") !important;
@@ -5243,7 +5125,6 @@ body.page-id-1950 .ag-cell[col-id="created_by"]>div::before {
     background-color: #F9B500 !important;
 }
 
-/* ===== Step pill — yellow ===== */
 body.page-id-1950 .ag-cell[col-id="workflow_step"] span {
     background: linear-gradient(135deg, #fffbeb, #fef3c7) !important;
     color: #b17a00 !important;
@@ -5255,31 +5136,23 @@ body.page-id-1950 .ag-row-hover .ag-cell[col-id="workflow_step"] span {
     border-color: #facc15 !important;
 }
 
-/* ===== Actions trigger hover ===== */
 body.page-id-1950 .gflow-grid__actions-trigger:hover {
     background: #fffbeb !important;
     color: #F9B500 !important;
 }
 
-/* ===== Pagination ===== */
 body.page-id-1950 .ag-paging-button:hover:not(.ag-disabled) {
     background: #fffbeb !important;
     border-color: #F9B500 !important;
     color: #F9B500 !important;
 }
 
-/* ===== Settings flyout toggle ===== */
 body.page-id-1950 .gform-field__toggle-input:checked+.gform-field__toggle-container .gform-field__toggle-switch {
     background: #F9B500 !important;
 }
 
-/* =====================================================
-   APPLICANT INBOX — ENTRY DETAIL + PENDING APPROVAL
-   Yellow overrides for the entry detail page rendered
-   when clicking a row in page 1950's inbox.
-   ===================================================== */
+/* Applicant Inbox — entry detail + pending approval (yellow overrides) */
 
-/* Success notice */
 body.page-id-1950 .gravityflow_workflow_notice {
     background: #fffbeb !important;
     border: 1px solid #fde68a !important;
@@ -5290,12 +5163,10 @@ body.page-id-1950 .gravityflow_workflow_notice p {
     color: #b17a00 !important;
 }
 
-/* Entry detail — section break accent bar */
 body.page-id-1950 table.entry-detail-view tbody td.entry-view-section-break::after {
     background: #F9B500 !important;
 }
 
-/* Entry detail — links, Map It, bulleted pills */
 body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value a {
     color: #F9B500 !important;
 }
@@ -5322,13 +5193,11 @@ body.page-id-1950 table.entry-detail-view tbody td.entry-view-field-value ul.bul
     color: #b17a00 !important;
 }
 
-/* "Show empty fields" checkbox + print notes checkbox */
 body.page-id-1950 #gentry_display_empty_fields,
 body.page-id-1950 #gform_print_notes {
     accent-color: #F9B500 !important;
 }
 
-/* Timeline avatar icon */
 body.page-id-1950 .gravityflow-note-avatar {
     background: #fffbeb !important;
 }
@@ -5337,12 +5206,10 @@ body.page-id-1950 .gravityflow-note-avatar i.fa {
     color: #F9B500 !important;
 }
 
-/* ===== Pending approval form — section title accent ===== */
 body.page-id-1950 #gform_fields_2 .gsection_title::after {
     background: #F9B500 !important;
 }
 
-/* Display field links */
 body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
     color: #F9B500 !important;
 }
@@ -5351,7 +5218,6 @@ body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-
     color: #d99a00 !important;
 }
 
-/* Editable checkbox / radio — accent + checked state */
 body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"],
 body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_radio input[type="radio"] {
     accent-color: #F9B500 !important;
@@ -5363,7 +5229,6 @@ body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_radio .gch
     background: #fffbeb !important;
 }
 
-/* Select-all toggle */
 body.page-id-1950 #gform_fields_2 button.gfield_choice_all_toggle {
     background: #fffbeb !important;
     color: #b17a00 !important;
@@ -5374,13 +5239,11 @@ body.page-id-1950 #gform_fields_2 button.gfield_choice_all_toggle:hover {
     color: #ffffff !important;
 }
 
-/* Note textarea focus */
 body.page-id-1950 textarea#gravityflow-note:focus {
     border-color: #F9B500 !important;
     box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
 }
 
-/* Approve / Reject buttons — keep approve yellow, reject stays pink */
 body.page-id-1950 .gravityflow-action-buttons button[value="approved"] {
     background: #F9B500 !important;
 }
@@ -5390,13 +5253,804 @@ body.page-id-1950 .gravityflow-action-buttons button[value="approved"]:hover {
     box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30) !important;
 }
 
+/* Applicant Inbox — structural rules (mirror 582/1929) + more yellow */
 
+body.page-id-1950 .wrap.gravityflow_workflow_detail {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+}
+
+body.page-id-1950 #poststuff {
+    padding-top: 0 !important;
+    min-width: 0 !important;
+    margin: 0 auto 60px !important;
+    max-width: 1200px !important;
+    padding: 0 24px !important;
+}
+
+body.page-id-1950 #post-body.metabox-holder.columns-2 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body.page-id-1950 #post-body-content {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    order: 1 !important;
+}
+
+body.page-id-1950 #postbox-container-1,
+body.page-id-1950 #postbox-container-2 {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+}
+
+body.page-id-1950 #postbox-container-1 {
+    order: 2 !important;
+}
+
+body.page-id-1950 #postbox-container-2 {
+    order: 3 !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-instructions {
+    background: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    border-left: 4px solid #F9B500 !important;
+    border-radius: 10px !important;
+    padding: 0 !important;
+    margin: 0 0 20px !important;
+    box-shadow: none !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-instructions .inside {
+    padding: 16px 20px !important;
+    margin: 0 !important;
+    font-size: 0.94rem !important;
+    line-height: 1.65 !important;
+    color: #78400a !important;
+    font-weight: 500 !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-instructions .inside a {
+    color: #F9B500 !important;
+    font-weight: 600 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-instructions .inside a:hover {
+    color: #d99a00 !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-instructions .inside a::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.page-id-1950 table.gravityflow-step-approval {
+    background: #ffffff !important;
+    border: 1px solid #e8ecf1 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+body.page-id-1950 table.gravityflow-step-approval thead th {
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
+    padding: 18px 28px !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    vertical-align: middle !important;
+}
+
+body.page-id-1950 table.gravityflow-step-approval thead th#details {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-align: left !important;
+}
+
+body.page-id-1950 table.gravityflow-step-approval thead th[style*="text-align: right"] {
+    font-weight: 500 !important;
+    color: #64748b !important;
+    font-size: 0.82rem !important;
+}
+
+body.page-id-1950 table.gravityflow-step-approval tbody>tr>td {
+    padding: 28px !important;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+body.page-id-1950 #gform_wrapper_2 {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.page-id-1950 #gform_fields_2 {
+    display: block !important;
+    grid-template-columns: none !important;
+    gap: 0 !important;
+}
+
+body.page-id-1950 #gform_fields_2>.gfield {
+    margin: 0 0 22px !important;
+    padding: 0 !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+}
+
+body.page-id-1950 #gform_fields_2>.spacer.gfield {
+    display: none !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gfield--type-section,
+body.page-id-1950 #gform_fields_2 .gsection {
+    border: none !important;
+    padding: 8px 0 4px !important;
+    margin: 28px 0 12px !important;
+    background: transparent !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gfield--type-section:first-child,
+body.page-id-1950 #gform_fields_2 .gsection:first-child {
+    margin-top: 0 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gsection_title {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid #e8ecf1 !important;
+    position: relative !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gsection_description {
+    font-size: 0.85rem !important;
+    color: #64748b !important;
+    margin-top: 6px !important;
+    font-style: italic !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field {
+    background: #f8fafc !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field.gfield--type-section {
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 0 4px !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gfield_label {
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    display: block !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gfield_label .gfield_required {
+    display: none !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value {
+    font-size: 0.98rem !important;
+    color: #1e293b !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    word-break: break-word !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.page-id-1950 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex {
+    margin-bottom: 6px !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_label,
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field legend.gfield_label {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin: 0 0 10px !important;
+    display: block !important;
+    line-height: 1.4 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gfield_required {
+    color: #E30B5C !important;
+    margin-left: 4px !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gfield_required_text {
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
+    list-style: none !important;
+    margin: 4px 0 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 16px !important;
+    background: #fafbfc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 100px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:hover {
+    border-color: #fde68a !important;
+    background: #ffffff !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox label {
+    font-size: 0.92rem !important;
+    color: #334155 !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+}
+
+body.page-id-1950 #gform_fields_2 .ginput_container_website input[type="url"],
+body.page-id-1950 #gform_fields_2 .ginput_container input[type="text"],
+body.page-id-1950 #gform_fields_2 .ginput_container input[type="url"],
+body.page-id-1950 #gform_fields_2 .ginput_container input[type="email"] {
+    width: 100% !important;
+    padding: 11px 14px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 0.98rem !important;
+    color: #1e293b !important;
+    background: #ffffff !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+body.page-id-1950 #gform_fields_2 .ginput_container input:hover {
+    border-color: #cbd5e1 !important;
+}
+
+body.page-id-1950 #gform_fields_2 .ginput_container input:focus {
+    outline: none !important;
+    border-color: #F9B500 !important;
+    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
+}
+
+body.page-id-1950 #gform_fields_2 #field_2_56 .gravityflow-field-value {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 4px 12px !important;
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 100px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4 !important;
+    margin-top: 4px !important;
+}
+
+body.page-id-1950 .gform-footer.gform_footer {
+    display: none !important;
+}
+
+body.page-id-1950 #gravityflow-status-box-container.postbox {
+    background: #ffffff !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    overflow: hidden !important;
+}
+
+body.page-id-1950 #gravityflow-status-box-container .hndle {
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
+    padding: 14px 22px !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    cursor: default !important;
+}
+
+body.page-id-1950 #gravityflow-status-box-container .hndle span {
+    font-size: inherit !important;
+    color: inherit !important;
+}
+
+body.page-id-1950 #submitcomment {
+    padding: 24px 28px !important;
+}
+
+body.page-id-1950 .gravityflow-status-box {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+    gap: 20px 24px !important;
+    background: none !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-label {
+    display: block !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin-bottom: 6px !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-value {
+    font-size: 0.94rem !important;
+    color: #1e293b !important;
+    font-weight: 600 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-entry-id a {
+    color: #F9B500 !important;
+    text-decoration: none !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-entry-id a:hover {
+    color: #d99a00 !important;
+    text-decoration: underline !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-entry-id a::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-status .gravityflow-status-box-field-value {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 4px 12px !important;
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 100px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box hr {
+    border: none !important;
+    border-top: 1px solid #e8ecf1 !important;
+    margin: 4px 0 8px !important;
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-step-status {
+    grid-column: 1 / -1 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-step-status h4 {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-label {
+    display: inline !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    margin: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-value {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 3px 10px !important;
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+    border: 1px solid #fde68a !important;
+    border-radius: 100px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-assignees {
+    grid-column: 1 / -1 !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-assignees ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-assignees ul li {
+    display: inline-flex !important;
+    padding: 4px 10px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 100px !important;
+    font-size: 0.78rem !important;
+    color: #475569 !important;
+    font-weight: 500 !important;
+    list-style: none !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-assignees span.gravityflow-status-box-field-value {
+    display: contents !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-note {
+    grid-column: 1 / -1 !important;
+    margin-top: 8px !important;
+}
+
+body.page-id-1950 .gravityflow-status-box-field-note label[for="gravityflow-note"] {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 6px !important;
+    display: block !important;
+    cursor: pointer !important;
+}
+
+body.page-id-1950 #submitcomment>span.gravityflow-status-box-field-value {
+    display: block !important;
+    grid-column: 1 / -1 !important;
+    margin-top: 4px !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+}
+
+body.page-id-1950 textarea#gravityflow-note {
+    width: 100% !important;
+    padding: 12px 14px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    color: #1e293b !important;
+    background: #ffffff !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    resize: vertical !important;
+    min-height: 90px !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons {
+    display: flex !important;
+    gap: 12px !important;
+    margin-top: 16px !important;
+    flex-wrap: wrap !important;
+    grid-column: 1 / -1 !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="approved"],
+body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 12px 28px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
+    line-height: 1 !important;
+    min-width: 140px !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="approved"] {
+    color: #ffffff !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="approved"] i.fa {
+    color: #ffffff !important;
+    font-size: 0.9rem !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] {
+    background: #ffffff !important;
+    color: #b5094a !important;
+    border: 1.5px solid #fbcfe0 !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="rejected"]:hover {
+    background: #E30B5C !important;
+    border-color: #E30B5C !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30) !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] i.fa {
+    font-size: 0.9rem !important;
+}
+
+body.page-id-1950 .gravityflow-action-buttons button[value="rejected"]:hover i.fa {
+    color: #ffffff !important;
+}
+
+body.page-id-1950 .detail-view-print {
+    text-align: center !important;
+    margin: 20px 0 0 !important;
+    padding: 18px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 10px !important;
+    font-size: 0.88rem !important;
+    color: #64748b !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+}
+
+body.page-id-1950 .detail-view-print .button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #64748b !important;
+    color: #ffffff !important;
+    padding: 10px 22px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+    min-height: 38px !important;
+}
+
+body.page-id-1950 .detail-view-print .button:hover {
+    background: #475569 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.25) !important;
+}
+
+body.page-id-1950 .detail-view-print .button::after {
+    display: none !important;
+    content: none !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-timeline {
+    background: #ffffff !important;
+    border: 1px solid #e8ecf1 !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    overflow: hidden !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-timeline>h3 {
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
+    padding: 14px 22px !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    cursor: default !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-timeline>h3 label {
+    font-size: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    text-transform: inherit !important;
+    letter-spacing: inherit !important;
+    cursor: default !important;
+}
+
+body.page-id-1950 .postbox.gravityflow-timeline .inside {
+    padding: 18px 22px !important;
+}
+
+body.page-id-1950 .gravityflow-note {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 16px 0 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    margin: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-note:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-note:first-child {
+    padding-top: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-note-avatar {
+    flex-shrink: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+body.page-id-1950 .gravityflow-note-avatar img,
+body.page-id-1950 .gravityflow-note-avatar .avatar {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    display: block !important;
+}
+
+body.page-id-1950 .gravityflow-note-avatar i.fa {
+    font-size: 18px !important;
+}
+
+body.page-id-1950 .gravityflow-note-body-wrap {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+body.page-id-1950 .gravityflow-note-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    margin-bottom: 4px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+}
+
+body.page-id-1950 .gravityflow-note-title {
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+}
+
+body.page-id-1950 .gravityflow-note-meta {
+    font-size: 0.8rem !important;
+    color: #94a3b8 !important;
+}
+
+body.page-id-1950 .gravityflow-note-body {
+    font-size: 0.88rem !important;
+    color: #475569 !important;
+    line-height: 1.6 !important;
+}
+
+body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
+    padding: 0 !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+}
+
+@media (max-width: 768px) {
+
+    body.page-id-1950 .wrap.gravityflow_workflow_detail,
+    body.page-id-1950 #poststuff {
+        padding: 0 16px !important;
+    }
+
+    body.page-id-1950 table.gravityflow-step-approval tbody>tr>td {
+        padding: 20px !important;
+    }
+
+    body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
+        gap: 8px !important;
+    }
+
+    body.page-id-1950 .gravityflow-action-buttons {
+        flex-direction: column !important;
+    }
+
+    body.page-id-1950 .gravityflow-action-buttons button[value="approved"],
+    body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] {
+        width: 100% !important;
+    }
+
+    body.page-id-1950 .gravityflow-status-box {
+        grid-template-columns: 1fr !important;
+    }
+}
 
 /* =====================================================
-   VIEW TASKS PAGE (Yellow theme)
-   Reuses the .ad-* dashboard pattern. Only adds a
-   numbered badge in the card icon slot and a submit
-   callout below the grid.
+   VIEW TASKS PAGE (Yellow)
    ===================================================== */
 
 .ad-card-icon.vt-task-number {
@@ -5407,12 +6061,10 @@ body.page-id-1950 .gravityflow-action-buttons button[value="approved"]:hover {
     letter-spacing: -0.02em;
 }
 
-/* Keep the number white when the icon box turns yellow on hover */
 .vt-task-card:hover .ad-card-icon.vt-task-number {
     color: #ffffff;
 }
 
-/* "Finished a task? Head to the Submit Task page..." callout */
 .vt-submit-callout {
     font-size: 0.95rem;
     color: #475569;
@@ -5438,14 +6090,10 @@ body.page-id-1950 .gravityflow-action-buttons button[value="approved"]:hover {
     color: #8a5d00;
 }
 
-
-
 /* =====================================================
-   VIEW TASK COMPLETED EVALUATION (GravityView — Yellow)
-   Page 1542 — mirrors page 1556 structure, yellow theme.
+   VIEW TASK COMPLETED EVALUATION — page 1542 (Yellow)
    ===================================================== */
 
-/* ===== Yellow overrides for the shared .gflow-* heading pattern ===== */
 body.page-id-1542 .gflow-label {
     color: #F9B500 !important;
 }
@@ -5455,7 +6103,6 @@ body.page-id-1542 .gflow-underline {
     background: #F9B500 !important;
 }
 
-/* ===== Full-bleed breakout for the GravityView column ===== */
 body.page-id-1542 .entry-content>.wp-block-columns.alignfull {
     position: relative !important;
     width: 100vw !important;
@@ -5475,7 +6122,6 @@ body.page-id-1542 .entry-content>.wp-block-columns.alignfull>.wp-block-column {
     min-width: 0 !important;
 }
 
-/* ===== GravityView table card ===== */
 body.page-id-1542 .gv-template-table {
     background: #ffffff !important;
     border: 1px solid #e8ecf1 !important;
@@ -5488,7 +6134,6 @@ body.page-id-1542 .gv-template-table {
     box-sizing: border-box !important;
 }
 
-/* ===== Search + pagination header row ===== */
 body.page-id-1542 .gv-widgets-header {
     margin-bottom: 18px !important;
 }
@@ -5566,7 +6211,6 @@ body.page-id-1542 input[type="search"][name="gv_search"]:focus {
     box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
 }
 
-/* Search submit button */
 body.page-id-1542 input.gv-search-button[type="submit"] {
     background: #F9B500 !important;
     color: #ffffff !important;
@@ -5587,7 +6231,6 @@ body.page-id-1542 input.gv-search-button[type="submit"]:hover {
     box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30) !important;
 }
 
-/* Pagination summary */
 body.page-id-1542 .gv-widget-pagination {
     margin: 14px 0 0 !important;
     text-align: right !important;
@@ -5600,7 +6243,6 @@ body.page-id-1542 .gv-widget-pagination p {
     font-weight: 500 !important;
 }
 
-/* ===== The table itself ===== */
 body.page-id-1542 .gv-table-container {
     border: 1px solid #e2e8f0 !important;
     border-radius: 10px !important;
@@ -5617,7 +6259,6 @@ body.page-id-1542 table.gv-table-view {
     font-family: inherit !important;
 }
 
-/* Table header */
 body.page-id-1542 table.gv-table-view thead th {
     background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
     padding: 0 18px !important;
@@ -5648,7 +6289,6 @@ body.page-id-1542 table.gv-table-view .gv-field-label {
     gap: 6px !important;
 }
 
-/* Sort icons */
 body.page-id-1542 table.gv-table-view .gv-sort {
     color: #94a3b8 !important;
     transition: color 0.15s ease !important;
@@ -5661,7 +6301,6 @@ body.page-id-1542 table.gv-table-view .gv-sort:hover {
     color: #F9B500 !important;
 }
 
-/* Rows */
 body.page-id-1542 table.gv-table-view tbody tr {
     background: #ffffff !important;
     transition: background 0.15s ease !important;
@@ -5675,7 +6314,6 @@ body.page-id-1542 table.gv-table-view tbody tr:hover {
     background-color: #fffbeb !important;
 }
 
-/* Cells */
 body.page-id-1542 table.gv-table-view tbody td {
     padding: 14px 18px !important;
     font-size: 0.93rem !important;
@@ -5694,7 +6332,6 @@ body.page-id-1542 table.gv-table-view tbody tr:last-child td {
     border-bottom: none !important;
 }
 
-/* No-results cell — center the message */
 body.page-id-1542 table.gv-table-view tbody td.gv-no-results {
     text-align: center !important;
     padding: 40px 20px !important;
@@ -5706,21 +6343,16 @@ body.page-id-1542 table.gv-table-view tbody td.gv-no-results p {
     margin: 0 !important;
 }
 
-/* Hide the footer (duplicates header) */
 body.page-id-1542 table.gv-table-view tfoot {
     display: none !important;
 }
 
-/* ===== Column-specific styling ===== */
-
-/* Name column — bold dark */
 body.page-id-1542 table.gv-table-view tbody td[data-label="Name"] {
     font-weight: 600 !important;
     color: #0f172a !important;
     white-space: nowrap !important;
 }
 
-/* Application Status — colored text */
 body.page-id-1542 table.gv-table-view tbody td[data-label="Application Status"] {
     white-space: nowrap !important;
     font-weight: 600 !important;
@@ -5730,7 +6362,6 @@ body.page-id-1542 table.gv-table-view tbody td[data-label="Application Status"] 
     padding: 14px 18px !important;
 }
 
-/* Bulleted list columns (Completed/Submitted Tasks, Core Skills Mastery) — yellow pills */
 body.page-id-1542 table.gv-table-view tbody td[data-label="Completed/Submitted Tasks"] ul.bulleted,
 body.page-id-1542 table.gv-table-view tbody td[data-label="Core Skills Mastery:"] ul.bulleted,
 body.page-id-1542 table.gv-table-view tbody td ul.bulleted {
@@ -5756,7 +6387,6 @@ body.page-id-1542 table.gv-table-view tbody td ul.bulleted li {
     line-height: 1.3 !important;
 }
 
-/* Task 1-5 columns — links inside cells get yellow treatment */
 body.page-id-1542 table.gv-table-view tbody td[data-label="Task 1"] a,
 body.page-id-1542 table.gv-table-view tbody td[data-label="Task 2"] a,
 body.page-id-1542 table.gv-table-view tbody td[data-label="Task 3"] a,
@@ -5777,19 +6407,16 @@ body.page-id-1542 table.gv-table-view tbody td[data-label="Task 5"] a:hover {
     text-decoration: underline !important;
 }
 
-/* Kill Genesis's ::after underline animation on task links */
 body.page-id-1542 table.gv-table-view tbody td a::after {
     display: none !important;
     content: none !important;
 }
 
-/* Hide the (Edit) admin link */
 body.page-id-1542 .entry-content>.post-edit-link,
 body.page-id-1542 article>.post-edit-link {
     display: none !important;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 900px) {
     body.page-id-1542 .gv-widget-search .gv-grid-row {
         grid-template-columns: 1fr !important;
@@ -5822,13 +6449,8 @@ body.page-id-1542 article>.post-edit-link {
     }
 }
 
-
-
 /* =====================================================
-   ABOUT US PAGE (Page 370)
-   Hero pattern (label + heading + underline + intro),
-   4-section colored card grid (blue/green/yellow/red),
-   then the existing Apply Now grid.
+   ABOUT US PAGE (page 370)
    ===================================================== */
 
 .au-page {
@@ -5838,7 +6460,6 @@ body.page-id-1542 article>.post-edit-link {
     text-align: center;
 }
 
-/* ===== Hero ===== */
 .au-label {
     display: block;
     text-align: center;
@@ -5870,7 +6491,6 @@ body.page-id-1542 article>.post-edit-link {
     max-width: none !important;
 }
 
-/* Override global .blue-line::after in case it attaches */
 .au-page hr.au-underline::after,
 hr.au-underline.blue-line::after {
     display: none !important;
@@ -5898,7 +6518,6 @@ hr.au-underline.blue-line::after {
     color: #143373;
 }
 
-/* ===== 2x2 section grid ===== */
 .au-section-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -5984,7 +6603,6 @@ hr.au-underline.blue-line::after {
     border-radius: 50%;
 }
 
-/* ===== Blue section (What We Do) ===== */
 .au-section-card.au-blue::before {
     background: #1D47A1;
 }
@@ -6011,7 +6629,6 @@ hr.au-underline.blue-line::after {
     background: #1D47A1;
 }
 
-/* ===== Green section (Internship Program) ===== */
 .au-section-card.au-green::before {
     background: #4CAF50;
 }
@@ -6038,7 +6655,6 @@ hr.au-underline.blue-line::after {
     background: #4CAF50;
 }
 
-/* ===== Yellow section (What Interns Gain) ===== */
 .au-section-card.au-yellow::before {
     background: #F9B500;
 }
@@ -6065,7 +6681,6 @@ hr.au-underline.blue-line::after {
     background: #F9B500;
 }
 
-/* ===== Red section (Our Values) ===== */
 .au-section-card.au-red::before {
     background: #E30B5C;
 }
@@ -6092,7 +6707,6 @@ hr.au-underline.blue-line::after {
     background: #E30B5C;
 }
 
-/* ===== Apply Now heading ===== */
 .au-apply-heading {
     font-size: clamp(1.6rem, 2.5vw, 2rem);
     font-weight: 800;
@@ -6109,7 +6723,6 @@ hr.au-underline.blue-line::after {
     margin: 0 auto 36px;
 }
 
-/* Scope the about-cards inside au-page to match site layout */
 .au-page .about-cards {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -6123,7 +6736,6 @@ hr.au-underline.blue-line::after {
     display: none;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 900px) {
     .au-section-grid {
         grid-template-columns: 1fr;
@@ -6148,10 +6760,6 @@ hr.au-underline.blue-line::after {
     }
 }
 
-
-
-/* Force-remove default bullets on About page section cards
-   (Genesis Sample's ul li styling overrides the scoped reset) */
 .au-section-card ul,
 .au-section-card ul li {
     list-style: none !important;
@@ -6173,22 +6781,16 @@ hr.au-underline.blue-line::after {
     display: none !important;
 }
 
-
-
 /* =====================================================
    LOGIN PAGE (Green theme — page 1018)
-   Targets the [mepr-login-form] shortcode output (mepr-*, not mepro-*).
-   Green because login is the gateway to Manager/Intern dashboards.
    ===================================================== */
 
-/* Page wrapper — center and add breathing room */
 body.page-id-1018 .entry-content {
     max-width: 520px;
     margin: 0 auto;
     padding: 30px 24px 80px;
 }
 
-/* "Login" H1 heading — themed to match site pattern */
 body.page-id-1018 .entry-title {
     font-size: clamp(2rem, 3vw, 2.4rem);
     font-weight: 800;
@@ -6200,7 +6802,6 @@ body.page-id-1018 .entry-title {
     padding-bottom: 20px;
 }
 
-/* Green accent underline under heading (site-consistent 50x3 bar) */
 body.page-id-1018 .entry-title::after {
     content: '';
     display: block;
@@ -6211,7 +6812,6 @@ body.page-id-1018 .entry-title::after {
     margin: 16px auto 0;
 }
 
-/* Uppercase label above heading, site-consistent */
 body.page-id-1018 .entry-title::before {
     content: 'WELCOME BACK';
     display: block;
@@ -6224,7 +6824,6 @@ body.page-id-1018 .entry-title::before {
     margin: 0 0 14px;
 }
 
-/* ===== Form card wrapper ===== */
 body.page-id-1018 .mp_wrapper.mp_login_form {
     background: #ffffff;
     border: 1px solid #c6f0d4;
@@ -6236,7 +6835,6 @@ body.page-id-1018 .mp_wrapper.mp_login_form {
     text-align: left;
 }
 
-/* ===== Form rows ===== */
 body.page-id-1018 form.mepr-form {
     margin: 0;
     padding: 0;
@@ -6265,7 +6863,6 @@ body.page-id-1018 .mepr-form .mp-form-label label {
     line-height: 1.4;
 }
 
-/* ===== Inputs (username + password) ===== */
 body.page-id-1018 .mepr-form input[type="text"],
 body.page-id-1018 .mepr-form input[type="password"],
 body.page-id-1018 .mepr-form input[type="email"] {
@@ -6300,7 +6897,6 @@ body.page-id-1018 .mepr-form input[type="email"]:focus {
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
 }
 
-/* ===== Password show/hide toggle (the eye icon) ===== */
 body.page-id-1018 .mepr-form .mp-hide-pw {
     position: relative;
 }
@@ -6342,7 +6938,6 @@ body.page-id-1018 .mepr-form button.mp-hide-pw .dashicons {
     line-height: 18px !important;
 }
 
-/* ===== Remember Me checkbox ===== */
 body.page-id-1018 .mepr-form div:has(> label > input[name="rememberme"]) {
     display: flex;
     align-items: center;
@@ -6368,13 +6963,11 @@ body.page-id-1018 .mepr-form label:has(> input#rememberme) {
     line-height: 1.4;
 }
 
-/* ===== Hide the &nbsp; spacer divs ===== */
 body.page-id-1018 .mepr-form .mp-spacer,
 body.page-id-1018 .mp_wrapper .mp-spacer {
     display: none !important;
 }
 
-/* ===== Submit button — green, full width, site-consistent ===== */
 body.page-id-1018 .mepr-form .submit {
     margin: 0;
     padding: 0;
@@ -6419,7 +7012,6 @@ body.page-id-1018 .mepr-form input.mepr-share-button:hover {
     color: #ffffff !important;
 }
 
-/* ===== Forgot password link ===== */
 body.page-id-1018 .mepr-login-actions {
     text-align: center;
     margin-top: 24px;
@@ -6447,18 +7039,15 @@ body.page-id-1018 .mepr-login-actions a:hover {
     text-underline-offset: 3px;
 }
 
-/* ===== Hide the (Edit) admin link ===== */
 body.page-id-1018 .entry-content>.post-edit-link,
 body.page-id-1018 article>.post-edit-link {
     display: none !important;
 }
 
-/* ===== Hide the empty <p></p> after form ===== */
 body.page-id-1018 .entry-content>p:empty {
     display: none;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 640px) {
     body.page-id-1018 .entry-content {
         padding: 20px 16px 60px;
@@ -6469,908 +7058,13 @@ body.page-id-1018 .entry-content>p:empty {
     }
 }
 
-
-
 /* =====================================================
-   APPLICANT INBOX — ENTRY DETAIL + PENDING APPROVAL VIEW
-   (page 1950 — yellow theme)
-
-   This extends the structural rules defined for pages
-   582/1929 to also apply on page 1950, then applies
-   yellow color overrides for the approval workflow
-   detail view that renders when an applicant clicks
-   into their own entry.
-   ===================================================== */
-
-/* ===== STRUCTURAL RULES — mirror the 582/1929 detail view ===== */
-
-/* Outer wrap + main layout containers */
-body.page-id-1950 .wrap.gravityflow_workflow_detail {
-    max-width: 1200px !important;
-    margin: 0 auto !important;
-    padding: 0 24px !important;
-}
-
-body.page-id-1950 #poststuff {
-    padding-top: 0 !important;
-    min-width: 0 !important;
-    margin: 0 auto 60px !important;
-    max-width: 1200px !important;
-    padding: 0 24px !important;
-}
-
-body.page-id-1950 #post-body.metabox-holder.columns-2 {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-body.page-id-1950 #post-body-content {
-    float: none !important;
-    width: 100% !important;
-    margin: 0 !important;
-    order: 1 !important;
-}
-
-body.page-id-1950 #postbox-container-1 {
-    float: none !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    order: 2 !important;
-    min-width: 0 !important;
-}
-
-body.page-id-1950 #postbox-container-2 {
-    float: none !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    order: 3 !important;
-    min-width: 0 !important;
-}
-
-/* ===== Instructions callout (top yellow block) ===== */
-body.page-id-1950 .postbox.gravityflow-instructions {
-    background: #fffbeb !important;
-    border: 1px solid #fde68a !important;
-    border-left: 4px solid #F9B500 !important;
-    border-radius: 10px !important;
-    padding: 0 !important;
-    margin: 0 0 20px !important;
-    box-shadow: none !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-instructions .inside {
-    padding: 16px 20px !important;
-    margin: 0 !important;
-    font-size: 0.94rem !important;
-    line-height: 1.65 !important;
-    color: #78400a !important;
-    font-weight: 500 !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-instructions .inside a {
-    color: #F9B500 !important;
-    font-weight: 600 !important;
-    text-decoration: underline !important;
-    text-underline-offset: 2px !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-instructions .inside a:hover {
-    color: #d99a00 !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-instructions .inside a::after {
-    display: none !important;
-    content: none !important;
-}
-
-/* ===== Outer approval table card ===== */
-body.page-id-1950 table.gravityflow-step-approval {
-    background: #ffffff !important;
-    border: 1px solid #e8ecf1 !important;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
-    width: 100% !important;
-    margin: 0 !important;
-}
-
-body.page-id-1950 table.gravityflow-step-approval thead th {
-    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
-    padding: 18px 28px !important;
-    border-bottom: 2px solid #e2e8f0 !important;
-    vertical-align: middle !important;
-}
-
-body.page-id-1950 table.gravityflow-step-approval thead th#details {
-    font-size: 1.05rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    text-align: left !important;
-}
-
-body.page-id-1950 table.gravityflow-step-approval thead th[style*="text-align: right"] {
-    font-weight: 500 !important;
-    color: #64748b !important;
-    font-size: 0.82rem !important;
-}
-
-body.page-id-1950 #gentry_display_empty_fields {
-    accent-color: #F9B500 !important;
-    cursor: pointer !important;
-    margin-right: 4px !important;
-    vertical-align: middle !important;
-}
-
-body.page-id-1950 table.gravityflow-step-approval tbody>tr>td {
-    padding: 28px !important;
-    background: #ffffff !important;
-    border: none !important;
-}
-
-/* ===== Gravity Form wrapper inside the card ===== */
-body.page-id-1950 #gform_wrapper_2 {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-body.page-id-1950 #gform_fields_2 {
-    display: block !important;
-    grid-template-columns: none !important;
-    gap: 0 !important;
-}
-
-body.page-id-1950 #gform_fields_2>.gfield {
-    margin: 0 0 22px !important;
-    padding: 0 !important;
-    grid-column: 1 / -1 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    flex: 0 0 100% !important;
-}
-
-body.page-id-1950 #gform_fields_2>.spacer.gfield {
-    display: none !important;
-}
-
-/* ===== Section headings inside the form ===== */
-body.page-id-1950 #gform_fields_2 .gfield--type-section,
-body.page-id-1950 #gform_fields_2 .gsection {
-    border: none !important;
-    padding: 8px 0 4px !important;
-    margin: 28px 0 12px !important;
-    background: transparent !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gfield--type-section:first-child,
-body.page-id-1950 #gform_fields_2 .gsection:first-child {
-    margin-top: 0 !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gsection_title {
-    font-size: 1.05rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    margin: 0 !important;
-    padding-bottom: 10px !important;
-    border-bottom: 2px solid #e8ecf1 !important;
-    position: relative !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gsection_title::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: -2px !important;
-    left: 0 !important;
-    width: 40px !important;
-    height: 2px !important;
-    background: #F9B500 !important;
-    border-radius: 2px !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gsection_description {
-    font-size: 0.85rem !important;
-    color: #64748b !important;
-    margin-top: 6px !important;
-    font-style: italic !important;
-}
-
-/* ===== Read-only display fields ===== */
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field {
-    background: #f8fafc !important;
-    border: 1px solid #e8ecf1 !important;
-    border-radius: 8px !important;
-    padding: 12px 16px !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field.gfield--type-section {
-    background: transparent !important;
-    border: none !important;
-    padding: 8px 0 4px !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gfield_label {
-    font-size: 0.72rem !important;
-    font-weight: 700 !important;
-    color: #64748b !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
-    margin: 0 0 6px !important;
-    padding: 0 !important;
-    display: block !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gfield_label .gfield_required {
-    display: none !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value {
-    font-size: 0.98rem !important;
-    color: #1e293b !important;
-    font-weight: 500 !important;
-    line-height: 1.5 !important;
-    word-break: break-word !important;
-}
-
-/* Links inside display values — yellow */
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a {
-    color: #F9B500 !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    transition: color 0.2s ease !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a:hover {
-    color: #d99a00 !important;
-    text-decoration: underline !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-display-field .gravityflow-field-value a::after {
-    display: none !important;
-    content: none !important;
-}
-
-body.page-id-1950 #gform_fields_2 fieldset.gravityflow-display-field .gfield_label_before_complex {
-    margin-bottom: 6px !important;
-}
-
-/* ===== Editable fields — labels ===== */
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_label,
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field legend.gfield_label {
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-    color: #1e293b !important;
-    margin: 0 0 10px !important;
-    display: block !important;
-    line-height: 1.4 !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gfield_required {
-    color: #E30B5C !important;
-    margin-left: 4px !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gfield_required_text {
-    font-size: 0.78rem !important;
-    font-weight: 500 !important;
-}
-
-/* ===== Editable CHECKBOX fields (Select a task) — pill style, yellow ===== */
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
-    list-style: none !important;
-    margin: 4px 0 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    padding: 10px 16px !important;
-    background: #fafbfc !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 100px !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    margin: 0 !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:hover {
-    border-color: #fde68a !important;
-    background: #ffffff !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox input[type="checkbox"] {
-    width: 16px !important;
-    height: 16px !important;
-    cursor: pointer !important;
-    flex-shrink: 0 !important;
-    margin: 0 !important;
-    accent-color: #F9B500 !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox label {
-    font-size: 0.92rem !important;
-    color: #334155 !important;
-    cursor: pointer !important;
-    font-weight: 500 !important;
-    margin: 0 !important;
-    white-space: nowrap !important;
-}
-
-body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox .gchoice:has(input:checked) {
-    border-color: #F9B500 !important;
-    background: #fffbeb !important;
-}
-
-/* ===== Editable URL/text/website inputs (Task 1-5 loom video links) ===== */
-body.page-id-1950 #gform_fields_2 .ginput_container_website input[type="url"],
-body.page-id-1950 #gform_fields_2 .ginput_container input[type="text"],
-body.page-id-1950 #gform_fields_2 .ginput_container input[type="url"],
-body.page-id-1950 #gform_fields_2 .ginput_container input[type="email"] {
-    width: 100% !important;
-    padding: 11px 14px !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    font-size: 0.98rem !important;
-    color: #1e293b !important;
-    background: #ffffff !important;
-    font-family: inherit !important;
-    line-height: 1.5 !important;
-    box-sizing: border-box !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-}
-
-body.page-id-1950 #gform_fields_2 .ginput_container input:hover {
-    border-color: #cbd5e1 !important;
-}
-
-body.page-id-1950 #gform_fields_2 .ginput_container input:focus {
-    outline: none !important;
-    border-color: #F9B500 !important;
-    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
-}
-
-/* ===== Application Status (display radio rendered as pill) — yellow ===== */
-body.page-id-1950 #gform_fields_2 #field_2_56 .gravityflow-field-value {
-    display: inline-flex !important;
-    align-items: center !important;
-    padding: 4px 12px !important;
-    background: #fffbeb !important;
-    color: #b17a00 !important;
-    border: 1px solid #fde68a !important;
-    border-radius: 100px !important;
-    font-size: 0.82rem !important;
-    font-weight: 600 !important;
-    line-height: 1.4 !important;
-    margin-top: 4px !important;
-}
-
-/* Hide the GF form footer */
-body.page-id-1950 .gform-footer.gform_footer {
-    display: none !important;
-}
-
-/* ===== Workflow sidebar (Workflow status box) ===== */
-body.page-id-1950 #gravityflow-status-box-container.postbox {
-    background: #ffffff !important;
-    border: 1px solid #e8ecf1 !important;
-    border-radius: 12px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
-    overflow: hidden !important;
-}
-
-body.page-id-1950 #gravityflow-status-box-container .hndle {
-    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
-    padding: 14px 22px !important;
-    margin: 0 !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    font-size: 0.85rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
-    cursor: default !important;
-}
-
-body.page-id-1950 #gravityflow-status-box-container .hndle span {
-    font-size: inherit !important;
-    color: inherit !important;
-}
-
-body.page-id-1950 #submitcomment {
-    padding: 24px 28px !important;
-}
-
-body.page-id-1950 .gravityflow-status-box {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
-    gap: 20px 24px !important;
-    background: none !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-label {
-    display: block !important;
-    font-size: 0.72rem !important;
-    font-weight: 700 !important;
-    color: #64748b !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
-    margin-bottom: 6px !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-value {
-    font-size: 0.94rem !important;
-    color: #1e293b !important;
-    font-weight: 600 !important;
-}
-
-/* Entry ID link in sidebar */
-body.page-id-1950 .gravityflow-status-box-field-entry-id a {
-    color: #F9B500 !important;
-    text-decoration: none !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-entry-id a:hover {
-    color: #d99a00 !important;
-    text-decoration: underline !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-entry-id a::after {
-    display: none !important;
-    content: none !important;
-}
-
-/* Pending status pill */
-body.page-id-1950 .gravityflow-status-box-field-status .gravityflow-status-box-field-value {
-    display: inline-flex !important;
-    align-items: center !important;
-    padding: 4px 12px !important;
-    background: #fffbeb !important;
-    color: #b17a00 !important;
-    border: 1px solid #fde68a !important;
-    border-radius: 100px !important;
-    font-size: 0.78rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0 !important;
-}
-
-/* Step status row */
-body.page-id-1950 .gravityflow-status-box hr {
-    border: none !important;
-    border-top: 1px solid #e8ecf1 !important;
-    margin: 4px 0 8px !important;
-    grid-column: 1 / -1 !important;
-    width: 100% !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-step-status {
-    grid-column: 1 / -1 !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-step-status h4 {
-    font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    flex-wrap: wrap !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-label {
-    display: inline !important;
-    font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    text-transform: none !important;
-    letter-spacing: 0 !important;
-    margin: 0 !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-step-status h4 .gravityflow-status-box-field-value {
-    display: inline-flex !important;
-    align-items: center !important;
-    padding: 3px 10px !important;
-    background: #fffbeb !important;
-    color: #b17a00 !important;
-    border: 1px solid #fde68a !important;
-    border-radius: 100px !important;
-    font-size: 0.75rem !important;
-    font-weight: 600 !important;
-    text-transform: none !important;
-    letter-spacing: 0 !important;
-}
-
-/* Assignees list */
-body.page-id-1950 .gravityflow-status-box-field-assignees {
-    grid-column: 1 / -1 !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-assignees ul {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-assignees ul li {
-    display: inline-flex !important;
-    padding: 4px 10px !important;
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 100px !important;
-    font-size: 0.78rem !important;
-    color: #475569 !important;
-    font-weight: 500 !important;
-    list-style: none !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-assignees span.gravityflow-status-box-field-value {
-    display: contents !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    font-size: inherit !important;
-    color: inherit !important;
-    font-weight: inherit !important;
-}
-
-/* Note textarea */
-body.page-id-1950 .gravityflow-status-box-field-note {
-    grid-column: 1 / -1 !important;
-    margin-top: 8px !important;
-}
-
-body.page-id-1950 .gravityflow-status-box-field-note label[for="gravityflow-note"] {
-    font-size: 0.85rem !important;
-    font-weight: 600 !important;
-    color: #1e293b !important;
-    text-transform: none !important;
-    letter-spacing: 0 !important;
-    margin-bottom: 6px !important;
-    display: block !important;
-    cursor: pointer !important;
-}
-
-body.page-id-1950 #submitcomment>span.gravityflow-status-box-field-value {
-    display: block !important;
-    grid-column: 1 / -1 !important;
-    margin-top: 4px !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    font-size: inherit !important;
-    color: inherit !important;
-    font-weight: inherit !important;
-}
-
-body.page-id-1950 textarea#gravityflow-note {
-    width: 100% !important;
-    padding: 12px 14px !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    font-size: 0.95rem !important;
-    color: #1e293b !important;
-    background: #ffffff !important;
-    font-family: inherit !important;
-    line-height: 1.5 !important;
-    resize: vertical !important;
-    min-height: 90px !important;
-    box-sizing: border-box !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-body.page-id-1950 textarea#gravityflow-note:focus {
-    outline: none !important;
-    border-color: #F9B500 !important;
-    box-shadow: 0 0 0 3px rgba(249, 181, 0, 0.18) !important;
-}
-
-/* ===== Approve / Reject action buttons ===== */
-body.page-id-1950 .gravityflow-action-buttons {
-    display: flex !important;
-    gap: 12px !important;
-    margin-top: 16px !important;
-    flex-wrap: wrap !important;
-    grid-column: 1 / -1 !important;
-}
-
-body.page-id-1950 .gravityflow-action-buttons button[value="approved"],
-body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    padding: 12px 28px !important;
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-    border: none !important;
-    border-radius: 10px !important;
-    cursor: pointer !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
-    line-height: 1 !important;
-    min-width: 140px !important;
-}
-
-/* Approve — yellow */
-body.page-id-1950 .gravityflow-action-buttons button[value="approved"] {
-    background: #F9B500 !important;
-    color: #ffffff !important;
-}
-
-body.page-id-1950 .gravityflow-action-buttons button[value="approved"]:hover {
-    background: #d99a00 !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(249, 181, 0, 0.30) !important;
-}
-
-body.page-id-1950 .gravityflow-action-buttons button[value="approved"] i.fa {
-    color: #ffffff !important;
-    font-size: 0.9rem !important;
-}
-
-/* Reject — red/pink */
-body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] {
-    background: #ffffff !important;
-    color: #b5094a !important;
-    border: 1.5px solid #fbcfe0 !important;
-}
-
-body.page-id-1950 .gravityflow-action-buttons button[value="rejected"]:hover {
-    background: #E30B5C !important;
-    border-color: #E30B5C !important;
-    color: #ffffff !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(227, 11, 92, 0.30) !important;
-}
-
-body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] i.fa {
-    font-size: 0.9rem !important;
-}
-
-body.page-id-1950 .gravityflow-action-buttons button[value="rejected"]:hover i.fa {
-    color: #ffffff !important;
-}
-
-/* ===== Print button row ===== */
-body.page-id-1950 .detail-view-print {
-    text-align: center !important;
-    margin: 20px 0 0 !important;
-    padding: 18px !important;
-    background: #f8fafc !important;
-    border: 1px solid #e8ecf1 !important;
-    border-radius: 10px !important;
-    font-size: 0.88rem !important;
-    color: #64748b !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 14px !important;
-    flex-wrap: wrap !important;
-}
-
-body.page-id-1950 .detail-view-print .button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: #64748b !important;
-    color: #ffffff !important;
-    padding: 10px 22px !important;
-    border-radius: 8px !important;
-    border: none !important;
-    font-size: 0.88rem !important;
-    font-weight: 600 !important;
-    line-height: 1 !important;
-    text-decoration: none !important;
-    transition: all 0.2s ease !important;
-    cursor: pointer !important;
-    min-height: 38px !important;
-}
-
-body.page-id-1950 .detail-view-print .button:hover {
-    background: #475569 !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.25) !important;
-}
-
-body.page-id-1950 .detail-view-print .button::after {
-    display: none !important;
-    content: none !important;
-}
-
-body.page-id-1950 #gform_print_notes {
-    accent-color: #F9B500 !important;
-    margin-right: 4px !important;
-    vertical-align: middle !important;
-}
-
-/* ===== Timeline ===== */
-body.page-id-1950 .postbox.gravityflow-timeline {
-    background: #ffffff !important;
-    border: 1px solid #e8ecf1 !important;
-    border-radius: 12px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
-    overflow: hidden !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-timeline>h3 {
-    background: linear-gradient(to bottom, #f8fafc, #f1f5f9) !important;
-    padding: 14px 22px !important;
-    margin: 0 !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-    font-size: 0.85rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
-    cursor: default !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-timeline>h3 label {
-    font-size: inherit !important;
-    color: inherit !important;
-    font-weight: inherit !important;
-    text-transform: inherit !important;
-    letter-spacing: inherit !important;
-    cursor: default !important;
-}
-
-body.page-id-1950 .postbox.gravityflow-timeline .inside {
-    padding: 18px 22px !important;
-}
-
-body.page-id-1950 .gravityflow-note {
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 14px !important;
-    padding: 16px 0 !important;
-    border-bottom: 1px solid #f1f5f9 !important;
-    margin: 0 !important;
-}
-
-body.page-id-1950 .gravityflow-note:last-child {
-    border-bottom: none !important;
-    padding-bottom: 0 !important;
-}
-
-body.page-id-1950 .gravityflow-note:first-child {
-    padding-top: 0 !important;
-}
-
-body.page-id-1950 .gravityflow-note-avatar {
-    flex-shrink: 0 !important;
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-    overflow: hidden !important;
-    background: #fffbeb !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-body.page-id-1950 .gravityflow-note-avatar img,
-body.page-id-1950 .gravityflow-note-avatar .avatar {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-    display: block !important;
-}
-
-body.page-id-1950 .gravityflow-note-avatar i.fa {
-    font-size: 18px !important;
-    color: #F9B500 !important;
-}
-
-body.page-id-1950 .gravityflow-note-body-wrap {
-    flex: 1 !important;
-    min-width: 0 !important;
-}
-
-body.page-id-1950 .gravityflow-note-header {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: baseline !important;
-    margin-bottom: 4px !important;
-    flex-wrap: wrap !important;
-    gap: 6px !important;
-}
-
-body.page-id-1950 .gravityflow-note-title {
-    font-size: 0.92rem !important;
-    font-weight: 700 !important;
-    color: #1e293b !important;
-}
-
-body.page-id-1950 .gravityflow-note-meta {
-    font-size: 0.8rem !important;
-    color: #94a3b8 !important;
-}
-
-body.page-id-1950 .gravityflow-note-body {
-    font-size: 0.88rem !important;
-    color: #475569 !important;
-    line-height: 1.6 !important;
-}
-
-body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
-    padding: 0 !important;
-    font-size: inherit !important;
-    color: inherit !important;
-    line-height: inherit !important;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-
-    body.page-id-1950 .wrap.gravityflow_workflow_detail,
-    body.page-id-1950 #poststuff {
-        padding: 0 16px !important;
-    }
-
-    body.page-id-1950 table.gravityflow-step-approval tbody>tr>td {
-        padding: 20px !important;
-    }
-
-    body.page-id-1950 #gform_fields_2 .gravityflow-editable-field .gfield_checkbox {
-        gap: 8px !important;
-    }
-
-    body.page-id-1950 .gravityflow-action-buttons {
-        flex-direction: column !important;
-    }
-
-    body.page-id-1950 .gravityflow-action-buttons button[value="approved"],
-    body.page-id-1950 .gravityflow-action-buttons button[value="rejected"] {
-        width: 100% !important;
-    }
-
-    body.page-id-1950 .gravityflow-status-box {
-        grid-template-columns: 1fr !important;
-    }
-}
-
-
-
-/* =====================================================
-   HEADER ACCENT BAR (mirrors footer)
-   Animated 4-color chain on home, solid single-color
-   on inner pages. Anchored to the bottom edge of .site-header.
+   HEADER ACCENT BAR (animated 4-color brand chain)
+   Home page: scrolling chain. Inner pages: solid color.
    ===================================================== */
 
 .site-header {
     position: relative;
-    /* positioning context for the accent bar */
 }
 
 .site-header-accent-bar {
@@ -7402,7 +7096,6 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
             #4CAF50 62.5%, #a5d8a8 75%,
             #F9B500 75%, #fcd876 87.5%,
             #E30B5C 87.5%, #f285ae 100%);
-    /* Reuses the footer's @keyframes — synced animation top and bottom */
     animation: footer-accent-scroll 12s linear infinite;
 }
 
@@ -7412,16 +7105,11 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
     }
 }
 
-/* -----------------------------------------------------
-   PER-PAGE SOLID COLOR OVERRIDES (mirrors footer)
-   ----------------------------------------------------- */
-
-/* GREEN — includes Login (1018) + Account (1020) */
+/* GREEN — Managers/Interns dashboards + Login */
 body.page-id-582 .site-header-accent-bar__track,
 body.page-id-1929 .site-header-accent-bar__track,
 body.page-id-1556 .site-header-accent-bar__track,
 body.page-id-1018 .site-header-accent-bar__track,
-body.page-id-1020 .site-header-accent-bar__track,
 body:has(.md-page) .site-header-accent-bar__track,
 body:has(.gflow-inbox-page) .site-header-accent-bar__track,
 body:has(.login-page) .site-header-accent-bar__track,
@@ -7443,7 +7131,8 @@ body:has(.io-app-yellow) .site-header-accent-bar__track {
     width: 100%;
 }
 
-/* BLUE */
+/* BLUE — About + Account */
+body.page-id-1020 .site-header-accent-bar__track,
 body:has(.au-page) .site-header-accent-bar__track,
 body:has(.io-blue) .site-header-accent-bar__track,
 body:has(.io-app-blue) .site-header-accent-bar__track {
@@ -7460,20 +7149,12 @@ body:has(.io-app-red) .site-header-accent-bar__track {
     width: 100%;
 }
 
-/* Optional: kill any border-bottom Genesis puts on the header so the
-   accent bar IS the divider, not a bar-plus-faint-grey-line. */
 .site-header {
     border-bottom: none !important;
 }
 
-
-
-
 /* =====================================================
    FOOTER ACCENT BAR (animated 4-color brand chain)
-   Home page: scrolling Blue → Green → Yellow → Red chain.
-   Inner pages: solid single color per page-id (see overrides below).
-   Anchored absolutely to the top edge of .site-footer.
    ===================================================== */
 
 .site-footer-accent-bar {
@@ -7524,20 +7205,11 @@ body:has(.io-app-red) .site-header-accent-bar__track {
     }
 }
 
-/* -----------------------------------------------------
-   PER-PAGE SOLID COLOR OVERRIDES
-   Inner pages replace the animated chain with a single
-   flat brand color matching their page accent. We target
-   __track and swap the gradient for a solid background
-   plus kill the animation.
-   ----------------------------------------------------- */
-
-/* GREEN — Managers / Interns-related dashboards + Login + Account */
+/* GREEN — Managers/Interns dashboards + Login */
 body.page-id-582 .site-footer-accent-bar__track,
 body.page-id-1929 .site-footer-accent-bar__track,
 body.page-id-1556 .site-footer-accent-bar__track,
 body.page-id-1018 .site-footer-accent-bar__track,
-body.page-id-1020 .site-footer-accent-bar__track,
 body:has(.md-page) .site-footer-accent-bar__track,
 body:has(.gflow-inbox-page) .site-footer-accent-bar__track,
 body:has(.login-page) .site-footer-accent-bar__track,
@@ -7548,7 +7220,7 @@ body:has(.io-app-green) .site-footer-accent-bar__track {
     width: 100%;
 }
 
-/* YELLOW — Applicants / Interns public-facing */
+/* YELLOW */
 body.page-id-1950 .site-footer-accent-bar__track,
 body.page-id-1542 .site-footer-accent-bar__track,
 body:has(.ad-page) .site-footer-accent-bar__track,
@@ -7559,7 +7231,8 @@ body:has(.io-app-yellow) .site-footer-accent-bar__track {
     width: 100%;
 }
 
-/* BLUE — About */
+/* BLUE — About + Account */
+body.page-id-1020 .site-footer-accent-bar__track,
 body:has(.au-page) .site-footer-accent-bar__track,
 body:has(.io-blue) .site-footer-accent-bar__track,
 body:has(.io-app-blue) .site-footer-accent-bar__track {
@@ -7568,7 +7241,7 @@ body:has(.io-app-blue) .site-footer-accent-bar__track {
     width: 100%;
 }
 
-/* RED — Logout / Alert contexts (reserved) */
+/* RED */
 body:has(.io-red) .site-footer-accent-bar__track,
 body:has(.io-app-red) .site-footer-accent-bar__track {
     background: #E30B5C;
@@ -7576,12 +7249,8 @@ body:has(.io-app-red) .site-footer-accent-bar__track {
     width: 100%;
 }
 
-
-
 /* =====================================================
    KILL PHANTOM GREY STRIP ABOVE HEADER
-   .site-container was exposing padding/margin above
-   the header, creating a thin grey band.
    ===================================================== */
 
 .site-container {
@@ -7595,12 +7264,8 @@ body:has(.io-app-red) .site-footer-accent-bar__track {
     margin-top: 0 !important;
 }
 
-
-
 /* =====================================================
-   STICKY HEADER — HIDE ON SCROLL DOWN, SHOW ON SCROLL UP
-   Body class 'header-hidden' toggled by header-scroll.js.
-   Header accent bar moves with the header (it's a child).
+   STICKY HEADER — hide on scroll down, show on scroll up
    ===================================================== */
 
 .site-header {
@@ -7616,333 +7281,228 @@ body.header-hidden .site-header {
     transform: translateY(-100%);
 }
 
-/* Subtle shadow once scrolled (depth cue that header is floating) */
 body:not(.header-hidden) .site-header {
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
-/* Disable the slide animation for reduced-motion users */
 @media (prefers-reduced-motion: reduce) {
     .site-header {
         transition: none;
     }
 }
 
-
-
 /* =====================================================
-   ACCOUNT PAGE (Green theme — page 1020)
-   MemberPress [mepr-account-form] shortcode output.
-   Green — part of the logged-in dashboard experience.
+   ACCOUNT PAGE (page 1020) — BLUE THEME
    ===================================================== */
 
-/* ===== Hide the account nav (Home / Subscriptions / Payments / Courses / Logout)
-   Using :has() to hide the entire wrapper so no empty card remains. */
+/* Hide the MemberPress internal account nav
+   NOTE: Best practice = use mepr-account-nav-items PHP filter instead.
+   Keeping CSS rule as interim until filter is wired up. */
 body.page-id-1020 .mp_wrapper:has(#mepr-account-nav) {
     display: none !important;
 }
 
-/* Page wrapper — center */
-body.page-id-1020 .entry-content {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 30px 24px 80px;
+body.page-id-1020 .entry-header {
+    text-align: center;
+    margin: 48px auto 32px;
 }
 
-/* "Account" H1 — themed to match site pattern */
 body.page-id-1020 .entry-title {
-    font-size: clamp(2rem, 3vw, 2.4rem);
-    font-weight: 800;
-    color: #1e293b;
-    text-align: center;
-    margin: 0 0 8px;
-    line-height: 1.2;
     position: relative;
-    padding-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
 }
 
 body.page-id-1020 .entry-title::before {
-    content: 'ACCOUNT SETTINGS';
+    content: "ACCOUNT SETTINGS";
     display: block;
-    text-align: center;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.15em;
+    color: #1D47A1;
+    margin-bottom: 8px;
     text-transform: uppercase;
-    color: #4CAF50;
-    margin: 0 0 14px;
 }
 
 body.page-id-1020 .entry-title::after {
-    content: '';
+    content: "";
     display: block;
     width: 50px;
     height: 3px;
-    background: #4CAF50;
-    border-radius: 2px;
+    background: #1D47A1;
     margin: 16px auto 0;
+    border-radius: 2px;
 }
 
-/* Welcome message */
 body.page-id-1020 #mepr-account-welcome-message {
     text-align: center;
-    margin: 20px 0 28px;
-}
-
-body.page-id-1020 #mepr-account-welcome-message p {
-    font-size: 1rem;
+    font-size: 1.125rem;
     color: #475569;
-    margin: 0;
+    margin: 0 0 28px;
+    padding: 0;
 }
 
-/* ===== Form card wrapper (the remaining .mp_wrapper, form-only) ===== */
 body.page-id-1020 .mp_wrapper:has(#mepr_account_form) {
-    background: #ffffff;
-    border: 1px solid #c6f0d4;
-    border-radius: 16px;
-    padding: 40px 36px;
-    margin: 20px auto 0;
     max-width: 620px;
-    box-shadow: 0 8px 30px rgba(76, 175, 80, 0.12);
-    text-align: left;
+    margin: 20px auto 60px;
+    padding: 40px 36px;
+    background: #ffffff;
+    border: 1px solid #c7d8ef;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(29, 71, 161, 0.12);
 }
 
-/* ===== Form ===== */
-body.page-id-1020 form.mepr-form {
-    margin: 0;
-    padding: 0;
+body.page-id-1020 .mepr-account-form .mp-form-row {
+    margin-bottom: 20px;
 }
 
-body.page-id-1020 .mepr-form .mp-form-row {
-    margin: 0 0 18px;
-    padding: 0;
-    border: none;
-    background: transparent;
-}
-
-body.page-id-1020 .mepr-form .mp-form-label {
-    margin: 0;
-    padding: 0;
+body.page-id-1020 .mepr-account-form .mp-form-label {
     display: block;
+    margin-bottom: 6px;
 }
 
-body.page-id-1020 .mepr-form .mp-form-label label,
-body.page-id-1020 .mepr-form .mp-form-label label.placeholder-text,
-body.page-id-1020 .mepr-form .mp-form-label label.placeholder-text.active {
-    display: block;
-    font-size: 0.88rem;
+body.page-id-1020 .mepr-account-form label {
     font-weight: 600;
-    color: #1e293b;
-    margin: 0 0 6px;
-    line-height: 1.4;
+    color: #0f172a;
+    font-size: 0.9rem;
 }
 
-/* Error spans — hidden by default, visible only when MP forces them via inline style */
-body.page-id-1020 .mepr-form .cc-error {
-    display: none;
+body.page-id-1020 .mepr-account-form .cc-required-field {
     color: #E30B5C;
-    font-size: 0.82rem;
+    margin-left: 2px;
+}
+
+body.page-id-1020 .mepr-account-form input[type="text"],
+body.page-id-1020 .mepr-account-form input[type="email"],
+body.page-id-1020 .mepr-account-form input[type="password"],
+body.page-id-1020 .mepr-account-form select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    color: #0f172a;
+    background: #ffffff;
+    border: 1px solid #d1d9e3;
+    border-radius: 8px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+body.page-id-1020 .mepr-account-form input[type="text"]:focus,
+body.page-id-1020 .mepr-account-form input[type="email"]:focus,
+body.page-id-1020 .mepr-account-form input[type="password"]:focus,
+body.page-id-1020 .mepr-account-form select:focus {
+    outline: none;
+    border-color: #1D47A1;
+    box-shadow: 0 0 0 3px rgba(29, 71, 161, 0.15);
+}
+
+body.page-id-1020 .mepr-account-form select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231D47A1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+@media (min-width: 640px) {
+
+    body.page-id-1020 .mepr-account-form .mp-form-row.mepr_first_name,
+    body.page-id-1020 .mepr-account-form .mp-form-row.mepr_last_name {
+        display: inline-block;
+        width: calc(50% - 10px);
+        vertical-align: top;
+    }
+
+    body.page-id-1020 .mepr-account-form .mp-form-row.mepr_first_name {
+        margin-right: 16px;
+    }
+}
+
+body.page-id-1020 .mepr-account-form .mepr-submit {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    margin-top: 12px;
+    background: #1D47A1;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.08s ease;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+body.page-id-1020 .mepr-account-form .mepr-submit:hover {
+    background: #143373;
+}
+
+body.page-id-1020 .mepr-account-form .mepr-submit:active {
+    transform: translateY(1px);
+}
+
+body.page-id-1020 .mepr-account-form .mepr-loading-gif {
+    display: block;
+    margin: 12px auto 0;
+}
+
+body.page-id-1020 .mepr-account-form .mepr-form-has-errors {
+    display: none;
+}
+
+body.page-id-1020 .mepr-account-form .mepr-form-has-errors[style*="display: inline"],
+body.page-id-1020 .mepr-account-form .mepr-form-has-errors[style*="display: block"] {
+    display: block !important;
+    text-align: center;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: #fef2f5;
+    color: #E30B5C;
+    border: 1px solid #fadde5;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+body.page-id-1020 .mepr-account-form .mepr_error {
+    color: #E30B5C;
+    font-size: 0.85rem;
     font-weight: 500;
     margin-left: 8px;
 }
 
-body.page-id-1020 .mepr-form .cc-error[style*="display: inline"] {
-    display: inline !important;
-}
-
-/* ===== Inputs ===== */
-body.page-id-1020 .mepr-form input[type="text"],
-body.page-id-1020 .mepr-form input[type="email"],
-body.page-id-1020 .mepr-form input[type="password"],
-body.page-id-1020 .mepr-form input[type="tel"] {
-    width: 100% !important;
-    padding: 12px 14px !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    font-size: 1rem !important;
-    color: #1e293b !important;
-    background: #ffffff !important;
-    font-family: inherit !important;
-    line-height: 1.5 !important;
-    box-sizing: border-box !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    height: auto !important;
-    max-width: 100% !important;
-}
-
-body.page-id-1020 .mepr-form input:hover {
-    border-color: #cbd5e1 !important;
-}
-
-body.page-id-1020 .mepr-form input:focus {
-    outline: none !important;
-    border-color: #4CAF50 !important;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
-}
-
-/* ===== Select dropdowns (Country, State) — custom chevron ===== */
-body.page-id-1020 .mepr-form select {
-    width: 100% !important;
-    padding: 11px 40px 11px 14px !important;
-    border: 1.5px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-    font-size: 1rem !important;
-    color: #1e293b !important;
-    background-color: #ffffff !important;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
-    background-repeat: no-repeat !important;
-    background-position: right 14px center !important;
-    background-size: 12px 8px !important;
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    appearance: none !important;
-    cursor: pointer !important;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
-    box-sizing: border-box !important;
-    font-family: inherit !important;
-    height: 44px !important;
-    line-height: 1.4 !important;
-}
-
-body.page-id-1020 .mepr-form select:hover {
-    border-color: #cbd5e1 !important;
-}
-
-body.page-id-1020 .mepr-form select:focus {
-    outline: none !important;
-    border-color: #4CAF50 !important;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15) !important;
-}
-
-/* ===== Spacers — hide ===== */
-body.page-id-1020 .mepr_spacer {
-    display: none !important;
-}
-
-/* ===== Save Profile submit button — green, full width ===== */
-body.page-id-1020 .mepr-form input[type="submit"].mepr-submit,
-body.page-id-1020 .mepr-form input.mepr-share-button {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    padding: 14px 24px !important;
-    font-size: 1.05rem !important;
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    background-color: #4CAF50 !important;
-    background-image: none !important;
-    border: none !important;
-    border-radius: 10px !important;
-    cursor: pointer !important;
-    line-height: 1 !important;
-    text-decoration: none !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
-    font-family: inherit !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    height: auto !important;
-    max-width: 100% !important;
-    margin-top: 12px !important;
-}
-
-body.page-id-1020 .mepr-form input[type="submit"].mepr-submit:hover,
-body.page-id-1020 .mepr-form input.mepr-share-button:hover {
-    background-color: #3d8b41 !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.30) !important;
-    color: #ffffff !important;
-}
-
-/* Loading gif */
-body.page-id-1020 .mepr-form .mepr-loading-gif {
-    display: inline-block !important;
-    margin: 12px auto 0 !important;
-    max-width: 32px !important;
-}
-
-/* ===== Form-level error banner (only when shown by MP) ===== */
-body.page-id-1020 .mepr-form .mepr-form-has-errors {
-    display: none;
-    color: #b5094a;
-    font-size: 0.88rem;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 14px;
-    padding: 10px 14px;
-    background: #fef2f4;
-    border: 1px solid #fbcfe0;
-    border-radius: 8px;
-}
-
-body.page-id-1020 .mepr-form .mepr-form-has-errors[style*="display: block"] {
-    display: block !important;
-}
-
-/* ===== Change Password link ===== */
 body.page-id-1020 .mepr-account-change-password {
     display: block;
     text-align: center;
-    margin: 24px 0 0;
+    margin-top: 28px;
     padding-top: 20px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid #e8ecf1;
 }
 
 body.page-id-1020 .mepr-account-change-password a {
-    font-size: 0.9rem;
+    color: #1D47A1;
     font-weight: 600;
-    color: #4CAF50;
     text-decoration: none;
-    transition: color 0.2s ease;
-    padding: 0;
-}
-
-body.page-id-1020 .mepr-account-change-password a::after {
-    display: none !important;
-    content: none !important;
+    transition: color 0.15s ease;
 }
 
 body.page-id-1020 .mepr-account-change-password a:hover {
-    color: #3d8b41;
+    color: #143373;
     text-decoration: underline;
-    text-underline-offset: 3px;
 }
 
-/* ===== Hide (Edit) admin link ===== */
-body.page-id-1020 .entry-content>.post-edit-link,
-body.page-id-1020 article>.post-edit-link {
-    display: none !important;
-}
-
-/* ===== 2-column layout for First/Last Name on desktop ===== */
-@media (min-width: 640px) {
-
-    body.page-id-1020 .mepr-form .mepr_first_name,
-    body.page-id-1020 .mepr-form .mepr_last_name {
-        display: inline-block;
-        width: calc(50% - 6px);
-        vertical-align: top;
-    }
-
-    body.page-id-1020 .mepr-form .mepr_first_name {
-        margin-right: 8px;
-    }
-}
-
-/* ===== Responsive ===== */
 @media (max-width: 640px) {
-    body.page-id-1020 .entry-content {
-        padding: 20px 16px 60px;
+    body.page-id-1020 .entry-title {
+        font-size: 2rem;
     }
 
     body.page-id-1020 .mp_wrapper:has(#mepr_account_form) {
-        padding: 28px 22px;
+        margin: 20px 16px 40px;
+        padding: 28px 20px;
     }
 }
-
-
-
