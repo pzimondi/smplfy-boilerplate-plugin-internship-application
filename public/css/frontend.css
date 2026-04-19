@@ -7416,11 +7416,12 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
    PER-PAGE SOLID COLOR OVERRIDES (mirrors footer)
    ----------------------------------------------------- */
 
-/* GREEN — includes Login (1018) */
+/* GREEN — includes Login (1018) + Account (1020) */
 body.page-id-582 .site-header-accent-bar__track,
 body.page-id-1929 .site-header-accent-bar__track,
 body.page-id-1556 .site-header-accent-bar__track,
 body.page-id-1018 .site-header-accent-bar__track,
+body.page-id-1020 .site-header-accent-bar__track,
 body:has(.md-page) .site-header-accent-bar__track,
 body:has(.gflow-inbox-page) .site-header-accent-bar__track,
 body:has(.login-page) .site-header-accent-bar__track,
@@ -7531,11 +7532,12 @@ body:has(.io-app-red) .site-header-accent-bar__track {
    plus kill the animation.
    ----------------------------------------------------- */
 
-/* GREEN — Managers / Interns-related dashboards + Login */
+/* GREEN — Managers / Interns-related dashboards + Login + Account */
 body.page-id-582 .site-footer-accent-bar__track,
 body.page-id-1929 .site-footer-accent-bar__track,
 body.page-id-1556 .site-footer-accent-bar__track,
 body.page-id-1018 .site-footer-accent-bar__track,
+body.page-id-1020 .site-footer-accent-bar__track,
 body:has(.md-page) .site-footer-accent-bar__track,
 body:has(.gflow-inbox-page) .site-footer-accent-bar__track,
 body:has(.login-page) .site-footer-accent-bar__track,
