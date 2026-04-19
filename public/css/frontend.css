@@ -7416,12 +7416,14 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
    PER-PAGE SOLID COLOR OVERRIDES (mirrors footer)
    ----------------------------------------------------- */
 
-/* GREEN */
+/* GREEN — includes Login (1018) */
 body.page-id-582 .site-header-accent-bar__track,
 body.page-id-1929 .site-header-accent-bar__track,
 body.page-id-1556 .site-header-accent-bar__track,
+body.page-id-1018 .site-header-accent-bar__track,
 body:has(.md-page) .site-header-accent-bar__track,
 body:has(.gflow-inbox-page) .site-header-accent-bar__track,
+body:has(.login-page) .site-header-accent-bar__track,
 body:has(.io-green) .site-header-accent-bar__track,
 body:has(.io-app-green) .site-header-accent-bar__track {
     background: #4CAF50;
