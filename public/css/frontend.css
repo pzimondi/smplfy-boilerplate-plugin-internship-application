@@ -7373,6 +7373,112 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
 
 
 /* =====================================================
+   HEADER ACCENT BAR (mirrors footer)
+   Animated 4-color chain on home, solid single-color
+   on inner pages. Anchored to the bottom edge of .site-header.
+   ===================================================== */
+
+.site-header {
+    position: relative;
+    /* positioning context for the accent bar */
+}
+
+.site-header-accent-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    overflow: hidden;
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.site-header-accent-bar__track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200%;
+    background: linear-gradient(90deg,
+            #1D47A1 0%, #6b8cc9 12.5%,
+            #4CAF50 12.5%, #a5d8a8 25%,
+            #F9B500 25%, #fcd876 37.5%,
+            #E30B5C 37.5%, #f285ae 50%,
+            #1D47A1 50%, #6b8cc9 62.5%,
+            #4CAF50 62.5%, #a5d8a8 75%,
+            #F9B500 75%, #fcd876 87.5%,
+            #E30B5C 87.5%, #f285ae 100%);
+    /* Reuses the footer's @keyframes — synced animation top and bottom */
+    animation: footer-accent-scroll 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-header-accent-bar__track {
+        animation: none;
+    }
+}
+
+/* -----------------------------------------------------
+   PER-PAGE SOLID COLOR OVERRIDES (mirrors footer)
+   ----------------------------------------------------- */
+
+/* GREEN */
+body.page-id-582 .site-header-accent-bar__track,
+body.page-id-1929 .site-header-accent-bar__track,
+body.page-id-1556 .site-header-accent-bar__track,
+body:has(.md-page) .site-header-accent-bar__track,
+body:has(.gflow-inbox-page) .site-header-accent-bar__track,
+body:has(.io-green) .site-header-accent-bar__track,
+body:has(.io-app-green) .site-header-accent-bar__track {
+    background: #4CAF50;
+    animation: none;
+    width: 100%;
+}
+
+/* YELLOW */
+body.page-id-1950 .site-header-accent-bar__track,
+body.page-id-1542 .site-header-accent-bar__track,
+body:has(.ad-page) .site-header-accent-bar__track,
+body:has(.io-yellow) .site-header-accent-bar__track,
+body:has(.io-app-yellow) .site-header-accent-bar__track {
+    background: #F9B500;
+    animation: none;
+    width: 100%;
+}
+
+/* BLUE */
+body.page-id-1018 .site-header-accent-bar__track,
+body:has(.au-page) .site-header-accent-bar__track,
+body:has(.login-page) .site-header-accent-bar__track,
+body:has(.io-blue) .site-header-accent-bar__track,
+body:has(.io-app-blue) .site-header-accent-bar__track {
+    background: #1D47A1;
+    animation: none;
+    width: 100%;
+}
+
+/* RED */
+body:has(.io-red) .site-header-accent-bar__track,
+body:has(.io-app-red) .site-header-accent-bar__track {
+    background: #E30B5C;
+    animation: none;
+    width: 100%;
+}
+
+/* Optional: kill any border-bottom Genesis puts on the header so the
+   accent bar IS the divider, not a bar-plus-faint-grey-line. */
+.site-header {
+    border-bottom: none !important;
+}
+
+
+
+
+/* =====================================================
    FOOTER ACCENT BAR (animated 4-color brand chain)
    Home page: scrolling Blue → Green → Yellow → Red chain.
    Inner pages: solid single color per page-id (see overrides below).

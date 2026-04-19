@@ -36,5 +36,6 @@ class DependencyFactory {
 
         // Presentation
         new FooterAccentBar();
+        new HeaderAccentBar();
     }
 }
