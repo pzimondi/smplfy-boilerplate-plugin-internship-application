@@ -458,7 +458,6 @@
    ===================================================== */
 
 .site-footer {
-    border-top: 1px solid #cbd5e1;
     background: #e2e8f0;
 }
 
@@ -7356,6 +7355,46 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
     body.page-id-1950 .gravityflow-status-box {
         grid-template-columns: 1fr !important;
     }
+}
+
+
+
+/* =====================================================
+   FOOTER ACCENT BAR (4-color brand bar)
+   Blue → Green → Yellow → Red, sharp color blocks
+   Sits above footer content, spans full viewport.
+   ===================================================== */
+
+.site-footer-accent-bar {
+    display: flex;
+    width: 100%;
+    height: 6px;
+    font-size: 0;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.site-footer-accent-bar>span {
+    flex: 1;
+    display: block;
+    height: 100%;
+}
+
+.site-footer-accent-bar .bar-blue {
+    background: #1D47A1;
+}
+
+.site-footer-accent-bar .bar-green {
+    background: #4CAF50;
+}
+
+.site-footer-accent-bar .bar-yellow {
+    background: #F9B500;
+}
+
+.site-footer-accent-bar .bar-red {
+    background: #E30B5C;
 }
 
 
