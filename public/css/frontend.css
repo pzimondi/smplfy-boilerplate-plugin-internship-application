@@ -7583,3 +7583,22 @@ body:has(.io-app-red) .site-footer-accent-bar__track {
     animation: none;
     width: 100%;
 }
+
+
+
+/* =====================================================
+   KILL PHANTOM GREY STRIP ABOVE HEADER
+   .site-container was exposing padding/margin above
+   the header, creating a thin grey band.
+   ===================================================== */
+
+.site-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    border-top: none !important;
+    background: #ffffff !important;
+}
+
+.site-header {
+    margin-top: 0 !important;
+}
