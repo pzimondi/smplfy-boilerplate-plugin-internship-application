@@ -6,15 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-/**
- * Injects the footer accent bar markup as the first child of
- * <footer class="site-footer">, outside the .wrap container,
- * so it can span full viewport width.
- *
- * Per-page coloring is handled entirely by CSS via body classes.
- * This class only places the markup.
- */
 class FooterAccentBar {
+
+    private static bool $injected = false;
 
     public function __construct() {
         $this->register_filters();
@@ -31,6 +25,12 @@ class FooterAccentBar {
     }
 
     public function inject_accent_bar( string $open_html ): string {
+
+        if ( self::$injected ) {
+            return $open_html;
+        }
+        self::$injected = true;
+
         return $open_html
             . '<div class="site-footer-accent-bar" role="presentation" aria-hidden="true">'
             . '<div class="site-footer-accent-bar__track"></div>'
