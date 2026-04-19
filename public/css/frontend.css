@@ -7356,41 +7356,127 @@ body.page-id-1950 .gravityflow-note-body .gravityflow-note-body {
 
 
 /* =====================================================
-   FOOTER ACCENT BAR (4-color brand bar)
-   Blue → Green → Yellow → Red, sharp color blocks
-   Sits above footer content, spans full viewport.
+   FOOTER ACCENT BAR SYSTEM
+   
+   Home page  → animated 4-color gradient chain (default)
+   All other  → solid single-color bar in that page's
+                role color (blue/green/yellow/red)
+   
+   Shared: footer background stays white, accent bar
+   is the separator between content and footer.
    ===================================================== */
 
+/* ----- Shared shell (all pages) ----- */
 .site-footer-accent-bar {
-    display: flex;
+    position: relative;
     width: 100%;
-    height: 6px;
-    font-size: 0;
-    line-height: 0;
+    height: 4px;
+    overflow: hidden;
+    background: #ffffff;
     margin: 0;
     padding: 0;
 }
 
-.site-footer-accent-bar>span {
-    flex: 1;
-    display: block;
+.site-footer-accent-bar__track {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
+    width: 200%;
+    background: linear-gradient(90deg,
+            #1D47A1 0%, #6b8cc9 12.5%,
+            #4CAF50 12.5%, #a5d8a8 25%,
+            #F9B500 25%, #fcd876 37.5%,
+            #E30B5C 37.5%, #f285ae 50%,
+            #1D47A1 50%, #6b8cc9 62.5%,
+            #4CAF50 62.5%, #a5d8a8 75%,
+            #F9B500 75%, #fcd876 87.5%,
+            #E30B5C 87.5%, #f285ae 100%);
+    animation: footer-accent-scroll 12s linear infinite;
 }
 
-.site-footer-accent-bar .bar-blue {
-    background: #1D47A1;
+@keyframes footer-accent-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
-.site-footer-accent-bar .bar-green {
+@media (prefers-reduced-motion: reduce) {
+    .site-footer-accent-bar__track {
+        animation: none;
+    }
+}
+
+/* ----- INNER PAGES — solid single-color bars -----
+   Override the animated track with a solid single color,
+   scoped per page via body class or wrapper class. */
+
+/* GREEN — Managers areas */
+body.page-id-582 .site-footer-accent-bar__track,
+/* Manager's Inbox */
+body.page-id-1929 .site-footer-accent-bar__track,
+/* Support Inbox */
+body.page-id-1556 .site-footer-accent-bar__track,
+/* View Submitted Tasks */
+body:has(.md-page) .site-footer-accent-bar__track,
+body:has(.gflow-inbox-page) .site-footer-accent-bar__track {
+    width: 100%;
     background: #4CAF50;
+    animation: none;
 }
 
-.site-footer-accent-bar .bar-yellow {
+/* YELLOW — Applicant / intern areas */
+body.page-id-1950 .site-footer-accent-bar__track,
+/* Applicant Inbox */
+body.page-id-1542 .site-footer-accent-bar__track,
+/* View Task Completed */
+body:has(.ad-page) .site-footer-accent-bar__track {
+    width: 100%;
     background: #F9B500;
+    animation: none;
 }
 
-.site-footer-accent-bar .bar-red {
+/* BLUE — About, Login */
+body.page-id-1018 .site-footer-accent-bar__track,
+/* Login */
+body:has(.au-page) .site-footer-accent-bar__track,
+body:has(.login-page) .site-footer-accent-bar__track {
+    width: 100%;
+    background: #1D47A1;
+    animation: none;
+}
+
+/* Role-wrapper pages — pick up color via existing wrapper classes */
+body:has(.io-blue) .site-footer-accent-bar__track,
+body:has(.io-app-blue) .site-footer-accent-bar__track {
+    width: 100%;
+    background: #1D47A1;
+    animation: none;
+}
+
+body:has(.io-green) .site-footer-accent-bar__track,
+body:has(.io-app-green) .site-footer-accent-bar__track {
+    width: 100%;
+    background: #4CAF50;
+    animation: none;
+}
+
+body:has(.io-yellow) .site-footer-accent-bar__track,
+body:has(.io-app-yellow) .site-footer-accent-bar__track {
+    width: 100%;
+    background: #F9B500;
+    animation: none;
+}
+
+body:has(.io-red) .site-footer-accent-bar__track,
+body:has(.io-app-red) .site-footer-accent-bar__track {
+    width: 100%;
     background: #E30B5C;
+    animation: none;
 }
 
 
