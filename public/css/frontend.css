@@ -149,9 +149,15 @@
     background: #E30B5C;
 }
 
-/* Login fallback – Red underline */
-#menu-item-609>a::after {
-    background: #E30B5C;
+/* Login – Green (href-based to survive menu-item ID changes) */
+.genesis-nav-menu a[href$="/login/"],
+.genesis-nav-menu a[href$="/login"] {
+    color: #4CAF50;
+}
+
+.genesis-nav-menu a[href$="/login/"]::after,
+.genesis-nav-menu a[href$="/login"]::after {
+    background: #4CAF50;
 }
 
 
