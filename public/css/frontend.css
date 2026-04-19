@@ -6227,12 +6227,12 @@ body.page-id-1018 .entry-title::before {
 /* ===== Form card wrapper ===== */
 body.page-id-1018 .mp_wrapper.mp_login_form {
     background: #ffffff;
-    border: 1px solid #e8ecf1;
+    border: 1px solid #c6f0d4;
     border-radius: 16px;
     padding: 40px 36px;
     margin: 20px auto 0;
     max-width: 460px;
-    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 8px 30px rgba(76, 175, 80, 0.12);
     text-align: left;
 }
 
