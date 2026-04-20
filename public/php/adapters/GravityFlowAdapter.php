@@ -5,9 +5,14 @@ namespace SMPLFY\boilerplate;
 class GravityFlowAdapter {
 
     private WorkflowNotifications $workflowNotifications;
+    private StepCompleteRedirect  $stepCompleteRedirect;
 
-    public function __construct( WorkflowNotifications $workflowNotifications ) {
+    public function __construct(
+        WorkflowNotifications $workflowNotifications,
+        StepCompleteRedirect  $stepCompleteRedirect
+    ) {
         $this->workflowNotifications = $workflowNotifications;
+        $this->stepCompleteRedirect  = $stepCompleteRedirect;
         $this->register_hooks();
     }
 
@@ -16,6 +21,13 @@ class GravityFlowAdapter {
         add_action(
             'gravityflow_step_complete',
             [ $this->workflowNotifications, 'handle_step_complete' ],
+            10,
+            4
+        );
+
+        add_filter(
+            'gravityflow_approval_confirmation',
+            [ $this->stepCompleteRedirect, 'filter_approval_confirmation' ],
             10,
             4
         );

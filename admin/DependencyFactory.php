@@ -27,11 +27,12 @@ class DependencyFactory {
         $loginRedirect           = new LoginRedirect();
         $workflowNotifications   = new WorkflowNotifications( $internshipApplicationRepository, $eSignatureAgreementRepository );
         $eSignatureNotifications = new ESignatureNotifications();
+        $stepCompleteRedirect    = new StepCompleteRedirect();
 
         // Adapters
         new GravityFormsAdapter( $internshipApplication );
         new WordpressAdapter( $userCreated, $backfillMemberships, $deleteUser, $loginRedirect );
-        new GravityFlowAdapter( $workflowNotifications );
+        new GravityFlowAdapter( $workflowNotifications, $stepCompleteRedirect );
         new ESignatureAdapter( $eSignatureNotifications );
 
         // Presentation
