@@ -224,6 +224,19 @@ class WorkflowNotifications {
                 $text .= "Regards,\nSimplifyBiz Workflow";
             }
 
+            if ( $step_name === 'Onboard Applicant' ) {
+                $webhook = $this->webhook_managers;
+                $text  = "*New Intern Onboarded - {$full_name}*\n\n";
+                $text .= "Hello Managers,\n\n";
+                $text .= "A new intern has been successfully onboarded and is now active on ops.simplifybiz.com.\n\n";
+                $text .= "*Applicant Details:*\n";
+                $text .= "Name: {$full_name}\n";
+                $text .= "Email: {$email}\n";
+                $text .= "Internship: {$internship}\n\n";
+                $text .= "The intern has been set up with their ops.simplifybiz.com account and assigned to a project. They are now ready to begin their internship.\n\n";
+                $text .= "Regards,\nSimplifyBiz Workflow";
+            }
+
             if ( ! empty( $text ) && ! empty( $webhook ) ) {
                 $this->send_to_google_chat( $text, $webhook );
             }
