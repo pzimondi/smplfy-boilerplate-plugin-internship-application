@@ -43,8 +43,8 @@
     position: absolute;
     left: 14px;
     right: 14px;
-    bottom: 1px;
-    height: 0.5px;
+    bottom: 0.5px;
+    height: 1px;
     border-radius: 999px;
     transform: scaleX(0);
     transform-origin: left;
