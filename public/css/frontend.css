@@ -7367,7 +7367,7 @@ body.page-id-1018 .entry-content>p:empty {
     }
 }
 
-/* GREEN — Managers/Interns dashboards + Login */
+/* GREEN — Managers/Interns dashboards + Login + Junior Social Media role page */
 body.page-id-582 .site-header-accent-bar__track,
 body.page-id-1929 .site-header-accent-bar__track,
 body.page-id-1556 .site-header-accent-bar__track,
@@ -7375,6 +7375,7 @@ body.page-id-1018 .site-header-accent-bar__track,
 body:has(.md-page) .site-header-accent-bar__track,
 body:has(.gflow-inbox-page) .site-header-accent-bar__track,
 body:has(.login-page) .site-header-accent-bar__track,
+body:has(.bs-job-hero-social) .site-header-accent-bar__track,
 body:has(.io-green) .site-header-accent-bar__track,
 body:has(.io-app-green) .site-header-accent-bar__track {
     background: #4CAF50;
@@ -7382,10 +7383,11 @@ body:has(.io-app-green) .site-header-accent-bar__track {
     width: 100%;
 }
 
-/* YELLOW */
+/* YELLOW — Applicant pages + Junior Business Analyst role page */
 body.page-id-1950 .site-header-accent-bar__track,
 body.page-id-1542 .site-header-accent-bar__track,
 body:has(.ad-page) .site-header-accent-bar__track,
+body:has(.bs-job-hero-analyst) .site-header-accent-bar__track,
 body:has(.io-yellow) .site-header-accent-bar__track,
 body:has(.io-app-yellow) .site-header-accent-bar__track {
     background: #F9B500;
@@ -7405,7 +7407,7 @@ body:has(.io-app-blue) .site-header-accent-bar__track {
 }
 
 /* RED — Junior Web Developer role page */
-body:has(.bs-job-hero-developer) .site-header-accent-bar__track,
+body:has(.bs-job-hero-webdev) .site-header-accent-bar__track,
 body:has(.io-red) .site-header-accent-bar__track,
 body:has(.io-app-red) .site-header-accent-bar__track {
     background: #E30B5C;
@@ -7477,6 +7479,7 @@ body.page-id-1018 .site-footer-accent-bar__track,
 body:has(.md-page) .site-footer-accent-bar__track,
 body:has(.gflow-inbox-page) .site-footer-accent-bar__track,
 body:has(.login-page) .site-footer-accent-bar__track,
+body:has(.bs-job-hero-social) .site-footer-accent-bar__track,
 body:has(.io-green) .site-footer-accent-bar__track,
 body:has(.io-app-green) .site-footer-accent-bar__track {
     background: #4CAF50;
@@ -7488,6 +7491,7 @@ body:has(.io-app-green) .site-footer-accent-bar__track {
 body.page-id-1950 .site-footer-accent-bar__track,
 body.page-id-1542 .site-footer-accent-bar__track,
 body:has(.ad-page) .site-footer-accent-bar__track,
+body:has(.bs-job-hero-analyst) .site-footer-accent-bar__track,
 body:has(.io-yellow) .site-footer-accent-bar__track,
 body:has(.io-app-yellow) .site-footer-accent-bar__track {
     background: #F9B500;
@@ -7506,6 +7510,7 @@ body:has(.io-app-blue) .site-footer-accent-bar__track {
 }
 
 /* RED */
+body:has(.bs-job-hero-analyst) .site-footer-accent-bar__track,
 body:has(.io-red) .site-footer-accent-bar__track,
 body:has(.io-app-red) .site-footer-accent-bar__track {
     background: #E30B5C;
