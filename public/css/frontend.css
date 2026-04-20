@@ -149,13 +149,11 @@
     background: #E30B5C;
 }
 
-/* Login – Green */
-.genesis-nav-menu #menu-item-1021>a,
+/* Login – Green */,
 #menu-item-1021>a {
     color: #4CAF50 !important;
 }
 
-.genesis-nav-menu #menu-item-1021>a::after,
 #menu-item-1021>a::after {
     background: #4CAF50 !important;
 }
