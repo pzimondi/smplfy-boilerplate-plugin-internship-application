@@ -94,7 +94,7 @@
 /* About + Account – Blue (universal / logged-in pages, not role-specific) */
 #menu-item-608>a,
 #menu-item-2118>a {
-    color: green;
+    color: #1D47A1;
 }
 
 #menu-item-608>a::after,
