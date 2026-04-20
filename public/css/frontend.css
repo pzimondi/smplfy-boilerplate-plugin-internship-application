@@ -150,8 +150,8 @@
 }
 
 /* Login – Green (href-based to survive menu-item ID changes) */
-.genesis-nav-menu a[href$="/login/"],
-.genesis-nav-menu a[href$="/login"] {
+.genesis-nav-menu a[href$="https: //intern.simplifybiz.com/login/"],
+.genesis-nav-menu a[href$="https: //intern.simplifybiz.com/login/"] {
     color: #4CAF50;
 }
 
