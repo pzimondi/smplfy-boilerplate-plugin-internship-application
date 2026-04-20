@@ -271,7 +271,6 @@
 .genesis-nav-menu li.nav-cta-apply .sub-menu li {
     display: block !important;
     width: 100% !important;
-    width: 100% !important;
     box-sizing: border-box !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -282,6 +281,8 @@
 /* Sub-item links */
 .genesis-nav-menu li.nav-cta-apply .sub-menu li>a {
     display: flex !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
     align-items: center;
     gap: 12px;
     padding: 11px 14px !important;
