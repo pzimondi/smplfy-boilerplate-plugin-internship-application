@@ -4,13 +4,13 @@
 
 /* Header spacing */
 .site-header {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .site-header .wrap {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 /* Logo — clickable feedback on hover */
@@ -33,7 +33,7 @@
     font-size: 1.05rem;
     font-weight: 600;
     position: relative;
-    padding: 10px 14px;
+    padding: 8px 14px;
     transition: transform 180ms ease;
 }
 
@@ -77,13 +77,13 @@
 /* Mobile nav tweaks */
 @media (max-width: 782px) {
     .site-header {
-        padding-top: 14px;
-        padding-bottom: 14px;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .genesis-nav-menu a {
         font-size: 1rem;
-        padding: 10px 10px;
+        padding: 8px 10px;
     }
 }
 
@@ -149,13 +149,251 @@
     background: #E30B5C;
 }
 
-/* Login – Green */,
+/* Login – Green (gateway to role dashboards, shares Managers/Interns accent) */
 #menu-item-1021>a {
-    color: #4CAF50 !important;
+    color: #4CAF50;
 }
 
 #menu-item-1021>a::after {
-    background: #4CAF50 !important;
+    background: #4CAF50;
+}
+
+
+/* =====================================================
+   NAV CTA — APPLY BUTTON WITH ROLE DROPDOWN
+   Parent menu item needs CSS class: nav-cta-apply
+   Child menu items need classes:
+     nav-cta-role-blue   → Junior Web Designer
+     nav-cta-role-green  → Junior Social Media Specialist
+     nav-cta-role-yellow → Junior Business Analyst
+     nav-cta-role-red    → Junior Web Developer
+   ===================================================== */
+
+/* Parent "Apply" item = filled yellow button */
+.genesis-nav-menu li.nav-cta-apply {
+    margin-left: 14px;
+    position: relative;
+}
+
+.genesis-nav-menu li.nav-cta-apply>a {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    background-color: #F9B500 !important;
+    color: #ffffff !important;
+    padding: 9px 20px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    font-size: 0.98rem !important;
+    line-height: 1.2 !important;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.genesis-nav-menu li.nav-cta-apply>a:hover,
+.genesis-nav-menu li.nav-cta-apply>a:focus {
+    background-color: #d99a00 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(249, 181, 0, 0.35);
+}
+
+/* Kill the nav underline animation on the button — it's a button, not a link */
+.genesis-nav-menu li.nav-cta-apply>a::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Chevron indicator on the right side of the button */
+.genesis-nav-menu li.nav-cta-apply>a::before {
+    content: "";
+    order: 2;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: rotate(45deg) translate(-2px, -2px);
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.genesis-nav-menu li.nav-cta-apply:hover>a::before,
+.genesis-nav-menu li.nav-cta-apply:focus-within>a::before {
+    transform: rotate(225deg) translate(-2px, -2px);
+}
+
+/* Dropdown panel */
+.genesis-nav-menu li.nav-cta-apply .sub-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 280px;
+    background: #ffffff;
+    border: 1px solid #e8ecf1;
+    border-radius: 14px;
+    padding: 8px;
+    margin: 10px 0 0;
+    list-style: none;
+    box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+    z-index: 150;
+}
+
+.genesis-nav-menu li.nav-cta-apply:hover>.sub-menu,
+.genesis-nav-menu li.nav-cta-apply:focus-within>.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0s;
+}
+
+/* Invisible bridge so hover doesn't break between button and dropdown */
+.genesis-nav-menu li.nav-cta-apply::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    height: 12px;
+    display: none;
+}
+
+.genesis-nav-menu li.nav-cta-apply:hover::after,
+.genesis-nav-menu li.nav-cta-apply:focus-within::after {
+    display: block;
+}
+
+/* Sub-item list items — clean reset */
+.genesis-nav-menu li.nav-cta-apply .sub-menu li {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Sub-item links */
+.genesis-nav-menu li.nav-cta-apply .sub-menu li>a {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px !important;
+    border-radius: 8px !important;
+    font-size: 0.93rem !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+    border-left: 3px solid transparent;
+    background: transparent !important;
+    line-height: 1.3 !important;
+    white-space: nowrap;
+}
+
+/* Color dot before each role name */
+.genesis-nav-menu li.nav-cta-apply .sub-menu li>a::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li>a:hover::before {
+    transform: scale(1.25);
+}
+
+/* Kill any inherited underline on sub-items */
+.genesis-nav-menu li.nav-cta-apply .sub-menu li>a::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Role-colored sub-items */
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-blue>a::before {
+    background: #1D47A1;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-blue>a:hover,
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-blue>a:focus {
+    background: #eff4fb !important;
+    color: #1D47A1 !important;
+    border-left-color: #1D47A1;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-green>a::before {
+    background: #4CAF50;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-green>a:hover,
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-green>a:focus {
+    background: #f0fdf4 !important;
+    color: #2f8132 !important;
+    border-left-color: #4CAF50;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-yellow>a::before {
+    background: #F9B500;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-yellow>a:hover,
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-yellow>a:focus {
+    background: #fffbeb !important;
+    color: #b17a00 !important;
+    border-left-color: #F9B500;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-red>a::before {
+    background: #E30B5C;
+}
+
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-red>a:hover,
+.genesis-nav-menu li.nav-cta-apply .sub-menu li.nav-cta-role-red>a:focus {
+    background: #fef2f4 !important;
+    color: #b5094a !important;
+    border-left-color: #E30B5C;
+}
+
+/* Mobile: collapse dropdown into a regular expanded list */
+@media (max-width: 782px) {
+    .genesis-nav-menu li.nav-cta-apply {
+        margin-left: 0;
+    }
+
+    .genesis-nav-menu li.nav-cta-apply>a {
+        justify-content: center;
+        width: 100%;
+        padding: 12px 20px !important;
+    }
+
+    .genesis-nav-menu li.nav-cta-apply>a::before {
+        display: none;
+    }
+
+    .genesis-nav-menu li.nav-cta-apply .sub-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        margin: 6px 0 0;
+        padding: 0;
+        min-width: 0;
+        background: transparent;
+        transition: none;
+    }
+
+    .genesis-nav-menu li.nav-cta-apply .sub-menu li>a {
+        padding: 10px 18px !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        white-space: normal;
+    }
 }
 
 
@@ -475,13 +713,13 @@
 /* Breathing room below the accent bar so copyright text doesn't crash into it */
 .site-footer .wrap,
 .site-footer .simplify-footer-inner {
-    padding-top: 24px;
+    padding-top: 18px;
 }
 
 .site-footer .simplify-footer-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 24px 20px;
+    padding: 18px 20px;
     text-align: center;
 }
 
