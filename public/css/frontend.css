@@ -149,13 +149,15 @@
     background: #E30B5C;
 }
 
-/* Login – Green (gateway to role dashboards, shares Managers/Interns accent) */
+/* Login – Green */
+.genesis-nav-menu #menu-item-1021>a,
 #menu-item-1021>a {
-    color: #4CAF50;
+    color: #4CAF50 !important;
 }
 
+.genesis-nav-menu #menu-item-1021>a::after,
 #menu-item-1021>a::after {
-    background: #4CAF50;
+    background: #4CAF50 !important;
 }
 
 
