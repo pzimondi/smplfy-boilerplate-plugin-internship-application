@@ -7775,3 +7775,23 @@ body.page-id-1020 .mepr-account-change-password a:hover {
         padding: 28px 20px;
     }
 }
+
+
+
+/* Form 1 page 12 gating page: hide the conditionally-disabled submit button.
+   Button ID is stable. Targets by ID + attribute for max specificity. */
+#gform_next_button_1_12[data-conditional-logic="hidden"],
+#gform_next_button_1_12[disabled],
+#gform_next_button_1_12[disabled="disabled"] {
+    display: none !important;
+}
+
+
+
+/* Collapse the gform-page-footer when it contains only the hidden submit button. */
+#gform_wrapper_1 .gform-page-footer:has(#gform_next_button_1_12[data-conditional-logic="hidden"]),
+#gform_wrapper_1 .gform_page_footer:has(#gform_next_button_1_12[data-conditional-logic="hidden"]) {
+    display: none !important;
+}
+
+
