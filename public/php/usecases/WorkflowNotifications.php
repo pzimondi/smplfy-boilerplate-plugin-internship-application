@@ -199,13 +199,29 @@ class WorkflowNotifications {
                 $webhook = $this->webhook_support;
                 $text  = "*Action Required - Onboard New Intern*\n\n";
                 $text .= "Hello Support Team,\n\n";
-                $text .= "A new intern has signed their internship agreement and is ready to be onboarded on ops.simplifybiz.com.\n\n";
-                $text .= "Applicant: {$full_name}\n";
+                $text .= "A new intern has signed their internship agreement and is ready to be onboarded. Please complete the onboarding setup below before approving this step.\n\n";
+                $text .= "*Applicant Details:*\n";
+                $text .= "Name: {$full_name}\n";
                 $text .= "Email: {$email}\n";
                 $text .= "Internship: {$internship}\n\n";
-                $text .= "Please log in to your support inbox to complete the onboarding steps:\n";
+                $text .= "*ONBOARDING CHECKLIST*\n\n";
+                $text .= "1. Create their ops.simplifybiz.com account\n";
+                $text .= "   - Set up their username and password\n";
+                $text .= "   - Grant the appropriate access permissions\n\n";
+                $text .= "2. Assign them to a Project\n";
+                $text .= "   - Select the project they will be working on\n\n";
+                $text .= "3. Assign their Project Role\n";
+                $text .= "   - Either Lead or Team Member\n\n";
+                $text .= "4. Fill in the editable fields below\n";
+                $text .= "   - ops.simplifybiz.com Username\n";
+                $text .= "   - Project\n";
+                $text .= "   - Project Role\n\n";
+                $text .= "*NEXT STEPS*\n\n";
+                $text .= "Once all fields are filled in, click Approve to send the intern their welcome and onboarding email.\n";
+                $text .= "Click Reject only if onboarding cannot be completed at this time.\n\n";
+                $text .= "Please log in to your support inbox to complete the onboarding:\n";
                 $text .= "https://intern.simplifybiz.com/support-inbox/\n\n";
-                $text .= "Regards,\nSimplifyBiz Team";
+                $text .= "Regards,\nSimplifyBiz Workflow";
             }
 
             if ( ! empty( $text ) && ! empty( $webhook ) ) {
