@@ -268,11 +268,14 @@
 
 /* Sub-item list items — clean reset */
 .genesis-nav-menu li.nav-cta-apply .sub-menu li {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    display: block !important;
+    width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    float: none !important;
 }
 
 /* Sub-item links */
