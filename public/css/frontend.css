@@ -149,14 +149,12 @@
     background: #E30B5C;
 }
 
-/* Login – Green (href-based to survive menu-item ID changes) */
-.genesis-nav-menu a[href$="https: //intern.simplifybiz.com/login/"],
-.genesis-nav-menu a[href$="https: //intern.simplifybiz.com/login/"] {
+/* Login – Green (gateway to role dashboards, shares Managers/Interns accent) */
+#menu-item-1021>a {
     color: #4CAF50;
 }
 
-.genesis-nav-menu a[href$="/login/"]::after,
-.genesis-nav-menu a[href$="/login"]::after {
+#menu-item-1021>a::after {
     background: #4CAF50;
 }
 
