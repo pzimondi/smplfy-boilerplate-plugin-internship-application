@@ -7,14 +7,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Injects a meta-refresh redirect into Gravity Flow's approval/rejection
- * confirmation page, sending the user back to their role's inbox after
- * a short delay.
+ * Appends a meta-refresh redirect to Gravity Flow's approval feedback message,
+ * sending the user back to their role's inbox after a short delay.
  *
- * Uses a hardcoded WordPress role slug → URL map rather than MemberPress's
- * per-membership Login Redirect URL. The role-based approach works reliably
- * mid-request (during an approval POST) whereas MeprUser::active_product_subscriptions
- * can return stale or empty state in that context.
+ * Uses gravityflow_feedback_approval — the filter that modifies the "Entry
+ * approved" / "Entry rejected" feedback text shown after a user clicks
+ * Approve or Reject on a workflow step. Fires only on approval step actions.
  *
  * Hooked via GravityFlowAdapter — do not register hooks here.
  */
@@ -33,30 +31,37 @@ class StepCompleteRedirect {
     ];
 
     /**
-     * gravityflow_approval_confirmation filter — fires when Gravity Flow
-     * renders the confirmation message after a user approves/rejects a step.
+     * gravityflow_feedback_approval filter callback.
+     *
+     * @param string               $feedback   The feedback message text.
+     * @param array                $entry      The entry array.
+     * @param \Gravity_Flow_Assignee $assignee The assignee object.
+     * @param string               $new_status The new approval status ('approved' / 'rejected').
+     * @param array                $form       The form array.
+     * @param \Gravity_Flow_Step   $step       The step object.
+     * @return string
      */
-    public function filter_approval_confirmation( $confirmation, $form, $entry, $step ): string {
+    public function filter_feedback_approval( $feedback, $entry, $assignee, $new_status, $form, $step ): string {
 
         try {
 
             $user = wp_get_current_user();
 
             if ( ! $user || ! $user->ID ) {
-                return $confirmation;
+                return $feedback;
             }
 
             $destination = $this->get_destination_for_user( $user );
 
             if ( empty( $destination ) ) {
-                return $confirmation;
+                return $feedback;
             }
 
-            return $this->inject_redirect( $confirmation, $destination );
+            return $this->inject_redirect( $feedback, $destination );
 
         } catch ( \Throwable $e ) {
             \SmplfyCore\SMPLFY_Log::error( 'StepCompleteRedirect error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() );
-            return $confirmation;
+            return $feedback;
         }
     }
 
@@ -82,21 +87,20 @@ class StepCompleteRedirect {
     }
 
     /**
-     * Wraps the confirmation message with a meta-refresh tag and a styled
-     * notice explaining the redirect.
+     * Appends a meta-refresh tag and a styled notice to the feedback message.
      */
-    private function inject_redirect( string $confirmation, string $destination ): string {
+    private function inject_redirect( string $feedback, string $destination ): string {
 
         $delay = (int) self::REDIRECT_DELAY_SECONDS;
 
         $refresh = '<meta http-equiv="refresh" content="' . $delay . ';url=' . esc_url( $destination ) . '">';
 
-        $notice  = '<div style="margin-top: 24px; padding: 16px 20px; background-color: #eff4fb; border: 1px solid #c7d8ef; border-left: 4px solid #1D47A1; border-radius: 10px; font-size: 14px; color: #1e293b; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">';
-        $notice .= '<strong style="color: #1d47a1;">Redirecting...</strong> ';
+        $notice  = '<div style="margin-top: 16px; padding: 14px 18px; background-color: #eff4fb; border: 1px solid #c7d8ef; border-left: 4px solid #1D47A1; border-radius: 10px; font-size: 14px; color: #1e293b; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">';
+        $notice .= '<strong style="color: #1d47a1;">Redirecting to your inbox...</strong> ';
         $notice .= 'You will be taken to your inbox in ' . $delay . ' seconds. ';
         $notice .= '<a style="color: #1d47a1; font-weight: 600; text-decoration: underline;" href="' . esc_url( $destination ) . '">Click here</a> if you are not redirected automatically.';
         $notice .= '</div>';
 
-        return $refresh . $confirmation . $notice;
+        return $refresh . $feedback . $notice;
     }
 }

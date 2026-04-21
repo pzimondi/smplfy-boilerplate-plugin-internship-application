@@ -26,10 +26,10 @@ class GravityFlowAdapter {
         );
 
         add_filter(
-            'gravityflow_approval_confirmation',
-            [ $this->stepCompleteRedirect, 'filter_approval_confirmation' ],
+            'gravityflow_feedback_approval',
+            [ $this->stepCompleteRedirect, 'filter_feedback_approval' ],
             10,
-            4
+            6
         );
 
         add_action(
