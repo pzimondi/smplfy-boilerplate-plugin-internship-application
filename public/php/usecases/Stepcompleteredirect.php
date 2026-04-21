@@ -95,10 +95,10 @@ class StepCompleteRedirect {
 
         $refresh = '<meta http-equiv="refresh" content="' . $delay . ';url=' . esc_url( $destination ) . '">';
 
-        $notice  = '<div style="margin-top: 16px; padding: 14px 18px; background-color: #eff4fb; border: 1px solid #c7d8ef; border-left: 4px solid #1D47A1; border-radius: 10px; font-size: 14px; color: #1e293b; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">';
-        $notice .= '<strong style="color: #1d47a1;">Redirecting to your inbox...</strong> ';
+        $notice  = '<div style="margin-top: 16px; padding: 14px 18px; background-color: #ffffff; border: 1px solid #fefff3; border-left: 4px solid #1D47A1; border-radius: 10px; font-size: 14px; color: #1e293b; line-height: 1.6; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">';
+        $notice .= '<strong style="color: #000000;">Redirecting to your inbox...</strong> ';
         $notice .= 'You will be taken to your inbox in ' . $delay . ' seconds. ';
-        $notice .= '<a style="color: #1d47a1; font-weight: 600; text-decoration: underline;" href="' . esc_url( $destination ) . '">Click here</a> if you are not redirected automatically.';
+        $notice .= '<a style="color: #000000; font-weight: 600; text-decoration: underline;" href="' . esc_url( $destination ) . '">Click here</a> if you are not redirected automatically.';
         $notice .= '</div>';
 
         return $refresh . $feedback . $notice;
