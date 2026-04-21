@@ -28,6 +28,8 @@ class DependencyFactory {
         $workflowNotifications   = new WorkflowNotifications( $internshipApplicationRepository, $eSignatureAgreementRepository );
         $eSignatureNotifications = new ESignatureNotifications();
         $stepCompleteRedirect    = new StepCompleteRedirect();
+        $fieldCopier             = new FieldCopier();
+        $fieldCopier->register_hooks();
 
         // Adapters
         new GravityFormsAdapter( $internshipApplication );
@@ -38,5 +40,7 @@ class DependencyFactory {
         // Presentation
         new FooterAccentBar();
         new HeaderAccentBar();
+
+
     }
 }
