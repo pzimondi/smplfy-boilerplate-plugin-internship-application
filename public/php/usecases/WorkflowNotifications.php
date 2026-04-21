@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Hooked via GravityFlowAdapter — do not register hooks here.
  *
- * Form 2 — Internship Application (all Approval steps, status = 'approved')
- * Form 4 — WP E-Signature Agreement (completes when signed, status = 'complete')
+ * Form 2 — Internship Application (all steps live here, including the
+ * "Agreement Signing" WP E-Signature step which completes with status 'complete').
  */
 class WorkflowNotifications {
 
@@ -42,53 +42,7 @@ class WorkflowNotifications {
                 return;
             }
 
-            if ( (int) $form_id === FormIds::ESIGNATURE_AGREEMENT_FORM_ID && (string) $status === 'complete' ) {
-
-                $raw_entry = \GFAPI::get_entry( (int) $entry_id );
-
-                if ( is_wp_error( $raw_entry ) || empty( $raw_entry ) ) {
-                    return;
-                }
-
-                $entity = $this->eSignatureAgreementRepository->get_one(
-                    [ '7' => rgar( $raw_entry, '7' ) ]
-                );
-
-                $signer_name  = $entity ? $entity->signerName  : '';
-                $signer_email = $entity ? $entity->signerEmail : '';
-
-                if ( empty( $signer_name ) ) {
-                    $user = get_userdata( (int) rgar( $raw_entry, 'created_by' ) );
-                    if ( $user ) {
-                        $signer_name  = trim( $user->first_name . ' ' . $user->last_name );
-                        $signer_email = $user->user_email;
-                        if ( empty( trim( $signer_name ) ) ) {
-                            $signer_name = $user->display_name;
-                        }
-                    }
-                }
-
-                $signer_name  = ! empty( $signer_name )  ? $signer_name  : 'Unknown';
-                $signer_email = ! empty( $signer_email ) ? $signer_email : 'Unknown';
-
-                $text  = "*Internship Agreement Signed*\n\n";
-                $text .= "Hello Manager,\n\n";
-                $text .= "{$signer_name} has signed their internship agreement.\n\n";
-                $text .= "*Signed by:* {$signer_name}\n";
-                $text .= "*Email:* {$signer_email}\n\n";
-                $text .= "Please log in to your manager inbox to confirm the signed agreement and advance the applicant to onboarding:\n";
-                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
-                $text .= "Regards,\nSimplifyBiz Team";
-
-                $this->send_to_google_chat( $text, $this->webhook_managers );
-                return;
-            }
-
             if ( (int) $form_id !== FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
-                return;
-            }
-
-            if ( (string) $status !== 'approved' ) {
                 return;
             }
 
@@ -97,10 +51,6 @@ class WorkflowNotifications {
             if ( is_wp_error( $raw_entry ) || empty( $raw_entry ) ) {
                 return;
             }
-
-            $entity = $this->internshipApplicationRepository->get_one(
-                [ FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID => rgar( $raw_entry, FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID ) ]
-            );
 
             $step_name = '';
             $steps     = gravity_flow()->get_steps( (int) $form_id, $raw_entry );
@@ -117,6 +67,10 @@ class WorkflowNotifications {
             if ( empty( $step_name ) ) {
                 return;
             }
+
+            $entity = $this->internshipApplicationRepository->get_one(
+                [ FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID => rgar( $raw_entry, FormIds::INTERNSHIP_APPLICATION_EMAIL_FIELD_ID ) ]
+            );
 
             if ( $entity ) {
                 $full_name  = trim( $entity->nameFirst . ' ' . $entity->nameLast );
@@ -138,103 +92,100 @@ class WorkflowNotifications {
             $text    = '';
             $webhook = '';
 
-            if ( $step_name === 'Approve Advance to Tasks' ) {
-                $webhook = $this->webhook_support;
-                $text  = "*Setup Required - {$full_name}*\n\n";
-                $text .= "Hello Support Team,\n\n";
-                $text .= "An applicant has been approved to start their application tasks and requires setup before they can begin.\n\n";
-                $text .= "*Applicant Details:*\n";
-                $text .= "Name: {$full_name}\n";
-                $text .= "Email: {$email}\n";
-                $text .= "Country: {$country}\n";
-                $text .= "Internship: {$internship}\n\n";
-                $text .= "Please log in to your inbox to view the full setup instructions and complete the required setup:\n";
-                $text .= "https://intern.simplifybiz.com/support-inbox/\n\n";
-                $text .= "Regards,\nSimplifyBiz Team";
-            }
-
-            if ( $step_name === 'Next Step - Submit Tasks' ) {
-                $webhook = $this->webhook_managers;
-                $text  = "*Action Required - Review and Approve Task Submission*\n\n";
-                $text .= "Hello Manager,\n\n";
-                $text .= "An applicant has completed Tasks 1 to 5 and their submission is ready for your review and approval.\n\n";
-                $text .= "Applicant: {$full_name}\n";
-                $text .= "Email: {$email}\n";
-                $text .= "Internship: {$internship}\n\n";
-                $text .= "Please log in to your manager's inbox to review and approve or reject the submission:\n";
-                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
-                $text .= "Regards,\nAndre\nSimplifyBiz LLC";
-            }
-
-            if ( $step_name === 'Schedule Interview' ) {
-                $webhook = $this->webhook_managers;
-                $text  = "*Interview Scheduled - {$full_name}*\n\n";
-                $text .= "Hello Manager,\n\n";
-                $text .= "{$full_name} has scheduled their interview for the {$internship} internship position.\n\n";
-                $text .= "*Interview Details:*\n";
-                $text .= "Date: {$interview_date}\n";
-                $text .= "Time: {$interview_time}\n";
-                $text .= "Link: {$interview_link}\n\n";
-                $text .= "Please log in to your inbox to complete the interview review step:\n";
-                $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
-                $text .= "Regards,\nSimplifyBiz Team";
-            }
-
-            if ( $step_name === 'Review and Accept Internship Offer' ) {
-                $webhook = $this->webhook_managers;
-                $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
-                $text .= "Hello Manager,\n\n";
-                $text .= "When you receive a notification from WP E-Signature that the following applicant has signed their internship agreement, please come back and confirm by clicking Approve to advance the applicant to the onboarding stage.\n\n";
-                $text .= "Applicant: {$full_name}\n";
-                $text .= "Email: {$email}\n";
-                $text .= "Internship: {$internship}\n\n";
-                $text .= "Please click the link below to come back and confirm once you have received the signed agreement notification:\n";
-                $text .= "{$entry_link}\n\n";
-                $text .= "Click *Approve* to confirm the agreement has been signed and advance to onboarding.\n";
-                $text .= "Click *Reject* only if the signed agreement is invalid or incomplete.\n\n";
-                $text .= "Regards,\nAndre\nSimplifyBiz LLC";
-            }
-
-            if ( $step_name === 'Agreement signed' ) {
+            // Agreement Signing (WP E-Signature step, fires on 'complete' when intern signs)
+            // Notifies support to onboard the applicant to ops.simplifybiz.com.
+            if ( $step_name === 'Agreement Signing' && (string) $status === 'complete' ) {
                 $webhook = $this->webhook_support;
                 $text  = "*Action Required - Onboard New Intern*\n\n";
                 $text .= "Hello Support Team,\n\n";
-                $text .= "A new intern has signed their internship agreement and is ready to be onboarded. Please complete the onboarding setup below before approving this step.\n\n";
+                $text .= "{$full_name} has signed their internship agreement and is ready to be onboarded to ops.simplifybiz.com.\n\n";
                 $text .= "*Applicant Details:*\n";
                 $text .= "Name: {$full_name}\n";
                 $text .= "Email: {$email}\n";
                 $text .= "Internship: {$internship}\n\n";
                 $text .= "*ONBOARDING CHECKLIST*\n\n";
-                $text .= "1. Create their ops.simplifybiz.com account\n";
-                $text .= "   - Set up their username and password\n";
-                $text .= "   - Grant the appropriate access permissions\n\n";
+                $text .= "1. Create their ops.simplifybiz.com account (username + password, appropriate permissions)\n";
                 $text .= "2. Assign them to a Project\n";
-                $text .= "   - Select the project they will be working on\n\n";
-                $text .= "3. Assign their Project Role\n";
-                $text .= "   - Either Lead or Team Member\n\n";
-                $text .= "4. Fill in the editable fields below\n";
-                $text .= "   - ops.simplifybiz.com Username\n";
-                $text .= "   - Project\n";
-                $text .= "   - Project Role\n\n";
-                $text .= "*NEXT STEPS*\n\n";
-                $text .= "Once all fields are filled in, click Approve to send the intern their welcome and onboarding email.\n";
-                $text .= "Click Reject only if onboarding cannot be completed at this time.\n\n";
-                $text .= "Please log in to your support inbox to complete the onboarding:\n";
+                $text .= "3. Assign their Project Role (Lead or Team Member)\n\n";
+                $text .= "Once onboarding is complete, return to your support inbox and approve the next step to send the intern their welcome email:\n";
                 $text .= "https://intern.simplifybiz.com/support-inbox/\n\n";
                 $text .= "Regards,\nSimplifyBiz Workflow";
             }
 
-            if ( $step_name === 'Onboard Applicant' ) {
-                $webhook = $this->webhook_managers;
-                $text  = "*New Intern Onboarded - {$full_name}*\n\n";
-                $text .= "Hello Managers,\n\n";
-                $text .= "A new intern has been successfully onboarded and is now active on ops.simplifybiz.com.\n\n";
-                $text .= "*Applicant Details:*\n";
-                $text .= "Name: {$full_name}\n";
-                $text .= "Email: {$email}\n";
-                $text .= "Internship: {$internship}\n\n";
-                $text .= "The intern has been set up with their ops.simplifybiz.com account and assigned to a project. They are now ready to begin their internship.\n\n";
-                $text .= "Regards,\nSimplifyBiz Workflow";
+            // The remaining branches below all require status === 'approved'
+            // (standard Gravity Flow approval steps). Agreement Signing above is
+            // the exception because it's a WP E-Signature step (status 'complete').
+            if ( empty( $text ) && (string) $status === 'approved' ) {
+
+                if ( $step_name === 'Approve Advance to Tasks' ) {
+                    $webhook = $this->webhook_support;
+                    $text  = "*Setup Required - {$full_name}*\n\n";
+                    $text .= "Hello Support Team,\n\n";
+                    $text .= "An applicant has been approved to start their application tasks and requires setup before they can begin.\n\n";
+                    $text .= "*Applicant Details:*\n";
+                    $text .= "Name: {$full_name}\n";
+                    $text .= "Email: {$email}\n";
+                    $text .= "Country: {$country}\n";
+                    $text .= "Internship: {$internship}\n\n";
+                    $text .= "Please log in to your inbox to view the full setup instructions and complete the required setup:\n";
+                    $text .= "https://intern.simplifybiz.com/support-inbox/\n\n";
+                    $text .= "Regards,\nSimplifyBiz Team";
+                }
+
+                if ( $step_name === 'Next Step - Submit Tasks' ) {
+                    $webhook = $this->webhook_managers;
+                    $text  = "*Action Required - Review and Approve Task Submission*\n\n";
+                    $text .= "Hello Manager,\n\n";
+                    $text .= "An applicant has completed Tasks 1 to 5 and their submission is ready for your review and approval.\n\n";
+                    $text .= "Applicant: {$full_name}\n";
+                    $text .= "Email: {$email}\n";
+                    $text .= "Internship: {$internship}\n\n";
+                    $text .= "Please log in to your manager's inbox to review and approve or reject the submission:\n";
+                    $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
+                    $text .= "Regards,\nAndre\nSimplifyBiz LLC";
+                }
+
+                if ( $step_name === 'Schedule Interview' ) {
+                    $webhook = $this->webhook_managers;
+                    $text  = "*Interview Scheduled - {$full_name}*\n\n";
+                    $text .= "Hello Manager,\n\n";
+                    $text .= "{$full_name} has scheduled their interview for the {$internship} internship position.\n\n";
+                    $text .= "*Interview Details:*\n";
+                    $text .= "Date: {$interview_date}\n";
+                    $text .= "Time: {$interview_time}\n";
+                    $text .= "Link: {$interview_link}\n\n";
+                    $text .= "Please log in to your inbox to complete the interview review step:\n";
+                    $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
+                    $text .= "Regards,\nSimplifyBiz Team";
+                }
+
+                if ( $step_name === 'Review and Accept Internship Offer' ) {
+                    $webhook = $this->webhook_managers;
+                    $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
+                    $text .= "Hello Manager,\n\n";
+                    $text .= "When you receive a notification from WP E-Signature that the following applicant has signed their internship agreement, please come back and confirm by clicking Approve to advance the applicant to the onboarding stage.\n\n";
+                    $text .= "Applicant: {$full_name}\n";
+                    $text .= "Email: {$email}\n";
+                    $text .= "Internship: {$internship}\n\n";
+                    $text .= "Please click the link below to come back and confirm once you have received the signed agreement notification:\n";
+                    $text .= "{$entry_link}\n\n";
+                    $text .= "Click *Approve* to confirm the agreement has been signed and advance to onboarding.\n";
+                    $text .= "Click *Reject* only if the signed agreement is invalid or incomplete.\n\n";
+                    $text .= "Regards,\nAndre\nSimplifyBiz LLC";
+                }
+
+                if ( $step_name === 'Onboard Applicant' ) {
+                    $webhook = $this->webhook_managers;
+                    $text  = "*New Intern Onboarded - {$full_name}*\n\n";
+                    $text .= "Hello Managers,\n\n";
+                    $text .= "A new intern has been successfully onboarded and is now active on ops.simplifybiz.com.\n\n";
+                    $text .= "*Applicant Details:*\n";
+                    $text .= "Name: {$full_name}\n";
+                    $text .= "Email: {$email}\n";
+                    $text .= "Internship: {$internship}\n\n";
+                    $text .= "The intern has been set up with their ops.simplifybiz.com account and assigned to a project. They are now ready to begin their internship.\n\n";
+                    $text .= "Regards,\nSimplifyBiz Workflow";
+                }
             }
 
             if ( ! empty( $text ) && ! empty( $webhook ) ) {
