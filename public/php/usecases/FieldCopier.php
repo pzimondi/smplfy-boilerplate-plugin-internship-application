@@ -9,72 +9,75 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Populates derived fields on form 2 (Internship Application) at submission.
  *
- * Uses a dual-hook strategy for maximum reliability:
+ * ARCHITECTURE NOTES:
  *
- *   1. gform_pre_submission_2 — injects values into $_POST so GF picks them up
- *      during its normal save pipeline. Works for most fields.
+ * Form 2 is a single-submission multi-page form. All fields save together at
+ * final submit. However, GF's conditional-logic engine STRIPS values from
+ * children of hidden sections on save — even values injected via $_POST.
  *
- *   2. gform_after_submission_2 — reads the just-saved entry and uses GFAPI
- *      to write any missing values directly. Catches fields that pre_submission
- *      missed because of visibility / conditional logic / page membership issues.
+ * Field 103 (Intern Onboarding section) shows only when Application Status =
+ * Onboarding, which is false on fresh submission. So its children 105, 120,
+ * 123 get their values stripped by GF despite successful POST injection and
+ * despite successful GFAPI::update_entry_field calls (GF re-applies CL on
+ * individual field updates).
  *
- * Direct copies:
+ * Field 59 (Applicant Onboarding) has no conditional logic, so its children
+ * 62, 63, 114, 115 save normally.
+ *
+ * Field 33 (password input) is stripped from the saved entry by GF's password-
+ * field handling — regardless of conditional logic.
+ *
+ * SOLUTION:
+ *
+ *   1. gform_pre_submission_2 — captures source values (email, password, first
+ *      name) into class state, since some get stripped before after_submission.
+ *
+ *   2. gform_after_submission_2 — uses GFAPI::update_entry() with the FULL
+ *      entry array rather than update_entry_field(). The full-array updater
+ *      does NOT re-run conditional logic per field, so values in hidden-section
+ *      children survive.
+ *
+ * Mappings:
  *   - Field 7  (Email)            → Fields 62, 105
  *   - Field 33 (Account Password) → Fields 63, 120
- *
- * Computed sblik URLs from first name (field 6.3), slugified:
- *   - Field 114 = https://{firstname}.sblik.com
- *   - Field 115 = https://{firstname}.sblik.com/login/
- *
- * Static URL:
- *   - Field 123 = https://ops.simplifybiz.com/login
- *
- * NOTE: backfill_entry has temporary diagnostic logging to debug field 120.
- * Remove the SMPLFY_Log::error() calls once the issue is resolved.
+ *   - Field 6.3 (First Name)      → Fields 114, 115 (slugified subdomain)
+ *   - Static                      → Field 123 (https://ops.simplifybiz.com/login)
  */
 class FieldCopier {
 
+    private array $captured = [];
+
     public function register_hooks(): void {
-        add_action( 'gform_pre_submission_2',   [ $this, 'inject_post_values' ] );
-        add_action( 'gform_after_submission_2', [ $this, 'backfill_entry' ], 10, 2 );
+        add_action( 'gform_pre_submission_2',   [ $this, 'capture_sources' ] );
+        add_action( 'gform_after_submission_2', [ $this, 'populate_entry' ], 10, 2 );
     }
 
     /**
-     * Pre-submission: inject values into $_POST.
-     * Handles fields that are on the current page of the multi-page form.
+     * Capture source values from POST before GF strips them on save.
      */
-    public function inject_post_values( $form ): void {
+    public function capture_sources( $form ): void {
 
-        // Direct copies
-        $email = rgpost( 'input_7' );
-        if ( $email !== null && $email !== '' ) {
-            $_POST['input_62']  = $email;
-            $_POST['input_105'] = $email;
-        }
-
-        $password = rgpost( 'input_33' );
-        if ( $password !== null && $password !== '' ) {
-            $_POST['input_63']  = $password;
-            $_POST['input_120'] = $password;
-        }
-
-        // Sblik URLs from first name
+        $email      = rgpost( 'input_7' );
+        $password   = rgpost( 'input_33' );
         $first_name = rgpost( 'input_6_3' );
-        $slug       = $this->slugify( $first_name );
-        if ( $slug !== '' ) {
-            $_POST['input_114'] = "https://{$slug}.sblik.com";
-            $_POST['input_115'] = "https://{$slug}.sblik.com/login/";
-        }
 
-        // Static ops URL
-        $_POST['input_123'] = 'https://ops.simplifybiz.com/login';
+        if ( $email !== null && $email !== '' ) {
+            $this->captured['email'] = (string) $email;
+        }
+        if ( $password !== null && $password !== '' ) {
+            $this->captured['password'] = (string) $password;
+        }
+        if ( $first_name !== null && $first_name !== '' ) {
+            $this->captured['first_name'] = (string) $first_name;
+        }
     }
 
     /**
-     * After submission: backfill anything that didn't stick from pre_submission.
-     * Fires after GF has saved the entry; we read what's there and patch gaps.
+     * After entry is saved, build the target values and update the full entry
+     * in one shot. GFAPI::update_entry bypasses per-field conditional-logic
+     * stripping, so hidden-section children retain their values.
      */
-    public function backfill_entry( $entry, $form ): void {
+    public function populate_entry( $entry, $form ): void {
 
         if ( ! class_exists( 'GFAPI' ) ) {
             return;
@@ -85,48 +88,52 @@ class FieldCopier {
             return;
         }
 
-        $updates = [];
-
+        // Resolve source values: prefer entry (already saved), fall back to captured.
         $email = (string) rgar( $entry, '7' );
-        if ( $email !== '' ) {
-            if ( rgar( $entry, '62' )  === '' ) { $updates['62']  = $email; }
-            if ( rgar( $entry, '105' ) === '' ) { $updates['105'] = $email; }
+        if ( $email === '' ) {
+            $email = $this->captured['email'] ?? '';
         }
 
         $password = (string) rgar( $entry, '33' );
-        if ( $password !== '' ) {
-            if ( rgar( $entry, '63' )  === '' ) { $updates['63']  = $password; }
-            if ( rgar( $entry, '120' ) === '' ) { $updates['120'] = $password; }
+        if ( $password === '' ) {
+            $password = $this->captured['password'] ?? '';
         }
 
         $first_name = (string) rgar( $entry, '6.3' );
-        $slug       = $this->slugify( $first_name );
+        if ( $first_name === '' ) {
+            $first_name = $this->captured['first_name'] ?? '';
+        }
+
+        // Build target assignments on the entry array.
+        $dirty = false;
+
+        if ( $email !== '' ) {
+            if ( rgar( $entry, '62' )  === '' ) { $entry['62']  = $email; $dirty = true; }
+            if ( rgar( $entry, '105' ) === '' ) { $entry['105'] = $email; $dirty = true; }
+        }
+
+        if ( $password !== '' ) {
+            if ( rgar( $entry, '63' )  === '' ) { $entry['63']  = $password; $dirty = true; }
+            if ( rgar( $entry, '120' ) === '' ) { $entry['120'] = $password; $dirty = true; }
+        }
+
+        $slug = $this->slugify( $first_name );
         if ( $slug !== '' ) {
-            if ( rgar( $entry, '114' ) === '' ) { $updates['114'] = "https://{$slug}.sblik.com"; }
-            if ( rgar( $entry, '115' ) === '' ) { $updates['115'] = "https://{$slug}.sblik.com/login/"; }
+            if ( rgar( $entry, '114' ) === '' ) { $entry['114'] = "https://{$slug}.sblik.com"; $dirty = true; }
+            if ( rgar( $entry, '115' ) === '' ) { $entry['115'] = "https://{$slug}.sblik.com/login/"; $dirty = true; }
         }
 
         if ( rgar( $entry, '123' ) === '' ) {
-            $updates['123'] = 'https://ops.simplifybiz.com/login';
+            $entry['123'] = 'https://ops.simplifybiz.com/login';
+            $dirty = true;
         }
 
-        // DIAGNOSTIC: log the entry state for field 120 and password source
-        \SmplfyCore\SMPLFY_Log::error( "FieldCopier entry snapshot: id={$entry_id} field_33='" . rgar( $entry, '33' ) . "' field_63='" . rgar( $entry, '63' ) . "' field_120='" . rgar( $entry, '120' ) . "'" );
-        \SmplfyCore\SMPLFY_Log::error( 'FieldCopier updates queued: ' . print_r( $updates, true ) );
-
-        if ( empty( $updates ) ) {
+        if ( ! $dirty ) {
             return;
         }
 
-        foreach ( $updates as $field_id => $value ) {
-            $result = \GFAPI::update_entry_field( $entry_id, $field_id, $value );
-
-            // DIAGNOSTIC: log each write result
-            $result_str = is_wp_error( $result )
-                ? 'WP_Error: ' . $result->get_error_message()
-                : var_export( $result, true );
-            \SmplfyCore\SMPLFY_Log::error( "FieldCopier update field={$field_id} result={$result_str}" );
-        }
+        // Full-entry update — does not re-run conditional-logic stripping.
+        \GFAPI::update_entry( $entry );
     }
 
     private function slugify( $value ): string {
