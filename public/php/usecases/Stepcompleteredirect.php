@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class StepCompleteRedirect {
 
-    private const REDIRECT_DELAY_SECONDS = 5;
+    private const REDIRECT_DELAY_SECONDS = 1;
 
     /**
      * WordPress role slug → inbox URL. First matching role in the user's
