@@ -7,72 +7,63 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Populates fields on form 2 (Internship Application) at submission time.
+ * Populates derived fields on form 2 (Internship Application) at save time.
  *
- * Two responsibilities:
+ * Uses gform_entry_pre_save because it fires AFTER form processing is complete
+ * and writes directly to the entry array going into the database. This sidesteps
+ * POST/visibility/conditional-logic timing issues that plague pre_submission for
+ * Hidden and Administrative fields on later pages of multi-page forms.
  *
- * 1. Direct copies (replaces Copy Cat JS):
- *    - Field 7  → Field 62, Field 105
- *    - Field 33 → Field 63, Field 120
+ * Direct copies (values derived from user input):
+ *   - Field 7  (Email)           → Fields 62, 105       (Sandbox + ops usernames)
+ *   - Field 33 (Account Password) → Fields 63, 120      (Sandbox + ops passwords)
  *
- * 2. Computed sblik URLs built from first name (field 6.3):
- *    - Field 114 = https://{firstname}.sblik.com
- *    - Field 115 = https://{firstname}.sblik.com/login/
- *    First name is slugified: lowercased and stripped of non-alphanumerics
- *    so it produces a valid subdomain.
+ * Computed sblik URLs built from first name (field 6.3), lowercased and stripped
+ * of non-alphanumerics to make a valid subdomain:
+ *   - Field 114 = https://{firstname}.sblik.com         (Assigned Subdomain)
+ *   - Field 115 = https://{firstname}.sblik.com/login/  (Sandbox Login URL)
  *
- * Runs on gform_pre_submission_2: after validation, before save, so the
- * values land in the entry as if the user typed them. Unlike Copy Cat (JS-only)
- * and GF default-value merge tags (which aren't evaluated for URL fields),
- * this fires on every submission path including admin edits and workflow re-saves.
+ * Static URL (never changes):
+ *   - Field 123 = https://ops.simplifybiz.com/login     (ops.simplifybiz.com login URL)
  */
 class FieldCopier {
 
     public function register_hooks(): void {
-        add_action( 'gform_pre_submission_2', [ $this, 'populate_fields' ] );
+        add_filter( 'gform_entry_pre_save', [ $this, 'populate_entry' ], 10, 2 );
     }
 
-    public function populate_fields( $form ): void {
-        $this->copy_fields();
-        $this->build_sblik_urls();
-    }
+    public function populate_entry( $entry, $form ) {
 
-    private function copy_fields(): void {
-
-        $map = [
-            '7'  => [ '62', '105' ],
-            '33' => [ '63', '120' ],
-        ];
-
-        foreach ( $map as $source_id => $target_ids ) {
-
-            $source_value = rgpost( 'input_' . $source_id );
-
-            if ( $source_value === null || $source_value === '' ) {
-                continue;
-            }
-
-            foreach ( $target_ids as $target_id ) {
-                $_POST[ 'input_' . $target_id ] = $source_value;
-            }
-        }
-    }
-
-    private function build_sblik_urls(): void {
-
-        $first_name = rgpost( 'input_6_3' );
-
-        if ( $first_name === null || $first_name === '' ) {
-            return;
+        if ( (int) rgar( $form, 'id' ) !== (int) FormIds::INTERNSHIP_APPLICATION_FORM_ID ) {
+            return $entry;
         }
 
-        $slug = strtolower( preg_replace( '/[^a-zA-Z0-9]/', '', $first_name ) );
+        // Direct copies: email → sandbox/ops username, password → sandbox/ops password
+        $email    = (string) rgar( $entry, '7' );
+        $password = (string) rgar( $entry, '33' );
 
-        if ( $slug === '' ) {
-            return;
+        if ( $email !== '' ) {
+            $entry['62']  = $email;
+            $entry['105'] = $email;
         }
 
-        $_POST['input_114'] = "https://{$slug}.sblik.com";
-        $_POST['input_115'] = "https://{$slug}.sblik.com/login/";
+        if ( $password !== '' ) {
+            $entry['63']  = $password;
+            $entry['120'] = $password;
+        }
+
+        // Computed sblik URLs from first name subfield (6.3)
+        $first_name = (string) rgar( $entry, '6.3' );
+        $slug       = strtolower( preg_replace( '/[^a-zA-Z0-9]/', '', $first_name ) );
+
+        if ( $slug !== '' ) {
+            $entry['114'] = "https://{$slug}.sblik.com";
+            $entry['115'] = "https://{$slug}.sblik.com/login/";
+        }
+
+        // Static ops login URL
+        $entry['123'] = 'https://ops.simplifybiz.com/login';
+
+        return $entry;
     }
 }
