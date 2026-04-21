@@ -87,7 +87,6 @@ class WorkflowNotifications {
             $interview_date = (string) rgar( $raw_entry, '99' );
             $interview_time = (string) rgar( $raw_entry, '100' );
             $interview_link = (string) rgar( $raw_entry, '101' );
-            $entry_link     = 'https://intern.simplifybiz.com/managers-dashboard/managers-inbox/';
 
             $text    = '';
             $webhook = '';
@@ -157,21 +156,6 @@ class WorkflowNotifications {
                     $text .= "Please log in to your inbox to complete the interview review step:\n";
                     $text .= "https://intern.simplifybiz.com/managers-dashboard/managers-inbox/\n\n";
                     $text .= "Regards,\nSimplifyBiz Team";
-                }
-
-                if ( $step_name === 'Review and Accept Internship Offer' ) {
-                    $webhook = $this->webhook_managers;
-                    $text  = "*Action Required - Confirm Internship Agreement Signed*\n\n";
-                    $text .= "Hello Manager,\n\n";
-                    $text .= "When you receive a notification from WP E-Signature that the following applicant has signed their internship agreement, please come back and confirm by clicking Approve to advance the applicant to the onboarding stage.\n\n";
-                    $text .= "Applicant: {$full_name}\n";
-                    $text .= "Email: {$email}\n";
-                    $text .= "Internship: {$internship}\n\n";
-                    $text .= "Please click the link below to come back and confirm once you have received the signed agreement notification:\n";
-                    $text .= "{$entry_link}\n\n";
-                    $text .= "Click *Approve* to confirm the agreement has been signed and advance to onboarding.\n";
-                    $text .= "Click *Reject* only if the signed agreement is invalid or incomplete.\n\n";
-                    $text .= "Regards,\nAndre\nSimplifyBiz LLC";
                 }
 
                 if ( $step_name === 'Onboard Applicant' ) {
