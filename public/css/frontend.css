@@ -7779,24 +7779,28 @@ body.page-id-1020 .mepr-account-change-password a:hover {
 
 
 /* Gating pages (forms 1/10/11/12 page 12): hide the conditionally-disabled
-   submit button when the Open/Closed toggle is set to Open. Button IDs are
-   stable. Form 12 uses gform_submit_button_12 (single-page form, not multi-page). */
+   submit/next button when the Open/Closed toggle is set to Open. */
 #gform_next_button_1_12[data-conditional-logic="hidden"],
 #gform_next_button_10_12[data-conditional-logic="hidden"],
 #gform_next_button_11_12[data-conditional-logic="hidden"],
+#gform_submit_button_1[data-conditional-logic="hidden"],
+#gform_submit_button_10[data-conditional-logic="hidden"],
+#gform_submit_button_11[data-conditional-logic="hidden"],
 #gform_submit_button_12[data-conditional-logic="hidden"] {
     display: none !important;
 }
 
-/* Collapse the footer wrapper when it contains only the hidden submit button.
-   Multi-page forms (1/10/11) use .gform-page-footer / .gform_page_footer,
-   single-page form 12 uses .gform_footer. */
+/* Collapse the footer wrapper when its button is hidden.
+   Handles both page-footer (multi-page Next) and footer (final Submit). */
 #gform_wrapper_1 .gform-page-footer:has(#gform_next_button_1_12[data-conditional-logic="hidden"]),
 #gform_wrapper_10 .gform-page-footer:has(#gform_next_button_10_12[data-conditional-logic="hidden"]),
 #gform_wrapper_11 .gform-page-footer:has(#gform_next_button_11_12[data-conditional-logic="hidden"]),
 #gform_wrapper_1 .gform_page_footer:has(#gform_next_button_1_12[data-conditional-logic="hidden"]),
 #gform_wrapper_10 .gform_page_footer:has(#gform_next_button_10_12[data-conditional-logic="hidden"]),
 #gform_wrapper_11 .gform_page_footer:has(#gform_next_button_11_12[data-conditional-logic="hidden"]),
+#gform_wrapper_1 .gform_footer:has(#gform_submit_button_1[data-conditional-logic="hidden"]),
+#gform_wrapper_10 .gform_footer:has(#gform_submit_button_10[data-conditional-logic="hidden"]),
+#gform_wrapper_11 .gform_footer:has(#gform_submit_button_11[data-conditional-logic="hidden"]),
 #gform_wrapper_12 .gform_footer:has(#gform_submit_button_12[data-conditional-logic="hidden"]) {
     display: none !important;
 }
