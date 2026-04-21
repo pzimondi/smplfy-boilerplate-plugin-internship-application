@@ -28,6 +28,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Static URL:
  *   - Field 123 = https://ops.simplifybiz.com/login
+ *
+ * NOTE: backfill_entry has temporary diagnostic logging to debug field 120.
+ * Remove the SMPLFY_Log::error() calls once the issue is resolved.
  */
 class FieldCopier {
 
@@ -107,12 +110,22 @@ class FieldCopier {
             $updates['123'] = 'https://ops.simplifybiz.com/login';
         }
 
+        // DIAGNOSTIC: log the entry state for field 120 and password source
+        \SmplfyCore\SMPLFY_Log::error( "FieldCopier entry snapshot: id={$entry_id} field_33='" . rgar( $entry, '33' ) . "' field_63='" . rgar( $entry, '63' ) . "' field_120='" . rgar( $entry, '120' ) . "'" );
+        \SmplfyCore\SMPLFY_Log::error( 'FieldCopier updates queued: ' . print_r( $updates, true ) );
+
         if ( empty( $updates ) ) {
             return;
         }
 
         foreach ( $updates as $field_id => $value ) {
-            \GFAPI::update_entry_field( $entry_id, $field_id, $value );
+            $result = \GFAPI::update_entry_field( $entry_id, $field_id, $value );
+
+            // DIAGNOSTIC: log each write result
+            $result_str = is_wp_error( $result )
+                ? 'WP_Error: ' . $result->get_error_message()
+                : var_export( $result, true );
+            \SmplfyCore\SMPLFY_Log::error( "FieldCopier update field={$field_id} result={$result_str}" );
         }
     }
 
